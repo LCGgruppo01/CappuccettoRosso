@@ -30,7 +30,10 @@
         var openImage;
         var candies;
         var toothbrushes;
-        var time=0;
+        var time = 0;
+        var gravity = 800;
+        var platformLenght = 500;
+        var platformHeight = 64;
 
         function preload() {
 
@@ -64,7 +67,7 @@
         var Game1State = {
             preload: function() {
 
-                game.world.width = 1350;
+                game.world.width = 3000;
 
                 game.load.crossOrigin = 'anonymous';
 
@@ -90,35 +93,31 @@
 
                 platforms = game.add.group();
                 platforms.enableBody = true;
-                for (i = 0; i < game.world.width/500; i++) {
-                  var ground = platforms.create(i*500, game.world.height - 64, 'ground');
+                for (i = 0; i < game.world.width / platformLenght; i++) {
+                  var ground = platforms.create(i * platformLenght, game.world.height - platformHeight, 'ground');
                   ground.body.immovable = true;
                 };
 
-                var ledge = platforms.create(game.world.width*0.1, game.world.height*0.8, 'ground');
-                ledge.body.immovable = true;
-                ledge = platforms.create(-game.world.width*0.1, game.world.height*0.58, 'ground');
-                ledge.body.immovable = true;
+                platforms.enableBody = true;
+                for (i = 0; i < game.world.width / platformLenght + 300; i++) {
+                  var ledge = platforms.create(i * platformLenght + i * 300 + platformLenght, game.world.height / 2 * Math.random() + game.world.height / 2 - platformHeight, 'ground');
+                  ledge.body.immovable = true;
+                };
 
-                ledge = platforms.create(game.world.width*0.3, game.world.height*0.6, 'ground');
-                ledge.body.immovable = true;
+                Wolves = game.add.group();
+                Wolves.enableBody = true;
 
+                for (i = 0; i < 15; i++) {
+                    var wolf = Wolves.create(game.world.width * Math.random() + 700, game.world.height - platformHeight - 75, 'candy');
+                    wolf.body.gravity.y = gravity;
+                    wolf.body.bounce.y =0.2;
+                    wolf.scale.setTo(0.3, 0.3);
+                }
 
-                ledge = platforms.create(game.world.width*0.5, game.world.height*0.5, 'ground');
-                ledge.body.immovable = true;
-
-
-                ledge = platforms.create(game.world.width*0.7, game.world.height*0.4, 'ground');
-                ledge.body.immovable = true;
-
-                ledge = platforms.create(game.world.width*0.9, game.world.height*0.3, 'ground');
-                ledge.body.immovable = true;
-
-
-                player = game.add.sprite(32, game.world.height - 80, 'dude');
+                player = game.add.sprite(32, game.world.height - platformHeight - 28, 'dude');
                 game.physics.arcade.enable(player);
                 player.body.bounce.y = 0.2;
-                player.body.gravity.y = 300;
+                player.body.gravity.y = gravity;
                 player.body.collideWorldBounds = true;
                 player.animations.add('right', [0, 1, 2, 3], 10, true);
                 player.animations.add('left', [7, 8, 9, 10], 10, true);
@@ -128,10 +127,6 @@
 
                 cursors = game.input.keyboard.createCursorKeys();
                 SPACE=game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-
-
-                Wolves = game.add.group();
-                Wolves.enableBody = true;
 
                 Bullets = game.add.group();
                 Bullets.enableBody = true;
@@ -173,7 +168,7 @@
 
                 if (cursors.up.isDown && player.body.touching.down && hitPlatform)
                 {
-                    player.body.velocity.y = -300;
+                    player.body.velocity.y = -600;
                 }
 
                 if (SPACE.isDown && position=="leftt" && game.time.now>time)
@@ -193,16 +188,21 @@
 
                 }
 
-
-                if(Math.random()<0.015) {
-                    var wolf = Wolves.create(1360*Math.random(), 0, 'candy');
-                    wolf.body.gravity.y = 200;
-                    wolf.body.bounce.y =0.2;
-                    wolf.scale.setTo(0.3, 0.3);
-                }
-
                  Wolves.forEach(function(wolf){
-                  wolf.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*50;
+
+                  if(player.x - wolf.x < 400){
+                    wolf.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*50;
+                  //  if(wolf.y - player.y > 150){
+                  //    wolf.body.velocity.y = -700;
+                  //  }
+                  //  else{
+                  //    wolf.body.velocity.y = 0;
+                  //  }
+                  }
+                  else{
+                    wolf.body.velocity.x = 0;
+                  }
+
                 });
             },
 
