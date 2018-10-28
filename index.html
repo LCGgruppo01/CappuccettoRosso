@@ -93,9 +93,10 @@
                 ledge.scale.setTo(0.5, 1.2);
                 ledge.body.immovable = true;
 
-                player = game.add.sprite(32, game.world.height - 140, 'granny');
+                player = game.add.sprite(32, game.world.height - 200, 'granny');
+                player.frame = 1;
                 game.physics.arcade.enable(player);
-                player.scale.setTo(0.1, 0.1);
+                player.scale.setTo(0.2, 0.2);
                 player.body.bounce.y = 0.2;
                 player.body.gravity.y = 500;
                 player.body.collideWorldBounds = true;
@@ -117,10 +118,10 @@
 
                 Wolves = game.add.group();
                 Wolves.enableBody = true;
-                var wolf = Wolves.create(1300,  game.world.height - 150, 'wolf');
+                var wolf = Wolves.create(1300,  game.world.height - 200, 'wolf');
                 wolf.body.gravity.y = 500;
                 wolf.body.bounce.y =0.2;
-                wolf.scale.setTo(0.1, 0.1);
+                wolf.scale.setTo(0.2, 0.2);
 
 
                 Bullets = game.add.group();
@@ -216,6 +217,12 @@
                   wolf.body.velocity.x = 0;
                   }
               });
+
+              if(player.health <= 0)
+              {
+                this.game.state.start('Game1');
+              }
+
             },
 
 
