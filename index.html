@@ -71,7 +71,7 @@
                 game.load.spritesheet('wolf', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/wolf_430x498.png', 430, 498);
                 game.load.image('sky', 'skies/sky2.png');
                 game.load.image('ground', 'sprites/platform.png');
-                game.load.image('thorns', 'sprites/32x32.png');
+                game.load.image('thorns', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/thorns.png');
                 game.load.spritesheet('granny', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/granny_369x432.png', 369, 432);
             },
 
@@ -108,8 +108,8 @@
 
                 thorns = game.add.group();
                 thorns.enableBody = true;
-                var thorn = thorns.create(game.world.width*0.194, game.world.height-95, 'thorns');
-                thorn.scale.setTo(4.5, 1);
+                var thorn = thorns.create(game.world.width*0.195, game.world.height-100, 'thorns');
+                thorn.scale.setTo(0.7, 0.7);
 
 
                 cursors = game.input.keyboard.createCursorKeys();
