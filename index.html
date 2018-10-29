@@ -1,4 +1,5 @@
-<!doctype html>
+
+game.healthText(player)<!doctype html>
 <html>
     <head>
         <meta charset="UTF-8" />
@@ -136,8 +137,8 @@
                 Bullets = game.add.group();
                 Bullets.enableBody = true;
 
-                healthText = game.add.text(0, 32, 'health: 100', { fontSize: '50px', fill: 'rgb(255, 255, 255)' });
-
+              healthText = game.add.text(32, 32, 'health: 100', { fontSize: '50px', fill: 'rgb(255, 255, 255)' });
+              healthText.fixedToCamera = true;
             },
 
 
