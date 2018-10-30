@@ -230,6 +230,14 @@ game.healthText(player)<!doctype html>
                  if (wolf.body.touching.left || wolf.body.touching.right && wolf.body.touching.down){
                    wolf.body.velocity.y = -250;
                  }
+                 if(wolf.body.velocity.x <=0)
+                 {
+                   wolf.frame=0;
+                 }
+                 if(wolf.body.velocity.x >0)
+                 {
+                   wolf.frame=1;
+                 }
                });
 
               if(player.health <= 0)
