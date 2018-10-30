@@ -17,8 +17,17 @@
        ledge2.body.immovable = true;
 
        for (i = 0; i < lenght - 2; i++) {
-       ledge2 = platforms.create(x + 32 + i * 32, y, 'groundCenter');
-       ledge2.body.immovable = true;
+        var numeroCasuale=Math.random();
+        if(numeroCasuale<0.33){
+            ledge2 = platforms.create(x + 32 + i * 32, y, 'groundCenter1');
+            ledge2.body.immovable = true;
+          }else if(numeroCasuale>0.33 && numeroCasuale<0.66){
+            ledge2 = platforms.create(x + 32 + i * 32, y, 'groundCenter2');
+            ledge2.body.immovable = true;
+          }else{
+            ledge2 = platforms.create(x + 32 + i * 32, y, 'groundCenter3');
+            ledge2.body.immovable = true;
+          }
       };
 
       ledge2 = platforms.create(x + (lenght - 1) * 32, y, 'groundEnd');
@@ -45,6 +54,7 @@
         var platformHeight = 64;
         var backgroundWidth = 800;
         var timeWolves = 0;
+        var timeWolfHit=0;
 
         function preload() {}
 
@@ -91,7 +101,9 @@
                 game.load.image('ground', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/piattaforma.jpeg');
                 game.load.image('groundStart', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/groundStart_32x32.png');
                 game.load.image('groundEnd', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/groundEnd_32x32.png');
-                game.load.image('groundCenter', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/groundCenter1_32x32.png');
+                game.load.image('groundCenter1', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/groundCenter1_32x32.png');
+                game.load.image('groundCenter2', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/groundCenter2_32x32.png');
+                game.load.image('groundCenter3', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/groundCenter3_32x32.png');
                 game.load.image('thorns', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/thorns.png');
                 game.load.spritesheet('granny', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/granny_369x432.png', 369, 432);
             },
@@ -177,13 +189,13 @@
 
                 healthText.text='Health: ' + player.health;
 
-                if (cursors.left.isDown)
+                if (cursors.left.isDown && game.time.now>timeWolfHit)
                 {
                     player.body.velocity.x = -250;
                     position="leftt";
                     player.frame=0;
                 }
-                else if (cursors.right.isDown)
+                else if (cursors.right.isDown && game.time.now>timeWolfHit)
                 {
                     player.body.velocity.x = 250;
                     position="rightt";
@@ -278,8 +290,12 @@
                 player.damage(25);
             },
             wolfHit: function (player, wolf) {
-                player.body.velocity.x=-400;
-                player.damage(25);
+                player.body.velocity.x=(player.x - wolf.x)/Math.abs(player.x - wolf.x)*4000;
+                if (game.time.now>timeWolfHit)
+                {
+                    timeWolfHit=game.time.now+300;
+                    player.damage(25);
+                }
             },
 
             killWolves: function (bul, wol) {
