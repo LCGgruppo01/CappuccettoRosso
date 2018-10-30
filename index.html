@@ -264,6 +264,19 @@ game.healthText(player)<!doctype html>
                 wol.kill();
                 bul.kill();
             }
+
+            createPlatform: function (x, y, lenght){
+              //crea la prima piattaforma
+              ledge = platforms.create(x, y, 'groundStart');
+              ledge.body.immovable = true;
+
+              for (i = 0, i > lenght - 2, i++ ){
+                ledge = platforms.create(x + 32 + i * 32, y, 'groundCenter');
+                ledge.body.immovable = true;
+              }
+
+              ledge = platforms.create(x + (lenght - 1) * 32, y, 'groundEnd');
+              ledge.body.immovable = true;
         }
 
         game.state.add('Game1', Game1State);
