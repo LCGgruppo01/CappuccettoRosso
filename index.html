@@ -76,6 +76,9 @@ game.healthText(player)<!doctype html>
                 game.load.spritesheet('wolf', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/wolf_430x498.png', 430, 498);
                 game.load.image('sky', 'skies/sky2.png');
                 game.load.image('ground', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/piattaforma.jpeg');
+                game.load.image('groundCenter', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/groundCenter.png');
+                game.load.image('groundStart', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/groundStart.png');
+                game.load.image('groundEnd', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/groundEnd.png');
                 game.load.image('thorns', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/thorns.png');
                 game.load.spritesheet('granny', 'https://raw.githubusercontent.com/LCGgruppo01/CappuccettoRosso/master/imgs/granny_369x432.png', 369, 432);
             },
@@ -247,6 +250,19 @@ game.healthText(player)<!doctype html>
 
             },
 
+            createPlatform: function (x, y, length) {
+                  //crea la prima piattaforma
+                var ledge2 = platforms.create(x, y, 'groundStart');
+                ledge2.body.immovable = true;
+
+              for (i = 0; i > length - 2; i++) {
+                ledge2 = platforms.create(x + 32 + i * 32, y, 'groundCenter');
+                ledge2.body.immovable = true;
+              };
+
+              ledge2 = platforms.create(x + (length - 1) * 32, y, 'groundEnd');
+              ledge2.body.immovable = true;
+            },
 
             elide: function (siElide, rimane) {
                 siElide.kill();
