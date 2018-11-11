@@ -1,11 +1,11 @@
 var timeWolves = 0;
 var wolvesKilled = 0;
 
-var GameLevel_1 = {
+var GameLevel_2 = {
 
   preload: function() {
 
-    game.load.image('sky', 'http://examples.phaser.io/assets/skies/sky2.png');
+    game.load.image('sky', 'http://examples.phaser.io/assets/skies/sky1.png');
 
     worldPreload(); //find in World.js
     playerPreload(); //find in Player.js
@@ -18,10 +18,6 @@ var GameLevel_1 = {
 
     ledgeCreate(game.world.width*0.1, game.world.height-100); //find in Function.js
     ledgeCreate(game.world.width*0.25, game.world.height-100); //find in Function.js
-
-    modularLedgeCreate(500, 100, 5); //find in Functions.js
-    modularLedgeCreate(1000, 500, 10); //find in Functions.js
-    modularLedgeCreate(600, 250, 2); //find in Functions.js
 
     thornsCreate(game.world.width*0.195, game.world.height-100); //find in Function.js
 
@@ -38,7 +34,7 @@ var GameLevel_1 = {
 
     playerUpdate(); //find in Player.js
 
-    if (game.time.now > timeWolves){
+    if ( game.time.now > timeWolves){
       var wolf = Wolves.create(1300,  game.world.height - 200, 'wolf');
       wolf.body.gravity.y = gravity;
       wolf.body.bounce.y =bounce;
@@ -46,13 +42,12 @@ var GameLevel_1 = {
       timeWolves = game.time.now + 4000;
     }
 
-    if(player.health <= 0)
-    {
-      this.game.state.start('GameLevel_1');
+    if(player.health <= 0){
+      this.game.state.start('GameLevel_2');
     }
 
     if(wolvesKilled >= 5){
-      this.game.state.start('GameLevel_2');
+      game.state.paused;
     }
 
     wolvesBehave(Wolves); //find in Functions.js
@@ -61,4 +56,4 @@ var GameLevel_1 = {
 
 };
 
-game.state.add('GameLevel_1', GameLevel_1);
+game.state.add('GameLevel_2', GameLevel_2);

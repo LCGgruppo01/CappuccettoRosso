@@ -1,5 +1,5 @@
-function chiama(x, y, lenght)
-{
+// CREATE functions start
+function modularLedgeCreate(x, y, lenght){
    var ledge2 = platforms.create(x, y, 'groundStart');
    ledge2.body.immovable = true;
 
@@ -21,6 +21,26 @@ function chiama(x, y, lenght)
   ledge2.body.immovable = true;
 };
 
+function ledgeCreate(x,y){
+  var ledge =  platforms.create(x, y, 'ground');
+  ledge.scale.setTo(0.5, 1.2);
+  ledge.body.immovable = true;
+};
+
+function thornsCreate(x, y){
+  var thorn = thorns.create(x, y, 'thorns');
+  thorn.scale.setTo(0.7, 0.7);
+};
+
+function wolfCreate(x, y){
+  var wolf = Wolves.create(x, y, 'wolf');
+  wolf.scale.setTo(0.2, 0.2);
+  wolf.body.gravity.y = gravity;
+  wolf.body.bounce.y = bounce;
+};
+// CREATE functions end
+
+// COLLIDE functions start
 function elide(siElide, rimane) {
     siElide.kill();
 };
@@ -42,9 +62,14 @@ function wolfHit(player, wolf) {
 function killWolves(bul, wol) {
     wol.kill();
     bul.kill();
+    wolvesKilled = wolvesKilled + 1;
 };
+// COLLIDE functions end
 
 function wolvesBehave(Wolves) {
+
+  game.physics.arcade.collide(Wolves, platforms);
+
   Wolves.forEach(function(wolf){
    if(Math.abs(player.x - wolf.x) < 600){
      wolf.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*50;
@@ -54,14 +79,14 @@ function wolvesBehave(Wolves) {
    }
    if (wolf.body.touching.down && player.body.touching.down && Math.abs(player.x - wolf.x) < 250) {
      if(wolf.y - player.y > 15){
-     wolf.body.velocity.y = -250;
+     wolf.body.velocity.y = wolfJump;
      }
      else{
      wolf.body.velocity.y = 0;
      }
    }
    if (wolf.body.touching.left || wolf.body.touching.right && wolf.body.touching.down){
-     wolf.body.velocity.y = -250;
+     wolf.body.velocity.y = wolfJump;
    }
    if(wolf.body.velocity.x <=0)
    {
