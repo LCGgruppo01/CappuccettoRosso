@@ -1,7 +1,5 @@
-
 function chiama(x, y, lenght)
 {
-  //crea la prima piattaforma
    var ledge2 = platforms.create(x, y, 'groundStart');
    ledge2.body.immovable = true;
 
@@ -33,7 +31,7 @@ function thornHit(player, thorn) {
 };
 
 function wolfHit(player, wolf) {
-    player.body.velocity.x=(player.x - wolf.x)/Math.abs(player.x - wolf.x)*4000;
+    player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*4000;
     if (game.time.now>timeWolfHit)
     {
         timeWolfHit=game.time.now+300;
