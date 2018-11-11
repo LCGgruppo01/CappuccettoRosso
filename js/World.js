@@ -59,10 +59,10 @@ function worldCreate(){
   // WORLD STUFFS end
 
   // HUD
-  healthText = game.add.text(32, 32, 'health: 100', { fontSize: '25px', fill: 'rgb(255, 255, 255)' });
+  healthText = game.add.text(32, 32, 'health 100', { fontSize: '30px', fill: 'rgb(255, 255, 255)' });
   healthText.fixedToCamera = true;
 
-  wolfesLeft = game.add.text(32, 64, 'Wolves left: 5', { fontSize: '25px', fill: 'rgb(255, 255, 255)' });
+  wolfesLeft = game.add.text(32, 64, 'Wolves killed 0', { fontSize: '30px', fill: 'rgb(255, 255, 255)' });
   wolfesLeft.fixedToCamera = true;
 
 };
@@ -73,5 +73,9 @@ function worldUpdate(){
   game.physics.arcade.overlap(player, thorns, thornHit, null, this); //find in Function.js
   game.physics.arcade.overlap(player, Wolves, wolfHit, null, this); //find in Function.js
   game.physics.arcade.overlap(Bullets, Wolves, killWolves, null, this); //find in Function.js
+
+  // HUD
+  healthText.text = 'Health ' + player.health;
+  wolfesLeft.text = 'Wolves killed ' + wolvesKilled;
 
 };

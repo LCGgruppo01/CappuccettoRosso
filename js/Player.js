@@ -34,8 +34,6 @@ function playerUpdate(){
 
   var hitPlatform = game.physics.arcade.collide(player, platforms);
 
-  healthText.text = 'Health: ' + player.health;
-
   //PLAYER MOVEMENT start
   if (cursors.left.isDown && game.time.now > timeWolfHit){
       player.body.velocity.x = -playerVelocity;
