@@ -1,39 +1,39 @@
 // CREATE functions start
-function modularLedgeCreate(x, y, lenght){
-   var ledge2 = platforms.create(x, y, 'groundStart');
+function platformCreate(x, y, lenght){
+   var ledge2 = platformsOver.create(x*m, y*m, 'platformStart');
    ledge2.body.immovable = true;
 
    for (i = 0; i < lenght - 2; i++) {
     var numeroCasuale=Math.random();
     if(numeroCasuale<0.33){
-        ledge2 = platforms.create(x + 32 + i * 32, y, 'groundCenter1');
+        ledge2 = platformsOver.create(x*m + m + i * m, y*m, 'platformCenter1');
         ledge2.body.immovable = true;
       }else if(numeroCasuale>0.33 && numeroCasuale<0.66){
-        ledge2 = platforms.create(x + 32 + i * 32, y, 'groundCenter2');
+        ledge2 = platformsOver.create(x*m + m + i * m, y*m, 'platformCenter2');
         ledge2.body.immovable = true;
       }else{
-        ledge2 = platforms.create(x + 32 + i * 32, y, 'groundCenter3');
+        ledge2 = platformsOver.create(x*m + m + i * m, y*m, 'platformCenter3');
         ledge2.body.immovable = true;
       }
   };
 
-  ledge2 = platforms.create(x + (lenght - 1) * 32, y, 'groundEnd');
+  ledge2 = platformsOver.create(x * m + (lenght - 1) * m, y * m, 'platformEnd');
   ledge2.body.immovable = true;
 };
 
 function ledgeCreate(x,y){
-  var ledge =  platforms.create(x, y, 'ground');
-  ledge.scale.setTo(0.5, 1.2);
+  var ledge =  platforms.create(x*m, y*m, 'ground');
   ledge.body.immovable = true;
 };
 
-function thornsCreate(x, y){
-  var thorn = thorns.create(x, y, 'thorns');
-  thorn.scale.setTo(0.7, 0.7);
+function thornsCreate(x, y,lenght){
+  for (i = 0; i < lenght - 2; i++) {
+  thorns.create(x*m + m + i*m, y*m, 'thorns');
+  }
 };
 
 function wolfCreate(x, y){
-  var wolf = Wolves.create(x, y, 'wolf');
+  var wolf = Wolves.create(x*m, y*m, 'wolf');
   wolf.scale.setTo(0.2, 0.2);
   wolf.body.gravity.y = gravity;
   wolf.body.bounce.y = bounce;
@@ -46,23 +46,25 @@ function elide(siElide, rimane) {
 };
 
 function thornHit(player, thorn) {
+  if (game.time.now>timeHit){
     player.body.velocity.y=-400;
     player.damage(25);
+    timeHit=game.time.now+300;
+  }
 };
 
 function wolfHit(player, wolf) {
     player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*4000;
-    if (game.time.now>timeWolfHit)
+    if (game.time.now>timeHit)
     {
-        timeWolfHit=game.time.now+300;
+        timeHit=game.time.now+300;
         player.damage(25);
     }
 };
 
-function killWolves(bul, wol) {
+function kill(bul, wol) {
     wol.kill();
     bul.kill();
-    wolvesKilled = wolvesKilled + 1;
 };
 // COLLIDE functions end
 
@@ -98,4 +100,12 @@ function wolvesBehave(Wolves) {
    }
    });
 
+};
+
+//Get the gotAxe
+function getAxe(payer, axe) {
+  if(cursors.down.isDown){
+     gotAxe=1;
+     axe.kill();
+  }
 };

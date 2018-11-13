@@ -5,6 +5,7 @@ var platformHeight = 64;
 //WORLD var
 var gravity = 700;
 var bounce = 0.2;
+var m = 64
 
 //PLAYER var
 var playerVelocity = 300;

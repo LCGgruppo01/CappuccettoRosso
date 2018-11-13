@@ -2,7 +2,7 @@ var salto;
 var wallJump = 0;
 var shootTime = 0;
 var shoot = true;
-var timeWolfHit = 0;
+var timeHit = 0;
 var position = "rightt";
 
 function playerPreload(){
@@ -32,15 +32,13 @@ function playerCreate(){
 
 function playerUpdate(){
 
-  var hitPlatform = game.physics.arcade.collide(player, platforms);
-
   //PLAYER MOVEMENT start
-  if (cursors.left.isDown && game.time.now > timeWolfHit){
+  if (cursors.left.isDown && game.time.now > timeHit){
       player.body.velocity.x = -playerVelocity;
       position = "leftt";
       player.frame = 0;
   }
-  else if (cursors.right.isDown && game.time.now > timeWolfHit){
+  else if (cursors.right.isDown && game.time.now > timeHit){
       player.body.velocity.x = playerVelocity;
       position = "rightt";
       player.frame = 1;
@@ -50,7 +48,7 @@ function playerUpdate(){
   //PLAYER MOVEMENT end
 
   //PLAYER JUMP start
-  if (cursors.up.isDown && player.body.touching.down && hitPlatform){
+  if (cursors.up.isDown && player.body.touching.down){
       player.body.velocity.y = playerJump;
       salto = 1;
   }
@@ -64,20 +62,6 @@ function playerUpdate(){
       salto = 3;
   }
   //PLAYER JUMP end
-
-  //WALL JUMP start
-  if (cursors.up.isDown && player.body.touching.right && hitPlatform){
-      player.body.velocity.y = playerJump;
-      player.body.velocity.x = - 1000;
-      salto = 1;
-  }
-
-  if (cursors.up.isDown && player.body.touching.left && hitPlatform){
-      player.body.velocity.y = playerJump;
-      player.body.velocity.x = 1000;
-      salto = 1;
-  }
-  //WALL JUMP end
 
   //SHOOTING start
   if (SPACE.isDown && position=="leftt" && game.time.now > shootTime && shoot == true){
