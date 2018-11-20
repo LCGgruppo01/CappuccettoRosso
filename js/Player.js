@@ -2,19 +2,19 @@ var salto;
 var wallJump = 0;
 var shootTime = 0;
 var shoot = true;
+var axeHit = true;
 var timeHit = 0;
 var position = "rightt";
 
 function playerPreload(){
 
-  game.load.spritesheet('granny', 'assets/images/granny_369x432.png', 369, 432);
+  game.load.spritesheet('granny', 'assets/images/granny_64x96.png', 64, 96);
 
 };
 
 function playerCreate(){
 
   player.frame = 1;
-  player.scale.setTo(0.2, 0.2);
   game.camera.follow(player);
 
   //PLAYER PHYSICS

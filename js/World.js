@@ -22,6 +22,7 @@ function worldCreate(){
   // CONTROLS SISTEM
   cursors = game.input.keyboard.createCursorKeys();
   SPACE=game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+  AXE=game.input.keyboard.addKey(Phaser.Keyboard.A);
 
   // WORLD BACKGROUND start
   Backgrounds = game.add.group();
@@ -61,6 +62,9 @@ function worldCreate(){
   healthText = game.add.text(32, 32, 'health 100', { fontSize: '30px', fill: 'rgb(255, 255, 255)' });
   healthText.fixedToCamera = true;
 
+
+  testCreate();
+
 };
 
 function worldUpdate(){
@@ -89,5 +93,9 @@ function worldUpdate(){
 
   // HUD
   healthText.text = 'Health ' + player.health;
+
+
+
+  testUpdate();
 
 };
