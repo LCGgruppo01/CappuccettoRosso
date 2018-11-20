@@ -43,7 +43,7 @@ var GameLevel_1 = {
 
     gotAxe=0;
 
-    player = game.add.sprite(40*m, 28*m, 'granny');
+    player = game.add.sprite(2*m, 50*m, 'granny');
     playerCreate(); //find in Player.js
 
     //objects

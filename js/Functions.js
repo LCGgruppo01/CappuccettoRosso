@@ -47,9 +47,19 @@ function elide(siElide, rimane) {
 
 function thornHit(player, thorn) {
   if (game.time.now>timeHit){
-    player.body.velocity.y=-400;
-    player.damage(25);
-    timeHit=game.time.now+300;
+    if(thorn.body.touching.up){
+      player.body.velocity.y=-400;
+      player.damage(25);
+      timeHit=game.time.now+300;
+    }else if(thorn.body.touching.left){
+      player.body.velocity.x=-600;
+      player.damage(25);
+      timeHit=game.time.now+300;
+    }else if(thorn.body.touching.right){
+      player.body.velocity.y=600;
+      player.damage(25);
+      timeHit=game.time.now+300;
+    }
   }
 };
 
@@ -107,5 +117,34 @@ function getAxe(payer, axe) {
   if(cursors.down.isDown){
      gotAxe=1;
      axe.kill();
+  }
+};
+
+function axeChop(){
+  if (A.isDown && game.time.now > shootTime && axeHit == true){
+    if(position=="leftt"){
+      shootTime = game.time.now + 300;
+      axeHit = false;
+    }else if(position=="rightt"){
+      shootTime = game.time.now + 300;
+      axeHit = false;
+    }
+  }
+
+  if (A.isUp) {
+    axeHit = true;
+  }
+
+};
+
+
+
+//TEST FUNCTIONS
+function testCreate(){
+  H=game.input.keyboard.addKey(Phaser.Keyboard.H);
+};
+function testUpdate(){
+  if(H.isDown){
+    player.heal(100);
   }
 };
