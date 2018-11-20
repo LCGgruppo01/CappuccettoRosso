@@ -7,13 +7,14 @@ var position = "rightt";
 
 function playerPreload(){
 
-  game.load.spritesheet('granny', 'assets/images/granny_369x432.jpg', 32, 96);
+  game.load.spritesheet('granny', 'assets/images/granny_369x432.png', 369, 432);
 
 };
 
 function playerCreate(){
 
   player.frame = 1;
+  player.scale.setTo(0.2, 0.2);
   game.camera.follow(player);
 
   //PLAYER PHYSICS
