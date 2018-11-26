@@ -27,6 +27,12 @@ var GameLevel_1 = {
     game.load.image('p4', 'assets/images/p4.png');
     game.load.image('p5', 'assets/images/p5.png');
     game.load.image('p6', 'assets/images/p6.png');
+    game.load.image('p8', 'assets/images/p8.png');
+    game.load.image('p9', 'assets/images/p9.png');
+    game.load.image('p10', 'assets/images/p10.png');
+    game.load.image('p11', 'assets/images/p11.png');
+    game.load.image('p12', 'assets/images/p12.png');
+    game.load.image('p13', 'assets/images/p13.png');
 
     playerPreload(); //find in Player.js
     worldPreload(); //find in World.js
@@ -43,7 +49,7 @@ var GameLevel_1 = {
 
     gotAxe=0;
 
-    player = game.add.sprite(65*m, 50*m, 'granny');
+    player = game.add.sprite(30*m, 50*m, 'granny');
     playerCreate(); //find in Player.js
 
     //objects
@@ -51,11 +57,19 @@ var GameLevel_1 = {
     platforms.create(28*m, 24*m, 'p3');
     platforms.create(39*m, 31*m, 'p5');
     platforms.create(39*m, 24*m, 'p6');
+    platforms.create(98*m, 44*m, 'p8');
+    platforms.create(106*m, 38*m, 'p9');
+    platforms.create(115*m, 38*m, 'p10');
+    platforms.create(118*m, 43*m, 'p11');
+    platforms.create(121*m, 48*m, 'p12');
+    platforms.create(125*m, 51*m, 'p13');
+
     //tronco interno
-    wolfCreate(36,52);
+    wolfCreate(36, 52);
     platformCreate(34, 51, 5);
     platformCreate(31, 48, 3);
     platformCreate(31, 45, 2);
+    wolfPatrol(37, 40, 0, 0);
     platformCreate(31, 39, 4);
     platformCreate(31, 34, 4);
     platformCreate(35, 42, 4);
@@ -70,7 +84,12 @@ var GameLevel_1 = {
     platformCreate(42, 49, 8);
     platformCreate(52, 51, 4);
     //spine
-    thornsCreate(70, 53, 22);
+    thornsCreate(70, 53, 34);
+    //grotta
+    platformCreate(102, 41, 4);
+    platformCreate(103, 38, 3);
+    platformCreate(118, 41, 1);
+    platformCreate(121, 46, 1);
 
     //destructible objects
     var p2 = platformsDes.create(22*m, 48*m, 'p2');

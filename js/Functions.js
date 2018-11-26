@@ -39,6 +39,14 @@ function wolfCreate(x, y){
   wolf.body.gravity.y = gravity;
   wolf.body.bounce.y = bounce;
 };
+
+function wolfPatrol(x, y, xp, yp){
+  var wolf = WolvesP.create(x*m, y*m, 'wolf');
+  wolf.scale.setTo(0.2, 0.2);
+  wolf.body.gravity.y = gravity;
+  wolf.body.bounce.y = bounce;
+  //patrol
+};
 // CREATE functions end
 
 // COLLIDE functions start

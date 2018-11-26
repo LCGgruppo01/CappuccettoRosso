@@ -68,7 +68,7 @@ function playerUpdate(){
     var bullet = Bullets.create(player.x - 10, player.y + 20, 'bullet');
     bullet.body.gravity.y = gravity;
     bullet.body.velocity.y = -100;
-    bullet.body.velocity.x = -bulletVelocity;
+    bullet.body.velocity.x = -bulletVelocity + player.body.velocity.x;
     shootTime = game.time.now + 300;
     shoot = false;
   }
@@ -76,7 +76,7 @@ function playerUpdate(){
     bullet = Bullets.create(player.x + 10, player.y + 20, 'bullet');
     bullet.body.gravity.y = gravity;
     bullet.body.velocity.y = -100;
-    bullet.body.velocity.x = bulletVelocity;
+    bullet.body.velocity.x = bulletVelocity + player.body.velocity.x;
     shootTime = game.time.now + 300;
     shoot = false;
   }
