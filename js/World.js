@@ -10,8 +10,6 @@ function worldPreload(){
   game.load.image('platformCenter2', 'assets/images/platformCenter2.png');
   game.load.image('platformCenter3', 'assets/images/platformCenter3.png');
   game.load.image('platformEnd', 'assets/images/platformEnd.png');
-
-  this.game.load.physics("sprite_physics", "assets/PysicsEditor.json");
 };
 
 function worldCreate(){

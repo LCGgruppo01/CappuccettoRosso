@@ -28,7 +28,8 @@ function ledgeCreate(x,y){
 
 function thornsCreate(x, y,lenght){
   for (i = 0; i < lenght - 2; i++) {
-  thorns.create(x*m + m + i*m, y*m, 'thorns');
+  thorns.create(x*m + i*m, y*m, 'thorns');
+  i++;
   }
 };
 
