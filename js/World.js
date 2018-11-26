@@ -11,6 +11,7 @@ function worldPreload(){
   game.load.image('platformCenter3', 'assets/images/platformCenter3.png');
   game.load.image('platformEnd', 'assets/images/platformEnd.png');
 
+  this.game.load.physics("sprite_physics", "assets/PysicsEditor.json");
 };
 
 function worldCreate(){
@@ -78,6 +79,8 @@ function worldUpdate(){
   game.physics.arcade.overlap(player, axe, getAxe, null, this);
   game.physics.arcade.overlap(Bullets, platforms, elide, null, this);
   game.physics.arcade.overlap(Bullets, platformsOver, elide, null, this);
+
+  axeChop();
 
   if(gotAxe==1){
     game.physics.arcade.overlap(Bullets, platformsDes, kill, null, this);

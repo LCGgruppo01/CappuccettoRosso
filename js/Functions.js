@@ -121,17 +121,20 @@ function getAxe(payer, axe) {
 };
 
 function axeChop(){
-  if (A.isDown && game.time.now > shootTime && axeHit == true){
+
+  if (AXE.isDown && game.time.now > shootTime && axeHit == true){
     if(position=="leftt"){
       shootTime = game.time.now + 300;
       axeHit = false;
+      player.frame = 2;
     }else if(position=="rightt"){
       shootTime = game.time.now + 300;
       axeHit = false;
+      player.frame = 3;
     }
   }
 
-  if (A.isUp) {
+  if (AXE.isUp) {
     axeHit = true;
   }
 
