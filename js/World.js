@@ -89,7 +89,7 @@ function worldUpdate(){
   }
 
   platformsOver.forEach(function(platform) {
-    if(player.body.velocity.y > 0){
+    if(player.body.y + 88 - platform.body.y <= 0){
       game.physics.arcade.collide(player, platform);
     }
   })
