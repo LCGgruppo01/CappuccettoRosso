@@ -34,7 +34,7 @@ var GameLevel_1 = {
     game.load.image('p12', 'assets/images/p12.png');
     game.load.image('p13', 'assets/images/p13.png');
 
-    playerPreload(); //find in Player.js
+    playerPreload(); //find in player.js
     worldPreload(); //find in World.js
   },
 
@@ -49,8 +49,8 @@ var GameLevel_1 = {
 
     gotAxe=0;
 
-    player = game.add.sprite(40*m, 28*m, 'granny');
-    playerCreate(); //find in Player.js
+    playerSpawn(40, 28);
+    playerCreate(); //find in player.js
 
     //objects
     platforms.create(12*m, 51*m, 'p1');
@@ -109,7 +109,7 @@ var GameLevel_1 = {
 
     worldUpdate(); //find in World.js
 
-    playerUpdate(); //find in Player.js
+    playerUpdate(); //find in player.js
 
     if (game.time.now > timeWolves){
       var wolf = Wolves.create(55*m,  50*m, 'wolf');

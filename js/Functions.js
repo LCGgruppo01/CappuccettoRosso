@@ -47,6 +47,10 @@ function wolfPatrolCreate(x, y, xp, yp){
   wolf.body.bounce.y = bounce;
   //patrol
 };
+
+function playerSpawn(x, y){
+  player = game.add.sprite(x*m, y*m, 'granny');
+}
 // CREATE functions end
 
 // COLLIDE functions start
@@ -73,12 +77,17 @@ function thornHit(player, thorn) {
 };
 
 function wolfHit(player, wolf) {
+  if((player.x +32 - wolf.x)/Math.abs(player.x +32 - wolf.x)>0 && position == 'leftt' && axeHit == false){
+    wolf.kill();
+  }
+  else if((player.x +32 - wolf.x)/Math.abs(player.x +32 - wolf.x)<0 && position == 'rightt' && axeHit == false){
+    wolf.kill();
+  }
+  else if (game.time.now > timeHit){
     player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*4000;
-    if (game.time.now>timeHit)
-    {
-        timeHit=game.time.now+300;
-        player.damage(25);
-    }
+    timeHit = game.time.now + 1000;
+    player.damage(25);
+  }
 };
 
 function kill(bul, wol) {
@@ -90,6 +99,7 @@ function kill(bul, wol) {
 function wolvesBehave(Wolves) {
 
   game.physics.arcade.collide(Wolves, platforms);
+
 
   Wolves.forEach(function(wolf){
    if(Math.abs(player.x - wolf.x) < 600){
@@ -106,7 +116,7 @@ function wolvesBehave(Wolves) {
      wolf.body.velocity.y = 0;
      }
    }
-   if (wolf.body.touching.left || wolf.body.touching.right && wolf.body.touching.down){
+   if ((wolf.body.touching.left || wolf.body.touching.right) && wolf.body.touching.down){
      wolf.body.velocity.y = wolfJump;
    }
    if(wolf.body.velocity.x <=0)
@@ -132,18 +142,12 @@ function getAxe(payer, axe) {
 function axeChop(){
 
   if (AXE.isDown && game.time.now > shootTime && axeHit == true){
-    if(position=="leftt"){
-      shootTime = game.time.now + 300;
-      axeHit = false;
-      player.frame = 2;
-    }else if(position=="rightt"){
-      shootTime = game.time.now + 300;
-      axeHit = false;
-      player.frame = 3;
-    }
+    timeAxe = game.time.now + 1000;
+    axeHit = false;
   }
 
-  if (AXE.isUp) {
+  if (axeHit == false && game.time.now > timeAxe) {
+    shootTime = game.time.now + 1000;
     axeHit = true;
   }
 

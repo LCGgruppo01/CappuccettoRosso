@@ -72,21 +72,19 @@ function worldCreate(){
 function worldUpdate(){
 
   game.physics.arcade.collide(player, platforms);
+  game.physics.arcade.overlap(player, Wolves, wolfHit, null, this);
+  game.physics.arcade.overlap(player, WolvesP, wolfHit, null, this);
   game.physics.arcade.collide(Wolves, platforms);
   game.physics.arcade.collide(Wolves, platformsOver);
   game.physics.arcade.collide(WolvesP, platforms);
   game.physics.arcade.collide(WolvesP, platformsOver);
   game.physics.arcade.collide(player, platformsDes);
   game.physics.arcade.overlap(player, thorns, thornHit, null, this);
-  game.physics.arcade.overlap(player, Wolves, wolfHit, null, this);
-  game.physics.arcade.overlap(player, WolvesP, wolfHit, null, this);
   game.physics.arcade.overlap(Bullets, Wolves, kill, null, this);
   game.physics.arcade.overlap(Bullets, WolvesP, kill, null, this);
   game.physics.arcade.overlap(player, axe, getAxe, null, this);
   game.physics.arcade.overlap(Bullets, platforms, elide, null, this);
   game.physics.arcade.overlap(Bullets, platformsOver, elide, null, this);
-
-  axeChop();
 
   if(gotAxe==1){
     game.physics.arcade.overlap(Bullets, platformsDes, kill, null, this);
@@ -99,7 +97,7 @@ function worldUpdate(){
       game.physics.arcade.collide(player, platform);
     }
   })
-
+  
   // HUD
   healthText.text = 'Health ' + player.health;
 
