@@ -49,7 +49,7 @@ var GameLevel_1 = {
 
     gotAxe=0;
 
-    player = game.add.sprite(30*m, 50*m, 'granny');
+    player = game.add.sprite(40*m, 28*m, 'granny');
     playerCreate(); //find in Player.js
 
     //objects
@@ -69,7 +69,7 @@ var GameLevel_1 = {
     platformCreate(34, 51, 5);
     platformCreate(31, 48, 3);
     platformCreate(31, 45, 2);
-    wolfPatrol(37, 40, 0, 0);
+    wolfPatrolCreate(37, 40, 0, 0);
     platformCreate(31, 39, 4);
     platformCreate(31, 34, 4);
     platformCreate(35, 42, 4);
