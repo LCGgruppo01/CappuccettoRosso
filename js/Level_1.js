@@ -49,7 +49,6 @@ var GameLevel_1 = {
 
     gotAxe=0;
 
-    playerSpawn(40, 28);
     playerCreate(); //find in player.js
 
     //objects
@@ -119,7 +118,7 @@ var GameLevel_1 = {
       timeWolves = game.time.now + 4000;
     }
 
-    if(player.health <= 0)
+    if(playerUp.health <= 0)
     {
       this.game.state.start('GameLevel_1');
       gotAxe=0;
