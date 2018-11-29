@@ -4,6 +4,7 @@ var shootTime = 0;
 var shoot = true;
 var axeHit = true;
 var timeHit = 0;
+var immunity = 0;
 var position = "rightt";
 var timeAxe = 0;
 

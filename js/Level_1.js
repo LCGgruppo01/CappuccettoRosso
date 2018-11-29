@@ -15,6 +15,7 @@ var GameLevel_1 = {
     game.load.image('sky', 'http://examples.phaser.io/assets/skies/sky2.png');
 
     game.load.spritesheet('wolf', 'assets/images/wolf_430x498.png', 430, 498);
+    game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 96, 96);
 
     game.load.image('ground', 'assets/images/ground.png');
     game.load.image('house', 'assets/images/house.png');
@@ -52,6 +53,7 @@ var GameLevel_1 = {
     playerCreate(); //find in player.js
 
     //objects
+    checkpointCreate(20, 50);
     platforms.create(12*m, 51*m, 'p1');
     platforms.create(28*m, 24*m, 'p3');
     platforms.create(39*m, 31*m, 'p5');
@@ -82,6 +84,7 @@ var GameLevel_1 = {
     platformCreate(58, 44, 5);
     platformCreate(42, 49, 8);
     platformCreate(52, 51, 4);
+    checkpointCreate(45, 30);
     //spine
     thornsCreate(70, 53, 34);
     //grotta

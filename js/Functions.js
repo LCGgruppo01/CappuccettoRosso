@@ -48,6 +48,10 @@ function wolfPatrolCreate(x, y, xp, yp){
   //patrol
 };
 
+function checkpointCreate(x, y){
+  var checkpoint = Checkpoints.create(x*m, y*m, 'checkpoint');
+  checkpoint.frame = 0;
+}
 // CREATE functions end
 
 // COLLIDE functions start
@@ -74,23 +78,29 @@ function thornHit(playerFunction, thorn) {
 };
 
 function wolfHit(player, wolf) {
-  if((playerUp.x +32 - wolf.x)/Math.abs(playerUp.x +32 - wolf.x)>0 && position == 'leftt' && axeHit == false){
+  if((player.x +32 - wolf.x)/Math.abs(player.x +32 - wolf.x)>0 && position == 'leftt' && axeHit == false){
     wolf.kill();
   }
-  else if((playerUp.x +32 - wolf.x)/Math.abs(playerUp.x +32 - wolf.x)<0 && position == 'rightt' && axeHit == false){
+  else if((player.x +32 - wolf.x)/Math.abs(player.x +32 - wolf.x)<0 && position == 'rightt' && axeHit == false){
     wolf.kill();
   }
-  else if (game.time.now > timeHit){
-    playerUp.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*4000;
-    playerDown.body.velocity.x = (playerDown.x - wolf.x)/Math.abs(playerDown.x - wolf.x)*4000;
-    timeHit = game.time.now + 1000;
-    playerUp.damage(25);
+  else if (game.time.now > immunity){
+    player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*4000;
+    timeHit = game.time.now + 300;
+    immunity = game.time.now + 1000;
+    player.damage(25);
   }
 };
 
 function kill(bul, wol) {
     wol.kill();
     bul.kill();
+};
+
+function checkpointHit(player, checkpoint){
+  spawnX = checkpoint.body.x;
+  spawnY = checkpoint.body.y - 64;
+  checkpoint.frame = 1;
 };
 // COLLIDE functions end
 
