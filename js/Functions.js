@@ -40,11 +40,13 @@ function wolfCreate(x, y){
   wolf.body.bounce.y = bounce;
 };
 
-function wolfPatrolCreate(x, y, xp, yp){
+function wolfPatrolCreate(x, y, fine){
   var wolf = WolvesP.create(x*m, y*m, 'wolf');
   wolf.scale.setTo(0.2, 0.2);
   wolf.body.gravity.y = gravity;
   wolf.body.bounce.y = bounce;
+  wolf.inizio = x * m;
+  wolf.fine = fine * m - 32;
   //patrol
 };
 
@@ -127,16 +129,33 @@ function wolvesBehave(Wolves) {
    if ((wolf.body.touching.left || wolf.body.touching.right) && wolf.body.touching.down){
      wolf.body.velocity.y = wolfJump;
    }
-   if(wolf.body.velocity.x <=0)
-   {
-     wolf.frame=0;
-   }
-   if(wolf.body.velocity.x >0)
-   {
-     wolf.frame=1;
-   }
    });
 
+};
+
+function wolfPatrolBehave(WolvesP){
+  WolvesP.forEach(function(wolf){
+    if(wolf.body.position.x <= wolf.inizio) {
+      wolf.body.velocity.x = 100;
+    }
+    else if(wolf.body.position.x >= wolf.fine) {
+        wolf.body.velocity.x = -100;
+    }
+  });
+};
+
+function wolfFrames(Wolves){
+  Wolves.forEach(function(wolf){
+
+    if(wolf.body.velocity.x <=0)
+    {
+      wolf.frame=0;
+    }
+    if(wolf.body.velocity.x >0)
+    {
+      wolf.frame=1;
+    }
+  });
 };
 
 //Get the gotAxe

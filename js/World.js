@@ -97,11 +97,14 @@ function worldUpdate(){
     game.physics.arcade.overlap(Bullets, platformsDes, elide, null, this);
   }
 
-  platformOverCollide();
+  platformOverCollide(); //find in Functions.js
   // HUD
   healthText.text = 'Health ' + playerUp.health;
 
-
+  wolvesBehave(Wolves); //find in Functions.js
+  wolfPatrolBehave(WolvesP); //find in Functions.js
+  wolfFrames(Wolves); //find in Functions.js
+  wolfFrames(WolvesP); //find in Functions.js
 
   testUpdate();
 

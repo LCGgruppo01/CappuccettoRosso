@@ -68,13 +68,15 @@ var GameLevel_1 = {
     //tronco interno
     wolfCreate(36, 52);
     platformCreate(34, 51, 5);
+    wolfPatrolCreate(35, 49, 38);
     platformCreate(31, 48, 3);
     platformCreate(31, 45, 2);
-    wolfPatrolCreate(37, 40, 0, 0);
     platformCreate(31, 39, 4);
     platformCreate(31, 34, 4);
     platformCreate(35, 42, 4);
+    wolfPatrolCreate(35, 40, 38);
     platformCreate(36, 36, 3);
+    wolfPatrolCreate(36, 34, 38);
     //tronco esterno
     platformCreate(42, 31, 5);
     //albero 2
@@ -127,7 +129,6 @@ var GameLevel_1 = {
       gotAxe=0;
     }
 
-    wolvesBehave(Wolves); //find in Functions.js
 
   },
 
