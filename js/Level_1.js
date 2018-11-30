@@ -106,6 +106,10 @@ var GameLevel_1 = {
       platform.body.immovable = true;
     });
 
+  if (spawnX > 20*m) {
+    gotAxe=1;
+  }
+
 
   },
 
