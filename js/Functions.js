@@ -1,14 +1,16 @@
 // CREATE functions start
 function platformCreate(x, y, lenght, position){
-  if(position == sx){
+  if(position == 1){
     sprite = 'platformStart'
+    var ledge2 = platformsOver.create(x*m, y*m, sprite);
+    ledge2.body.immovable = true;
   }
-  else if (position == dx) {
+  else if (position == 2) {
     sprite = 'platformEnd'
+    var ledge3 = platformsOver.create(x*m+64, y*m, sprite);
+    ledge3.scale.x = -1;
+    ledge3.body.immovable = true;
   }
-   var ledge2 = platformsOver.create(x*m, y*m, sprite);
-   ledge2.body.immovable = true;
-
 
    for (i = 0; i < lenght - 2; i++) {
     var numeroCasuale=Math.random();
@@ -24,20 +26,30 @@ function platformCreate(x, y, lenght, position){
       }
   };
 
-  if(position == dx){
+  if(position == 2){
     sprite = 'platformStart'
+    ledge2 = platformsOver.create(x * m + (lenght - 1) * m, y * m, sprite);
+    ledge2.body.immovable = true;
   }
-  else if (position == sx) {
+  else if (position == 1) {
     sprite = 'platformEnd'
+    ledge3 = platformsOver.create(x * m + (lenght - 1) +lenght * m, y * m, sprite);
+    ledge3.scale.x = -1;
+    ledge3.body.immovable = true;
   }
-  ledge2 = platformsOver.create(x * m + (lenght - 1) * m, y * m, 'platformEnd');
-  ledge2.body.immovable = true;
 };
 
 function trunkCreate(x, y, height){
   for (i = 0; i < height; i++) {
     ledge2 = platforms.create(x*m, y*m + i * m, 't1');
     ledge2.body.immovable = true;
+  }
+};
+
+function trunkBg(x, y, height){
+  for (i = 0; i < height; i++) {
+    game.add.sprite(x*m, y*m + i * m, 's1');
+    i = i+9;
   }
 };
 
@@ -199,12 +211,12 @@ function getAxe(payer, axe) {
 
 function axeChop(){
 
-  if (SPACE.isDown && game.time.now > shootTime && axeHit == true){
+  if (SPACE.isDown && game.time.now > shootTime && axeHit == true && gotAxe==1){
     timeAxe = game.time.now + 1000;
     axeHit = false;
   }
 
-  if (axeHit == false && game.time.now > timeAxe) {
+  if (axeHit == false && game.time.now > timeAxe && gotAxe==1) {
     shootTime = game.time.now + 1000;
     axeHit = true;
   }
