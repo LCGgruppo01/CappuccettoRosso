@@ -6,8 +6,8 @@ var GameLevel_1 = {
 
     game.load.image('sky', 'http://examples.phaser.io/assets/skies/sky2.png');
 
-    game.world.width=167*m;
-    game.world.height=55*m;
+    game.world.width=180*m;
+    game.world.height=61*m;
 
     game.load.crossOrigin = 'anonymous';
 
@@ -42,7 +42,6 @@ var GameLevel_1 = {
   create: function() {
     //Backgrounds
     game.add.sprite(0, 47*m, 'house');
-    game.add.sprite(28*m, 24*m, 's2');
     axe = game.add.sprite(16*m, 52*m, 'axe');
     game.physics.arcade.enable(axe);
 
@@ -53,47 +52,73 @@ var GameLevel_1 = {
     playerCreate(); //find in player.js
 
     //objects
-    checkpointCreate(20, 50);
-    platforms.create(12*m, 51*m, 'p1');
-    platforms.create(28*m, 24*m, 'p3');
-    platforms.create(39*m, 31*m, 'p5');
-    platforms.create(39*m, 24*m, 'p6');
-    platforms.create(98*m, 44*m, 'p8');
-    platforms.create(106*m, 38*m, 'p9');
-    platforms.create(115*m, 38*m, 'p10');
-    platforms.create(118*m, 43*m, 'p11');
-    platforms.create(121*m, 48*m, 'p12');
-    platforms.create(125*m, 51*m, 'p13');
+    //albero esterno
+    platformCreate(26,50,6);
+    wolfPatrolCreate(26,48,31);
+    platformCreate(35,51,7);
+    wolfPatrolCreate(35,49,42);
+    platformCreate(34,47,5);
+    platformCreate(28,46,3);
+    platformCreate(31,44,4);
+    platformCreate(35,51,7);
+    platformCreate(24,41,7);
+    wolfPatrolCreate(24,39,31);
+    platformCreate(34,39,10);
+    platformCreate(27,37,5);
+    platformCreate(37,36,13);
+    wolfPatrolCreate(37,34,50);
+    //albero cavo 1
+    platformCreate(55,35,5);
+    platformCreate(57,32,3);
+    platformCreate(50,30,4);
+    platformCreate(54,27,5);
+    wolfPatrolCreate(54,25,59);
+    platformCreate(50,25,3);
+    platformCreate(53,23,5);
+    platformCreate(57,21,3);
+    platformCreate(52,19,4);
+    platformCreate(50,17,3);
+    platformCreate(54,15,4);
+    wolfPatrolCreate(54,13,58);
+    //ponte
+    platformCreate(63,16,11);
+    checkpointCreate(64,15);
+    wolfPatrolCreate(66,14,74);
+    //albero cavo 2
+    platformCreate(77,16,4);
+    platformCreate(83,19,4);
+    platformCreate(77,23,7);
+    wolfPatrolCreate(77,21,84);
+    platformCreate(81,27,4);
+    platformCreate(80,31,7);
+    wolfPatrolCreate(80,29,87);
+    platformCreate(78,36,3);
+    platformCreate(77,39,7);
+    wolfPatrolCreate(77,37,84);
+    platformCreate(80,43,7);
+    platformCreate(77,48,10);
+    wolfPatrolCreate(77,46,87);
+    platformCreate(79,51,4);
+    platformCreate(85,52,2);
+    platformCreate(82,54,3);
+    platformCreate(77,56,4);
+    //platform spine
+    thornsCreate(90,57,67)
+    platformCreate(93,52,9);
+    checkpointCreate(98,51);
+    platformCreate(104,54,6);
+    wolfPatrolCreate(104,52,110);
+    platformCreate(112,52,2);
+    platformCreate(116,55,9);
+    wolfPatrolCreate(116,53,125);
+    platformCreate(128,54,2);
+    platformCreate(137,54,1);
+    platformCreate(141,53,1);
+    platformCreate(144,51,7);
+    wolfPatrolCreate(144,49,151);
+    platformCreate(152,53,4);
+    platformCreate(156,56,25);
 
-    //tronco interno
-    wolfCreate(36, 52);
-    platformCreate(34, 51, 5);
-    wolfPatrolCreate(35, 49, 38);
-    platformCreate(31, 48, 3);
-    platformCreate(31, 45, 2);
-    platformCreate(31, 39, 4);
-    platformCreate(31, 34, 4);
-    platformCreate(35, 42, 4);
-    wolfPatrolCreate(35, 40, 38);
-    platformCreate(36, 36, 3);
-    wolfPatrolCreate(36, 34, 38);
-    //tronco esterno
-    platformCreate(42, 31, 5);
-    //albero 2
-    platformCreate(48, 41, 7);
-    platformCreate(52, 47, 12);
-    platformCreate(60, 38, 12);
-    platformCreate(58, 44, 5);
-    platformCreate(42, 49, 8);
-    platformCreate(52, 51, 4);
-    checkpointCreate(45, 30);
-    //spine
-    thornsCreate(70, 53, 34);
-    //grotta
-    platformCreate(102, 41, 4);
-    platformCreate(103, 38, 3);
-    platformCreate(118, 41, 1);
-    platformCreate(121, 46, 1);
 
     //destructible objects
     var p2 = platformsDes.create(22*m, 48*m, 'p2');

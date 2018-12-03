@@ -35,7 +35,7 @@ function worldCreate(){
   platforms = game.add.group();
   platforms.enableBody = true;
   for (i = 0; i < game.world.width / platformLenght; i++) {
-    var ground = platforms.create(i * platformLenght, game.world.height - platformHeight, 'ground');
+    var ground = platforms.create(i * platformLenght, 58*m, 'ground');
     ground.body.immovable = true;
   };
   // WORLD BACKGROUND end
