@@ -104,8 +104,18 @@ function checkpointHit(player, checkpoint){
   spawnY = checkpoint.body.y - 64;
   checkpoint.frame = 1;
 };
+
+function platformOverCollide (){
+  platformsOver.forEach(function(platform) {
+    if(playerUp.body.y + 70 - platform.body.y <= 0){
+      game.physics.arcade.collide(player, platform);
+    }
+  })
+
+};
 // COLLIDE functions end
 
+// wolves BEHAVE and FRAMES functions start
 function wolvesBehave(Wolves) {
 
   game.physics.arcade.collide(Wolves, platforms);
@@ -157,6 +167,7 @@ function wolfFrames(Wolves){
     }
   });
 };
+// wolves BEHAVE and FRAMES functions end
 
 //Get the gotAxe
 function getAxe(payer, axe) {
@@ -168,7 +179,7 @@ function getAxe(payer, axe) {
 
 function axeChop(){
 
-  if (AXE.isDown && game.time.now > shootTime && axeHit == true){
+  if (SPACE.isDown && game.time.now > shootTime && axeHit == true){
     timeAxe = game.time.now + 1000;
     axeHit = false;
   }
@@ -190,13 +201,4 @@ function testUpdate(){
   if(H.isDown){
     playerUp.heal(100);
   }
-};
-
-function platformOverCollide (){
-  platformsOver.forEach(function(platform) {
-    if(playerUp.body.y + 85.5 - platform.body.y <= 0){
-      game.physics.arcade.collide(player, platform);
-    }
-  })
-
 };

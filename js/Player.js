@@ -10,9 +10,8 @@ var timeAxe = 0;
 
 function playerPreload(){
 
-  game.load.spritesheet('granny', 'assets/images/granny_64x96.png', 64, 96);
-  game.load.spritesheet('grannyUp', 'assets/images/granny_up_64x96.png', 64, 96);
-  game.load.spritesheet('grannyDown', 'assets/images/granny_down_64x96.png', 64, 96);
+  game.load.spritesheet('grannyUp', 'assets/images/grannyUp_64x85.png', 64, 85);
+  game.load.spritesheet('grannyDown', 'assets/images/granny_down_64x85.png', 64, 85);
 
 
 };
@@ -36,8 +35,15 @@ function playerCreate(){
   playerUp.maxHealth = 100;
   playerUp.heal(100);
 
-  playerDown.animations.add('right', [1, 3], 10, true);
-  playerDown.animations.add('left', [0, 2], 10, true);
+  //player ANIMATIONS
+  playerDown.animations.add('left', [3, 2, 1, 0], 10, true);
+  playerDown.animations.add('right', [6, 7, 8, 9], 10, true);
+  playerUp.animations.add('left', [3, 2, 1, 0], 10, true);
+  playerUp.animations.add('right', [6, 7, 8, 9], 10, true);
+  playerUp.animations.add('leftAxe', [13, 12, 11, 10], 10, true);
+  playerUp.animations.add('rightAxe', [16, 17, 18, 19], 10, true);
+  playerUp.animations.add('leftAxeChop', [1, 0, 0, 19], 10, true);
+  playerUp.animations.add('rightAxeChop', [4, 7, 18, 0], 10, true);
 
 };
 
@@ -48,18 +54,67 @@ function playerUpdate(){
   if (cursors.left.isDown && game.time.now > timeHit){
     player.setAll('body.velocity.x', -playerVelocity);
     position = "leftt";
-    if(playerUp.body.touching.down) {playerDown.animations.play('left');}
-    else {playerDown.frame = 2;}
+    if(playerUp.body.touching.down) {
+      playerDown.animations.play('left');
+      if (gotAxe==0) {
+        playerUp.animations.play('left');
+      }else if (gotAxe==1) {
+        playerUp.animations.play('leftAxe');
+      }else if (gotAxe==2) {
+        playerUp.animations.play('leftGun');
+      }
+    }else {
+      playerDown.frame = 4;
+      if (gotAxe===0) {
+        playerUp.frame = 4
+      }else if (gotAxe==1) {
+        playerUp.frame = 14
+      }else if (gotAxe==2) {
+        playerUp.frame = 24
+      }
+    }
   }else if (position == "leftt"){
-    playerDown.frame = 2;
+    playerDown.frame = 4;
+    if (gotAxe===0) {
+      playerUp.frame = 4
+    }else if (gotAxe==1) {
+      playerUp.frame = 14
+    }else if (gotAxe==2) {
+      playerUp.frame = 24
+    }
   }
+
   if (cursors.right.isDown && game.time.now > timeHit){
     player.setAll('body.velocity.x', playerVelocity);
     position = "rightt";
-    if(playerUp.body.touching.down) {playerDown.animations.play('right');}
-    else {playerDown.frame = 3;}
+    if(playerUp.body.touching.down) {
+      playerDown.animations.play('right');
+      if (gotAxe==0) {
+        playerUp.animations.play('right');
+      }else if (gotAxe==1) {
+        playerUp.animations.play('rightAxe');
+      }else if (gotAxe==2) {
+        playerUp.animations.play('rightGun');
+      }
+    }else {
+      playerDown.frame = 5;
+      if (gotAxe===0) {
+        playerUp.frame = 5
+      }else if (gotAxe==1) {
+        playerUp.frame = 15
+      }else if (gotAxe==2) {
+        playerUp.frame = 25
+      }
+    }
   }else if (position == "rightt"){
-    playerDown.frame = 3;
+    playerDown.frame = 5;
+    if (gotAxe===0) {
+      playerUp.frame = 5
+    }else if (gotAxe==1) {
+      playerUp.frame = 15
+    }else if (gotAxe==2) {
+      playerUp.frame = 25
+    }
   }
 
   player.setAll('body.velocity.x', playerUp.body.velocity.x * slowDownFactor);
@@ -89,22 +144,9 @@ function playerUpdate(){
     }else{
       game.physics.arcade.collide(player, platformsDes);
     }
-    if(position == 'rightt'){
-      playerUp.frame = 3;
-    }
-    else{
-      playerUp.frame = 2;
-    }
   }
   else{
     game.physics.arcade.collide(player, platformsDes);
-
-    if(position == 'leftt'){
-      playerUp.frame = 0;
-    }
-    else{
-      playerUp.frame = 1;
-    }
   }
 
 };
