@@ -89,7 +89,7 @@ function worldUpdate(){
   game.physics.arcade.overlap(playerUp, axe, getAxe, null, this);
   game.physics.arcade.overlap(Bullets, platforms, elide, null, this);
   game.physics.arcade.overlap(Bullets, platformsOver, elide, null, this);
-  game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
+    game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
 
   if(gotAxe==1){
     game.physics.arcade.overlap(Bullets, platformsDes, kill, null, this);

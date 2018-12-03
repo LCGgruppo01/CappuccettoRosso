@@ -6,8 +6,8 @@ var GameLevel_1 = {
 
     game.load.image('sky', 'http://examples.phaser.io/assets/skies/sky2.png');
 
-    game.world.width=180*m;
-    game.world.height=65*m;
+    game.world.width=167*m;
+    game.world.height=55*m;
 
     game.load.crossOrigin = 'anonymous';
 
@@ -41,7 +41,7 @@ var GameLevel_1 = {
 
   create: function() {
     //Backgrounds
-    game.add.sprite(0, 56*m, 'house');
+    game.add.sprite(0, 47*m, 'house');
     game.add.sprite(28*m, 24*m, 's2');
     axe = game.add.sprite(16*m, 52*m, 'axe');
     game.physics.arcade.enable(axe);
@@ -53,6 +53,7 @@ var GameLevel_1 = {
     playerCreate(); //find in player.js
 
     //objects
+    checkpointCreate(20, 50);
     platforms.create(12*m, 51*m, 'p1');
     platforms.create(28*m, 24*m, 'p3');
     platforms.create(39*m, 31*m, 'p5');
