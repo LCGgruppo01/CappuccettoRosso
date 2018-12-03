@@ -194,7 +194,7 @@ function testUpdate(){
 
 function platformOverCollide (){
   platformsOver.forEach(function(platform) {
-    if(playerUp.body.y + 85.5 - platform.body.y <= 0){
+    if(playerUp.body.velocity.y < 0){
       game.physics.arcade.collide(player, platform);
     }
   })
