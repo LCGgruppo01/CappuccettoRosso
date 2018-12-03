@@ -1,5 +1,5 @@
 var backgroundWidth = 800;
-var platformLenght = 400;
+var platformLenght = 640;
 var platformHeight = 64;
 
 //WORLD var
@@ -12,8 +12,8 @@ var playerVelocity = 300;
 var playerJump = -400;
 var slowDownFactor = 0.87;
 var bulletVelocity = 500;
-var spawnX = 93*m;
-var spawnY = 48*m;
+var spawnX = 37*m;
+var spawnY = 34*m;
 
 //WOLF var
 var wolfJump = -250;

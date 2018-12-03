@@ -29,7 +29,6 @@ function worldCreate(){
   Backgrounds = game.add.group();
   for (i = 0; i < game.world.width / backgroundWidth; i++) {
     var background = Backgrounds.create(i * backgroundWidth, 0, 'sky');
-    Backgrounds.scale.setTo(1,1.2);
   };
 
   platforms = game.add.group();

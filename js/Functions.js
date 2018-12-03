@@ -1,7 +1,14 @@
 // CREATE functions start
-function platformCreate(x, y, lenght){
-   var ledge2 = platformsOver.create(x*m, y*m, 'platformStart');
+function platformCreate(x, y, lenght, position){
+  if(position == sx){
+    sprite = 'platformStart'
+  }
+  else if (position == dx) {
+    sprite = 'platformEnd'
+  }
+   var ledge2 = platformsOver.create(x*m, y*m, sprite);
    ledge2.body.immovable = true;
+
 
    for (i = 0; i < lenght - 2; i++) {
     var numeroCasuale=Math.random();
@@ -17,8 +24,21 @@ function platformCreate(x, y, lenght){
       }
   };
 
+  if(position == dx){
+    sprite = 'platformStart'
+  }
+  else if (position == sx) {
+    sprite = 'platformEnd'
+  }
   ledge2 = platformsOver.create(x * m + (lenght - 1) * m, y * m, 'platformEnd');
   ledge2.body.immovable = true;
+};
+
+function trunkCreate(x, y, height){
+  for (i = 0; i < height; i++) {
+    ledge2 = platforms.create(x*m, y*m + i * m, 't1');
+    ledge2.body.immovable = true;
+  }
 };
 
 function ledgeCreate(x,y){
