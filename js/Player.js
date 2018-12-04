@@ -138,4 +138,7 @@ function playerUpdate(){
 
   axeChop(); //find in Functions.js
 
+  playerDown.body.x = playerUp.body.x;
+  playerDown.body.y = playerUp.body.y;
+
 };

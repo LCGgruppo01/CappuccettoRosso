@@ -1,5 +1,5 @@
 var backgroundWidth = 800;
-var platformLenght = 640;
+var platformlength = 640;
 var platformHeight = 64;
 
 //WORLD var

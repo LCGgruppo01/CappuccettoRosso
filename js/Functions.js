@@ -1,20 +1,20 @@
 // CREATE functions start
-function platformCreate(x, y, lenght, position, fall){
+function platformCreate(x, y, length, position, fall){
   if(position == 1){
-    sprite = 'platformStart'
-    var ledge2 = platformsOver.create(x*m, y*m, sprite);
+    spriteStart = 'platformStart'
+    var ledge2 = platformsOver.create(x*m, y*m, spriteStart);
     ledge2.body.immovable = true;
     ledge2.caduta = fall;
   }
   else if (position == 2) {
-    sprite = 'platformEnd'
-    var ledge2 = platformsOver.create(x*m+64, y*m, sprite);
+    spriteStart = 'platformEnd'
+    var ledge2 = platformsOver.create(x*m+64, y*m, spriteStart);
     ledge2.scale.x = -1;
     ledge2.body.immovable = true;
     ledge2.caduta = fall;
   }
 
-   for (i = 0; i < lenght - 2; i++) {
+   for (i = 0; i < length - 2; i++) {
     var numeroCasuale=Math.random();
     if(numeroCasuale<0.33){
         ledge2 = platformsOver.create(x*m + m + i * m, y*m, 'platformCenter1');
@@ -32,14 +32,14 @@ function platformCreate(x, y, lenght, position, fall){
   };
 
   if(position == 2){
-    sprite = 'platformStart'
-    ledge2 = platformsOver.create(x * m + (lenght - 1) * m, y * m, sprite);
+    spriteEnd = 'platformStart'
+    ledge2 = platformsOver.create(x * m + (length - 1) * m, y * m, spriteEnd);
     ledge2.body.immovable = true;
     ledge2.caduta = fall;
   }
   else if (position == 1) {
-    sprite = 'platformEnd'
-    ledge2 = platformsOver.create(x * m + (lenght - 1) +lenght * m, y * m, sprite);
+    spriteEnd = 'platformEnd'
+    ledge2 = platformsOver.create(x * m + (length - 1) * m, y * m, spriteEnd);
     ledge2.scale.x = -1;
     ledge2.body.immovable = true;
     ledge2.caduta = fall;
@@ -65,8 +65,8 @@ function ledgeCreate(x,y){
   ledge.body.immovable = true;
 };
 
-function thornsCreate(x, y,lenght){
-  for (i = 0; i < lenght - 2; i++) {
+function thornsCreate(x, y,length){
+  for (i = 0; i < length - 2; i++) {
   thorns.create(x*m + i*m, y*m, 'thorns');
   i++;
   }
@@ -159,8 +159,8 @@ function checkpointHit(player, checkpoint){
 
 function platformOverCollide (){
   platformsOver.forEach(function(platform) {
-    if(playerUp.body.y + 20 - platform.body.y <= 0){
-      game.physics.arcade.collide(player, platformsOver);
+    if(playerUp.body.y + 64 - platform.body.y <= 0){
+      game.physics.arcade.collide(player, platform);
     }
   })
 
