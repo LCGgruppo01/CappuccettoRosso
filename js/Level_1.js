@@ -18,6 +18,7 @@ var GameLevel_1 = {
     game.load.spritesheet('wolf', 'assets/images/wolf_430x498.png', 430, 498);
     game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 96, 96);
     game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
+    game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
 
     game.load.image('ground', 'assets/images/ground.png');
     game.load.image('house', 'assets/images/house.png');

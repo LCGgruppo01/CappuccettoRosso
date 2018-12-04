@@ -84,15 +84,15 @@ function thornHit(playerFunction, thorn) {
   if (game.time.now>timeHit){
     if(thorn.body.touching.up){
       player.setAll('body.velocity.y', -400);
-      playerUp.damage(10);
+      playerUp.damage(25);
       timeHit=game.time.now+300;
     }else if(thorn.body.touching.left){
       player.setAll('body.velocity.x', -600);
-      playerUp.damage(10);
+      playerUp.damage(25);
       timeHit=game.time.now+300;
     }else if(thorn.body.touching.right){
       player.setAll('body.velocity.y', 600);
-      playerUp.damage(10);
+      playerUp.damage(25);
       timeHit=game.time.now+300;
     }
   }
