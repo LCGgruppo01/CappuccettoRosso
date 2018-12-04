@@ -76,8 +76,8 @@ function worldCreate(){
 function worldUpdate(){
 
   game.physics.arcade.collide(player, platforms);
-  game.physics.arcade.overlap(player, Wolves, wolfHit, null, this);
-  game.physics.arcade.overlap(player, WolvesP, wolfHit, null, this);
+  game.physics.arcade.collide(player, Wolves, wolfHit, null, this);
+  game.physics.arcade.collide(player, WolvesP, wolfHit, null, this);
   game.physics.arcade.collide(Wolves, platforms);
   game.physics.arcade.collide(Wolves, platformsOver);
   game.physics.arcade.collide(WolvesP, platforms);
@@ -89,6 +89,7 @@ function worldUpdate(){
   game.physics.arcade.overlap(Bullets, platforms, elide, null, this);
   game.physics.arcade.overlap(Bullets, platformsOver, elide, null, this);
   game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
+  game.physics.arcade.overlap(player, platformsDes, desWall, null, this);
 
   if(gotAxe==1){
     game.physics.arcade.overlap(Bullets, platformsDes, kill, null, this);

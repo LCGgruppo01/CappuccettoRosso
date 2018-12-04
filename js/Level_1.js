@@ -1,4 +1,5 @@
 var timeWolves = 0;
+var wait = 0;
 
 var GameLevel_1 = {
 
@@ -16,6 +17,7 @@ var GameLevel_1 = {
 
     game.load.spritesheet('wolf', 'assets/images/wolf_430x498.png', 430, 498);
     game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 96, 96);
+    game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
 
     game.load.image('ground', 'assets/images/ground.png');
     game.load.image('house', 'assets/images/house.png');
@@ -27,7 +29,6 @@ var GameLevel_1 = {
     game.load.image('p4', 'assets/images/p4.png');
     game.load.image('p5', 'assets/images/p5.png');
     game.load.image('p6', 'assets/images/p6.png');
-    game.load.image('d1', 'assets/images/d1.png');
     game.load.image('s1', 'assets/images/s1.png');
     game.load.image('t1', 'assets/images/t1.png');
 
@@ -145,7 +146,10 @@ var GameLevel_1 = {
     });
     platformsDes.forEach(function(d1){
       d1.body.immovable = true;
+      d1.frame = 0;
+      d1.stato = 1;
     });
+
   if (spawnX > 20*m) {
     gotAxe=1;
   }
