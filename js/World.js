@@ -76,8 +76,8 @@ function worldCreate(){
 function worldUpdate(){
 
   game.physics.arcade.collide(player, platforms);
-  game.physics.arcade.collide(player, Wolves, wolfHit, null, this);
-  game.physics.arcade.collide(player, WolvesP, wolfHit, null, this);
+  game.physics.arcade.collide(playerUp, Wolves, wolfHit, null, this);
+  game.physics.arcade.collide(playerUp, WolvesP, wolfHit, null, this);
   game.physics.arcade.collide(Wolves, platforms);
   game.physics.arcade.collide(Wolves, platformsOver);
   game.physics.arcade.collide(WolvesP, platforms);

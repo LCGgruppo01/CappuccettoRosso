@@ -103,6 +103,7 @@ function wolfHit(player, wolf) {
     if (wolf.vita == 2){
       wolf.vita = 1;
       immunity = game.time.now + 1000;
+      wolf.alpha = 0.5;
     }
     else if (wolf.vita == 1 && game.time.now > immunity){
       wolf.kill();
@@ -112,6 +113,7 @@ function wolfHit(player, wolf) {
     if (wolf.vita == 2){
       wolf.vita =  1;
       immunity = game.time.now + 1000;
+      wolf.alpha = 0.5;
     }
     else if (wolf.vita == 1 && game.time.now > immunity){
       wolf.kill();
