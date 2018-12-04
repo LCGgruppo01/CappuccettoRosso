@@ -31,6 +31,7 @@ var GameLevel_1 = {
     game.load.image('p6', 'assets/images/p6.png');
     game.load.image('s1', 'assets/images/s1.png');
     game.load.image('t1', 'assets/images/t1.png');
+    game.load.image('d1destroyed', 'assets/images/d1destroyed.png');
 
     playerPreload(); //find in player.js
     worldPreload(); //find in World.js
@@ -91,7 +92,7 @@ var GameLevel_1 = {
     platformCreate(50,17,3);
     platformCreate(54,15,4);
     wolfPatrolCreate(54,13,58);
-    platformsDes.create(60*m, 12*m, 'd1');
+    platformsDes.create(61*m, 12*m, 'd1');
     trunkCreate(60,1,11);
     trunkCreate(60,16,42);
     //ponte

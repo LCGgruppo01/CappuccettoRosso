@@ -161,8 +161,9 @@ function desWall(player, d1){
     }
   }
   else{
-    game.physics.arcade.overlap(player, platformsDes);
-  }
+    d1.kill();
+    d1Destroyed = game.add.sprite(d1.x, d1.y + 208, 'd1destroyed');
+    }
 
 };
 // COLLIDE functions end
