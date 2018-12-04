@@ -58,6 +58,7 @@ var GameLevel_1 = {
     platforms.create(38*m, 57*m, 'p4');
     platforms.create(41*m, 55*m, 'p5');
     platforms.create(44*m, 53*m, 'p6');
+    checkpointCreate(31,57);
     //albero esterno
     platformCreate(26,50,6);
     wolfPatrolCreate(26,48,31);

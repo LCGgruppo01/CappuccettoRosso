@@ -67,6 +67,10 @@ function worldCreate(){
   // HUD
   healthText = game.add.text(32, 32, 'health 100', { fontSize: '30px', fill: 'rgb(255, 255, 255)' });
   healthText.fixedToCamera = true;
+  xt = game.add.text(32, 64, 'x', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
+  xt.fixedToCamera = true;
+  yt = game.add.text(32, 80, 'y', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
+  yt.fixedToCamera = true;
 
 
   testCreate();
@@ -100,7 +104,9 @@ function worldUpdate(){
   platformOverCollide(); //find in Functions.js
   // HUD
   healthText.text = 'Health ' + playerUp.health;
-
+  xt.text = 'x ' + playerUp.body.x/m;
+  yt.text = 'y ' + playerUp.body.y/m;
+  
   wolvesBehave(Wolves); //find in Functions.js
   wolfPatrolBehave(WolvesP); //find in Functions.js
   wolfFrames(Wolves); //find in Functions.js
