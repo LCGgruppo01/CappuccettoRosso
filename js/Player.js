@@ -19,8 +19,8 @@ function playerPreload(){
 function playerCreate(){
 
   player = game.add.group();
-  playerUp = player.create(spawnX, spawnY, 'grannyUp');
   playerDown = player.create(spawnX, spawnY, 'grannyDown');
+  playerUp = player.create(spawnX, spawnY, 'grannyUp');
   game.camera.follow(playerUp);
 
   //player PHYSICS
