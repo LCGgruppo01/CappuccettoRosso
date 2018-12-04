@@ -1,15 +1,17 @@
 // CREATE functions start
-function platformCreate(x, y, lenght, position){
+function platformCreate(x, y, lenght, position, fall){
   if(position == 1){
     sprite = 'platformStart'
     var ledge2 = platformsOver.create(x*m, y*m, sprite);
     ledge2.body.immovable = true;
+    ledge2.caduta = fall;
   }
   else if (position == 2) {
     sprite = 'platformEnd'
-    var ledge3 = platformsOver.create(x*m+64, y*m, sprite);
-    ledge3.scale.x = -1;
-    ledge3.body.immovable = true;
+    var ledge2 = platformsOver.create(x*m+64, y*m, sprite);
+    ledge2.scale.x = -1;
+    ledge2.body.immovable = true;
+    ledge2.caduta = fall;
   }
 
    for (i = 0; i < lenght - 2; i++) {
@@ -17,12 +19,15 @@ function platformCreate(x, y, lenght, position){
     if(numeroCasuale<0.33){
         ledge2 = platformsOver.create(x*m + m + i * m, y*m, 'platformCenter1');
         ledge2.body.immovable = true;
+        ledge2.caduta = fall;
       }else if(numeroCasuale>0.33 && numeroCasuale<0.66){
         ledge2 = platformsOver.create(x*m + m + i * m, y*m, 'platformCenter2');
         ledge2.body.immovable = true;
+        ledge2.caduta = fall;
       }else{
         ledge2 = platformsOver.create(x*m + m + i * m, y*m, 'platformCenter3');
         ledge2.body.immovable = true;
+        ledge2.caduta = fall;
       }
   };
 
@@ -30,12 +35,14 @@ function platformCreate(x, y, lenght, position){
     sprite = 'platformStart'
     ledge2 = platformsOver.create(x * m + (lenght - 1) * m, y * m, sprite);
     ledge2.body.immovable = true;
+    ledge2.caduta = fall;
   }
   else if (position == 1) {
     sprite = 'platformEnd'
-    ledge3 = platformsOver.create(x * m + (lenght - 1) +lenght * m, y * m, sprite);
-    ledge3.scale.x = -1;
-    ledge3.body.immovable = true;
+    ledge2 = platformsOver.create(x * m + (lenght - 1) +lenght * m, y * m, sprite);
+    ledge2.scale.x = -1;
+    ledge2.body.immovable = true;
+    ledge2.caduta = fall;
   }
 };
 
@@ -79,7 +86,7 @@ function wolfPatrolCreate(x, y, fine){
   wolf.body.bounce.y = bounce;
   wolf.inizio = x * m;
   wolf.fine = fine * m - 32;
-  //patrol
+  wolf.vita = 2;
 };
 
 function checkpointCreate(x, y){
@@ -113,12 +120,25 @@ function thornHit(playerFunction, thorn) {
 
 function wolfHit(player, wolf) {
   if((player.x +32 - wolf.x)/Math.abs(player.x +32 - wolf.x)>0 && position == 'leftt' && axeHit == false){
-    wolf.kill();
+    if (wolf.vita == 2){
+      wolf.vita = 1;
+      immunity = game.time.now + 1000;
+    }
+    else if (wolf.vita == 1 && game.time.now > immunity){
+      wolf.kill();
+    }
   }
-  else if((player.x +32 - wolf.x)/Math.abs(player.x +32 - wolf.x)<0 && position == 'rightt' && axeHit == false){
-    wolf.kill();
+  else if((player.x + 32 - wolf.x)/Math.abs(player.x +32 - wolf.x)<0 && position == 'rightt' && axeHit == false){
+    if (wolf.vita == 2){
+      wolf.vita =  1;
+      immunity = game.time.now + 1000;
+      wolf.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*50;
+    }
+    else if (wolf.vita == 1 && game.time.now > immunity){
+      wolf.kill();
+    }
   }
-  else if (game.time.now > immunity){
+  if (game.time.now > immunity && axeHit == true){
     player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*4000;
     timeHit = game.time.now + 300;
     immunity = game.time.now + 1000;
@@ -139,10 +159,29 @@ function checkpointHit(player, checkpoint){
 
 function platformOverCollide (){
   platformsOver.forEach(function(platform) {
-    if(playerUp.body.y + 70 - platform.body.y <= 0){
-      game.physics.arcade.collide(player, platform);
+    if(playerUp.body.y + 20 - platform.body.y <= 0){
+      game.physics.arcade.collide(player, platformsOver);
     }
   })
+
+};
+
+function desWall(player, d1){
+  if (d1.stato < 3){
+    game.physics.arcade.collide(player, platformsDes);
+    if(d1.stato == 1 && axeHit == false){
+      d1.frame = 1;
+      d1.stato = 2;
+      wait = game.time.now + 300;
+    }
+    else if(d1.stato == 2 && axeHit == false && game.time.now > wait){
+      d1.frame = 2;
+      d1.stato = 3;
+    }
+  }
+  else{
+    game.physics.arcade.overlap(player, platformsDes);
+  }
 
 };
 // COLLIDE functions end
@@ -212,12 +251,12 @@ function getAxe(payer, axe) {
 function axeChop(){
 
   if (SPACE.isDown && game.time.now > shootTime && axeHit == true && gotAxe==1){
-    timeAxe = game.time.now + 1000;
+    timeAxe = game.time.now + 300;
     axeHit = false;
   }
 
   if (axeHit == false && game.time.now > timeAxe && gotAxe==1) {
-    shootTime = game.time.now + 1000;
+    shootTime = game.time.now + 300;
     axeHit = true;
   }
 

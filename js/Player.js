@@ -138,15 +138,4 @@ function playerUpdate(){
 
   axeChop(); //find in Functions.js
 
-  if(axeHit == false){
-    if(gotAxe==1){
-      game.physics.arcade.overlap(platformsDes, player, elide, null, this);
-    }else{
-      game.physics.arcade.collide(player, platformsDes);
-    }
-  }
-  else{
-    game.physics.arcade.collide(player, platformsDes);
-  }
-
 };
