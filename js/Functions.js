@@ -1,18 +1,8 @@
 // CREATE functions start
-function platformCreate(x, y, length, position, fall){
-  if(position == 1){
-    spriteStart = 'platformStart'
-    var ledge2 = platformsOver.create(x*m, y*m, spriteStart);
-    ledge2.body.immovable = true;
-    ledge2.caduta = fall;
-  }
-  else if (position == 2) {
-    spriteStart = 'platformEnd'
-    var ledge2 = platformsOver.create(x*m+64, y*m, spriteStart);
-    ledge2.scale.x = -1;
-    ledge2.body.immovable = true;
-    ledge2.caduta = fall;
-  }
+function platformCreate(x, y, length, fall){
+  var ledge2 = platformsOver.create(x*m, y*m, 'platformEnd');
+  ledge2.body.immovable = true;
+  ledge2.caduta = fall;
 
    for (i = 0; i < length - 2; i++) {
     var numeroCasuale=Math.random();
@@ -31,19 +21,9 @@ function platformCreate(x, y, length, position, fall){
       }
   };
 
-  if(position == 2){
-    spriteEnd = 'platformStart'
-    ledge2 = platformsOver.create(x * m + (length - 1) * m, y * m, spriteEnd);
+    ledge2 = platformsOver.create(x * m + (length - 1) * m, y * m, 'platformStart');
     ledge2.body.immovable = true;
     ledge2.caduta = fall;
-  }
-  else if (position == 1) {
-    spriteEnd = 'platformEnd'
-    ledge2 = platformsOver.create(x * m + (length - 1) * m, y * m, spriteEnd);
-    ledge2.scale.x = -1;
-    ledge2.body.immovable = true;
-    ledge2.caduta = fall;
-  }
 };
 
 function trunkCreate(x, y, height){
@@ -253,11 +233,14 @@ function axeChop(){
   if (SPACE.isDown && game.time.now > shootTime && axeHit == true && gotAxe==1){
     timeAxe = game.time.now + 300;
     axeHit = false;
+    playerUp.alpha = 0.5;
   }
 
   if (axeHit == false && game.time.now > timeAxe && gotAxe==1) {
     shootTime = game.time.now + 300;
     axeHit = true;
+    playerUp.alpha = 1;
+
   }
 
 };
