@@ -36,11 +36,11 @@ function playerCreate(){
   playerUp.heal(100);
 
   //player ANIMATIONS
-  playerDown.animations.add('left', [3, 2, 1, 0], 10, true);
+  playerDown.animations.add('left', [0, 1, 2, 3], 10, true);
   playerDown.animations.add('right', [6, 7, 8, 9], 10, true);
-  playerUp.animations.add('left', [3, 2, 1, 0], 10, true);
+  playerUp.animations.add('left', [0, 1, 2, 3], 10, true);
   playerUp.animations.add('right', [6, 7, 8, 9], 10, true);
-  playerUp.animations.add('leftAxe', [13, 12, 11, 10], 10, true);
+  playerUp.animations.add('leftAxe', [10, 11, 12, 13], 10, true);
   playerUp.animations.add('rightAxe', [16, 17, 18, 19], 10, true);
   playerUp.animations.add('leftAxeChop', [1, 0, 0, 19], 10, true);
   playerUp.animations.add('rightAxeChop', [4, 7, 18, 0], 10, true);
