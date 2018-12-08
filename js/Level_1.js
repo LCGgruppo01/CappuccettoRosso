@@ -18,6 +18,8 @@ var GameLevel_1 = {
     game.load.spritesheet('wolf', 'assets/images/wolf_430x498.png', 430, 498);
     game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 96, 96);
     game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
+    game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
+
 
     game.load.image('ground', 'assets/images/ground.png');
     game.load.image('house', 'assets/images/house.png');
@@ -31,6 +33,7 @@ var GameLevel_1 = {
     game.load.image('p6', 'assets/images/p6.png');
     game.load.image('s1', 'assets/images/s1.png');
     game.load.image('t1', 'assets/images/t1.png');
+    game.load.image('d1destroyed', 'assets/images/d1destroyed.png');
 
     playerPreload(); //find in player.js
     worldPreload(); //find in World.js
@@ -58,6 +61,7 @@ var GameLevel_1 = {
     platforms.create(38*m, 57*m, 'p4');
     platforms.create(41*m, 55*m, 'p5');
     platforms.create(44*m, 53*m, 'p6');
+    checkpointCreate(31,57);
     //albero esterno
     platformCreate(26,50,6);
     wolfPatrolCreate(26,48,31);
@@ -90,7 +94,7 @@ var GameLevel_1 = {
     platformCreate(50,17,3);
     platformCreate(54,15,4);
     wolfPatrolCreate(54,13,58);
-    platformsDes.create(60*m, 12*m, 'd1');
+    platformsDes.create(61*m, 12*m, 'd1');
     trunkCreate(60,1,11);
     trunkCreate(60,16,42);
     //ponte

@@ -64,10 +64,24 @@ function worldCreate(){
 
   // WORLD STUFFS end
 
-  // HUD
-  healthText = game.add.text(32, 32, 'health 100', { fontSize: '30px', fill: 'rgb(255, 255, 255)' });
-  healthText.fixedToCamera = true;
-
+  //life
+  heart0 = game.add.sprite(0.5*m, 0.25*m, 'heart');
+  heart0.frame = 0;
+  heart0.fixedToCamera = true;
+  heart1 = game.add.sprite(1*m, 0.25*m, 'heart');
+  heart1.frame = 0;
+  heart1.fixedToCamera = true;
+  heart2 = game.add.sprite(1.5*m, 0.25*m, 'heart');
+  heart2.frame = 0;
+  heart2.fixedToCamera = true;
+  heart3 = game.add.sprite(2*m, 0.25*m, 'heart');
+  heart3.frame = 0;
+  heart3.fixedToCamera = true;
+  //position
+  xt = game.add.text(32, 64, 'x', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
+  xt.fixedToCamera = true;
+  yt = game.add.text(32, 80, 'y', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
+  yt.fixedToCamera = true;
 
   testCreate();
 
@@ -99,7 +113,25 @@ function worldUpdate(){
 
   platformOverCollide(); //find in Functions.js
   // HUD
-  healthText.text = 'Health ' + playerUp.health;
+  //life
+  if(playerUp.health == 100){
+    heart0.frame = 0;
+    heart1.frame = 0;
+    heart2.frame = 0;
+    heart3.frame = 0;
+  }
+  else if (playerUp.health == 75) {
+    heart3.frame = 1;
+  }
+  else if (playerUp.health == 50) {
+    heart2.frame = 1;
+  }
+  else {
+    heart1.frame = 1;
+  }
+
+  xt.text = 'x ' + playerUp.body.x/m;
+  yt.text = 'y ' + playerUp.body.y/m;
 
   wolvesBehave(Wolves); //find in Functions.js
   wolfPatrolBehave(WolvesP); //find in Functions.js

@@ -81,22 +81,24 @@ function elide(siElide, rimane) {
 };
 
 function thornHit(playerFunction, thorn) {
-  if (game.time.now>timeHit){
-    if(thorn.body.touching.up){
-      player.setAll('body.velocity.y', -400);
-      playerUp.damage(10);
-      timeHit=game.time.now+300;
-    }else if(thorn.body.touching.left){
-      player.setAll('body.velocity.x', -600);
-      playerUp.damage(10);
-      timeHit=game.time.now+300;
-    }else if(thorn.body.touching.right){
-      player.setAll('body.velocity.y', 600);
-      playerUp.damage(10);
-      timeHit=game.time.now+300;
-    }
-  }
-};
+ if (game.time.now>timeHit){
+   if(thorn.body.touching.up){
+     player.setAll('body.velocity.y', -400);
+     playerUp.damage(10);
+     playerUp.damage(25);
+     timeHit=game.time.now+300;
+   }else if(thorn.body.touching.left){
+     player.setAll('body.velocity.x', -600);
+     playerUp.damage(10);
+     playerUp.damage(25);
+     timeHit=game.time.now+300;
+   }else if(thorn.body.touching.right){
+     player.setAll('body.velocity.y', 600);
+     playerUp.damage(10);
+     playerUp.damage(25);
+     timeHit=game.time.now+300;
+   }
+ }};
 
 function wolfHit(player, wolf) {
   if((player.x +32 - wolf.x)/Math.abs(player.x +32 - wolf.x)>0 && position == 'leftt' && axeHit == false){
@@ -161,9 +163,9 @@ function desWall(player, d1){
     }
   }
   else{
-    game.physics.arcade.overlap(player, platformsDes);
-  }
-
+    d1.kill();
+    d1Destroyed = game.add.sprite(d1.x, d1.y + 208, 'd1destroyed');
+    }
 };
 // COLLIDE functions end
 
