@@ -84,15 +84,15 @@ function thornHit(playerFunction, thorn) {
   if (game.time.now>timeHit){
     if(thorn.body.touching.up){
       player.setAll('body.velocity.y', -400);
-      playerUp.damage(25);
+      playerUp.damage(10);
       timeHit=game.time.now+300;
     }else if(thorn.body.touching.left){
       player.setAll('body.velocity.x', -600);
-      playerUp.damage(25);
+      playerUp.damage(10);
       timeHit=game.time.now+300;
     }else if(thorn.body.touching.right){
       player.setAll('body.velocity.y', 600);
-      playerUp.damage(25);
+      playerUp.damage(10);
       timeHit=game.time.now+300;
     }
   }
@@ -161,9 +161,8 @@ function desWall(player, d1){
     }
   }
   else{
-    d1.kill();
-    d1Destroyed = game.add.sprite(d1.x, d1.y + 208, 'd1destroyed');
-    }
+    game.physics.arcade.overlap(player, platformsDes);
+  }
 
 };
 // COLLIDE functions end
@@ -247,7 +246,61 @@ function axeChop(){
 
 };
 
+function changeHitbox() {
+  if (axeHit == false) {
+    playerUp.body.setSize(80, 85, 0, 0);
+    playerDown.body.setSize(80, 85, 0, 0);
+  }else {
+    playerUp.body.setSize(64, 85, 0, 0);
+    playerDown.body.setSize(64, 85, 0, 0);
+  }
+}
 
+function playerAnimation(){
+  if (playerUp.body.velocity.x > 5 || playerUp.body.velocity.x < -5) {
+    if (playerUp.body.touching.down) {
+      if (gotAxe==0) {
+        playerUp.animations.play('right');
+        playerDown.animations.play('right');
+      }else if (gotAxe==1) {
+        playerUp.animations.play('rightAxe');
+        playerDown.animations.play('rightAxe');
+      }else if (gotAxe==2) {
+        playerUp.animations.play('rightGun');
+        playerDown.animations.play('rightGun');
+      }
+    }else {
+      if (gotAxe === 0) {
+        playerUp.frame = 5;
+        playerDown.frame = 5;
+      }else if (gotAxe == 1) {
+        playerUp.frame = 15;
+        playerDown.frame = 5;
+      }else if (gotAxe == 2) {
+        playerUp.frame = 25;
+        playerDown.frame = 5;
+      }
+    }
+  }else {
+    if (gotAxe === 0) {
+      playerUp.frame = 5;
+      playerDown.frame = 5;
+    }else if (gotAxe == 1) {
+      playerUp.frame = 15;
+      playerDown.frame = 5;
+    }else if (gotAxe == 2) {
+      playerUp.frame = 25;
+      playerDown.frame = 5;
+    }
+  }
+  if (position=='leftt') {
+    playerUp.scale.x = -1;
+    playerDown.scale.x = -1;
+  }else {
+    playerUp.scale.x = 1;
+    playerDown.scale.x = 1;
+  }
+};
 
 //TEST FUNCTIONS
 function testCreate(){
@@ -257,4 +310,7 @@ function testUpdate(){
   if(H.isDown){
     playerUp.heal(100);
   }
+};
+function render() {
+    game.debug.body(playerUp);
 };

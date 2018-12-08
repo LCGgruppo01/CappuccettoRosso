@@ -22,6 +22,8 @@ function playerCreate(){
   playerDown = player.create(spawnX, spawnY, 'grannyDown');
   playerUp = player.create(spawnX, spawnY, 'grannyUp');
   game.camera.follow(playerUp);
+  playerUp.anchor.setTo(.5,.5);
+  playerDown.anchor.setTo(.5,.5);
 
   //player PHYSICS
   game.physics.arcade.enable(player);
@@ -50,71 +52,14 @@ function playerCreate(){
 function playerUpdate(){
 
   //player MOVEMENT start
-  if(playerUp.body.touching.down){}
   if (cursors.left.isDown && game.time.now > timeHit){
     player.setAll('body.velocity.x', -playerVelocity);
     position = "leftt";
-    if(playerUp.body.touching.down) {
-      playerDown.animations.play('left');
-      if (gotAxe==0) {
-        playerUp.animations.play('left');
-      }else if (gotAxe==1) {
-        playerUp.animations.play('leftAxe');
-      }else if (gotAxe==2) {
-        playerUp.animations.play('leftGun');
-      }
-    }else {
-      playerDown.frame = 4;
-      if (gotAxe===0) {
-        playerUp.frame = 4
-      }else if (gotAxe==1) {
-        playerUp.frame = 14
-      }else if (gotAxe==2) {
-        playerUp.frame = 24
-      }
-    }
-  }else if (position == "leftt"){
-    playerDown.frame = 4;
-    if (gotAxe===0) {
-      playerUp.frame = 4
-    }else if (gotAxe==1) {
-      playerUp.frame = 14
-    }else if (gotAxe==2) {
-      playerUp.frame = 24
-    }
   }
 
   if (cursors.right.isDown && game.time.now > timeHit){
     player.setAll('body.velocity.x', playerVelocity);
     position = "rightt";
-    if(playerUp.body.touching.down) {
-      playerDown.animations.play('right');
-      if (gotAxe==0) {
-        playerUp.animations.play('right');
-      }else if (gotAxe==1) {
-        playerUp.animations.play('rightAxe');
-      }else if (gotAxe==2) {
-        playerUp.animations.play('rightGun');
-      }
-    }else {
-      playerDown.frame = 5;
-      if (gotAxe===0) {
-        playerUp.frame = 5
-      }else if (gotAxe==1) {
-        playerUp.frame = 15
-      }else if (gotAxe==2) {
-        playerUp.frame = 25
-      }
-    }
-  }else if (position == "rightt"){
-    playerDown.frame = 5;
-    if (gotAxe===0) {
-      playerUp.frame = 5
-    }else if (gotAxe==1) {
-      playerUp.frame = 15
-    }else if (gotAxe==2) {
-      playerUp.frame = 25
-    }
   }
 
   player.setAll('body.velocity.x', playerUp.body.velocity.x * slowDownFactor);
@@ -137,7 +82,7 @@ function playerUpdate(){
   //player JUMP end
 
   axeChop(); //find in Functions.js
-
+  playerAnimation();
   playerDown.body.x = playerUp.body.x;
   playerDown.body.y = playerUp.body.y;
 
