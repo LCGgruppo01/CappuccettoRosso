@@ -57,6 +57,7 @@ function wolfCreate(x, y){
   wolf.scale.setTo(0.2, 0.2);
   wolf.body.gravity.y = gravity;
   wolf.body.bounce.y = bounce;
+  wolf.health = 100;
 };
 
 function wolfPatrolCreate(x, y, fine){
@@ -66,12 +67,13 @@ function wolfPatrolCreate(x, y, fine){
   wolf.body.bounce.y = bounce;
   wolf.inizio = x * m;
   wolf.fine = fine * m - 32;
-  wolf.vita = 2;
+  wolf.health = 100;
 };
 
 function checkpointCreate(x, y){
   var checkpoint = Checkpoints.create(x*m, y*m, 'checkpoint');
   checkpoint.frame = 0;
+  checkpoint.body.setSize(100,10,0,90);
 }
 // CREATE functions end
 
@@ -84,43 +86,20 @@ function thornHit(playerFunction, thorn) {
  if (game.time.now>timeHit){
    if(thorn.body.touching.up){
      player.setAll('body.velocity.y', -400);
-     playerUp.damage(10);
      playerUp.damage(25);
      timeHit=game.time.now+300;
    }else if(thorn.body.touching.left){
      player.setAll('body.velocity.x', -600);
-     playerUp.damage(10);
      playerUp.damage(25);
      timeHit=game.time.now+300;
    }else if(thorn.body.touching.right){
      player.setAll('body.velocity.y', 600);
-     playerUp.damage(10);
      playerUp.damage(25);
      timeHit=game.time.now+300;
    }
  }};
 
 function wolfHit(player, wolf) {
-  if((player.x +32 - wolf.x)/Math.abs(player.x +32 - wolf.x)>0 && position == 'leftt' && axeHit == false){
-    if (wolf.vita == 2){
-      wolf.vita = 1;
-      immunity = game.time.now + 1000;
-      wolf.alpha = 0.5;
-    }
-    else if (wolf.vita == 1 && game.time.now > immunity){
-      wolf.kill();
-    }
-  }
-  else if((player.x + 32 - wolf.x)/Math.abs(player.x +32 - wolf.x)<0 && position == 'rightt' && axeHit == false){
-    if (wolf.vita == 2){
-      wolf.vita =  1;
-      immunity = game.time.now + 1000;
-      wolf.alpha = 0.5;
-    }
-    else if (wolf.vita == 1 && game.time.now > immunity){
-      wolf.kill();
-    }
-  }
   if (game.time.now > immunity && axeHit == true){
     player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*4000;
     timeHit = game.time.now + 300;
@@ -128,6 +107,15 @@ function wolfHit(player, wolf) {
     player.damage(25);
   }
 };
+
+function wolfHitboxDamage(hitbox, wolf) {
+  if (game.time.now > immunity)
+  {
+    wolf.damage(50);
+    wolf.body.velocity.y = 2000;
+    immunity = game.time.now + 1000;
+  }
+}
 
 function kill(bul, wol) {
     wol.kill();
@@ -149,9 +137,8 @@ function platformOverCollide (){
 
 };
 
-function desWall(player, d1){
+function desWall(play, d1){
   if (d1.stato < 3){
-    game.physics.arcade.collide(player, platformsDes);
     if(d1.stato == 1 && axeHit == false){
       d1.frame = 1;
       d1.stato = 2;
@@ -177,7 +164,7 @@ function wolvesBehave(Wolves) {
 
   Wolves.forEach(function(wolf){
    if(Math.abs(playerUp.x - wolf.x) < 600){
-     wolf.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*50;
+     wolf.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*100;
    }
    else{
      wolf.body.velocity.x = 0;
@@ -200,16 +187,16 @@ function wolvesBehave(Wolves) {
 function wolfPatrolBehave(WolvesP){
   WolvesP.forEach(function(wolf){
     if(wolf.body.position.x <= wolf.inizio) {
-      wolf.body.velocity.x = 100;
+      wolf.body.velocity.x = 200;
     }
     else if(wolf.body.position.x >= wolf.fine) {
-        wolf.body.velocity.x = -100;
+        wolf.body.velocity.x = -200;
     }
   });
-};
+  };
 
-function wolfFrames(Wolves){
-  Wolves.forEach(function(wolf){
+  function wolfFrames(Wolves){
+    Wolves.forEach(function(wolf){
 
     if(wolf.body.velocity.x <=0)
     {
@@ -218,6 +205,9 @@ function wolfFrames(Wolves){
     if(wolf.body.velocity.x >0)
     {
       wolf.frame=1;
+    }
+    if (wolf.health < 100) {
+      wolf.alpha = 0.5;
     }
   });
 };
@@ -248,16 +238,6 @@ function axeChop(){
 
 };
 
-function changeHitbox() {
-  if (axeHit == false) {
-    playerUp.body.setSize(80, 85, 0, 0);
-    playerDown.body.setSize(80, 85, 0, 0);
-  }else {
-    playerUp.body.setSize(64, 85, 0, 0);
-    playerDown.body.setSize(64, 85, 0, 0);
-  }
-}
-
 function playerAnimation(){
   if (playerUp.body.velocity.x > 5 || playerUp.body.velocity.x < -5) {
     if (playerUp.body.touching.down) {
@@ -266,10 +246,10 @@ function playerAnimation(){
         playerDown.animations.play('right');
       }else if (gotAxe==1) {
         playerUp.animations.play('rightAxe');
-        playerDown.animations.play('rightAxe');
+        playerDown.animations.play('right');
       }else if (gotAxe==2) {
         playerUp.animations.play('rightGun');
-        playerDown.animations.play('rightGun');
+        playerDown.animations.play('right');
       }
     }else {
       if (gotAxe === 0) {
@@ -304,7 +284,37 @@ function playerAnimation(){
   }
 };
 
-//TEST FUNCTIONS
+//player attack HItBOX
+
+function changeHitbox() {
+  if (axeHit == false) {
+    playerHitbox.body.setSize(80, 85, 0, 0);
+    if (position == "rightt") {
+      playerHitbox.body.x = playerUp.body.x + 64;
+    }else if (position == "leftt") {
+      playerHitbox.body.x = playerUp.body.x - 80;
+    }
+  }else {
+    playerHitbox.body.setSize(0, 0, 0, 0);
+  }
+}; //used in hitBoxUpdate
+
+function hitBoxCreate() {
+  playerHitbox = game.add.sprite(spawnX, spawnY, '');
+  game.physics.arcade.enable(playerHitbox);
+  playerHitbox.enableBody = true;
+  playerHitbox.body.collideWorldBounds = true;
+  playerHitbox.body.setSize(0, 85, 0, 0);
+};
+
+function hitBoxUpdate() {
+  playerHitbox.body.x = playerUp.body.x + 64;
+  playerHitbox.body.y = playerUp.body.y;
+  changeHitbox();
+};
+
+// TEST & DEBUG functions
+
 function testCreate(){
   H=game.input.keyboard.addKey(Phaser.Keyboard.H);
 };
@@ -314,5 +324,6 @@ function testUpdate(){
   }
 };
 function render() {
-    game.debug.body(playerUp);
+  game.debug.body(playerUp);
+  game.debug.body(playerHitbox);
 };

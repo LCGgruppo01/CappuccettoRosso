@@ -25,6 +25,9 @@ function playerCreate(){
   playerUp.anchor.setTo(.5,.5);
   playerDown.anchor.setTo(.5,.5);
 
+  //player attack HItBOX
+  hitBoxCreate();
+
   //player PHYSICS
   game.physics.arcade.enable(player);
   player.enableBody = true;
@@ -85,5 +88,7 @@ function playerUpdate(){
   playerAnimation();
   playerDown.body.x = playerUp.body.x;
   playerDown.body.y = playerUp.body.y;
+
+  hitBoxUpdate();
 
 };

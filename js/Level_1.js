@@ -61,7 +61,8 @@ var GameLevel_1 = {
     platforms.create(38*m, 57*m, 'p4');
     platforms.create(41*m, 55*m, 'p5');
     platforms.create(44*m, 53*m, 'p6');
-    checkpointCreate(31,57);
+    checkpointCreate(31,56.5);
+    wolfCreate(42,53);
     //albero esterno
     platformCreate(26,50,6);
     wolfPatrolCreate(26,48,31);
@@ -99,7 +100,7 @@ var GameLevel_1 = {
     trunkCreate(60,16,42);
     //ponte
     platformCreate(63,16,11);
-    checkpointCreate(64,15);
+    checkpointCreate(64,14.5);
     wolfPatrolCreate(66,14,72);
     //albero cavo 2
     trunkCreate(74,1,11);
@@ -128,7 +129,7 @@ var GameLevel_1 = {
     //platform spine
     thornsCreate(90,57,67)
     platformCreate(93,52,9);
-    checkpointCreate(98,51);
+    checkpointCreate(98,50.5);
     platformCreate(104,54,6);
     wolfPatrolCreate(104,52,110);
     platformCreate(112,52,2);
@@ -167,14 +168,6 @@ var GameLevel_1 = {
 
     playerUpdate(); //find in player.js
 
-    if (game.time.now > timeWolves){
-      var wolf = Wolves.create(55*m,  50*m, 'wolf');
-      wolf.body.gravity.y = gravity;
-      wolf.body.bounce.y =bounce;
-      wolf.scale.setTo(0.2, 0.2);
-      timeWolves = game.time.now + 4000;
-    }
-
     if(playerUp.health <= 0)
     {
       this.game.state.start('GameLevel_1');
@@ -182,7 +175,6 @@ var GameLevel_1 = {
     }
 
     render();
-    changeHitbox();
   },
 
 };
