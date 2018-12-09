@@ -177,6 +177,7 @@ var GameLevel_1 = {
 
     playerUpdate(); //find in player.js
 
+    //cutscene START
     if(playerUp.body.x >= 161*m){
       game.input.keyboard.removeKey(Phaser.Keyboard.UP);
       game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
@@ -215,8 +216,8 @@ var GameLevel_1 = {
         spawnX = 2*m;
         spawnY = 56*m;
       }
-
     }
+    //cutscene END
 
     if(playerUp.health <= 0){
       this.game.state.start('GameLevel_1');

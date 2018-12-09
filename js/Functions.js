@@ -85,7 +85,7 @@ function elide(siElide, rimane) {
 function thornHit(playerFunction, thorn) {
  if (game.time.now>timeHit){
    if(thorn.body.touching.up){
-     player.setAll('body.velocity.y', -400);
+     player.setAll('body.velocity.y', -600);
      playerUp.damage(25);
      timeHit=game.time.now+300;
    }else if(thorn.body.touching.left){
