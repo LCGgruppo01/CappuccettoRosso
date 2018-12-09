@@ -6,6 +6,7 @@ var GameStart = {
   },
 
   create: function() {
+    this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
     image = game.add.sprite(game.world.centerX, game.world.centerY, 'open');
     image.scale.setTo(0.6,0.6);
     image.anchor.set(0.5);
@@ -19,7 +20,7 @@ var GameStart = {
 
 };
 
-var game = new Phaser.Game(1024, 768, Phaser.AUTO);
+var game = new Phaser.Game(canvasWidth, canvasHeight, Phaser.AUTO);
 
 game.state.add('GameStart', GameStart);
 game.state.start('GameStart');

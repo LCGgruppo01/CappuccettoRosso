@@ -18,6 +18,7 @@ function worldPreload(){
 function worldCreate(){
 
   // WORLD SISTEM
+  this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
   game.world.setBounds(0, 0, game.world.width, game.world.height);
   game.physics.startSystem(Phaser.Physics.ARCADE);
 

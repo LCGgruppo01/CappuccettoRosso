@@ -13,7 +13,6 @@ function playerPreload(){
   game.load.spritesheet('grannyUp', 'assets/images/grannyUp_64x85.png', 64, 85);
   game.load.spritesheet('grannyDown', 'assets/images/granny_down_64x85.png', 64, 85);
 
-
 };
 
 function playerCreate(){
