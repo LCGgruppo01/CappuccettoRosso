@@ -195,7 +195,7 @@ function wolfPatrolBehave(WolvesP){
   });
   };
 
-  function wolfFrames(Wolves){
+function wolfFrames(Wolves){
     Wolves.forEach(function(wolf){
 
     if(wolf.body.velocity.x <=0)
@@ -213,7 +213,7 @@ function wolfPatrolBehave(WolvesP){
 };
 // wolves BEHAVE and FRAMES functions end
 
-//Get the gotAxe
+//weapos START
 function getAxe(payer, axe) {
   if(cursors.down.isDown){
      gotAxe=1;
@@ -226,18 +226,53 @@ function axeChop(){
   if (SPACE.isDown && game.time.now > shootTime && axeHit == true && gotAxe==1){
     timeAxe = game.time.now + 300;
     axeHit = false;
-    playerUp.alpha = 0.5;
   }
 
   if (axeHit == false && game.time.now > timeAxe && gotAxe==1) {
     shootTime = game.time.now + 300;
     axeHit = true;
-    playerUp.alpha = 1;
-
   }
 
 };
 
+function rifle(){
+  if (gotAxe == 2) {
+    if (SPACE.isDown && position=="leftt" && game.time.now > shootTime && shoot == true){
+      var bullet = Bullets.create(playerUp.x - 10, playerUp.y + 20, 'bullet');
+      bullet.body.gravity.y = gravity;
+      bullet.body.velocity.y = -100;
+      bullet.body.velocity.x = -bulletVelocity + playerUp.body.velocity.x;
+      shootTime = game.time.now + 300;
+      shoot = false;
+    }
+    else if (SPACE.isDown && position=="rightt" && game.time.now > shootTime && shoot == true){
+      bullet = Bullets.create(playerUp.x + 10, playerUp.y + 20, 'bullet');
+      bullet.body.gravity.y = gravity;
+      bullet.body.velocity.y = -100;
+      bullet.body.velocity.x = bulletVelocity + playerUp.body.velocity.x;
+      shootTime = game.time.now + 300;
+      shoot = false;
+    }
+
+    if (SPACE.isUp) {
+      shoot = true;
+    }
+  }
+}
+
+function weaposChange(){
+  if(CTRL.isDown && gotAxe == 1 && game.time.now > changeWeapon){
+    gotAxe = 2;
+    changeWeapon = game.time.now + 300;
+  }
+  else if(CTRL.isDown && gotAxe == 2 && game.time.now > changeWeapon){
+    gotAxe = 1;
+    changeWeapon = game.time.now + 300;
+  }
+}
+//weapos END
+
+//animations START
 function playerAnimationDown() {
   if (playerUp.body.velocity.x > 5 || playerUp.body.velocity.x < -5) {
     if (playerUp.body.touching.down) {
@@ -266,13 +301,7 @@ function playerAnimationDown() {
       playerDown.frame = 0;
     }
   }else{
-    if (gotAxe === 0) {
-      playerDown.frame = 11;
-    }else if (gotAxe == 1) {
-      playerDown.frame = 11;
-    }else if (gotAxe == 2) {
-      playerDown.frame = 11;
-    }
+    playerDown.frame = 11;
   }
   if (position=='leftt') {
     playerDown.scale.x = -1;
@@ -327,6 +356,7 @@ function playerAnimationUp(){
   }
 
 };
+//animations END
 
 //player attack HItBOX
 
@@ -340,8 +370,7 @@ function changeHitbox() {
     }
   }else {
     playerHitbox.body.setSize(0, 0, 0, 0);
-  }
-}; //used in hitBoxUpdate
+  }}; //used in hitBoxUpdate
 
 function hitBoxCreate() {
   playerHitbox = game.add.sprite(spawnX, spawnY, '');
@@ -370,4 +399,32 @@ function testUpdate(){
 function render() {
   game.debug.body(playerUp);
   game.debug.body(playerHitbox);
+};
+
+function cheats() {
+  //lunar gravity
+  if(cheat == 0 && cursors.down.isDown){
+    cheat = 1;
+    setTimeout(function(){
+       cheat = 0;
+     }, 5000);
+  }
+  if(cheat == 1 && cursors.right.isDown){
+    cheat = 2;
+  }
+  if(cheat == 2 && cursors.up.isDown){
+    cheat = 3;
+  }
+  if(cheat == 3 && SPACE.isDown){
+    cheat = 4;
+  }
+  if(cheat == 4 && cursors.up.isDown){
+    cheat = 5;
+  }
+  if(cheat == 5 && cursors.left.isDown){
+    cheat = 6;
+  }
+  if(cheat == 6 && cursors.down.isDown){
+    playerJump = -800;
+  }
 };

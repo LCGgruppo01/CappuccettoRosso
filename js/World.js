@@ -6,16 +6,33 @@ var Wolves;
 var Bullets;
 var thorns;
 var gotAxe;
+var cheat = 0;
 
 function worldPreload(){
+  game.load.image('bullet', 'http://examples.phaser.io/assets/bullets/bullet13.png');
+  game.load.image('sky', 'http://examples.phaser.io/assets/skies/sky2.png');
+
+  game.load.spritesheet('wolf', 'assets/images/wolf_430x498.png', 430, 498);
+  game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 96, 96);
+  game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
+  game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
+
+  game.load.image('ground', 'assets/images/ground.png');
   game.load.image('platformStart', 'assets/images/platformStart.png');
   game.load.image('platformCenter1', 'assets/images/platformCenter1.png');
   game.load.image('platformCenter2', 'assets/images/platformCenter2.png');
   game.load.image('platformCenter3', 'assets/images/platformCenter3.png');
   game.load.image('platformEnd', 'assets/images/platformEnd.png');
+  game.load.image('bar', 'assets/images/bar.png');
+  game.load.image('barGranny', 'assets/images/barGranny.png');
+  game.load.image('d1destroyed', 'assets/images/d1destroyed.png');
+  game.load.image('kingWolf', 'assets/images/kingWolf.png');
+  game.load.image('cappuccetto', 'assets/images/cappuccetto.png');
 };
 
 function worldCreate(){
+
+  game.stage.backgroundColor = "#01041d";
 
   // WORLD SISTEM
   this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
@@ -79,6 +96,13 @@ function worldCreate(){
   heart3 = game.add.sprite(2*m, 0.25*m, 'heart');
   heart3.frame = 0;
   heart3.fixedToCamera = true;
+  //bar
+  bar = game.add.sprite(3*m, 0.5*m, 'bar');
+  bar.fixedToCamera = true;
+  barGranny = game.add.sprite(3*m, 0.5*m, 'barGranny');
+  barGranny.fixedToCamera = true;
+  game.physics.arcade.enable(barGranny);
+  barGranny.enableBody = true;
   //position
   xt = game.add.text(32, 64, 'x', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
   xt.fixedToCamera = true;
@@ -103,7 +127,6 @@ function worldUpdate(){
   game.physics.arcade.overlap(playerUp, thorns, thornHit, null, this);
   game.physics.arcade.overlap(Bullets, Wolves, kill, null, this);
   game.physics.arcade.overlap(Bullets, WolvesP, kill, null, this);
-  game.physics.arcade.overlap(playerUp, axe, getAxe, null, this);
   game.physics.arcade.overlap(Bullets, platforms, elide, null, this);
   game.physics.arcade.overlap(Bullets, platformsOver, elide, null, this);
   game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
@@ -111,6 +134,7 @@ function worldUpdate(){
   game.physics.arcade.collide(player, platformsDes);
 
   platformOverCollide(); //find in Functions.js
+
   // HUD
   //life
   if(playerUp.health == 100){
@@ -129,6 +153,8 @@ function worldUpdate(){
     heart1.frame = 1;
   }
 
+  barGranny.cameraOffset.x = playerUp.body.position.x/32 + 3*m;
+
   xt.text = 'x ' + playerUp.body.x/m;
   yt.text = 'y ' + playerUp.body.y/m;
 
@@ -136,6 +162,8 @@ function worldUpdate(){
   wolfPatrolBehave(WolvesP); //find in Functions.js
   wolfFrames(Wolves); //find in Functions.js
   wolfFrames(WolvesP); //find in Functions.js
+
+  cheats();
 
   testUpdate();
 

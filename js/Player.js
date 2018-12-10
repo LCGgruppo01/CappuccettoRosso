@@ -82,9 +82,16 @@ function playerUpdate(){
     player.setAll('body.velocity.y', playerJump);
     salto = 3;
   }
+
+  if(playerUp.body.velocity.y > 600){
+    playerUp.body.velocity.y = 600;
+  }
   //player JUMP end
 
-  axeChop(); //find in Functions.js
+  axeChop();
+  rifle();
+
+  //find in Functions.js
   if (animAxe.isPlaying) {
     if (position=='leftt') {
       playerUp.scale.x = -1;
