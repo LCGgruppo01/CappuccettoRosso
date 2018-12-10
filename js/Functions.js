@@ -238,50 +238,94 @@ function axeChop(){
 
 };
 
-function playerAnimation(){
+function playerAnimationDown() {
   if (playerUp.body.velocity.x > 5 || playerUp.body.velocity.x < -5) {
     if (playerUp.body.touching.down) {
       if (gotAxe==0) {
-        playerUp.animations.play('right');
         playerDown.animations.play('right');
       }else if (gotAxe==1) {
-        playerUp.animations.play('rightAxe');
         playerDown.animations.play('right');
       }else if (gotAxe==2) {
-        playerUp.animations.play('rightGun');
         playerDown.animations.play('right');
       }
     }else {
       if (gotAxe === 0) {
-        playerUp.frame = 5;
-        playerDown.frame = 5;
+        playerDown.frame = 11;
       }else if (gotAxe == 1) {
-        playerUp.frame = 15;
-        playerDown.frame = 5;
+        playerDown.frame = 11;
       }else if (gotAxe == 2) {
-        playerUp.frame = 25;
-        playerDown.frame = 5;
+        playerDown.frame = 11;
       }
     }
+  }else if(playerUp.body.touching.down){
+    if (gotAxe === 0) {
+      playerDown.frame = 0;
+    }else if (gotAxe == 1) {
+      playerDown.frame = 0;
+    }else if (gotAxe == 2) {
+      playerDown.frame = 0;
+    }
+  }else{
+    if (gotAxe === 0) {
+      playerDown.frame = 11;
+    }else if (gotAxe == 1) {
+      playerDown.frame = 11;
+    }else if (gotAxe == 2) {
+      playerDown.frame = 11;
+    }
+  }
+  if (position=='leftt') {
+    playerDown.scale.x = -1;
   }else {
+    playerDown.scale.x = 1;
+  }
+};
+
+function playerAnimationUp(){
+  if (playerUp.body.velocity.x > 5 || playerUp.body.velocity.x < -5) {
+    if (playerUp.body.touching.down) {
+      if (gotAxe==0) {
+        playerUp.animations.play('right');
+      }else if (gotAxe==1) {
+        playerUp.animations.play('rightAxe');
+      }else if (gotAxe==2) {
+        playerUp.animations.play('rightGun');
+      }
+    }else {
+      if (gotAxe === 0) {
+        playerUp.frame = 5;
+      }else if (gotAxe == 1) {
+        playerUp.frame = 0;
+      }else if (gotAxe == 2) {
+        playerUp.frame = 25;
+      }
+    }
+  }else if(playerUp.body.touching.down){
     if (gotAxe === 0) {
       playerUp.frame = 5;
-      playerDown.frame = 5;
     }else if (gotAxe == 1) {
-      playerUp.frame = 15;
-      playerDown.frame = 5;
+      playerUp.frame = 0;
     }else if (gotAxe == 2) {
       playerUp.frame = 25;
-      playerDown.frame = 5;
+    }
+  }else{
+    if (gotAxe === 0) {
+      playerUp.frame = 5;
+    }else if (gotAxe == 1) {
+      playerUp.frame = 0;
+    }else if (gotAxe == 2) {
+      playerUp.frame = 25;
     }
   }
   if (position=='leftt') {
     playerUp.scale.x = -1;
-    playerDown.scale.x = -1;
   }else {
     playerUp.scale.x = 1;
-    playerDown.scale.x = 1;
   }
+  if (axeHit == false){
+    playerUp.animations.play('rightAxeChop');
+  }
+
 };
 
 //player attack HItBOX
