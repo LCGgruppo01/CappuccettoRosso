@@ -368,3 +368,31 @@ function render() {
   game.debug.body(playerUp);
   game.debug.body(playerHitbox);
 };
+
+function cheats() {
+  //lunar gravity
+  if(cheat == 0 && cursors.down.isDown){
+    cheat = 1;
+    setTimeout(function(){
+       cheat = 0;
+     }, 5000);
+  }
+  if(cheat == 1 && cursors.right.isDown){
+    cheat = 2;
+  }
+  if(cheat == 2 && cursors.up.isDown){
+    cheat = 3;
+  }
+  if(cheat == 3 && SPACE.isDown){
+    cheat = 4;
+  }
+  if(cheat == 4 && cursors.up.isDown){
+    cheat = 5;
+  }
+  if(cheat == 5 && cursors.left.isDown){
+    cheat = 6;
+  }
+  if(cheat == 6 && cursors.down.isDown){
+    playerJump = -800;
+  }
+};

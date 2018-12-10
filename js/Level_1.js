@@ -1,6 +1,7 @@
 var timeWolves = 0;
 var wait = 0;
 var step = 0;
+var cheat = 0;
 
 var GameLevel_1 = {
 
@@ -226,6 +227,8 @@ var GameLevel_1 = {
       this.game.state.start('GameLevel_1');
       gotAxe=0;
     }
+
+    cheats();
 
     render();
   },
