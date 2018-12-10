@@ -13,9 +13,13 @@ function worldPreload(){
   game.load.image('platformCenter2', 'assets/images/platformCenter2.png');
   game.load.image('platformCenter3', 'assets/images/platformCenter3.png');
   game.load.image('platformEnd', 'assets/images/platformEnd.png');
+  game.load.image('bar', 'assets/images/bar.png');
+  game.load.image('barGranny', 'assets/images/barGranny.png');
 };
 
 function worldCreate(){
+
+  game.stage.backgroundColor = "#01041d";
 
   // WORLD SISTEM
   this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
@@ -79,6 +83,13 @@ function worldCreate(){
   heart3 = game.add.sprite(2*m, 0.25*m, 'heart');
   heart3.frame = 0;
   heart3.fixedToCamera = true;
+  //bar
+  bar = game.add.sprite(3*m, 0.5*m, 'bar');
+  bar.fixedToCamera = true;
+  barGranny = game.add.sprite(3*m, 0.5*m, 'barGranny');
+  barGranny.fixedToCamera = true;
+  game.physics.arcade.enable(barGranny);
+  barGranny.enableBody = true;
   //position
   xt = game.add.text(32, 64, 'x', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
   xt.fixedToCamera = true;
@@ -111,6 +122,7 @@ function worldUpdate(){
   game.physics.arcade.collide(player, platformsDes);
 
   platformOverCollide(); //find in Functions.js
+
   // HUD
   //life
   if(playerUp.health == 100){
@@ -128,6 +140,8 @@ function worldUpdate(){
   else {
     heart1.frame = 1;
   }
+
+  barGranny.cameraOffset.x = playerUp.body.position.x/32 + 3*m;
 
   xt.text = 'x ' + playerUp.body.x/m;
   yt.text = 'y ' + playerUp.body.y/m;
