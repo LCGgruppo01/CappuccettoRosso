@@ -34,6 +34,9 @@ function playerCreate(){
   player.setAll('body.collideWorldBounds', true);
   player.setAll('body.bounce.y', bounce);
   player.setAll('body.gravity.y', gravity);
+  playerUp.body.setSize(30, 60, 15, 15);
+  playerDown.body.setSize(30, 60, 15, 15);
+
 
   //player HEALTH
   playerUp.health = 100;
