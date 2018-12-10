@@ -1,5 +1,6 @@
 var timeWolves = 0;
 var wait = 0;
+var step = 0;
 
 var GameLevel_1 = {
 
@@ -7,7 +8,7 @@ var GameLevel_1 = {
 
     game.load.image('sky', 'http://examples.phaser.io/assets/skies/sky2.png');
 
-    game.world.width=175*m;
+    game.world.width=185*m;
     game.world.height=61*m;
 
     game.load.crossOrigin = 'anonymous';
@@ -143,12 +144,13 @@ var GameLevel_1 = {
     platformCreate(144,51,7);
     wolfPatrolCreate(144,49,151);
     platformCreate(152,53,4);
-    platformCreate(156,56,25);
+    platformCreate(156,56,30);
+    platformsDes.create(170*m, 52*m, 'd1');
     //cutscene
-    kingWolf = game.add.sprite(168*m, 53*m, 'kingWolf');
+    kingWolf = game.add.sprite(178*m, 53*m, 'kingWolf');
     game.physics.arcade.enable(kingWolf);
     kingWolf.enableBody = true;
-    cappuccetto = game.add.sprite(171*m, 55*m, 'cappuccetto');
+    cappuccetto = game.add.sprite(176*m, 55*m, 'cappuccetto');
     game.physics.arcade.enable(cappuccetto);
     cappuccetto.enableBody = true;
 
@@ -178,7 +180,7 @@ var GameLevel_1 = {
     playerUpdate(); //find in player.js
 
     //cutscene START
-    if(playerUp.body.x >= 161*m){
+    if(playerUp.body.x >= 172*m){
       game.input.keyboard.removeKey(Phaser.Keyboard.UP);
       game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
       game.input.keyboard.removeKey(Phaser.Keyboard.RIGHT);
@@ -188,29 +190,30 @@ var GameLevel_1 = {
       game.input.keyboard.removeKey(Phaser.Keyboard.H);
       player.setAll('body.collideWorldBounds', false);
       game.camera.follow();
-      if(playerUp.body.x >= 161*m && playerUp.body.x < 162*m){
+      if(playerUp.body.x >= 172*m && playerUp.body.x < 173*m){
         playerUp.body.velocity.x = 0;
         playerUp.frame = 15;
         playerDown.frame = 5;
       }
-
       setTimeout(function(){
          game.camera.x += 4;
        }, 200);
-
       setTimeout(function(){
-        kingWolf.body.velocity.x = 250;
-        if(kingWolf.body.x > 172*m){
-          cappuccetto.body.velocity.x = 250;
+        if (step == 0) {
+          kingWolf.body.velocity.x = -250;
         }
-        if(cappuccetto.body.x > 172*m){
+        if(kingWolf.body.x <= 176*m){
+          step = 1;
+          cappuccetto.body.velocity.x = 250;
+          kingWolf.body.velocity.x = 250;
+        }
+        if(cappuccetto.body.x > 180*m){
           playerUp.body.velocity.x = playerVelocity + 100;
           playerUp.animations.play('rightAxe');
           playerDown.animations.play('right');
         }
       }, 2300);
-
-      if(playerUp.body.x >= 175*m){
+      if(playerUp.body.x >= 185*m){
         this.game.state.start('GameLevel_2');
         playerUp.health = 100;
         spawnX = 2*m;

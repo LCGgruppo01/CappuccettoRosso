@@ -226,14 +226,11 @@ function axeChop(){
   if (SPACE.isDown && game.time.now > shootTime && axeHit == true && gotAxe==1){
     timeAxe = game.time.now + 300;
     axeHit = false;
-    playerUp.alpha = 0.5;
   }
 
   if (axeHit == false && game.time.now > timeAxe && gotAxe==1) {
     shootTime = game.time.now + 300;
     axeHit = true;
-    playerUp.alpha = 1;
-
   }
 
 };
