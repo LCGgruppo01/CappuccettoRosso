@@ -263,13 +263,7 @@ function playerAnimationDown() {
       playerDown.frame = 0;
     }
   }else{
-    if (gotAxe === 0) {
-      playerDown.frame = 11;
-    }else if (gotAxe == 1) {
-      playerDown.frame = 11;
-    }else if (gotAxe == 2) {
-      playerDown.frame = 11;
-    }
+    playerDown.frame = 11;
   }
   if (position=='leftt') {
     playerDown.scale.x = -1;

@@ -143,7 +143,7 @@ function worldUpdate(){
 
   barGranny.cameraOffset.x = playerUp.body.position.x/32 + 3*m;
 
-  xt.text = 'x ' + cheat;
+  xt.text = 'x ' + playerUp.body.x/m;
   yt.text = 'y ' + playerUp.body.y/m;
 
   wolvesBehave(Wolves); //find in Functions.js

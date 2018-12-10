@@ -79,6 +79,10 @@ function playerUpdate(){
     player.setAll('body.velocity.y', playerJump);
     salto = 3;
   }
+
+  if(playerUp.body.velocity.y > 600){
+    playerUp.body.velocity.y = 600;
+  }
   //player JUMP end
 
   axeChop(); //find in Functions.js
