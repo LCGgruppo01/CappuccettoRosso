@@ -130,7 +130,7 @@ function checkpointHit(player, checkpoint){
 
 function platformOverCollide (){
   platformsOver.forEach(function(platform) {
-    if(playerUp.body.y + 64 - platform.body.y <= 0){
+    if(playerUp.body.y + 50 - platform.body.y <= 0){
       game.physics.arcade.collide(player, platform);
     }
   })
@@ -362,11 +362,11 @@ function playerAnimationUp(){
 
 function changeHitbox() {
   if (axeHit == false) {
-    playerHitbox.body.setSize(80, 85, 0, 0);
+    playerHitbox.body.setSize(30, 60, 0, 0);
     if (position == "rightt") {
-      playerHitbox.body.x = playerUp.body.x + 64;
+      playerHitbox.body.x = playerUp.body.x + 30;
     }else if (position == "leftt") {
-      playerHitbox.body.x = playerUp.body.x - 80;
+      playerHitbox.body.x = playerUp.body.x - 30;
     }
   }else {
     playerHitbox.body.setSize(0, 0, 0, 0);
@@ -377,11 +377,11 @@ function hitBoxCreate() {
   game.physics.arcade.enable(playerHitbox);
   playerHitbox.enableBody = true;
   playerHitbox.body.collideWorldBounds = true;
-  playerHitbox.body.setSize(0, 85, 0, 0);
+  playerHitbox.body.setSize(0, 60, 0, 0);
 };
 
 function hitBoxUpdate() {
-  playerHitbox.body.x = playerUp.body.x + 64;
+  playerHitbox.body.x = playerUp.body.x + 30;
   playerHitbox.body.y = playerUp.body.y;
   changeHitbox();
 };
