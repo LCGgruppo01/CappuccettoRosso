@@ -85,7 +85,10 @@ function playerUpdate(){
   }
   //player JUMP end
 
-  axeChop(); //find in Functions.js
+  axeChop();
+  rifle();
+
+  //find in Functions.js
   if (animAxe.isPlaying) {
     if (position=='leftt') {
       playerUp.scale.x = -1;

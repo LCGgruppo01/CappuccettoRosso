@@ -1,7 +1,6 @@
 var timeWolves = 0;
 var wait = 0;
 var step = 0;
-var cheat = 0;
 
 var GameLevel_1 = {
 
@@ -14,16 +13,6 @@ var GameLevel_1 = {
 
     game.load.crossOrigin = 'anonymous';
 
-    game.load.image('bullet', 'http://examples.phaser.io/assets/bullets/bullet13.png');
-    game.load.image('sky', 'http://examples.phaser.io/assets/skies/sky2.png');
-
-    game.load.spritesheet('wolf', 'assets/images/wolf_430x498.png', 430, 498);
-    game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 96, 96);
-    game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
-    game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
-
-
-    game.load.image('ground', 'assets/images/ground.png');
     game.load.image('house', 'assets/images/house.png');
     game.load.image('thorns', 'assets/images/thorns.png');
     game.load.image('axe', 'assets/images/axe.png');
@@ -35,9 +24,6 @@ var GameLevel_1 = {
     game.load.image('p6', 'assets/images/p6.png');
     game.load.image('s1', 'assets/images/s1.png');
     game.load.image('t1', 'assets/images/t1.png');
-    game.load.image('d1destroyed', 'assets/images/d1destroyed.png');
-    game.load.image('kingWolf', 'assets/images/kingWolf.png');
-    game.load.image('cappuccetto', 'assets/images/cappuccetto.png');
 
     playerPreload(); //find in player.js
     worldPreload(); //find in World.js
@@ -180,6 +166,8 @@ var GameLevel_1 = {
 
     playerUpdate(); //find in player.js
 
+    game.physics.arcade.overlap(playerUp, axe, getAxe, null, this);
+
     //cutscene START
     if(playerUp.body.x >= 172*m){
       game.input.keyboard.removeKey(Phaser.Keyboard.UP);
@@ -227,8 +215,6 @@ var GameLevel_1 = {
       this.game.state.start('GameLevel_1');
       gotAxe=0;
     }
-
-    cheats();
 
     render();
   },

@@ -6,8 +6,18 @@ var Wolves;
 var Bullets;
 var thorns;
 var gotAxe;
+var cheat = 0;
 
 function worldPreload(){
+  game.load.image('bullet', 'http://examples.phaser.io/assets/bullets/bullet13.png');
+  game.load.image('sky', 'http://examples.phaser.io/assets/skies/sky2.png');
+
+  game.load.spritesheet('wolf', 'assets/images/wolf_430x498.png', 430, 498);
+  game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 96, 96);
+  game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
+  game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
+
+  game.load.image('ground', 'assets/images/ground.png');
   game.load.image('platformStart', 'assets/images/platformStart.png');
   game.load.image('platformCenter1', 'assets/images/platformCenter1.png');
   game.load.image('platformCenter2', 'assets/images/platformCenter2.png');
@@ -15,6 +25,9 @@ function worldPreload(){
   game.load.image('platformEnd', 'assets/images/platformEnd.png');
   game.load.image('bar', 'assets/images/bar.png');
   game.load.image('barGranny', 'assets/images/barGranny.png');
+  game.load.image('d1destroyed', 'assets/images/d1destroyed.png');
+  game.load.image('kingWolf', 'assets/images/kingWolf.png');
+  game.load.image('cappuccetto', 'assets/images/cappuccetto.png');
 };
 
 function worldCreate(){
@@ -114,7 +127,6 @@ function worldUpdate(){
   game.physics.arcade.overlap(playerUp, thorns, thornHit, null, this);
   game.physics.arcade.overlap(Bullets, Wolves, kill, null, this);
   game.physics.arcade.overlap(Bullets, WolvesP, kill, null, this);
-  game.physics.arcade.overlap(playerUp, axe, getAxe, null, this);
   game.physics.arcade.overlap(Bullets, platforms, elide, null, this);
   game.physics.arcade.overlap(Bullets, platformsOver, elide, null, this);
   game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
@@ -150,6 +162,8 @@ function worldUpdate(){
   wolfPatrolBehave(WolvesP); //find in Functions.js
   wolfFrames(Wolves); //find in Functions.js
   wolfFrames(WolvesP); //find in Functions.js
+
+  cheats();
 
   testUpdate();
 

@@ -195,7 +195,7 @@ function wolfPatrolBehave(WolvesP){
   });
   };
 
-  function wolfFrames(Wolves){
+function wolfFrames(Wolves){
     Wolves.forEach(function(wolf){
 
     if(wolf.body.velocity.x <=0)
@@ -213,7 +213,7 @@ function wolfPatrolBehave(WolvesP){
 };
 // wolves BEHAVE and FRAMES functions end
 
-//Get the gotAxe
+//weapos START
 function getAxe(payer, axe) {
   if(cursors.down.isDown){
      gotAxe=1;
@@ -235,6 +235,44 @@ function axeChop(){
 
 };
 
+function rifle(){
+  if (gotAxe == 2) {
+    if (SPACE.isDown && position=="leftt" && game.time.now > shootTime && shoot == true){
+      var bullet = Bullets.create(playerUp.x - 10, playerUp.y + 20, 'bullet');
+      bullet.body.gravity.y = gravity;
+      bullet.body.velocity.y = -100;
+      bullet.body.velocity.x = -bulletVelocity + playerUp.body.velocity.x;
+      shootTime = game.time.now + 300;
+      shoot = false;
+    }
+    else if (SPACE.isDown && position=="rightt" && game.time.now > shootTime && shoot == true){
+      bullet = Bullets.create(playerUp.x + 10, playerUp.y + 20, 'bullet');
+      bullet.body.gravity.y = gravity;
+      bullet.body.velocity.y = -100;
+      bullet.body.velocity.x = bulletVelocity + playerUp.body.velocity.x;
+      shootTime = game.time.now + 300;
+      shoot = false;
+    }
+
+    if (SPACE.isUp) {
+      shoot = true;
+    }
+  }
+}
+
+function weaposChange(){
+  if(CTRL.isDown && gotAxe == 1 && game.time.now > changeWeapon){
+    gotAxe = 2;
+    changeWeapon = game.time.now + 300;
+  }
+  else if(CTRL.isDown && gotAxe == 2 && game.time.now > changeWeapon){
+    gotAxe = 1;
+    changeWeapon = game.time.now + 300;
+  }
+}
+//weapos END
+
+//animations START
 function playerAnimationDown() {
   if (playerUp.body.velocity.x > 5 || playerUp.body.velocity.x < -5) {
     if (playerUp.body.touching.down) {
@@ -318,6 +356,7 @@ function playerAnimationUp(){
   }
 
 };
+//animations END
 
 //player attack HItBOX
 
@@ -331,8 +370,7 @@ function changeHitbox() {
     }
   }else {
     playerHitbox.body.setSize(0, 0, 0, 0);
-  }
-}; //used in hitBoxUpdate
+  }}; //used in hitBoxUpdate
 
 function hitBoxCreate() {
   playerHitbox = game.add.sprite(spawnX, spawnY, '');
