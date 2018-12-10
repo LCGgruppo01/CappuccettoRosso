@@ -7,11 +7,12 @@ var timeHit = 0;
 var immunity = 0;
 var position = "rightt";
 var timeAxe = 0;
+var animAxe;
 
 function playerPreload(){
 
-  game.load.spritesheet('grannyUp', 'assets/images/grannyUp_64x85.png', 64, 85);
-  game.load.spritesheet('grannyDown', 'assets/images/granny_down_64x85.png', 64, 85);
+  game.load.spritesheet('grannyUp', 'assets/images/GRANNYup67x75h.png', 67, 75);
+  game.load.spritesheet('grannyDown', 'assets/images/GRANNYdown67x75h.png', 67, 75);
 
 
 };
@@ -41,14 +42,11 @@ function playerCreate(){
   playerUp.heal(100);
 
   //player ANIMATIONS
-  playerDown.animations.add('left', [0, 1, 2, 3], 10, true);
-  playerDown.animations.add('right', [6, 7, 8, 9], 10, true);
-  playerUp.animations.add('left', [0, 1, 2, 3], 10, true);
+  playerDown.animations.add('right', [1, 2, 3, 4], 10, true);
   playerUp.animations.add('right', [6, 7, 8, 9], 10, true);
-  playerUp.animations.add('leftAxe', [10, 11, 12, 13], 10, true);
-  playerUp.animations.add('rightAxe', [16, 17, 18, 19], 10, true);
-  playerUp.animations.add('leftAxeChop', [1, 0, 0, 19], 10, true);
-  playerUp.animations.add('rightAxeChop', [4, 7, 18, 0], 10, true);
+  playerUp.animations.add('rightAxe', [1, 2, 3, 4], 10, true);
+  animAxe = playerUp.animations.add('rightAxeChop', [10, 11, 12, 13], 10, true);
+  animAxe.loop = false;
 
 };
 
@@ -85,7 +83,17 @@ function playerUpdate(){
   //player JUMP end
 
   axeChop(); //find in Functions.js
-  playerAnimation();
+  if (animAxe.isPlaying) {
+    if (position=='leftt') {
+      playerUp.scale.x = -1;
+    }else {
+      playerUp.scale.x = 1;
+    }
+  }else {
+    playerAnimationUp();
+  }
+  playerAnimationDown();
+
   playerDown.body.x = playerUp.body.x;
   playerDown.body.y = playerUp.body.y;
 
