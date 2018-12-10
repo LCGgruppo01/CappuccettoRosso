@@ -20,7 +20,7 @@ var GameStart = {
 
 };
 
-var game = new Phaser.Game(canvasWidth, canvasHeight, Phaser.AUTO);
+var game = new Phaser.Game(1024, 768, Phaser.AUTO);
 
 game.state.add('GameStart', GameStart);
 game.state.start('GameStart');
