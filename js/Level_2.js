@@ -26,7 +26,7 @@ var GameLevel_2 = {
     worldCreate(); //find in World.js
     playerCreate(); //find in Player.js
 
-    CTRL=game.input.keyboard.addKey(Phaser.Keyboard.M);
+    CTRL=game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
 
     wolfCreate(10, 49); //find in Function.js
 
