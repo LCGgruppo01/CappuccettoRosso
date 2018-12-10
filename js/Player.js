@@ -14,7 +14,6 @@ function playerPreload(){
   game.load.spritesheet('grannyUp', 'assets/images/GRANNYup67x75h.png', 67, 75);
   game.load.spritesheet('grannyDown', 'assets/images/GRANNYdown67x75h.png', 67, 75);
 
-
 };
 
 function playerCreate(){
