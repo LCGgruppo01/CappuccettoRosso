@@ -224,7 +224,7 @@ var GameLevel_1 = {
       gotAxe=0;
     }
 
-//    render();
+    render();
   },
 
 };
