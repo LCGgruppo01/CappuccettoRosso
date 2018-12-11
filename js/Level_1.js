@@ -57,7 +57,7 @@ var GameLevel_1 = {
     platforms.create(38*m, 57*m, 'p4');
     platforms.create(41*m, 55*m, 'p5');
     platforms.create(44*m, 53*m, 'p6');
-    checkpointCreate(31,56.5);
+    checkpointCreate(31,56);
     wolfCreate(42,53);
     //albero esterno
     platformCreate(26,50,6);
@@ -96,7 +96,7 @@ var GameLevel_1 = {
     trunkCreate(60,16,42);
     //ponte
     platformCreate(63,16,11);
-    checkpointCreate(64,14.5);
+    checkpointCreate(64,14);
     wolfPatrolCreate(66,14,72);
     //albero cavo 2
     trunkCreate(74,1,11);
@@ -108,7 +108,7 @@ var GameLevel_1 = {
     wolfPatrolCreate(77,21,84);
     platformCreate(81,27,4);
     platformCreate(80,31,7);
-    wolfPatrolCreate(80,29,87);
+    wolfPatrolCreate(80,29,86);
     platformCreate(78,36,3);
     platformCreate(77,39,7);
     wolfPatrolCreate(77,37,84);
@@ -125,7 +125,7 @@ var GameLevel_1 = {
     //platform spine
     thornsCreate(90,57,67)
     platformCreate(93,52,9);
-    checkpointCreate(98,50.5);
+    checkpointCreate(98,50);
     platformCreate(104,54,6);
     wolfPatrolCreate(104,52,110);
     platformCreate(112,52,2);
@@ -136,9 +136,11 @@ var GameLevel_1 = {
     platformCreate(141,53,1);
     platformCreate(144,51,7);
     wolfPatrolCreate(144,49,151);
-    platformCreate(152,53,4);
+    platformCreate(152,52,4);
     platformCreate(156,56,30);
     platformsDes.create(170*m, 52*m, 'd1');
+    wolfCreate(168,54);
+    wolfCreate(166,54);
     //cutscene
     kingWolf = game.add.sprite(178*m, 53*m, 'kingWolf');
     game.physics.arcade.enable(kingWolf);
@@ -187,8 +189,8 @@ var GameLevel_1 = {
       game.camera.follow();
       if(playerUp.body.x >= 172*m && playerUp.body.x < 173*m){
         playerUp.body.velocity.x = 0;
-        playerUp.frame = 15;
-        playerDown.frame = 5;
+        playerUp.frame = 0;
+        playerDown.frame = 0;
       }
       setTimeout(function(){
          game.camera.x += 4;
