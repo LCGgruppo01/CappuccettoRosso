@@ -1,0 +1,8 @@
+LUNAR GRAVITY
+C down right up left space
+
+SUPER JUMP
+C up down up space down
+
+SUPER VELOCITY
+C right left right left space

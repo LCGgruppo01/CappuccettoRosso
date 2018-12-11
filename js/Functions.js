@@ -402,29 +402,74 @@ function render() {
 };
 
 function cheats() {
-  //lunar gravity
-  if(cheat == 0 && cursors.down.isDown){
+  //super jump
+  if(cheat == 0 && C.isDown){
     cheat = 1;
     setTimeout(function(){
        cheat = 0;
-     }, 5000);
+     }, 3000);
   }
-  if(cheat == 1 && cursors.right.isDown){
+  if(cheat == 1 && cursors.up.isDown){
     cheat = 2;
   }
-  if(cheat == 2 && cursors.up.isDown){
+  if(cheat == 2 && cursors.down.isDown){
     cheat = 3;
   }
-  if(cheat == 3 && SPACE.isDown){
+  if(cheat == 3 && cursors.up.isDown){
     cheat = 4;
   }
-  if(cheat == 4 && cursors.up.isDown){
+  if(cheat == 4 && SPACE.isDown){
     cheat = 5;
   }
-  if(cheat == 5 && cursors.left.isDown){
-    cheat = 6;
-  }
-  if(cheat == 6 && cursors.down.isDown){
+  if(cheat == 5 && cursors.down.isDown){
     playerJump = -800;
+  }
+
+  //lunar gravity
+  if(cheat1 == 0 && C.isDown){
+    cheat1 = 1;
+    setTimeout(function(){
+       cheat1 = 0;
+     }, 3000);
+  }
+  if(cheat1 == 1 && cursors.down.isDown){
+    cheat1 = 2;
+  }
+  if(cheat1 == 2 && cursors.right.isDown){
+    cheat1 = 3;
+  }
+  if(cheat1 == 3 && cursors.up.isDown){
+    cheat1 = 4;
+  }
+  if(cheat1 == 4 && cursors.left.isDown){
+    cheat1 = 5;
+  }
+  if(cheat1 == 5 && SPACE.isDown){
+    gravity = 300;
+    player.setAll('body.gravity.y', gravity);
+    Wolves.setAll('body.gravity.y', gravity);
+  }
+
+  //super velocity
+  if(cheat2 == 0 && C.isDown){
+    cheat2 = 1;
+    setTimeout(function(){
+       cheat2 = 0;
+     }, 3000);
+  }
+  if(cheat2 == 1 && cursors.right.isDown){
+    cheat2 = 2;
+  }
+  if(cheat2 == 2 && cursors.left.isDown){
+    cheat2 = 3;
+  }
+  if(cheat2 == 3 && cursors.right.isDown){
+    cheat2 = 4;
+  }
+  if(cheat2 == 4 && cursors.left.isDown){
+    cheat2 = 5;
+  }
+  if(cheat2 == 5 && SPACE.isDown){
+    playerVelocity = 600;
   }
 };
