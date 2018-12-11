@@ -102,7 +102,7 @@ var GameLevel_1 = {
     wolfPatrolCreate(77,21,84);
     platformCreate(81,27,4);
     platformCreate(80,31,7);
-    wolfPatrolCreate(80,29,87);
+    wolfPatrolCreate(80,29,86);
     platformCreate(78,36,3);
     platformCreate(77,39,7);
     wolfPatrolCreate(77,37,84);

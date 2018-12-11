@@ -103,6 +103,7 @@ function thornHit(playerFunction, thorn) {
 
 function wolfHit(player, wolf) {
   if (game.time.now > immunity && axeHit == true){
+    wolf.body.velocity.x = -(playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*500;
     player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*4000;
     timeHit = game.time.now + 300;
     immunity = game.time.now + 1000;
@@ -111,10 +112,10 @@ function wolfHit(player, wolf) {
 };
 
 function wolfHitboxDamage(hitbox, wolf) {
-  if (game.time.now > immunity)
-  {
-    wolf.damage(50);
+  if (game.time.now > immunity){
     wolf.body.velocity.y = 2000;
+    wolf.body.velocity.x = -(playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*500;
+    wolf.damage(50);
     immunity = game.time.now + 1000;
   }
 }
@@ -184,7 +185,7 @@ function wolfPatrolBehave(WolvesP){
       else if(wolf.body.position.x >= wolf.fine) {
           wolf.body.velocity.x = -200;
       }
-  });
+    });
   };
 
 function wolfFrames(Wolves){
