@@ -51,7 +51,7 @@ var GameLevel_1 = {
     platforms.create(38*m, 57*m, 'p4');
     platforms.create(41*m, 55*m, 'p5');
     platforms.create(44*m, 53*m, 'p6');
-    checkpointCreate(31,56.5);
+    checkpointCreate(31,56);
     wolfCreate(42,53);
     //albero esterno
     platformCreate(26,50,6);
@@ -90,7 +90,7 @@ var GameLevel_1 = {
     trunkCreate(60,16,42);
     //ponte
     platformCreate(63,16,11);
-    checkpointCreate(64,14.5);
+    checkpointCreate(64,14);
     wolfPatrolCreate(66,14,72);
     //albero cavo 2
     trunkCreate(74,1,11);
@@ -119,7 +119,7 @@ var GameLevel_1 = {
     //platform spine
     thornsCreate(90,57,67)
     platformCreate(93,52,9);
-    checkpointCreate(98,50.5);
+    checkpointCreate(98,50);
     platformCreate(104,54,6);
     wolfPatrolCreate(104,52,110);
     platformCreate(112,52,2);

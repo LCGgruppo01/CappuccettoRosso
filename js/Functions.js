@@ -75,6 +75,7 @@ function checkpointCreate(x, y){
   var checkpoint = Checkpoints.create(x*m, y*m, 'checkpoint');
   checkpoint.frame = 0;
   checkpoint.body.setSize(100,10,0,90);
+  checkpoint.animations.add('checkhit', [1, 2, 3, 4, 5, 6], 10, true);
 }
 // CREATE functions end
 
@@ -86,15 +87,15 @@ function elide(siElide, rimane) {
 function thornHit(playerFunction, thorn) {
  if (game.time.now>timeHit){
    if(thorn.body.touching.up){
-     player.setAll('body.velocity.y', -600);
+     player.setAll('body.velocity.y', -700);
      playerUp.damage(25);
      timeHit=game.time.now+300;
    }else if(thorn.body.touching.left){
-     player.setAll('body.velocity.x', -600);
+     player.setAll('body.velocity.x', -700);
      playerUp.damage(25);
      timeHit=game.time.now+300;
    }else if(thorn.body.touching.right){
-     player.setAll('body.velocity.y', 600);
+     player.setAll('body.velocity.y', 700);
      playerUp.damage(25);
      timeHit=game.time.now+300;
    }
@@ -126,7 +127,7 @@ function kill(bul, wol) {
 function checkpointHit(player, checkpoint){
   spawnX = checkpoint.body.x;
   spawnY = checkpoint.body.y - 64;
-  checkpoint.frame = 1;
+  checkpoint.animations.play('checkhit');
 };
 
 function platformOverCollide (){
@@ -164,9 +165,7 @@ function wolvesBehave(Wolves) {
 
   Wolves.forEach(function(wolf){
    if(Math.abs(playerUp.x - wolf.x) < 600 && - playerUp.y + wolf.y < 160){
-     setTimeout(function(){
-       wolf.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*300*Math.random();
-     }, 100000*Math.random());
+      wolf.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*50 + (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*200*wolf.casuale;
    }
    else{
      wolf.body.velocity.x = 0;
@@ -179,12 +178,12 @@ function wolvesBehave(Wolves) {
 
 function wolfPatrolBehave(WolvesP){
   WolvesP.forEach(function(wolf){
-    if(wolf.body.position.x <= wolf.inizio) {
-      wolf.body.velocity.x = 200;
-    }
-    else if(wolf.body.position.x >= wolf.fine) {
-        wolf.body.velocity.x = -200;
-    }
+      if(wolf.body.position.x <= wolf.inizio) {
+        wolf.body.velocity.x = 200;
+      }
+      else if(wolf.body.position.x >= wolf.fine) {
+          wolf.body.velocity.x = -200;
+      }
   });
   };
 
