@@ -130,9 +130,11 @@ var GameLevel_1 = {
     platformCreate(141,53,1);
     platformCreate(144,51,7);
     wolfPatrolCreate(144,49,151);
-    platformCreate(152,53,4);
+    platformCreate(152,52,4);
     platformCreate(156,56,30);
     platformsDes.create(170*m, 52*m, 'd1');
+    wolfCreate(168,54);
+    wolfCreate(166,54);
     //cutscene
     kingWolf = game.add.sprite(178*m, 53*m, 'kingWolf');
     game.physics.arcade.enable(kingWolf);
@@ -181,8 +183,8 @@ var GameLevel_1 = {
       game.camera.follow();
       if(playerUp.body.x >= 172*m && playerUp.body.x < 173*m){
         playerUp.body.velocity.x = 0;
-        playerUp.frame = 15;
-        playerDown.frame = 5;
+        playerUp.frame = 0;
+        playerDown.frame = 0;
       }
       setTimeout(function(){
          game.camera.x += 4;
@@ -216,7 +218,7 @@ var GameLevel_1 = {
       gotAxe=0;
     }
 
-    
+
   },
 
 };

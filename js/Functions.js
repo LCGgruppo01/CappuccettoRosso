@@ -58,6 +58,7 @@ function wolfCreate(x, y){
   wolf.body.gravity.y = gravity;
   wolf.body.bounce.y = bounce;
   wolf.health = 100;
+  wolf.casuale = Math.random();
 };
 
 function wolfPatrolCreate(x, y, fine){
@@ -161,27 +162,19 @@ function wolvesBehave(Wolves) {
 
   game.physics.arcade.collide(Wolves, platforms);
 
-
   Wolves.forEach(function(wolf){
-   if(Math.abs(playerUp.x - wolf.x) < 600){
-     wolf.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*100;
+   if(Math.abs(playerUp.x - wolf.x) < 600 && - playerUp.y + wolf.y < 160){
+     setTimeout(function(){
+       wolf.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*300*Math.random();
+     }, 100000*Math.random());
    }
    else{
      wolf.body.velocity.x = 0;
    }
-   if (wolf.body.touching.down && playerUp.body.touching.down && Math.abs(playerUp.x - wolf.x) < 250) {
-     if(wolf.y - playerUp.y > 15){
-     wolf.body.velocity.y = wolfJump;
-     }
-     else{
-     wolf.body.velocity.y = 0;
-     }
-   }
    if ((wolf.body.touching.left || wolf.body.touching.right) && wolf.body.touching.down){
      wolf.body.velocity.y = wolfJump;
-   }
-   });
-
+    }
+  });
 };
 
 function wolfPatrolBehave(WolvesP){
