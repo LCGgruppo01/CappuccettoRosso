@@ -15,7 +15,7 @@ var GameLevel_1 = {
 
     game.load.image('house', 'assets/images/house.png');
     game.load.image('thorns', 'assets/images/thorns.png');
-    game.load.spritesheet('axe', 'assets/images/axe_64x64.png', 64, 64);
+    game.load.spritesheet('axe', 'assets/images/axe_64.png', 64, 64);
     game.load.image('p1', 'assets/images/p1.png');
     game.load.image('p2', 'assets/images/p2.png');
     game.load.image('p3', 'assets/images/p3.png');
@@ -26,6 +26,8 @@ var GameLevel_1 = {
     game.load.image('t1', 'assets/images/t1.png');
     game.load.image('tutorialMove', 'assets/images/tutorial_move.png');
     game.load.image('tutorialUp', 'assets/images/tutorial_up.png');
+    game.load.image('tutorialAxe', 'assets/images/tutorial_axe.png');
+    game.load.image('tutorialSpace', 'assets/images/tutorial_space.png');
 
 
     playerPreload(); //find in player.js
@@ -37,6 +39,8 @@ var GameLevel_1 = {
     game.add.sprite(0*m, 50*m, 'house');
     game.add.sprite(6.5*m, 57*m, 'tutorialMove');
     game.add.sprite(10.5*m, 55*m, 'tutorialUp');
+    game.add.sprite(14.25*m, 53.5*m, 'tutorialAxe');
+    game.add.sprite(15.75*m, 54*m, 'tutorialSpace');
     axe = game.add.sprite(14*m, 54*m, 'axe');
     axe.frame= 1;
     game.physics.arcade.enable(axe);
