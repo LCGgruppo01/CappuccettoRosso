@@ -217,7 +217,7 @@ function wolfFrames(Wolves){
 function getAxe(payer, axe) {
   if(cursors.down.isDown){
      gotAxe=1;
-     axe.kill();
+     axe.frame = 0;
   }
 };
 

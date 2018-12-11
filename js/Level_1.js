@@ -15,7 +15,7 @@ var GameLevel_1 = {
 
     game.load.image('house', 'assets/images/house.png');
     game.load.image('thorns', 'assets/images/thorns.png');
-    game.load.image('axe', 'assets/images/axe.png');
+    game.load.spritesheet('axe', 'assets/images/axe_64x64.png', 64, 64);
     game.load.image('p1', 'assets/images/p1.png');
     game.load.image('p2', 'assets/images/p2.png');
     game.load.image('p3', 'assets/images/p3.png');
@@ -24,6 +24,9 @@ var GameLevel_1 = {
     game.load.image('p6', 'assets/images/p6.png');
     game.load.image('s1', 'assets/images/s1.png');
     game.load.image('t1', 'assets/images/t1.png');
+    game.load.image('tutorialMove', 'assets/images/tutorial_move.png');
+    game.load.image('tutorialUp', 'assets/images/tutorial_up.png');
+
 
     playerPreload(); //find in player.js
     worldPreload(); //find in World.js
@@ -32,7 +35,10 @@ var GameLevel_1 = {
   create: function() {
     //Backgrounds
     game.add.sprite(0*m, 50*m, 'house');
-    axe = game.add.sprite(14*m, 53*m, 'axe');
+    game.add.sprite(6.5*m, 57*m, 'tutorialMove');
+    game.add.sprite(10.5*m, 55*m, 'tutorialUp');
+    axe = game.add.sprite(14*m, 54*m, 'axe');
+    axe.frame= 1;
     game.physics.arcade.enable(axe);
     trunkBg(47,1,60);
     trunkBg(74,1,60);
@@ -216,7 +222,7 @@ var GameLevel_1 = {
       gotAxe=0;
     }
 
-    
+
   },
 
 };
