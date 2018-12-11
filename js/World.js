@@ -7,6 +7,9 @@ var Bullets;
 var thorns;
 var gotAxe;
 var cheat = 0;
+var cheat1 = 0;
+var cheat2 = 0;
+var cheat3 = 0;
 
 function worldPreload(){
   game.load.image('bullet', 'http://examples.phaser.io/assets/bullets/bullet13.png');
@@ -43,6 +46,7 @@ function worldCreate(){
   cursors = game.input.keyboard.createCursorKeys();
   SPACE=game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
   AXE=game.input.keyboard.addKey(Phaser.Keyboard.A);
+  C=game.input.keyboard.addKey(Phaser.Keyboard.C);
 
   // WORLD BACKGROUND start
   Backgrounds = game.add.group();

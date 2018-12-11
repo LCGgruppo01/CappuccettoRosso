@@ -3,8 +3,6 @@ var platformlength = 640;
 var platformHeight = 64;
 
 //WORLD var
-var canvasWidth = 1024;
-var canvasHeight = 768;
 var gravity = 700;
 var bounce = 0;
 var m = 64;
