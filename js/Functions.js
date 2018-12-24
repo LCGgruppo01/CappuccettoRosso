@@ -379,6 +379,50 @@ function hitBoxUpdate() {
   changeHitbox();
 };
 
+function flashDamage(){
+  if (timeHit >= game.time.now + 290) {
+    game.camera.flash(0xff0015, 100);
+  }
+};
+
+// start PAUSE menù
+
+function pauseMenu() {
+  P=game.input.keyboard.addKey(Phaser.Keyboard.P);
+
+  pause = game.add.text(900, 30, 'Pause', { font: '24px Arial', fill: '#fff' });
+  pause.inputEnabled = true;
+  pause.fixedToCamera = true;
+
+  P.onDown.add(paused, this);
+  pause.events.onInputUp.add(paused);
+  game.input.onDown.add(unpause);
+};
+
+function paused() {
+  if (game.paused === false) {
+
+    // When the paus button is pressed, we pause the game
+    setTimeout(function(){
+      game.paused = true;
+     }, 20);
+    unpause = game.add.text(500, 350, 'Esci Dalla Siesta', { font: '24px Arial', fill: '#fff' });
+    unpause.inputEnabled = true;
+    unpause.fixedToCamera = true;
+  }
+};
+
+function unpause(event){
+  if (game.paused) {
+    unpause.events.onInputUp.add(function(){
+      game.paused = false;
+      unpause.kill();
+    });
+  }
+};
+
+//end PAUSE menù
+
 // TEST & DEBUG functions
 
 function testCreate(){
