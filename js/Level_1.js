@@ -109,7 +109,7 @@ var GameLevel_1 = {
     //ponte
     platformCreate(63,16,11);
     checkpointCreate(64,14);
-    wolfPatrolCreate(66,14,72);
+    wolfPatrolCreate(66,14,74);
     //albero cavo 2
     trunkCreate(74,1,11);
     trunkCreate(74,16,42);

@@ -21,7 +21,7 @@ function playerCreate(){
   player = game.add.group();
   playerDown = player.create(spawnX, spawnY, 'grannyDown');
   playerUp = player.create(spawnX, spawnY, 'grannyUp');
-  game.camera.follow(playerUp, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
+  game.camera.follow(playerUp, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.05);
   playerUp.anchor.setTo(.5,.5);
   playerDown.anchor.setTo(.5,.5);
 
