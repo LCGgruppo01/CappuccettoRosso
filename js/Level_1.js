@@ -29,12 +29,17 @@ var GameLevel_1 = {
     game.load.image('tutorialAxe', 'assets/images/tutorial_axe.png');
     game.load.image('tutorialSpace', 'assets/images/tutorial_space.png');
 
+    game.load.image('livello1', 'assets/images/livello1.png');
+
 
     playerPreload(); //find in player.js
     worldPreload(); //find in World.js
   },
 
   create: function() {
+
+    game.add.sprite(1*m, 1*m, 'livello1');
+
     //Backgrounds
     game.add.sprite(0*m, 50*m, 'house');
     game.add.sprite(6.5*m, 57*m, 'tutorialMove');
@@ -44,8 +49,8 @@ var GameLevel_1 = {
     axe = game.add.sprite(14*m, 54*m, 'axe');
     axe.frame= 1;
     game.physics.arcade.enable(axe);
-    trunkBg(47,1,60);
-    trunkBg(74,1,60);
+    //trunkBg(47,1,60);
+    //trunkBg(74,1,60);
 
     worldCreate(); //find in World.js
 
@@ -169,6 +174,8 @@ var GameLevel_1 = {
     gotAxe=1;
   }
 
+  platformsOver.setAll('alpha','0');
+  platforms.setAll('alpha','0');
 
   },
 
