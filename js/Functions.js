@@ -77,9 +77,14 @@ function checkpointCreate(x, y){
   checkpoint.body.setSize(100,10,0,90);
   checkpoint.animations.add('checkhit', [1, 2, 3, 4, 5, 6], 10, true);
 }
+
+function memoryObjCreate(x, y){
+  memoryObj = memoryObjs.create(x*m, y*m, 'memoryObj');
+  memoryObj.body.gravity.y = gravity;
+}
 // CREATE functions end
 
-// COLLIDE functions start
+// COLLIDE & OVERLAP functions start
 function elide(siElide, rimane) {
     siElide.kill();
 };
@@ -157,7 +162,24 @@ function desWall(play, d1){
     d1Destroyed = game.add.sprite(d1.x, d1.y + 208, 'd1destroyed');
     }
 };
-// COLLIDE functions end
+
+function collectMe(player, memoryObj){
+  if(memoryObj.body.touching.down){
+    memoryObj.body.velocity.y = -200;
+  }
+  else {
+    memoryObj.body.velocity.y = 0;
+  }
+
+  if(cursors.down.isDown){
+    scene1.alpha = 1;
+    memoryObj.kill();
+    scene1.inputEnabled = true;
+    game.paused = true;
+    game.input.onDown.add(unpause, this);
+  }
+};
+// COLLIDE & OVERLAP functions end
 
 // wolves BEHAVE and FRAMES functions start
 function wolvesBehave(Wolves) {
@@ -380,6 +402,19 @@ function hitBoxUpdate() {
 };
 
 // TEST & DEBUG functions
+
+function imagesCreate(sprite){
+  scene1 = Scenes.create(512, 384, sprite);
+  scene1.alpha = 0;
+  scene1.scale.setTo(0.6,0.6);
+  scene1.anchor.set(0.5);
+  scene1.fixedToCamera = true;
+};
+
+function unpause(event){
+  game.paused = false;
+  scene1.alpha = 0;
+};
 
 function testCreate(){
   H=game.input.keyboard.addKey(Phaser.Keyboard.H);

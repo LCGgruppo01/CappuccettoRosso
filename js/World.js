@@ -2,6 +2,7 @@ var player;
 var playerUp;
 var playerDown;
 var playerHitbox;
+var memoryObj;
 var Wolves;
 var Bullets;
 var thorns;
@@ -85,6 +86,11 @@ function worldCreate(){
   platformsOver = game.add.group();
   platformsOver.enableBody = true;
 
+  memoryObjs = game.add.group();
+  memoryObjs.enableBody = true;
+
+  Scenes = game.add.group();
+
   // WORLD STUFFS end
 
   //life
@@ -119,15 +125,8 @@ function worldCreate(){
 
 function worldUpdate(){
 
-  game.physics.arcade.collide(player, platforms);
-  game.physics.arcade.collide(playerUp, Wolves, wolfHit, null, this);
-  game.physics.arcade.collide(playerUp, WolvesP, wolfHit, null, this);
   game.physics.arcade.overlap(playerHitbox, Wolves, wolfHitboxDamage, null, this);
   game.physics.arcade.overlap(playerHitbox, WolvesP, wolfHitboxDamage, null, this);
-  game.physics.arcade.collide(Wolves, platforms);
-  game.physics.arcade.collide(Wolves, platformsOver);
-  game.physics.arcade.collide(WolvesP, platforms);
-  game.physics.arcade.collide(WolvesP, platformsOver);
   game.physics.arcade.overlap(playerUp, thorns, thornHit, null, this);
   game.physics.arcade.overlap(Bullets, Wolves, kill, null, this);
   game.physics.arcade.overlap(Bullets, WolvesP, kill, null, this);
@@ -135,8 +134,17 @@ function worldUpdate(){
   game.physics.arcade.overlap(Bullets, platformsOver, elide, null, this);
   game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
   game.physics.arcade.overlap(playerHitbox, platformsDes, desWall, null, this);
-  game.physics.arcade.collide(player, platformsDes);
+  game.physics.arcade.overlap(playerUp, memoryObjs, collectMe, null, this);
 
+  game.physics.arcade.collide(Wolves, platforms);
+  game.physics.arcade.collide(player, platforms);
+  game.physics.arcade.collide(playerUp, Wolves, wolfHit, null, this);
+  game.physics.arcade.collide(playerUp, WolvesP, wolfHit, null, this);
+  game.physics.arcade.collide(Wolves, platformsOver);
+  game.physics.arcade.collide(WolvesP, platforms);
+  game.physics.arcade.collide(WolvesP, platformsOver);
+  game.physics.arcade.collide(player, platformsDes);
+  game.physics.arcade.collide(memoryObjs, platforms);
   platformOverCollide(); //find in Functions.js
 
   // HUD

@@ -1,3 +1,4 @@
+var scene1;
 var timeWolves = 0;
 var wait = 0;
 var step = 0;
@@ -13,9 +14,10 @@ var GameLevel_1 = {
 
     game.load.crossOrigin = 'anonymous';
 
+    game.load.spritesheet('axe', 'assets/images/axe_64.png', 64, 64);
+
     game.load.image('house', 'assets/images/house.png');
     game.load.image('thorns', 'assets/images/thorns.png');
-    game.load.spritesheet('axe', 'assets/images/axe_64.png', 64, 64);
     game.load.image('p1', 'assets/images/p1.png');
     game.load.image('p2', 'assets/images/p2.png');
     game.load.image('p3', 'assets/images/p3.png');
@@ -28,6 +30,9 @@ var GameLevel_1 = {
     game.load.image('tutorialUp', 'assets/images/tutorial_up.png');
     game.load.image('tutorialAxe', 'assets/images/tutorial_axe.png');
     game.load.image('tutorialSpace', 'assets/images/tutorial_space.png');
+    game.load.image('memoryObj', 'assets/images/memory_object.png');
+
+    game.load.image('open', 'http://1.bp.blogspot.com/-a8aV13i0t9Y/Vi4LTodbxuI/AAAAAAAABdM/YPArwcG7Gx8/s1600/cappuccetto-rosso-e-il-lupo.jpg');
 
 
     playerPreload(); //find in player.js
@@ -62,6 +67,7 @@ var GameLevel_1 = {
     platforms.create(41*m, 55*m, 'p5');
     platforms.create(44*m, 53*m, 'p6');
     checkpointCreate(31,56);
+    memoryObjCreate(33,56);
     wolfCreate(42,53);
     //albero esterno
     platformCreate(26,50,6);
@@ -165,10 +171,12 @@ var GameLevel_1 = {
       d1.stato = 1;
     });
 
-  if (spawnX > 20*m) {
-    gotAxe=1;
-  }
+    if (spawnX > 20*m) {
+      gotAxe=1;
+    }
 
+    //scenes
+    imagesCreate('open', scene1);
 
   },
 
@@ -227,7 +235,6 @@ var GameLevel_1 = {
       this.game.state.start('GameLevel_1');
       gotAxe=0;
     }
-
 
   },
 
