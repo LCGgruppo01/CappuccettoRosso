@@ -30,6 +30,7 @@ var GameLevel_1 = {
     game.load.image('tutorialSpace', 'assets/images/tutorial_space.png');
 
     game.load.image('livello1', 'assets/images/livello1.png');
+    game.load.image('skyBackground', 'assets/images/sky background.png');
 
 
     playerPreload(); //find in player.js
@@ -37,6 +38,8 @@ var GameLevel_1 = {
   },
 
   create: function() {
+    skyBack = game.add.sprite(0, 0, 'skyBackground');
+    skyBack.fixedToCamera = true;
 
     game.add.sprite(1*m, 1*m, 'livello1');
 
