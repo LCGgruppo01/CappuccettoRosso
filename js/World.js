@@ -120,6 +120,7 @@ function worldCreate(){
   yt.fixedToCamera = true;
 
   testCreate();
+  pauseMenu();
 
 };
 
@@ -178,5 +179,6 @@ function worldUpdate(){
   cheats();
 
   testUpdate();
+  flashDamage();
 
 };

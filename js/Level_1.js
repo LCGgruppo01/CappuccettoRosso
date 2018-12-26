@@ -34,12 +34,20 @@ var GameLevel_1 = {
 
     game.load.image('open', 'http://1.bp.blogspot.com/-a8aV13i0t9Y/Vi4LTodbxuI/AAAAAAAABdM/YPArwcG7Gx8/s1600/cappuccetto-rosso-e-il-lupo.jpg');
 
+    game.load.image('livello1', 'assets/images/livello1.png');
+    game.load.image('skyBackground', 'assets/images/sky background.png');
+
 
     playerPreload(); //find in player.js
     worldPreload(); //find in World.js
   },
 
   create: function() {
+    skyBack = game.add.sprite(0, 0, 'skyBackground');
+    skyBack.fixedToCamera = true;
+
+    game.add.sprite(1*m, 1*m, 'livello1');
+
     //Backgrounds
     game.add.sprite(0*m, 50*m, 'house');
     game.add.sprite(6.5*m, 57*m, 'tutorialMove');
@@ -49,8 +57,8 @@ var GameLevel_1 = {
     axe = game.add.sprite(14*m, 54*m, 'axe');
     axe.frame= 1;
     game.physics.arcade.enable(axe);
-    trunkBg(47,1,60);
-    trunkBg(74,1,60);
+    //trunkBg(47,1,60);
+    //trunkBg(74,1,60);
 
     worldCreate(); //find in World.js
 
@@ -107,7 +115,7 @@ var GameLevel_1 = {
     //ponte
     platformCreate(63,16,11);
     checkpointCreate(64,14);
-    wolfPatrolCreate(66,14,72);
+    wolfPatrolCreate(66,14,74);
     //albero cavo 2
     trunkCreate(74,1,11);
     trunkCreate(74,16,42);
@@ -175,8 +183,13 @@ var GameLevel_1 = {
       gotAxe=1;
     }
 
+<<<<<<< HEAD
     //scenes
     imagesCreate('open', scene1);
+=======
+  platformsOver.setAll('alpha','0');
+  platforms.setAll('alpha','0');
+>>>>>>> 441cebcacbdfdc80a96977059737e2477d5528c4
 
   },
 
