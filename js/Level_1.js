@@ -91,7 +91,7 @@ var GameLevel_1 = {
     platformCreate(34,39,10);
     platformCreate(27,37,5);
     platformCreate(37,36,10);
-    wolfPatrolCreate(37,34,48);
+    wolfPatrolCreate(37,34,47);
     //albero cavo 1
     trunkCreate(47,1,31);
     trunkCreate(47,36,22);
@@ -183,13 +183,11 @@ var GameLevel_1 = {
       gotAxe=1;
     }
 
-<<<<<<< HEAD
-    //scenes
-    imagesCreate('open', scene1);
-=======
+  //scenes
+  imagesCreate('open', scene1);
+
   platformsOver.setAll('alpha','0');
   platforms.setAll('alpha','0');
->>>>>>> 441cebcacbdfdc80a96977059737e2477d5528c4
 
   },
 

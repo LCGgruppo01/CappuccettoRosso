@@ -111,17 +111,17 @@ function wolfHit(player, wolf) {
     wolf.body.velocity.x = -(playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*500;
     player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*4000;
     timeHit = game.time.now + 300;
-    immunity = game.time.now + 1000;
+    immunity = game.time.now + 500;
     player.damage(25);
   }
 };
 
 function wolfHitboxDamage(hitbox, wolf) {
-  if (game.time.now > immunity){
+  if (game.time.now > immunity && axeHit === false){
     wolf.body.velocity.y = 2000;
     wolf.body.velocity.x = -(playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*500;
     wolf.damage(50);
-    immunity = game.time.now + 1000;
+    immunity = game.time.now + 500;
   }
 }
 
@@ -176,7 +176,7 @@ function collectMe(player, memoryObj){
     memoryObj.kill();
     scene1.inputEnabled = true;
     game.paused = true;
-    game.input.onDown.add(unpause, this);
+    game.input.onDown.add(unpauseImage, this);
   }
 };
 // COLLIDE & OVERLAP functions end
@@ -186,7 +186,10 @@ function wolvesBehave(Wolves) {
 
   game.physics.arcade.collide(Wolves, platforms);
 
+
   Wolves.forEach(function(wolf){
+  if (game.time.now > immunity) {
+
    if(Math.abs(playerUp.x - wolf.x) < 600 && - playerUp.y + wolf.y < 160){
       wolf.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*50 + (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*200*wolf.casuale;
    }
@@ -196,6 +199,7 @@ function wolvesBehave(Wolves) {
    if ((wolf.body.touching.left || wolf.body.touching.right) && wolf.body.touching.down){
      wolf.body.velocity.y = wolfJump;
     }
+  }
   });
 };
 
@@ -418,7 +422,9 @@ function pauseMenu() {
 
   P.onDown.add(paused, this);
   pause.events.onInputUp.add(paused);
-  game.input.onDown.add(unpause);
+  game.input.onDown.add(unpaused);
+  //aggiungo per fixare un bug
+  onPause = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
 };
 
 function paused() {
@@ -428,17 +434,17 @@ function paused() {
     setTimeout(function(){
       game.paused = true;
      }, 20);
-    unpause = game.add.text(500, 350, 'Esci Dalla Siesta', { font: '24px Arial', fill: '#fff' });
-    unpause.inputEnabled = true;
-    unpause.fixedToCamera = true;
+    onPause = game.add.text(500, 350, 'Esci Dalla Siesta', { font: '24px Arial', fill: '#fff' });
+    onPause.inputEnabled = true;
+    onPause.fixedToCamera = true;
   }
 };
 
-function unpause(event){
+function unpaused(event){
   if (game.paused) {
-    unpause.events.onInputUp.add(function(){
+    onPause.events.onInputUp.add(function(){
       game.paused = false;
-      unpause.kill();
+      onPause.kill();
     });
   }
 };
@@ -448,14 +454,13 @@ function unpause(event){
 // TEST & DEBUG functions
 
 function imagesCreate(sprite){
-  scene1 = Scenes.create(512, 384, sprite);
+  scene1 = Scenes.create(0, 0, sprite);
   scene1.alpha = 0;
   scene1.scale.setTo(0.6,0.6);
-  scene1.anchor.set(0.5);
   scene1.fixedToCamera = true;
 };
 
-function unpause(event){
+function unpauseImage(event){
   game.paused = false;
   scene1.alpha = 0;
 };
