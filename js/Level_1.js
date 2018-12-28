@@ -183,13 +183,9 @@ var GameLevel_1 = {
       gotAxe=1;
     }
 
-<<<<<<< HEAD
-    //scenes
     imagesCreate('open', scene1);
-=======
-  platformsOver.setAll('alpha','0');
-  platforms.setAll('alpha','0');
->>>>>>> 441cebcacbdfdc80a96977059737e2477d5528c4
+    platformsOver.setAll('alpha','0');
+    platforms.setAll('alpha','0');
 
   },
 
