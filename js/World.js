@@ -145,6 +145,8 @@ function worldUpdate(){
   game.physics.arcade.collide(WolvesP, platforms);
   game.physics.arcade.collide(WolvesP, platformsOver);
   game.physics.arcade.collide(player, platformsDes);
+  game.physics.arcade.collide(Wolves, platformsDes);
+  game.physics.arcade.collide(WolvesP, platformsDes);
   game.physics.arcade.collide(memoryObjs, platforms);
   platformOverCollide(); //find in Functions.js
 
@@ -177,7 +179,7 @@ function worldUpdate(){
   wolfFrames(WolvesP); //find in Functions.js
 
   cheats();
-
+  render();
   testUpdate();
   flashDamage();
 
