@@ -179,7 +179,6 @@ function worldUpdate(){
   wolfFrames(WolvesP); //find in Functions.js
 
   cheats();
-  render();
   testUpdate();
   flashDamage();
 

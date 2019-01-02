@@ -444,7 +444,7 @@ function unpaused(event){
   if (game.paused) {
     onPause.events.onInputUp.add(function(){
       game.paused = false;
-      onPause.kill();
+      onPause.text = '';
     });
   }
 };
