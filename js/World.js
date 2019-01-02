@@ -94,16 +94,18 @@ function worldCreate(){
   // WORLD STUFFS end
 
   //life
-  heart0 = game.add.sprite(0.5*m, 0.25*m, 'heart');
+  Hearts = game.add.group();
+
+  heart0 = Hearts.create(0.5*m, 0.25*m, 'heart');
   heart0.frame = 0;
   heart0.fixedToCamera = true;
-  heart1 = game.add.sprite(1*m, 0.25*m, 'heart');
+  heart1 = Hearts.create(1*m, 0.25*m, 'heart');
   heart1.frame = 0;
   heart1.fixedToCamera = true;
-  heart2 = game.add.sprite(1.5*m, 0.25*m, 'heart');
+  heart2 = Hearts.create(1.5*m, 0.25*m, 'heart');
   heart2.frame = 0;
   heart2.fixedToCamera = true;
-  heart3 = game.add.sprite(2*m, 0.25*m, 'heart');
+  heart3 = Hearts.create(2*m, 0.25*m, 'heart');
   heart3.frame = 0;
   heart3.fixedToCamera = true;
   //bar

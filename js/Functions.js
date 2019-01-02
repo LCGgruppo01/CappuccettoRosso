@@ -173,6 +173,11 @@ function collectMe(player, memoryObj){
 
   if(cursors.down.isDown){
     scene1.alpha = 1;
+    playerUp.alpha = 0;
+    playerDown.alpha = 0;
+    bar.alpha = 0;
+    barGranny.alpha = 0;
+    Hearts.alpha = 0;
     memoryObj.kill();
     scene1.inputEnabled = true;
     game.paused = true;
@@ -463,6 +468,11 @@ function imagesCreate(sprite){
 function unpauseImage(event){
   game.paused = false;
   scene1.alpha = 0;
+  playerUp.alpha = 1;
+  playerDown.alpha = 1;
+  bar.alpha = 1;
+  barGranny.alpha = 1;
+  Hearts.alpha = 1;
 };
 
 function testCreate(){
