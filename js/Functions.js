@@ -77,11 +77,6 @@ function checkpointCreate(x, y){
   checkpoint.body.setSize(100,10,0,90);
   checkpoint.animations.add('checkhit', [1, 2, 3, 4, 5, 6], 10, true);
 }
-
-function memoryObjCreate(x, y){
-  memoryObj = memoryObjs.create(x*m, y*m, 'memoryObj');
-  memoryObj.body.gravity.y = gravity;
-}
 // CREATE functions end
 
 // COLLIDE & OVERLAP functions start
@@ -164,22 +159,21 @@ function desWall(play, d1){
 };
 
 function collectMe(player, memoryObj){
-  if(memoryObj.body.touching.down){
-    memoryObj.body.velocity.y = -200;
-  }
-  else {
-    memoryObj.body.velocity.y = 0;
-  }
-
   if(cursors.down.isDown){
-    scene1.alpha = 1;
+    if (memoryObjCollect == 0) {
+      scene1.alpha = 1;
+      scene1.inputEnabled = true;
+    }
+    else if (memoryObjCollect == 1) {
+      scene2.alpha = 1;
+      scene2.inputEnabled = true;
+    }
     playerUp.alpha = 0;
     playerDown.alpha = 0;
     bar.alpha = 0;
     barGranny.alpha = 0;
     Hearts.alpha = 0;
     memoryObj.kill();
-    scene1.inputEnabled = true;
     game.paused = true;
     game.input.onDown.add(unpauseImage, this);
   }
@@ -394,7 +388,9 @@ function changeHitbox() {
     }
   }else {
     playerHitbox.body.setSize(0, 0, 0, 0);
-  }}; //used in hitBoxUpdate
+  }
+};
+//used in hitBoxUpdate
 
 function hitBoxCreate() {
   playerHitbox = game.add.sprite(spawnX, spawnY, '');
@@ -458,21 +454,42 @@ function unpaused(event){
 
 // TEST & DEBUG functions
 
-function imagesCreate(sprite){
-  scene1 = Scenes.create(0, 0, sprite);
-  scene1.alpha = 0;
-  scene1.scale.setTo(0.6,0.6);
-  scene1.fixedToCamera = true;
+function imagesCreate(x1,y1, x2,y2){
+  if (memoryObjCollect <= 0){
+    scene1 = Scenes.create(0, 0, 'open');
+    scene1.alpha = 0;
+    scene1.scale.setTo(0.6,0.6);
+    scene1.fixedToCamera = true;
+
+    memoryObj1 = MemoryObjs.create(x1*m, y1*m, 'memoryObj');
+  }
+
+  if (memoryObjCollect <= 1){
+    scene2 = Scenes.create(0, 0, 'open');
+    scene2.tint = 0x1a53ff;
+    scene2.alpha = 0;
+    scene2.scale.setTo(0.6,0.6);
+    scene2.fixedToCamera = true;
+
+    memoryObj2 = MemoryObjs.create(x2*m, y2*m, 'memoryObj');
+    memoryObj2.tint = 0x1a53ff;
+  }
 };
 
 function unpauseImage(event){
   game.paused = false;
-  scene1.alpha = 0;
+  memoryObjCollect++
   playerUp.alpha = 1;
   playerDown.alpha = 1;
   bar.alpha = 1;
   barGranny.alpha = 1;
   Hearts.alpha = 1;
+  if (memoryObjCollect == 1) {
+    scene1.alpha = 0;
+  }
+  else if (memoryObjCollect == 2) {
+    scene2.alpha = 0;
+  }
 };
 
 function testCreate(){

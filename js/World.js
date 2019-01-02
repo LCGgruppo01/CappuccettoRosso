@@ -86,8 +86,8 @@ function worldCreate(){
   platformsOver = game.add.group();
   platformsOver.enableBody = true;
 
-  memoryObjs = game.add.group();
-  memoryObjs.enableBody = true;
+  MemoryObjs = game.add.group();
+  MemoryObjs.enableBody = true;
 
   Scenes = game.add.group();
 
@@ -137,7 +137,7 @@ function worldUpdate(){
   game.physics.arcade.overlap(Bullets, platformsOver, elide, null, this);
   game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
   game.physics.arcade.overlap(playerHitbox, platformsDes, desWall, null, this);
-  game.physics.arcade.overlap(playerUp, memoryObjs, collectMe, null, this);
+  game.physics.arcade.overlap(playerUp, MemoryObjs, collectMe, null, this);
 
   game.physics.arcade.collide(Wolves, platforms);
   game.physics.arcade.collide(player, platforms);
@@ -149,7 +149,6 @@ function worldUpdate(){
   game.physics.arcade.collide(player, platformsDes);
   game.physics.arcade.collide(Wolves, platformsDes);
   game.physics.arcade.collide(WolvesP, platformsDes);
-  game.physics.arcade.collide(memoryObjs, platforms);
   platformOverCollide(); //find in Functions.js
 
   // HUD

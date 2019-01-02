@@ -2,6 +2,7 @@ var scene1;
 var timeWolves = 0;
 var wait = 0;
 var step = 0;
+var memoryObjCollect = 0;
 
 var GameLevel_1 = {
 
@@ -75,7 +76,6 @@ var GameLevel_1 = {
     platforms.create(41*m, 55*m, 'p5');
     platforms.create(44*m, 53*m, 'p6');
     checkpointCreate(31,56);
-    memoryObjCreate(33,56);
     wolfCreate(42,53);
     //albero esterno
     platformCreate(26,50,6);
@@ -184,7 +184,7 @@ var GameLevel_1 = {
     }
 
   //scenes
-  imagesCreate('open', scene1);
+  imagesCreate(33,57, 46,52);
 
   platformsOver.setAll('alpha','0');
   platforms.setAll('alpha','0');
