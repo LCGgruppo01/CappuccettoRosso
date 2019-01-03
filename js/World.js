@@ -15,7 +15,7 @@ var cheat3 = 0;
 function worldPreload(){
   game.load.image('bullet', 'http://examples.phaser.io/assets/bullets/bullet13.png');
 
-  game.load.spritesheet('wolf', 'assets/images/wolf_430x498.png', 430, 498);
+  game.load.spritesheet('wolf', 'assets/images/wolf.png', 64, 128);
   game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 64, 128);
   game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
   game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
@@ -119,6 +119,7 @@ function worldCreate(){
 
   testCreate();
   pauseMenu();
+
 
 };
 

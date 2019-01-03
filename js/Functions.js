@@ -61,21 +61,25 @@ function thornsCreate(x, y,length){
 
 function wolfCreate(x, y){
   var wolf = Wolves.create(x*m, y*m, 'wolf');
-  wolf.scale.setTo(0.2, 0.2);
+  wolf.anchor.setTo(.5,.5);
   wolf.body.gravity.y = gravity;
   wolf.body.bounce.y = bounce;
   wolf.health = 100;
   wolf.casuale = Math.random();
+  wolf.animations.add('sane', [2, 3], 5, true);
+  wolf.animations.add('damage', [0, 1], 5, true);
 };
 
 function wolfPatrolCreate(x, y, fine){
   var wolf = WolvesP.create(x*m, y*m, 'wolf');
-  wolf.scale.setTo(0.2, 0.2);
+  wolf.anchor.setTo(.5,.5);
   wolf.body.gravity.y = gravity;
   wolf.body.bounce.y = bounce;
   wolf.inizio = x * m;
   wolf.fine = fine * m - 32;
   wolf.health = 100;
+  wolf.animations.add('sane', [2, 3], 5, true);
+  wolf.animations.add('damage', [0, 1], 5, true);
 };
 
 function checkpointCreate(x, y){
@@ -223,16 +227,16 @@ function wolfPatrolBehave(WolvesP){
 function wolfFrames(Wolves){
     Wolves.forEach(function(wolf){
 
-    if(wolf.body.velocity.x <=0)
+    if(wolf.health >= 100)
     {
-      wolf.frame=0;
+      wolf.animations.play('sane');
+    }else if (wolf.health < 100) {
+      wolf.animations.play('damage');
     }
-    if(wolf.body.velocity.x >0)
-    {
-      wolf.frame=1;
-    }
-    if (wolf.health < 100) {
-      wolf.alpha = 0.5;
+    if (wolf.body.velocity.x > 0) {
+      wolf.scale.x = -1;
+    }else if (wolf.body.velocity.x < 0) {
+      wolf.scale.x = 1;
     }
   });
 };
