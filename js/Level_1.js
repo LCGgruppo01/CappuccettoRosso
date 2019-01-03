@@ -8,8 +8,6 @@ var GameLevel_1 = {
 
   preload: function() {
 
-    game.load.image('sky', 'http://examples.phaser.io/assets/skies/sky2.png');
-
     game.world.width=185*m;
     game.world.height=61*m;
 
@@ -35,6 +33,7 @@ var GameLevel_1 = {
     game.load.image('open', 'http://1.bp.blogspot.com/-a8aV13i0t9Y/Vi4LTodbxuI/AAAAAAAABdM/YPArwcG7Gx8/s1600/cappuccetto-rosso-e-il-lupo.jpg');
 
     game.load.image('livello1', 'assets/images/livello1.png');
+    game.load.image('livello1parte2', 'assets/images/livello1parte2 .png');
     game.load.image('skyBackground', 'assets/images/sky background.png');
 
 
@@ -47,7 +46,8 @@ var GameLevel_1 = {
     skyBack.fixedToCamera = true;
 
     game.add.sprite(1*m, 1*m, 'livello1');
-
+    parte2 = game.add.sprite(91*m, 1*m, 'livello1parte2');
+    parte2.scale.setTo(10,10);
     //Backgrounds
     game.add.sprite(0*m, 50*m, 'house');
     game.add.sprite(6.5*m, 57*m, 'tutorialMove');
@@ -153,7 +153,7 @@ var GameLevel_1 = {
     platformCreate(141,53,1);
     platformCreate(144,51,7);
     wolfPatrolCreate(144,49,151);
-    platformCreate(152,52,4);
+    platformCreate(152,53,4);
     platformCreate(156,56,30);
     platformsDes.create(170*m, 52*m, 'd1');
     wolfCreate(168,54);
