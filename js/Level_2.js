@@ -122,7 +122,7 @@ var GameLevel_2 = {
     playerUpdate(); //find in Player.js
     weaposChange(); //find in Functions.js
 
-    if((playerUp.x > 16*m && playerUp.x < 29*m) && (playerUp.y > 35*m && playerUp.y < 41*m)){
+    if((playerUp.x > 17*m && playerUp.x < 29*m) && (playerUp.y > 35*m && playerUp.y < 41*m)){
       secretHall.alpha = secretHall.alpha*0.98;
     }else{
       secretHall.alpha = 1;
