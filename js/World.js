@@ -21,6 +21,7 @@ function worldPreload(){
   game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
   game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
 
+  game.load.image('thorns', 'assets/images/thorns.png');
   game.load.image('ground', 'assets/images/ground.png');
   game.load.image('platformStart', 'assets/images/platformStart.png');
   game.load.image('platformCenter1', 'assets/images/platformCenter1.png');

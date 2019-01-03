@@ -18,7 +18,6 @@ var GameLevel_1 = {
     game.load.spritesheet('axe', 'assets/images/axe_64.png', 64, 64);
 
     game.load.image('house', 'assets/images/house.png');
-    game.load.image('thorns', 'assets/images/thorns.png');
     game.load.image('p1', 'assets/images/p1.png');
     game.load.image('p2', 'assets/images/p2.png');
     game.load.image('p3', 'assets/images/p3.png');
