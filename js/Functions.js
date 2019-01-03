@@ -40,6 +40,13 @@ function trunkBg(x, y, height){
   }
 };
 
+function rockCreate(x, y, l, h) {
+  rock = platforms.create(x*m, y*m, '');
+  rock.body.setSize(l*m, h*m, 0, 0);
+  rock.body.immovable = true;
+
+};
+
 function ledgeCreate(x,y){
   var ledge =  platforms.create(x*m, y*m, 'ground');
   ledge.body.immovable = true;
@@ -503,6 +510,11 @@ function testUpdate(){
 function render() {
   game.debug.body(playerUp);
   game.debug.body(playerHitbox);
+
+  platforms.forEach(function(platform) {
+    game.debug.body(platform);
+  });
+
 };
 
 function cheats() {
