@@ -14,7 +14,6 @@ var cheat3 = 0;
 
 function worldPreload(){
   game.load.image('bullet', 'http://examples.phaser.io/assets/bullets/bullet13.png');
-  game.load.image('sky', 'http://examples.phaser.io/assets/skies/sky2.png');
 
   game.load.spritesheet('wolf', 'assets/images/wolf_430x498.png', 430, 498);
   game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 64, 128);
@@ -51,10 +50,6 @@ function worldCreate(){
   C=game.input.keyboard.addKey(Phaser.Keyboard.C);
 
   // WORLD BACKGROUND start
-  Backgrounds = game.add.group();
-  for (i = 0; i < game.world.width / backgroundWidth; i++) {
-    var background = Backgrounds.create(i * backgroundWidth, 0, 'sky');
-  };
 
   platforms = game.add.group();
   platforms.enableBody = true;
