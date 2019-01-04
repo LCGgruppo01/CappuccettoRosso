@@ -2,6 +2,8 @@ var timeWolves = 0;
 var wolvesKilled = 0;
 var gotAxe = 1;
 var changeWeapon = 0;
+var shake = 0.05;
+var step = 0;
 
 var GameLevel_2 = {
 
@@ -105,8 +107,18 @@ var GameLevel_2 = {
     rockCreate(103,48,20,1);
     rockCreate(93,58,31,1);
     rockCreate(123,48,1,11);
-
-
+    //bossFight
+    //cutscene
+    rockCutscene = platforms.create(93*m, 48*m, '');
+    rockCutscene.body.setSize(9*m, 1*m, 0, 0);
+    rockCutscene.body.immovable = true;
+    kingWolf = game.add.sprite(115*m, 55*m, 'kingWolf');
+    game.physics.arcade.enable(kingWolf);
+    kingWolf.enableBody = true;
+    platformsDes.create(118*m, 54*m, 'd1');
+    cappuccetto = game.add.sprite(121*m, 57*m, 'cappuccetto');
+    game.physics.arcade.enable(cappuccetto);
+    cappuccetto.enableBody = true;
 
     //HUD
     weaponText = game.add.text(32, 96, 'weapon 1', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
@@ -132,6 +144,50 @@ var GameLevel_2 = {
 
     if(wolvesKilled >= 5){
       game.state.paused;
+    }
+
+    //cutscene
+    if (playerUp.body.x >= 93*m && step == 0) {
+      game.input.keyboard.removeKey(Phaser.Keyboard.UP);
+    }
+    if (playerUp.body.x >= 97*m && step == 0) {
+      game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
+      game.input.keyboard.removeKey(Phaser.Keyboard.RIGHT);
+      game.input.keyboard.removeKey(Phaser.Keyboard.DOWN);
+      game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
+      game.input.keyboard.removeKey(Phaser.Keyboard.H);
+      playerUp.body.velocity.x = 0;
+      playerUp.frame = 0;
+      playerDown.frame = 0;
+      if (playerUp.body.y <= 51*m && step == 0) {
+        game.camera.shake(shake, 1000);
+        shake = shake*0.95;
+      }
+      setTimeout(function(){
+        rockCutscene.body.immovable = false;
+      }, 500)
+    }
+    if (playerUp.body.y >= 57*m && step == 0) {
+      game.camera.follow();
+      game.camera.x += 8;
+    }
+    if (game.camera.x >= 107.5*m && step == 0) {
+      step = 1;
+    }
+    if (step == 1) {
+      setTimeout(function(){
+        kingWolf.body.velocity.x = -250;
+      },200)
+      setTimeout(function(){
+        game.camera.x -= 8;
+      },550)
+    }
+    if (game.camera.x <= 99.5*m && step == 1) {
+      step = 2;
+      game.camera.follow(playerUp, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.05);
+    }
+    if (step == 2){
+      kingWolf.body.velocity.x = kingWolf.body.velocity.x*0.95;
     }
 
     rifle(); //find in Functions.js

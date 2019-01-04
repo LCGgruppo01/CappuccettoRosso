@@ -158,7 +158,7 @@ var GameLevel_1 = {
     platformsDes.create(170*m, 52*m, 'd1');
     wolfCreate(168,54);
     wolfCreate(166,54);
-    
+
     //cutscene
     kingWolf = game.add.sprite(178*m, 53*m, 'kingWolf');
     game.physics.arcade.enable(kingWolf);
