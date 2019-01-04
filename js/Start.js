@@ -15,7 +15,7 @@ var GameStart = {
   },
 
   imageClick: function(pointer) {
-      this.game.state.start('GameLevel_2');
+      this.game.state.start('GameLevel_1');
   }
 
 };

@@ -156,8 +156,8 @@ var GameLevel_1 = {
     platformCreate(152,53,4);
     platformCreate(156,56,30);
     platformsDes.create(170*m, 52*m, 'd1');
-    wolfCreate(168,54);
-    wolfCreate(166,54);
+    //wolfCreate(168,54);
+    //wolfCreate(166,54);
     //cutscene
     kingWolf = game.add.sprite(178*m, 53*m, 'kingWolf');
     game.physics.arcade.enable(kingWolf);
@@ -200,7 +200,7 @@ var GameLevel_1 = {
     scene2.scale.setTo(0.6,0.6);
     scene2.fixedToCamera = true;
 
-    memoryObj2 = game.add.sprite(46*m, 52*m, 'memoryObj');
+    memoryObj2 = game.add.sprite(182*m, 55*m, 'memoryObj');
     memoryObj2.tint = 0x1a53ff;
     game.physics.arcade.enable(memoryObj2);
     memoryObj2.enableBody = true;
@@ -218,46 +218,48 @@ var GameLevel_1 = {
     playerUpdate(); //find in player.js
 
     game.physics.arcade.overlap(playerUp, axe, getAxe, null, this);
+    game.physics.arcade.overlap(playerUp, memoryObj1, collectMe1, null, this);
+    game.physics.arcade.overlap(playerUp, memoryObj2, collectMe2, null, this);
 
     //cutscene START
     if(playerUp.body.x >= 172*m){
-      game.input.keyboard.removeKey(Phaser.Keyboard.UP);
-      game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
-      game.input.keyboard.removeKey(Phaser.Keyboard.RIGHT);
-      game.input.keyboard.removeKey(Phaser.Keyboard.DOWN);
-      game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
-      game.input.keyboard.removeKey(Phaser.Keyboard.A);
-      game.input.keyboard.removeKey(Phaser.Keyboard.H);
-      player.setAll('body.collideWorldBounds', false);
-      game.camera.follow();
-      if(playerUp.body.x >= 172*m && playerUp.body.x < 173*m){
-        playerUp.body.velocity.x = 0;
-        playerUp.frame = 0;
-        playerDown.frame = 0;
+      if(cappuccetto.body.x > 180*m){
+        cursors = game.input.keyboard.createCursorKeys();
+        SPACE = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        C = game.input.keyboard.addKey(Phaser.Keyboard.C);
+        H = game.input.keyboard.addKey(Phaser.Keyboard.H);
+        game.camera.follow(playerUp, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.05);
+        player.setAll('body.collideWorldBounds', true);
       }
-      setTimeout(function(){
-         game.camera.x += 4;
-       }, 200);
-      setTimeout(function(){
-        if (step == 0) {
-          kingWolf.body.velocity.x = -250;
+      else if (cappuccetto.body.x < 180*m) {
+        game.input.keyboard.removeKey(Phaser.Keyboard.UP);
+        game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
+        game.input.keyboard.removeKey(Phaser.Keyboard.RIGHT);
+        game.input.keyboard.removeKey(Phaser.Keyboard.DOWN);
+        game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
+        game.input.keyboard.removeKey(Phaser.Keyboard.H);
+        player.setAll('body.collideWorldBounds', false);
+        game.camera.follow();
+        if(playerUp.body.x >= 172*m && playerUp.body.x < 173*m){
+          playerUp.body.velocity.x = 0;
+          playerUp.frame = 0;
+          playerDown.frame = 0;
         }
-        if(kingWolf.body.x <= 176*m){
-          step = 1;
-          cappuccetto.body.velocity.x = 250;
-          kingWolf.body.velocity.x = 250;
-        }
-        if(cappuccetto.body.x > 180*m){
-          playerUp.body.velocity.x = playerVelocity + 100;
-          playerUp.animations.play('rightAxe');
-          playerDown.animations.play('right');
-        }
-      }, 2300);
-      if(playerUp.body.x >= 185*m){
-        this.game.state.start('GameLevel_2');
-        playerUp.health = 100;
-        spawnX = 2*m;
-        spawnY = 56*m;
+        setTimeout(function(){
+          if (game.camera.x <= 165*m) {
+            game.camera.x += 4;
+          }
+         }, 200);
+        setTimeout(function(){
+          if (step == 0) {
+            kingWolf.body.velocity.x = -250;
+          }
+          if(kingWolf.body.x <= 176*m){
+            step = 1;
+            cappuccetto.body.velocity.x = 250;
+            kingWolf.body.velocity.x = 250;
+          }
+        }, 1300);
       }
     }
     //cutscene END
@@ -268,6 +270,10 @@ var GameLevel_1 = {
     }
 
   },
+
+  imageClick: function(pointer) {
+      this.game.state.start('GameLevel_2');
+  }
 
 };
 

@@ -178,6 +178,7 @@ function collectMe1(player, memoryObj1){
     bar.alpha = 0;
     barGranny.alpha = 0;
     Hearts.alpha = 0;
+    d1Destroyed.alpha = 0;
     memoryObj1.kill();
     game.paused = true;
     game.input.onDown.add(unpauseImage, this);
@@ -193,9 +194,10 @@ function collectMe2(player, memoryObj2){
     bar.alpha = 0;
     barGranny.alpha = 0;
     Hearts.alpha = 0;
+    d1Destroyed.alpha = 0;
     memoryObj2.kill();
     game.paused = true;
-    game.input.onDown.add(unpauseImage, this);
+    game.input.onDown.add(nextLevelImg, this);
   }
 };
 // COLLIDE & OVERLAP functions end
@@ -482,8 +484,26 @@ function unpauseImage(event){
   bar.alpha = 1;
   barGranny.alpha = 1;
   Hearts.alpha = 1;
+  d1Destroyed.alpha = 1;
   scene1.alpha = 0;
   scene2.alpha = 0;
+};
+
+function nextLevelImg(event){
+  game.paused = false;
+  memoryObjCollect++
+  playerUp.alpha = 1;
+  playerDown.alpha = 1;
+  bar.alpha = 1;
+  barGranny.alpha = 1;
+  Hearts.alpha = 1;
+  d1Destroyed.alpha = 1;
+  scene1.alpha = 0;
+  scene2.alpha = 0;
+  this.game.state.start('GameLevel_2');
+  playerUp.health = 100;
+  spawnX = 28*m;
+  spawnY = 8*m;
 };
 
 function testCreate(){

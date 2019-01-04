@@ -46,7 +46,6 @@ function worldCreate(){
   // CONTROLS SISTEM
   cursors = game.input.keyboard.createCursorKeys();
   SPACE=game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-  AXE=game.input.keyboard.addKey(Phaser.Keyboard.A);
   C=game.input.keyboard.addKey(Phaser.Keyboard.C);
 
   // WORLD BACKGROUND start
@@ -129,8 +128,6 @@ function worldUpdate(){
   game.physics.arcade.overlap(Bullets, platformsOver, elide, null, this);
   game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
   game.physics.arcade.overlap(playerHitbox, platformsDes, desWall, null, this);
-  game.physics.arcade.overlap(playerUp, memoryObj1, collectMe1, null, this);
-  game.physics.arcade.overlap(playerUp, memoryObj2, collectMe2, null, this);
 
   game.physics.arcade.collide(Wolves, platforms);
   game.physics.arcade.collide(player, platforms);

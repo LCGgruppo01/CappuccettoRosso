@@ -16,8 +16,6 @@ var GameLevel_2 = {
   },
 
   create: function() {
-    spawnX = 6*m;
-    spawnY = 38*m;
 
     worldCreate(); //find in World.js
     playerCreate(); //find in Player.js
