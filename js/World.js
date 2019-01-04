@@ -82,11 +82,6 @@ function worldCreate(){
   platformsOver = game.add.group();
   platformsOver.enableBody = true;
 
-  MemoryObjs = game.add.group();
-  MemoryObjs.enableBody = true;
-
-  Scenes = game.add.group();
-
   // WORLD STUFFS end
 
   //life
@@ -133,7 +128,8 @@ function worldUpdate(){
   game.physics.arcade.overlap(Bullets, platformsOver, elide, null, this);
   game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
   game.physics.arcade.overlap(playerHitbox, platformsDes, desWall, null, this);
-  game.physics.arcade.overlap(playerUp, MemoryObjs, collectMe, null, this);
+  game.physics.arcade.overlap(playerUp, memoryObj1, collectMe1, null, this);
+  game.physics.arcade.overlap(playerUp, memoryObj2, collectMe2, null, this);
 
   game.physics.arcade.collide(Wolves, platforms);
   game.physics.arcade.collide(player, platforms);

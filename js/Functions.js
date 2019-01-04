@@ -165,22 +165,31 @@ function desWall(play, d1){
     }
 };
 
-function collectMe(player, memoryObj){
+function collectMe1(player, memoryObj1){
   if(cursors.down.isDown){
-    if (memoryObjCollect == 0) {
-      scene1.alpha = 1;
-      scene1.inputEnabled = true;
-    }
-    else if (memoryObjCollect == 1) {
-      scene2.alpha = 1;
-      scene2.inputEnabled = true;
-    }
+    scene1.alpha = 1;
+    scene1.inputEnabled = true;
     playerUp.alpha = 0;
     playerDown.alpha = 0;
     bar.alpha = 0;
     barGranny.alpha = 0;
     Hearts.alpha = 0;
-    memoryObj.kill();
+    memoryObj1.kill();
+    game.paused = true;
+    game.input.onDown.add(unpauseImage, this);
+  }
+};
+
+function collectMe2(player, memoryObj2){
+  if(cursors.down.isDown){
+    scene2.alpha = 1;
+    scene2.inputEnabled = true;
+    playerUp.alpha = 0;
+    playerDown.alpha = 0;
+    bar.alpha = 0;
+    barGranny.alpha = 0;
+    Hearts.alpha = 0;
+    memoryObj2.kill();
     game.paused = true;
     game.input.onDown.add(unpauseImage, this);
   }
@@ -387,11 +396,11 @@ function playerAnimationUp(){
 
 function changeHitbox() {
   if (axeHit == false) {
-    playerHitbox.body.setSize(30, 60, 0, 0);
+    playerHitbox.body.setSize(40, 60, 0, 0);
     if (position == "rightt") {
       playerHitbox.body.x = playerUp.body.x + 30;
     }else if (position == "leftt") {
-      playerHitbox.body.x = playerUp.body.x - 30;
+      playerHitbox.body.x = playerUp.body.x - 40;
     }
   }else {
     playerHitbox.body.setSize(0, 0, 0, 0);
@@ -461,28 +470,6 @@ function unpaused(event){
 
 // TEST & DEBUG functions
 
-function imagesCreate(x1,y1, x2,y2){
-  if (memoryObjCollect <= 0){
-    scene1 = Scenes.create(0, 0, 'open');
-    scene1.alpha = 0;
-    scene1.scale.setTo(0.6,0.6);
-    scene1.fixedToCamera = true;
-
-    memoryObj1 = MemoryObjs.create(x1*m, y1*m, 'memoryObj');
-  }
-
-  if (memoryObjCollect <= 1){
-    scene2 = Scenes.create(0, 0, 'open');
-    scene2.tint = 0x1a53ff;
-    scene2.alpha = 0;
-    scene2.scale.setTo(0.6,0.6);
-    scene2.fixedToCamera = true;
-
-    memoryObj2 = MemoryObjs.create(x2*m, y2*m, 'memoryObj');
-    memoryObj2.tint = 0x1a53ff;
-  }
-};
-
 function unpauseImage(event){
   game.paused = false;
   memoryObjCollect++
@@ -491,12 +478,8 @@ function unpauseImage(event){
   bar.alpha = 1;
   barGranny.alpha = 1;
   Hearts.alpha = 1;
-  if (memoryObjCollect == 1) {
-    scene1.alpha = 0;
-  }
-  else if (memoryObjCollect == 2) {
-    scene2.alpha = 0;
-  }
+  scene1.alpha = 0;
+  scene2.alpha = 0;
 };
 
 function testCreate(){
@@ -507,6 +490,7 @@ function testUpdate(){
     playerUp.heal(100);
   }
 };
+
 function render() {
   game.debug.body(playerUp);
   game.debug.body(playerHitbox);
