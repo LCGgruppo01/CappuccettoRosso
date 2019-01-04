@@ -204,9 +204,7 @@ function collectMe2(player, memoryObj2){
 
 // wolves BEHAVE and FRAMES functions start
 function wolvesBehave(Wolves) {
-
   game.physics.arcade.collide(Wolves, platforms);
-
 
   Wolves.forEach(function(wolf){
   if (game.time.now > immunity) {

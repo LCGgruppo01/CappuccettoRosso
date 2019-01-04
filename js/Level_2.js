@@ -150,7 +150,7 @@ var GameLevel_2 = {
     if (playerUp.body.x >= 93*m && step == 0) {
       game.input.keyboard.removeKey(Phaser.Keyboard.UP);
     }
-    if (playerUp.body.x >= 97*m && step == 0) {
+    if (playerUp.body.x >= 97*m && step <= 2) {
       game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
       game.input.keyboard.removeKey(Phaser.Keyboard.RIGHT);
       game.input.keyboard.removeKey(Phaser.Keyboard.DOWN);
@@ -184,10 +184,21 @@ var GameLevel_2 = {
     }
     if (game.camera.x <= 99.5*m && step == 1) {
       step = 2;
-      game.camera.follow(playerUp, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.05);
     }
     if (step == 2){
-      kingWolf.body.velocity.x = kingWolf.body.velocity.x*0.95;
+      kingWolf.body.velocity.x = 0;
+    }
+    if (step == 3) {
+      cursors = game.input.keyboard.createCursorKeys();
+      SPACE = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+      C = game.input.keyboard.addKey(Phaser.Keyboard.C);
+      H = game.input.keyboard.addKey(Phaser.Keyboard.H);
+      setTimeout(function(){
+        game.camera.follow(playerUp, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.05);
+      },1000)
+      setTimeout(function(){
+        wolf.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*50;
+      },1000)
     }
 
     rifle(); //find in Functions.js
