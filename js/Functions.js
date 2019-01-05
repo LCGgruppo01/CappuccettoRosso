@@ -65,7 +65,7 @@ function wolfCreate(x, y){
   wolf.body.gravity.y = gravity;
   wolf.body.bounce.y = bounce;
   wolf.health = 100;
-  wolf.casuale = Math.random();
+  wolf.casuale =0.2 + Math.random()*0.7;
   wolf.animations.add('sane', [2, 3], 5, true);
   wolf.animations.add('damage', [0, 1], 5, true);
 };
@@ -115,21 +115,50 @@ function thornHit(playerFunction, thorn) {
 function wolfHit(player, wolf) {
   if (game.time.now > immunity && axeHit == true){
     wolf.body.velocity.x = -(playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*500;
-    player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*4000;
+    player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*2000;
     timeHit = game.time.now + 300;
     immunity = game.time.now + 500;
     player.damage(25);
   }
 };
 
+function wolfBulletDamage(bullet, wolf){
+  if (game.time.now > immunity){
+    if (wolf.health < 100 && Math.random() < 0.7 && fucile == true) {
+      ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
+      ammo.body.gravity.y = gravity;
+      ammo.body.bounce.y = 0.2;
+    }
+    if (wolf.health < 100 && Math.random() < 0.3) {
+      life = Lives.create(wolf.x, wolf.y, 'heart');
+      life.body.gravity.y = gravity;
+      life.body.bounce.y = 0.2;
+    }
+    wolf.damage(50);
+    immunity = game.time.now + 500;
+    wolf.body.velocity.y = 2000;
+  }
+  bullet.kill();
+};
+
 function wolfHitboxDamage(hitbox, wolf) {
   if (game.time.now > immunity && axeHit === false){
+    if (wolf.health < 100 && Math.random() < 0.7 && fucile == true) {
+      ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
+      ammo.body.gravity.y = gravity;
+      ammo.body.bounce.y = 0.2;
+    }
+    if (wolf.health < 100 && Math.random() < 0.3) {
+      life = Lives.create(wolf.x, wolf.y, 'heart');
+      life.body.gravity.y = gravity;
+      life.body.bounce.y = 0.2;
+    }
     wolf.body.velocity.y = 2000;
     wolf.body.velocity.x = -(playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*500;
     wolf.damage(50);
     immunity = game.time.now + 500;
   }
-}
+};
 
 function kill(bul, wol) {
     wol.kill();
@@ -207,7 +236,9 @@ function wolvesBehave(Wolves) {
   game.physics.arcade.collide(Wolves, platforms);
 
   Wolves.forEach(function(wolf){
+
   if (game.time.now > immunity) {
+
 
    if(Math.abs(playerUp.x - wolf.x) < 600 && - playerUp.y + wolf.y < 160){
       wolf.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*50 + (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*200*wolf.casuale;
@@ -215,6 +246,7 @@ function wolvesBehave(Wolves) {
    else{
      wolf.body.velocity.x = 0;
    }
+   
    if ((wolf.body.touching.left || wolf.body.touching.right) && wolf.body.touching.down){
      wolf.body.velocity.y = wolfJump;
     }
@@ -275,21 +307,22 @@ function axeChop(){
 
 function rifle(){
   if (gotAxe == 2) {
-    if (SPACE.isDown && position=="leftt" && game.time.now > shootTime && shoot == true){
-      var bullet = Bullets.create(playerUp.x - 10, playerUp.y + 20, 'bullet');
-      bullet.body.gravity.y = gravity;
-      bullet.body.velocity.y = -100;
-      bullet.body.velocity.x = -bulletVelocity + playerUp.body.velocity.x;
+    if (SPACE.isDown && game.time.now > shootTime && shoot == true && bulletN > 0){
+      if (position == "leftt") {
+        var bullet = Bullets.create(playerUp.x - 10, playerUp.y + 20, 'bullet');
+        bullet.body.gravity.y = gravity;
+        bullet.body.velocity.y = -100;
+        bullet.body.velocity.x = -bulletVelocity + playerUp.body.velocity.x;
+      }else if (position == "rightt") {
+        bullet = Bullets.create(playerUp.x + 10, playerUp.y + 20, 'bullet');
+        bullet.scale.x = -1;
+        bullet.body.gravity.y = gravity;
+        bullet.body.velocity.y = -100;
+        bullet.body.velocity.x = bulletVelocity + playerUp.body.velocity.x;
+      }
       shootTime = game.time.now + 300;
       shoot = false;
-    }
-    else if (SPACE.isDown && position=="rightt" && game.time.now > shootTime && shoot == true){
-      bullet = Bullets.create(playerUp.x + 10, playerUp.y + 20, 'bullet');
-      bullet.body.gravity.y = gravity;
-      bullet.body.velocity.y = -100;
-      bullet.body.velocity.x = bulletVelocity + playerUp.body.velocity.x;
-      shootTime = game.time.now + 300;
-      shoot = false;
+      bulletN--;
     }
 
     if (SPACE.isUp) {
@@ -299,7 +332,7 @@ function rifle(){
 }
 
 function weaposChange(){
-  if(CTRL.isDown && gotAxe == 1 && game.time.now > changeWeapon){
+  if(CTRL.isDown && gotAxe == 1 && game.time.now > changeWeapon && fucile == true){
     gotAxe = 2;
     changeWeapon = game.time.now + 300;
   }
@@ -307,7 +340,25 @@ function weaposChange(){
     gotAxe = 1;
     changeWeapon = game.time.now + 300;
   }
-}
+
+  if (gotAxe === 0) {
+    weaponImage.frame = 0;
+  }else if (gotAxe == 1) {
+    weaponImage.frame = 1;
+  }else if (gotAxe == 2) {
+    weaponImage.frame = 2;
+  }
+};
+
+function collectAmmo(player, ammo) {
+  ammo.kill();
+  bulletN++;
+};
+
+function heal(player, life){
+  life.kill();
+  playerUp.heal(25);
+};
 //weapos END
 
 //animations START

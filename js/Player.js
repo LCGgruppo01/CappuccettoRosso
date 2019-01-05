@@ -8,6 +8,7 @@ var immunity = 0;
 var position = "rightt";
 var timeAxe = 0;
 var animAxe;
+var bulletN = 5;
 
 function playerPreload(){
 
