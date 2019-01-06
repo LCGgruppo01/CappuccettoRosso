@@ -200,6 +200,20 @@ function collectMe2(player, memoryObj2){
     game.input.onDown.add(nextLevelImg, this);
   }
 };
+
+function kingHit(player, bone) {
+  if (game.time.now > immunity && axeHit == true){
+    playerUp.body.velocity.x = -1000;
+    timeHit = game.time.now + 300;
+    immunity = game.time.now + 500;
+    player.damage(25);
+    bone.kill();
+  }
+  if (axeHit == false){
+    bone.body.velocity.x = - bone.body.velocity.x;
+    bone.body.velocity.y = - bone.body.velocity.y;
+  }
+};
 // COLLIDE & OVERLAP functions end
 
 // wolves BEHAVE and FRAMES functions start
@@ -248,6 +262,16 @@ function wolfFrames(Wolves){
       wolf.scale.x = 1;
     }
   });
+};
+
+function wolfKingShot(){
+  if (game.time.now > kingShot) {
+    bone = Bones.create(kingWolf.x, kingWolf.y, 'barGranny');
+    bone.body.gravity.y = gravity;
+    bone.body.velocity.x = (playerUp.x - kingWolf.x);
+    bone.body.velocity.y = - 350 + (playerUp.y - kingWolf.y);
+    kingShot = game.time.now + 1500;
+  }
 };
 // wolves BEHAVE and FRAMES functions end
 
