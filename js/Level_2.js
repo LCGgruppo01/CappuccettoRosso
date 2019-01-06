@@ -20,11 +20,10 @@ var GameLevel_2 = {
   create: function() {
 
     var step = 0;
-
+    fucile = true;
+    
     worldCreate(); //find in World.js
     playerCreate(); //find in Player.js
-
-    CTRL=game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
 
     //Cave entering
     rockCreate(0,9,33,1);
@@ -78,7 +77,7 @@ var GameLevel_2 = {
     rockCreate(16,48,24,1);
     rockCreate(40,43,1,6);
     rockCreate(40,52,1,4);
-    wolfPatrolCreate(11,48,25);
+    wolfPatrolCreate(10,48,25);
     wolfCreate(24,48);
     wolfPatrolCreate(28,48,38);
     //Big Hall
@@ -122,17 +121,12 @@ var GameLevel_2 = {
     game.physics.arcade.enable(cappuccetto);
     cappuccetto.enableBody = true;
 
-    //HUD
-    weaponText = game.add.text(32, 96, 'weapon 1', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
-    weaponText.fixedToCamera = true;
-
   },
 
   update: function() {
 
     worldUpdate(); //find in World.js
     playerUpdate(); //find in Player.js
-    weaposChange(); //find in Functions.js
 
     if((playerUp.x > 17*m && playerUp.x < 29*m) && (playerUp.y > 35*m && playerUp.y < 41*m)){
       secretHall.alpha = secretHall.alpha*0.98;
@@ -197,13 +191,8 @@ var GameLevel_2 = {
       H = game.input.keyboard.addKey(Phaser.Keyboard.H);
       wolfKingShot();
     }
-
-    rifle(); //find in Functions.js
     render();
     wolvesBehave(Wolves); //find in Functions.js
-
-    //HUD
-    weaponText.text = 'weapon ' + gotAxe;
 
   },
 

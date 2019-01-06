@@ -215,7 +215,6 @@ var GameLevel_1 = {
   update: function() {
 
     worldUpdate(); //find in World.js
-
     playerUpdate(); //find in player.js
 
     game.physics.arcade.overlap(playerUp, axe, getAxe, null, this);

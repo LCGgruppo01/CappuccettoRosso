@@ -7,18 +7,21 @@ var Wolves;
 var Bullets;
 var thorns;
 var gotAxe;
+var fucile = false;
 var cheat = 0;
 var cheat1 = 0;
 var cheat2 = 0;
 var cheat3 = 0;
+var weaponImage;
 
 function worldPreload(){
-  game.load.image('bullet', 'http://examples.phaser.io/assets/bullets/bullet13.png');
+  game.load.image('bullet', 'assets/images/bullet.png');
 
   game.load.spritesheet('wolf', 'assets/images/wolf.png', 64, 128);
   game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 64, 128);
   game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
   game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
+  game.load.spritesheet('weapon', 'assets/images/weapon.png', 128, 64);
 
   game.load.image('thorns', 'assets/images/thorns.png');
   game.load.image('ground', 'assets/images/ground.png');
@@ -47,6 +50,7 @@ function worldCreate(){
   cursors = game.input.keyboard.createCursorKeys();
   SPACE=game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
   C=game.input.keyboard.addKey(Phaser.Keyboard.C);
+  CTRL=game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
 
   // WORLD BACKGROUND start
 
@@ -75,6 +79,12 @@ function worldCreate(){
   Checkpoints = game.add.group();
   Checkpoints.enableBody = true;
 
+  Ammos = game.add.group();
+  Ammos.enableBody = true;
+
+  Lives = game.add.group();
+  Lives.enableBody = true;
+
   platformsDes = game.add.group();
   platformsDes.enableBody = true;
 
@@ -89,16 +99,16 @@ function worldCreate(){
   //life
   Hearts = game.add.group();
 
-  heart0 = Hearts.create(0.5*m, 0.25*m, 'heart');
+  heart0 = Hearts.create(0.5*m, 0.45*m, 'heart');
   heart0.frame = 0;
   heart0.fixedToCamera = true;
-  heart1 = Hearts.create(1*m, 0.25*m, 'heart');
+  heart1 = Hearts.create(1*m, 0.45*m, 'heart');
   heart1.frame = 0;
   heart1.fixedToCamera = true;
-  heart2 = Hearts.create(1.5*m, 0.25*m, 'heart');
+  heart2 = Hearts.create(1.5*m, 0.45*m, 'heart');
   heart2.frame = 0;
   heart2.fixedToCamera = true;
-  heart3 = Hearts.create(2*m, 0.25*m, 'heart');
+  heart3 = Hearts.create(2*m, 0.45*m, 'heart');
   heart3.frame = 0;
   heart3.fixedToCamera = true;
   //bar
@@ -108,10 +118,17 @@ function worldCreate(){
   barGranny.fixedToCamera = true;
   game.physics.arcade.enable(barGranny);
   barGranny.enableBody = true;
+  //weapon
+  weaponImage = game.add.sprite(0.5*m, 1*m, 'weapon');
+  weaponImage.fixedToCamera = true;
+  if (fucile == true) {
+    ammoCount = game.add.text(0.5*m, 3*m, 'ammo: ', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
+    ammoCount.fixedToCamera = true;
+  }
   //position
-  xt = game.add.text(32, 64, 'x', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
+  xt = game.add.text(32, 140, 'x', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
   xt.fixedToCamera = true;
-  yt = game.add.text(32, 80, 'y', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
+  yt = game.add.text(32, 160, 'y', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
   yt.fixedToCamera = true;
 
   testCreate();
@@ -125,8 +142,8 @@ function worldUpdate(){
   game.physics.arcade.overlap(playerHitbox, Wolves, wolfHitboxDamage, null, this);
   game.physics.arcade.overlap(playerHitbox, WolvesP, wolfHitboxDamage, null, this);
   game.physics.arcade.overlap(playerUp, thorns, thornHit, null, this);
-  game.physics.arcade.overlap(Bullets, Wolves, kill, null, this);
-  game.physics.arcade.overlap(Bullets, WolvesP, kill, null, this);
+  game.physics.arcade.overlap(Bullets, Wolves, wolfBulletDamage, null, this);
+  game.physics.arcade.overlap(Bullets, WolvesP, wolfBulletDamage, null, this);
   game.physics.arcade.overlap(Bullets, platforms, elide, null, this);
   game.physics.arcade.overlap(Bullets, platformsOver, elide, null, this);
   game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
@@ -134,12 +151,18 @@ function worldUpdate(){
   game.physics.arcade.overlap(Bones, platforms, elide, null, this);
   game.physics.arcade.overlap(Bones, platformsOver, elide, null, this);
   game.physics.arcade.overlap(playerUp, Bones, kingHit, null, this);
+  game.physics.arcade.overlap(player, Ammos, collectAmmo, null, this);
+  game.physics.arcade.overlap(player, Lives, heal, null, this);
 
   game.physics.arcade.collide(Wolves, platforms);
   game.physics.arcade.collide(player, platforms);
+  game.physics.arcade.collide(Ammos, platforms);
+  game.physics.arcade.collide(Lives, platforms);
   game.physics.arcade.collide(playerUp, Wolves, wolfHit, null, this);
   game.physics.arcade.collide(playerUp, WolvesP, wolfHit, null, this);
   game.physics.arcade.collide(Wolves, platformsOver);
+  game.physics.arcade.collide(Ammos, platformsOver);
+  game.physics.arcade.collide(Lives, platformsOver);
   game.physics.arcade.collide(WolvesP, platforms);
   game.physics.arcade.collide(WolvesP, platformsOver);
   game.physics.arcade.collide(player, platformsDes);
@@ -156,13 +179,22 @@ function worldUpdate(){
     heart3.frame = 0;
   }
   else if (playerUp.health == 75) {
+    heart0.frame = 0;
+    heart1.frame = 0;
+    heart2.frame = 0;
     heart3.frame = 1;
   }
   else if (playerUp.health == 50) {
+    heart0.frame = 0;
+    heart1.frame = 0;
     heart2.frame = 1;
+    heart3.frame = 1;
   }
   else {
+    heart0.frame = 0;
     heart1.frame = 1;
+    heart2.frame = 1;
+    heart3.frame = 1;
   }
 
   barGranny.cameraOffset.x = playerUp.body.position.x/32 + 3*m;
@@ -178,5 +210,12 @@ function worldUpdate(){
   cheats();
   testUpdate();
   flashDamage();
+  weaposChange(); //find in Functions.js
+
+  if (fucile == true) {
+    ammoCount.text = 'ammo: ' + bulletN;
+    rifle(); //find in Functions.js
+  }
+
 
 };
