@@ -260,7 +260,7 @@ function wolvesBehave(Wolves) {
    else{
      wolf.body.velocity.x = 0;
    }
-   
+
    if ((wolf.body.touching.left || wolf.body.touching.right) && wolf.body.touching.down){
      wolf.body.velocity.y = wolfJump;
     }
@@ -435,28 +435,28 @@ function playerAnimationUp(){
       }
     }else {
       if (gotAxe === 0) {
-        playerUp.frame = 5;
-      }else if (gotAxe == 1) {
         playerUp.frame = 0;
+      }else if (gotAxe == 1) {
+        playerUp.frame = 5;
       }else if (gotAxe == 2) {
-        playerUp.frame = 25;
+        playerUp.frame = 10;
       }
     }
   }else if(playerUp.body.touching.down){
     if (gotAxe === 0) {
-      playerUp.frame = 5;
+      playerUp.frame = 1;
     }else if (gotAxe == 1) {
-      playerUp.frame = 0;
+      playerUp.frame = 6;
     }else if (gotAxe == 2) {
-      playerUp.frame = 25;
+      playerUp.frame = 11;
     }
   }else{
     if (gotAxe === 0) {
-      playerUp.frame = 5;
-    }else if (gotAxe == 1) {
       playerUp.frame = 0;
+    }else if (gotAxe == 1) {
+      playerUp.frame = 5;
     }else if (gotAxe == 2) {
-      playerUp.frame = 25;
+      playerUp.frame = 10;
     }
   }
   if (position=='leftt') {
