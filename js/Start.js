@@ -18,7 +18,7 @@ var GameStart = {
 };
 
 function imageClick() {
-    this.game.state.start('GameLevel_1');
+    this.game.state.start('GameLevel_2');
 }
 
 var game = new Phaser.Game(1024, 768, Phaser.AUTO);

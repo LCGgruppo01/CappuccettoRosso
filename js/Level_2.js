@@ -18,6 +18,7 @@ var GameLevel_2 = {
     game.load.image('memoryObj', 'assets/images/memory_object.png');
     game.load.image('fucile', 'assets/images/fucile.png');
     game.load.image('open', 'http://1.bp.blogspot.com/-a8aV13i0t9Y/Vi4LTodbxuI/AAAAAAAABdM/YPArwcG7Gx8/s1600/cappuccetto-rosso-e-il-lupo.jpg');
+    game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
 
     worldPreload(); //find in World.js
     playerPreload(); //find in Player.js
@@ -29,7 +30,7 @@ var GameLevel_2 = {
     step = 0;
     shake = 0.05;
     fristBone = 0;
-    ammoCount = 5;
+    bulletN = 5;
 
     if (spawnY > 27*m) {
       fucile = true;
@@ -40,16 +41,17 @@ var GameLevel_2 = {
       scene3.alpha = 0;
       scene3.scale.setTo(0.6,0.6);
       scene3.fixedToCamera = true;
-
-      fucileTerra = game.add.sprite(13*m, 8*m, 'fucile');
-      game.physics.arcade.enable(fucileTerra);
-      fucileTerra.enableBody = true;
+      fucileTerra.alpha = 0;
     }
+    fucileTerra = game.add.sprite(13*m, 8*m, 'fucile');
+    game.physics.arcade.enable(fucileTerra);
+    fucileTerra.enableBody = true;
 
     worldCreate(); //find in World.js
     playerCreate(); //find in Player.js
 
     //Cave entering
+    wolfCreate(7,27);
     rockCreate(0,9,33,1);
     rockCreate(32,1,1,4);
     rockCreate(32,5,10,1);
@@ -157,8 +159,18 @@ var GameLevel_2 = {
     kingWolf.alpha = 0.5;
     kingWolf.anchor.setTo(.5,.5);
 
+    wolfLife1 = game.add.sprite(kingWolf.x, kingWolf.y - 50, 'heart');
+    wolfLife2 = game.add.sprite(kingWolf.x + 50, kingWolf.y - 50, 'heart');
+    wolfLife3 = game.add.sprite(kingWolf.x + 100, kingWolf.y - 50, 'heart');
+    wolfLife4 = game.add.sprite(kingWolf.x + 150, kingWolf.y - 50, 'heart');
+
     ultimo = platformsDes.create(118*m, 54*m, 'd1');
-    ultimo.body.immovable = true;
+
+    platformsDes.forEach(function(d1){
+      d1.body.immovable = true;
+      d1.frame = 0;
+      d1.stato = 1;
+    });
 
     cappuccetto = game.add.sprite(121*m, 57*m, 'cappuccetto');
     game.physics.arcade.enable(cappuccetto);
@@ -188,6 +200,8 @@ var GameLevel_2 = {
     if(wolvesKilled >= 5){
       game.state.paused;
     }
+
+    wolfKingHearts();
 
     //cutscene
     if (playerUp.body.x >= 93*m && step == 0) {
