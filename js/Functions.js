@@ -230,6 +230,41 @@ function collectMe2(player, memoryObj2){
   }
 };
 
+function collectMe3(player, fucileTerra){
+  if(cursors.down.isDown){
+    scene3.alpha = 1;
+    scene3.inputEnabled = true;
+    playerUp.alpha = 0;
+    playerDown.alpha = 0;
+    bar.alpha = 0;
+    barGranny.alpha = 0;
+    Hearts.alpha = 0;
+    fucileTerra.kill();
+    game.paused = true;
+    game.input.onDown.add(unpauseImage2, this);
+    fucile = true;
+    ammoCount = game.add.text(0.5*m, 3*m, 'ammo: ', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
+    ammoCount.fixedToCamera = true;
+    gotAxe = 2;
+  }
+};
+
+function collectMe4(player, memoryObj4){
+  if(cursors.down.isDown){
+    scene4.alpha = 1;
+    scene4.inputEnabled = true;
+    playerUp.alpha = 0;
+    playerDown.alpha = 0;
+    bar.alpha = 0;
+    barGranny.alpha = 0;
+    Hearts.alpha = 0;
+    secretHall.alpha = 0;
+    memoryObj4.kill();
+    game.paused = true;
+    game.input.onDown.add(unpauseImage2, this);
+  }
+};
+
 function boneHitPlayer(player, bone) {
   if (game.time.now > immunity && axeHit == true){
     playerUp.body.velocity.x = -1000;
@@ -642,6 +677,18 @@ function unpauseImage(event){
   d1Destroyed.alpha = 1;
   scene1.alpha = 0;
   scene2.alpha = 0;
+};
+
+function unpauseImage2(event){
+  game.paused = false;
+  memoryObjCollect++
+  playerUp.alpha = 1;
+  playerDown.alpha = 1;
+  bar.alpha = 1;
+  barGranny.alpha = 1;
+  Hearts.alpha = 1;
+  scene3.alpha = 0;
+  scene4.alpha = 0;
 };
 
 function nextLevelImg(event){
