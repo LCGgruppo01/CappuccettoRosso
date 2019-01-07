@@ -163,7 +163,7 @@ var GameLevel_1 = {
     //wolfCreate(166,54);
 
     //cutscene
-    kingWolf = game.add.sprite(178*m, 53*m, 'kingWolf');
+    kingWolf = game.add.sprite(180*m, 53*m, 'kingWolf');
     game.physics.arcade.enable(kingWolf);
     kingWolf.enableBody = true;
     cappuccetto = game.add.sprite(176*m, 55*m, 'cappuccetto');
@@ -226,6 +226,14 @@ var GameLevel_1 = {
 
     //cutscene START
     if(playerUp.body.x >= 172*m){
+      if (borderTop.cameraOffset.y <= 8 && cappuccetto.body.x < 180*m) {
+        borderTop.cameraOffset.y = borderTop.cameraOffset.y + 3;
+        borderBottom.cameraOffset.y = borderBottom.cameraOffset.y - 2;
+      }
+      if (borderTop.cameraOffset.y >= -150 && cappuccetto.body.x > 180*m) {
+        borderTop.cameraOffset.y = borderTop.cameraOffset.y - 3;
+        borderBottom.cameraOffset.y = borderBottom.cameraOffset.y + 2;
+      }
       if(cappuccetto.body.x > 180*m){
         cursors = game.input.keyboard.createCursorKeys();
         SPACE = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -234,7 +242,7 @@ var GameLevel_1 = {
         game.camera.follow(playerUp, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.05);
         player.setAll('body.collideWorldBounds', true);
       }
-      else if (cappuccetto.body.x < 180*m) {
+      else if (cappuccetto.body.x < 195*m) {
         game.input.keyboard.removeKey(Phaser.Keyboard.UP);
         game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
         game.input.keyboard.removeKey(Phaser.Keyboard.RIGHT);
@@ -249,10 +257,10 @@ var GameLevel_1 = {
           playerDown.frame = 0;
         }
         setTimeout(function(){
-          if (game.camera.x <= 165*m) {
+          if (game.camera.x <= 175*m) {
             game.camera.x += 4;
           }
-         }, 200);
+        }, 1700);
         setTimeout(function(){
           if (step1 == 0) {
             kingWolf.body.velocity.x = -250;
@@ -262,7 +270,7 @@ var GameLevel_1 = {
             cappuccetto.body.velocity.x = 250;
             kingWolf.body.velocity.x = 250;
           }
-        }, 1300);
+        }, 3000);
       }
     }
     //cutscene END
