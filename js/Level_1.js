@@ -1,6 +1,7 @@
 var scene1;
 var timeWolves = 0;
 var wait = 0;
+var step1 = 0;
 var memoryObjCollect = 0;
 var step1 = 0;
 
@@ -42,6 +43,7 @@ var GameLevel_1 = {
   },
 
   create: function() {
+    level = 1;
     step1 = 0;
 
     skyBack = game.add.sprite(0, 0, 'skyBackground');
@@ -162,7 +164,7 @@ var GameLevel_1 = {
     //wolfCreate(166,54);
 
     //cutscene
-    kingWolf = game.add.sprite(178*m, 53*m, 'kingWolf');
+    kingWolf = game.add.sprite(180*m, 53*m, 'kingWolf');
     game.physics.arcade.enable(kingWolf);
     kingWolf.enableBody = true;
     cappuccetto = game.add.sprite(176*m, 55*m, 'cappuccetto');
@@ -186,17 +188,17 @@ var GameLevel_1 = {
     }
 
   //scenes
-  if (memoryObjCollect <= 0){
+
     scene1 = game.add.sprite(0, 0, 'open');
     scene1.alpha = 0;
     scene1.scale.setTo(0.6,0.6);
     scene1.fixedToCamera = true;
 
-    memoryObj1 = game.add.sprite(33*m, 57*m, 'memoryObj');
+    memoryObj1 = game.add.sprite(86*m, 51*m, 'memoryObj');
     game.physics.arcade.enable(memoryObj1);
     memoryObj1.enableBody = true;
-  }
-  if (memoryObjCollect <= 1){
+
+
     scene2 = game.add.sprite(0, 0, 'open');
     scene2.tint = 0x1a53ff;
     scene2.alpha = 0;
@@ -207,7 +209,7 @@ var GameLevel_1 = {
     memoryObj2.tint = 0x1a53ff;
     game.physics.arcade.enable(memoryObj2);
     memoryObj2.enableBody = true;
-  }
+
 
   platformsOver.setAll('alpha','0');
   platforms.setAll('alpha','0');
@@ -225,6 +227,14 @@ var GameLevel_1 = {
 
     //cutscene START
     if(playerUp.body.x >= 172*m){
+      if (borderTop.cameraOffset.y <= 8 && cappuccetto.body.x < 180*m) {
+        borderTop.cameraOffset.y = borderTop.cameraOffset.y + 3;
+        borderBottom.cameraOffset.y = borderBottom.cameraOffset.y - 2;
+      }
+      if (borderTop.cameraOffset.y >= -150 && cappuccetto.body.x > 180*m) {
+        borderTop.cameraOffset.y = borderTop.cameraOffset.y - 3;
+        borderBottom.cameraOffset.y = borderBottom.cameraOffset.y + 2;
+      }
       if(cappuccetto.body.x > 180*m){
         cursors = game.input.keyboard.createCursorKeys();
         SPACE = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -233,7 +243,7 @@ var GameLevel_1 = {
         game.camera.follow(playerUp, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.05);
         player.setAll('body.collideWorldBounds', true);
       }
-      else if (cappuccetto.body.x < 180*m) {
+      else if (cappuccetto.body.x < 195*m) {
         game.input.keyboard.removeKey(Phaser.Keyboard.UP);
         game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
         game.input.keyboard.removeKey(Phaser.Keyboard.RIGHT);
@@ -248,10 +258,10 @@ var GameLevel_1 = {
           playerDown.frame = 0;
         }
         setTimeout(function(){
-          if (game.camera.x <= 165*m) {
+          if (game.camera.x <= 175*m) {
             game.camera.x += 4;
           }
-         }, 200);
+        }, 1700);
         setTimeout(function(){
           if (step1 == 0) {
             kingWolf.body.velocity.x = -250;
@@ -261,7 +271,7 @@ var GameLevel_1 = {
             cappuccetto.body.velocity.x = 250;
             kingWolf.body.velocity.x = 250;
           }
-        }, 1300);
+        }, 3000);
       }
     }
     //cutscene END

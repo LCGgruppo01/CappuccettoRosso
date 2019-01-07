@@ -4,7 +4,9 @@ var gotAxe = 1;
 var changeWeapon = 0;
 var shake = 0.05;
 var kingShot = 0;
-var step2 = 0;
+var tempo = 0;
+var step = 0;
+var fristBone = 0;
 
 var GameLevel_2 = {
 
@@ -13,6 +15,10 @@ var GameLevel_2 = {
     game.world.width=126*m;
     game.world.height=64*m;
     game.load.image('secretHall', 'assets/images/secretHall.png');
+    game.load.image('memoryObj', 'assets/images/memory_object.png');
+    game.load.image('fucile', 'assets/images/fucile.png');
+    game.load.image('open', 'http://1.bp.blogspot.com/-a8aV13i0t9Y/Vi4LTodbxuI/AAAAAAAABdM/YPArwcG7Gx8/s1600/cappuccetto-rosso-e-il-lupo.jpg');
+    game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
 
     worldPreload(); //find in World.js
     playerPreload(); //find in Player.js
@@ -20,13 +26,32 @@ var GameLevel_2 = {
 
   create: function() {
 
-    step2 = 0;
-    fucile = true;
+    level = 2;
+    step = 0;
+    shake = 0.05;
+    fristBone = 0;
+    bulletN = 5;
+    fucileTerra = game.add.sprite(13*m, 8*m, 'fucile');
+    game.physics.arcade.enable(fucileTerra);
+    fucileTerra.enableBody = true;
+
+    if (spawnY > 25*m) {
+      fucile = true;
+      fucileTerra.alpha = 0;
+    }else {
+      fucile = false;
+      scene3 = game.add.sprite(0, 0, 'open');
+      scene3.tint = 0x6b16ff;
+      scene3.alpha = 0;
+      scene3.scale.setTo(0.6,0.6);
+      scene3.fixedToCamera = true;
+    }
 
     worldCreate(); //find in World.js
     playerCreate(); //find in Player.js
 
     //Cave entering
+    wolfCreate(27,7);
     rockCreate(0,9,33,1);
     rockCreate(32,1,1,4);
     rockCreate(32,5,10,1);
@@ -67,6 +92,17 @@ var GameLevel_2 = {
     rockCreate(17,41,13,1);
     rockCreate(29,35,1,6);
     rockCreate(16,35,13,1);
+    scene4 = game.add.sprite(0, 0, 'open');
+    scene4.tint = 0x1a16ff;
+    scene4.alpha = 0;
+    scene4.scale.setTo(0.6,0.6);
+    scene4.fixedToCamera = true;
+
+    memoryObj4 = game.add.sprite(24*m, 40*m, 'memoryObj');
+    memoryObj4.tint = 0x1a53ff;
+    game.physics.arcade.enable(memoryObj4);
+    memoryObj4.enableBody = true;
+
     //Vertical 3
     platformCreate(13,42,3);
     rockCreate(9,41,1,11);
@@ -114,11 +150,28 @@ var GameLevel_2 = {
     rockCutscene = platforms.create(93*m, 48*m, '');
     rockCutscene.body.setSize(9*m, 1*m, 0, 0);
     rockCutscene.body.immovable = true;
-    kingWolf = game.add.sprite(115*m, 55*m, 'kingWolf');
+
+    kingWolf = game.add.sprite(115*m, 56*m, 'kingWolf');
     game.physics.arcade.enable(kingWolf);
     kingWolf.enableBody = true;
+    kingWolf.body.gravity.y = gravity;
     kingWolf.health = 100;
-    platformsDes.create(118*m, 54*m, 'd1');
+    kingWolf.alpha = 0.5;
+    kingWolf.anchor.setTo(.5,.5);
+
+    wolfLife1 = game.add.sprite(kingWolf.x, kingWolf.y - 50, 'heart');
+    wolfLife2 = game.add.sprite(kingWolf.x + 50, kingWolf.y - 50, 'heart');
+    wolfLife3 = game.add.sprite(kingWolf.x + 100, kingWolf.y - 50, 'heart');
+    wolfLife4 = game.add.sprite(kingWolf.x + 150, kingWolf.y - 50, 'heart');
+
+    ultimo = platformsDes.create(118*m, 54*m, 'd1');
+
+    platformsDes.forEach(function(d1){
+      d1.body.immovable = true;
+      d1.frame = 0;
+      d1.stato = 1;
+    });
+
     cappuccetto = game.add.sprite(121*m, 57*m, 'cappuccetto');
     game.physics.arcade.enable(cappuccetto);
     cappuccetto.enableBody = true;
@@ -130,6 +183,10 @@ var GameLevel_2 = {
     worldUpdate(); //find in World.js
     playerUpdate(); //find in Player.js
 
+    game.physics.arcade.overlap(playerUp, memoryObj4, collectMe4, null, this);
+    game.physics.arcade.overlap(playerUp, fucileTerra, collectMe3, null, this);
+
+    //secretHall
     if((playerUp.x > 17*m && playerUp.x < 29*m) && (playerUp.y > 35*m && playerUp.y < 41*m)){
       secretHall.alpha = secretHall.alpha*0.98;
     }else{
@@ -144,42 +201,44 @@ var GameLevel_2 = {
       game.state.paused;
     }
 
+    wolfKingHearts();
+
     //cutscene
     if (playerUp.body.x >= 93*m && step2 <= 1) {
       game.input.keyboard.removeKey(Phaser.Keyboard.UP);
     }
-    if (playerUp.body.x >= 97*m && step2 <= 1) {
+    if (playerUp.body.x >= 97*m && step <= 3) {
       game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
       game.input.keyboard.removeKey(Phaser.Keyboard.RIGHT);
       game.input.keyboard.removeKey(Phaser.Keyboard.DOWN);
       game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
       game.input.keyboard.removeKey(Phaser.Keyboard.H);
       playerUp.body.velocity.x = 0;
-      playerUp.frame = 0;
       playerDown.frame = 0;
-      if (playerUp.body.y <= 51*m && step2 == 0) {
-        game.camera.shake(shake, 1000);
-        shake = shake*0.95;
+      if (step <=1) {
+        playerUp.frame = 0;
+      }
+      if (borderTop.cameraOffset.y <= -10 && step == 0) {
+        borderTop.cameraOffset.y = borderTop.cameraOffset.y + 3;
+        borderBottom.cameraOffset.y = borderBottom.cameraOffset.y - 2;
       }
       setTimeout(function(){
-        rockCutscene.body.immovable = false;
-      }, 500)
+        if (playerUp.body.y <= 51*m && step == 0) {
+          game.camera.shake(shake, 1000);
+          shake = shake*0.95;
+        }
+        setTimeout(function(){
+          rockCutscene.body.immovable = false;
+        }, 500)
+      }, 1000)
     }
 
-    if (playerUp.body.y >= 57*m && step2 == 0) {
-      game.camera.follow();
-      game.camera.x += 8;
-    }
-    if (game.camera.x >= 107.5*m && step2 == 0) {
-      step2 = 1;
-    }
-
-    if (kingWolf.healt == 0) {
-      step2 = 3;
+    if (kingWolf.health <= 10){
       rock1.kill();
       rock2.kill();
+      game.camera.follow(playerUp, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.05);
     }
-    else if (step2 == 2){
+    else if (step == 4) {
       kingWolf.body.velocity.x = 0;
       cursors = game.input.keyboard.createCursorKeys();
       SPACE = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -187,16 +246,53 @@ var GameLevel_2 = {
       H = game.input.keyboard.addKey(Phaser.Keyboard.H);
       wolfKingShot();
     }
-    else if (game.camera.x <= 99.5*m && step2 == 1) {
-      rock1 = platforms.create(94.2, 48, '');
-      rock1.body.setSize(1, 11, 0, 0);
-      rock1.body.immovable = true;
-      rock2 = platforms.create(111.1, 48, '');
-      rock2.body.setSize(1, 11, 0, 0);
-      rock2.body.immovable = true;
-      step2 = 2;
+    else if (step == 3){
+      if (borderTop.cameraOffset.y <= -155) {
+        step = 4;
+      }
+      else {
+        borderTop.cameraOffset.y = borderTop.cameraOffset.y - 2;
+        borderBottom.cameraOffset.y = borderBottom.cameraOffset.y + 2;
+      }
     }
-    else if (step2 == 1) {
+    else if(step == 2){
+      kingWolf.body.velocity.x = 0;
+      setTimeout(function(){
+        if (fristBone == 0) {
+          wolfKingShot();
+          fristBone = 1;
+        }
+      }, 1100);
+      setTimeout(function(){
+        if (fristBone == 1) {
+          axeHit = false
+          changeHitbox();
+          playerUp.animations.play('rightAxeChop');
+          bone.body.velocity.x = - bone.body.velocity.x;
+          bone.body.velocity.y = - bone.body.velocity.y;
+          fristBone = 2;
+        }
+      }, 2490);
+      setTimeout(function(){
+        if (fristBone == 2) {
+          kingWolf.damage(25);
+          flashDamage();
+          bone.kill();
+          fristBone = 3;
+          step = 3;
+        }
+      }, 3710);
+    }
+    else if (game.camera.x <= 99.5*m && step == 1) {
+      rock1 = platforms.create(94.3*m, 48*m, '');
+      rock1.body.setSize(1*m, 11*m, 0, 0);
+      rock1.body.immovable = true;
+      rock2 = platforms.create(111.2*m, 48*m, '');
+      rock2.body.setSize(1*m, 11*m, 0, 0);
+      rock2.body.immovable = true;
+      step = 2;
+    }
+    else if (step == 1) {
       setTimeout(function(){
         kingWolf.body.velocity.x = -250;
       },200)
@@ -204,6 +300,14 @@ var GameLevel_2 = {
         game.camera.x -= 8;
       },550)
     }
+    else if (game.camera.x >= 107.5*m && step == 0) {
+      step = 1;
+    }
+    else if (playerUp.body.y >= 57*m && step == 0) {
+      game.camera.follow();
+      game.camera.x += 8;
+    }
+
     render();
     wolvesBehave(Wolves); //find in Functions.js
 

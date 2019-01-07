@@ -124,17 +124,17 @@ function wolfHit(player, wolf) {
 
 function wolfBulletDamage(bullet, wolf){
   if (game.time.now > immunity){
-    if (wolf.health < 100 && Math.random() < 0.7 && fucile == true) {
+    if (wolf.health < 110 && Math.random() < 0.7 && fucile == true) {
       ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
       ammo.body.gravity.y = gravity;
       ammo.body.bounce.y = 0.2;
     }
-    if (wolf.health < 100 && Math.random() < 0.3) {
+    if (wolf.health < 110 && Math.random() < 0.3) {
       life = Lives.create(wolf.x, wolf.y, 'heart');
       life.body.gravity.y = gravity;
       life.body.bounce.y = 0.2;
     }
-    wolf.damage(50);
+    wolf.damage(100);
     immunity = game.time.now + 500;
     wolf.body.velocity.y = 2000;
   }
@@ -230,6 +230,41 @@ function collectMe2(player, memoryObj2){
   }
 };
 
+function collectMe3(player, fucileTerra){
+  if(cursors.down.isDown){
+    scene3.alpha = 1;
+    scene3.inputEnabled = true;
+    playerUp.alpha = 0;
+    playerDown.alpha = 0;
+    bar.alpha = 0;
+    barGranny.alpha = 0;
+    Hearts.alpha = 0;
+    fucileTerra.kill();
+    game.paused = true;
+    game.input.onDown.add(unpauseImage2, this);
+    fucile = true;
+    ammoCount = game.add.text(0.5*m, 3*m, 'ammo: ', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
+    ammoCount.fixedToCamera = true;
+    gotAxe = 2;
+  }
+};
+
+function collectMe4(player, memoryObj4){
+  if(cursors.down.isDown){
+    scene4.alpha = 1;
+    scene4.inputEnabled = true;
+    playerUp.alpha = 0;
+    playerDown.alpha = 0;
+    bar.alpha = 0;
+    barGranny.alpha = 0;
+    Hearts.alpha = 0;
+    secretHall.alpha = 0;
+    memoryObj4.kill();
+    game.paused = true;
+    game.input.onDown.add(unpauseImage2, this);
+  }
+};
+
 function boneHitPlayer(player, bone) {
   if (game.time.now > immunity && axeHit == true){
     playerUp.body.velocity.x = -1000;
@@ -239,14 +274,15 @@ function boneHitPlayer(player, bone) {
     bone.kill();
   }
   if (axeHit == false){
-    bone.body.velocity.x = - (playerUp.x - kingWolf.x)*1.5;
-    bone.body.velocity.y = - 350 + (playerUp.y - kingWolf.y);
     bone.rimbalzo = 1;
+    bone.body.velocity.x = - bone.body.velocity.x;
+    bone.body.velocity.y = - bone.body.velocity.y;
+
   }
 };
 
-function boneHitKing(player, bone) {
-  if (game.time.now > immunity && axeHit == true && bone.rimbalzo == 1){
+function boneHitKing(kingWolf, bone) {
+  if (game.time.now > immunity && bone.rimbalzo == 1){
     kingWolf.body.velocity.x = -1000;
     timeHit = game.time.now + 300;
     immunity = game.time.now + 500;
@@ -265,10 +301,12 @@ function wolvesBehave(Wolves) {
   if (game.time.now > immunity) {
 
 
-   if(Math.abs(playerUp.x - wolf.x) < 600 && - playerUp.y + wolf.y < 160){
-      wolf.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*50 + (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*200*wolf.casuale;
+   if(Math.abs(playerUp.x - wolf.x) < 600 && Math.abs(playerUp.x - wolf.x) > 80 && - playerUp.y + wolf.y < 160){
+     wolf.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*50 + (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*200*wolf.casuale;
+   }else if (Math.abs(playerUp.x - wolf.x) > 0 && Math.abs(playerUp.x - wolf.x) > 80 && - playerUp.y + wolf.y < 160) {
+     wolf.body.velocity.x = wolf.body.velocity.x;
    }
-   else{
+   else if (Math.abs(playerUp.x - wolf.x) > 600 && - playerUp.y + wolf.y > 160) {
      wolf.body.velocity.x = 0;
    }
 
@@ -308,13 +346,43 @@ function wolfFrames(Wolves){
 };
 
 function wolfKingShot(){
-  if (game.time.now > kingShot) {
+  if (game.time.now > kingShot && kingWolf.health >= 10) {
     bone = Bones.create(kingWolf.x, kingWolf.y, 'barGranny');
     bone.rimbalzo = 0;
     bone.body.gravity.y = gravity;
-    bone.body.velocity.x = (playerUp.x - kingWolf.x);
-    bone.body.velocity.y = - 350 + (playerUp.y - kingWolf.y);
-    kingShot = game.time.now + 1500;
+
+    bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((playerUp.y - kingWolf.y), 2))/500;
+
+    bone.body.velocity.x = -(kingWolf.x - playerUp.x)/bone.tempo -1*Math.random() +1*Math.random();
+    bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
+    kingShot = game.time.now + 2000*Math.random();
+
+    xt.text = 'x ' + bone.body.velocity.x;
+    yt.text = 'y ' + borderTop.cameraOffset.y;
+    tempo.text = 'tempo ' + bone.tempo;
+    velocità.text = 'velocità ' + bone.tempo*500/bone.tempo;
+  }
+};
+
+function wolfKingHearts() {
+
+  wolfLife1.x = kingWolf.x - 50;
+  wolfLife2.x = kingWolf.x - 25;
+  wolfLife3.x = kingWolf.x;
+  wolfLife4.x = kingWolf.x + 25;
+
+  if (kingWolf.health < 100 && kingWolf.health >= 75) {
+    wolfLife4.frame = 1;
+  }if (kingWolf.health < 75  && kingWolf.health >= 50) {
+    wolfLife3.frame = 1;
+  }if (kingWolf.health < 50 && kingWolf.health >= 25) {
+    wolfLife2.frame = 1;
+  }if (kingWolf.health < 25 && kingWolf.health >= 0) {
+    wolfLife1.frame = 1;
+    wolfLife1.kill();
+    wolfLife2.kill();
+    wolfLife3.kill();
+    wolfLife4.kill();
   }
 };
 // wolves BEHAVE and FRAMES functions end
@@ -345,15 +413,13 @@ function rifle(){
   if (gotAxe == 2) {
     if (SPACE.isDown && game.time.now > shootTime && shoot == true && bulletN > 0){
       if (position == "leftt") {
-        var bullet = Bullets.create(playerUp.x - 10, playerUp.y + 20, 'bullet');
-        bullet.body.gravity.y = gravity;
-        bullet.body.velocity.y = -100;
+        var bullet = Bullets.create(playerUp.x - 15, playerUp.y, 'bullet');
+        bullet.body.gravity.y = 25;
         bullet.body.velocity.x = -bulletVelocity + playerUp.body.velocity.x;
       }else if (position == "rightt") {
-        bullet = Bullets.create(playerUp.x + 10, playerUp.y + 20, 'bullet');
+        bullet = Bullets.create(playerUp.x + 15, playerUp.y, 'bullet');
         bullet.scale.x = -1;
-        bullet.body.gravity.y = gravity;
-        bullet.body.velocity.y = -100;
+        bullet.body.gravity.y = 25;
         bullet.body.velocity.x = bulletVelocity + playerUp.body.velocity.x;
       }
       shootTime = game.time.now + 300;
@@ -363,6 +429,10 @@ function rifle(){
 
     if (SPACE.isUp) {
       shoot = true;
+      axeHit = true;
+    }
+    if (bulletN <= 0) {
+      gotAxe=1;
     }
   }
 }
@@ -447,28 +517,28 @@ function playerAnimationUp(){
       }
     }else {
       if (gotAxe === 0) {
-        playerUp.frame = 5;
-      }else if (gotAxe == 1) {
         playerUp.frame = 0;
+      }else if (gotAxe == 1) {
+        playerUp.frame = 5;
       }else if (gotAxe == 2) {
-        playerUp.frame = 25;
+        playerUp.frame = 10;
       }
     }
   }else if(playerUp.body.touching.down){
     if (gotAxe === 0) {
-      playerUp.frame = 5;
+      playerUp.frame = 1;
     }else if (gotAxe == 1) {
-      playerUp.frame = 0;
+      playerUp.frame = 6;
     }else if (gotAxe == 2) {
-      playerUp.frame = 25;
+      playerUp.frame = 11;
     }
   }else{
     if (gotAxe === 0) {
-      playerUp.frame = 5;
-    }else if (gotAxe == 1) {
       playerUp.frame = 0;
+    }else if (gotAxe == 1) {
+      playerUp.frame = 5;
     }else if (gotAxe == 2) {
-      playerUp.frame = 25;
+      playerUp.frame = 10;
     }
   }
   if (position=='leftt') {
@@ -533,6 +603,9 @@ function pauseMenu() {
   game.input.onDown.add(unpaused);
   //aggiungo per fixare un bug
   onPause = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
+  restart = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
+  restartLevel = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
+  mainMenu = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
 };
 
 function paused() {
@@ -542,9 +615,22 @@ function paused() {
     setTimeout(function(){
       game.paused = true;
      }, 20);
-    onPause = game.add.text(500, 350, 'Esci Dalla Siesta', { font: '24px Arial', fill: '#fff' });
-    onPause.inputEnabled = true;
-    onPause.fixedToCamera = true;
+     onPause = game.add.text(500, 350, 'Esci Dalla Siesta', { font: '24px Arial', fill: '#fff' });
+     onPause.inputEnabled = true;
+     onPause.fixedToCamera = true;
+
+     restart = game.add.text(500, 400, 'restart', { font: '24px Arial', fill: '#fff' });
+     restart.inputEnabled = true;
+     restart.fixedToCamera = true;
+
+     restartLevel = game.add.text(500, 450, 'restart level', { font: '24px Arial', fill: '#fff' });
+     restartLevel.inputEnabled = true;
+     restartLevel.fixedToCamera = true;
+
+     mainMenu = game.add.text(500, 500, 'main menu', { font: '24px Arial', fill: '#fff' });
+     mainMenu.inputEnabled = true;
+     mainMenu.fixedToCamera = true;
+
   }
 };
 
@@ -553,6 +639,51 @@ function unpaused(event){
     onPause.events.onInputUp.add(function(){
       game.paused = false;
       onPause.text = '';
+      restart.text = '';
+      restartLevel.text = '';
+      mainMenu.text = '';
+    });
+
+    restart.events.onInputUp.add(function(){
+      game.paused = false;
+      onPause.text = '';
+      restart.text = '';
+      restartLevel.text = '';
+      mainMenu.text = '';
+      if (level == 1) {
+        this.game.state.start('GameLevel_1');
+      }else if (level == 2) {
+        this.game.state.start('GameLevel_2');
+      }
+    });
+
+    restartLevel.events.onInputUp.add(function(){
+      game.paused = false;
+      onPause.text = '';
+      restart.text = '';
+      restartLevel.text = '';
+      mainMenu.text = '';
+      if (level == 1) {
+        this.game.state.start('GameLevel_1');
+        spawnX = 4*m;
+        spawnY = 54*m;
+      }else if (level == 2) {
+        this.game.state.start('GameLevel_2');
+        spawnX = 6*m;
+        spawnY = 5*m;
+      }
+    });
+
+    mainMenu.events.onInputUp.add(function(){
+      game.paused = false;
+      onPause.text = '';
+      restart.text = '';
+      restartLevel.text = '';
+      mainMenu.text = '';
+      this.game.state.start('GameStart');
+      spawnX = 4*m;
+      spawnY = 54*m;
+      fucile = false;
     });
   }
 };
@@ -572,6 +703,18 @@ function unpauseImage(event){
   d1Destroyed.alpha = 1;
   scene1.alpha = 0;
   scene2.alpha = 0;
+};
+
+function unpauseImage2(event){
+  game.paused = false;
+  memoryObjCollect++
+  playerUp.alpha = 1;
+  playerDown.alpha = 1;
+  bar.alpha = 1;
+  barGranny.alpha = 1;
+  Hearts.alpha = 1;
+  scene3.alpha = 0;
+  scene4.alpha = 0;
 };
 
 function nextLevelImg(event){

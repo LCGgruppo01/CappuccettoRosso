@@ -8,18 +8,18 @@ var GameStart = {
 
   create: function() {
     this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
-    game.add.sprite(0, 0, 'copertina');
-    start = game.add.sprite(game.world.width/2, game.world.height/2, 'start');
+    copertina = game.add.sprite(0, 0, 'copertina');
+    start = game.add.sprite(512, 384, 'start');
     start.anchor.setTo(.5,.5);
     start.inputEnabled = true;
-    start.events.onInputDown.add(this.imageClick, this);
+    start.events.onInputUp.add(imageClick);
   },
 
-  imageClick: function(pointer) {
-      this.game.state.start('GameLevel_2');
-  }
-
 };
+
+function imageClick() {
+    this.game.state.start('GameLevel_2');
+}
 
 var game = new Phaser.Game(1024, 768, Phaser.AUTO);
 

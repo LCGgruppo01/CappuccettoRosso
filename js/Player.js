@@ -46,9 +46,10 @@ function playerCreate(){
 
   //player ANIMATIONS
   playerDown.animations.add('right', [1, 2, 3, 4], 10, true);
-  playerUp.animations.add('right', [6, 7, 8, 9], 10, true);
-  playerUp.animations.add('rightAxe', [1, 2, 3, 4], 10, true);
-  animAxe = playerUp.animations.add('rightAxeChop', [10, 11, 12, 13], 10, true);
+  playerUp.animations.add('right', [1, 2, 3, 4], 10, true);
+  playerUp.animations.add('rightAxe', [6, 7, 8, 9], 10, true);
+  playerUp.animations.add('rightGun', [11, 12, 13, 14], 10, true);
+  animAxe = playerUp.animations.add('rightAxeChop', [15, 16, 17, 18], 10, true);
   animAxe.loop = false;
 
 };
