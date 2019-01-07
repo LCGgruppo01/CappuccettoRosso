@@ -35,7 +35,7 @@ var GameLevel_2 = {
     game.physics.arcade.enable(fucileTerra);
     fucileTerra.enableBody = true;
 
-    if (spawnY > 27*m) {
+    if (spawnY > 25*m) {
       fucile = true;
       fucileTerra.alpha = 0;
     }else {
@@ -51,7 +51,7 @@ var GameLevel_2 = {
     playerCreate(); //find in Player.js
 
     //Cave entering
-    wolfCreate(7,27);
+    wolfCreate(27,7);
     rockCreate(0,9,33,1);
     rockCreate(32,1,1,4);
     rockCreate(32,5,10,1);

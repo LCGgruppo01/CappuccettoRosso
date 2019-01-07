@@ -124,17 +124,17 @@ function wolfHit(player, wolf) {
 
 function wolfBulletDamage(bullet, wolf){
   if (game.time.now > immunity){
-    if (wolf.health < 100 && Math.random() < 0.7 && fucile == true) {
+    if (wolf.health < 110 && Math.random() < 0.7 && fucile == true) {
       ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
       ammo.body.gravity.y = gravity;
       ammo.body.bounce.y = 0.2;
     }
-    if (wolf.health < 100 && Math.random() < 0.3) {
+    if (wolf.health < 110 && Math.random() < 0.3) {
       life = Lives.create(wolf.x, wolf.y, 'heart');
       life.body.gravity.y = gravity;
       life.body.bounce.y = 0.2;
     }
-    wolf.damage(50);
+    wolf.damage(100);
     immunity = game.time.now + 500;
     wolf.body.velocity.y = 2000;
   }
@@ -301,10 +301,12 @@ function wolvesBehave(Wolves) {
   if (game.time.now > immunity) {
 
 
-   if(Math.abs(playerUp.x - wolf.x) < 600 && - playerUp.y + wolf.y < 160){
-      wolf.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*50 + (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*200*wolf.casuale;
+   if(Math.abs(playerUp.x - wolf.x) < 600 && Math.abs(playerUp.x - wolf.x) > 80 && - playerUp.y + wolf.y < 160){
+     wolf.body.velocity.x = (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*50 + (playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*200*wolf.casuale;
+   }else if (Math.abs(playerUp.x - wolf.x) > 0 && Math.abs(playerUp.x - wolf.x) > 80 && - playerUp.y + wolf.y < 160) {
+     wolf.body.velocity.x = wolf.body.velocity.x;
    }
-   else{
+   else if (Math.abs(playerUp.x - wolf.x) > 600 && - playerUp.y + wolf.y > 160) {
      wolf.body.velocity.x = 0;
    }
 
@@ -427,6 +429,10 @@ function rifle(){
 
     if (SPACE.isUp) {
       shoot = true;
+      axeHit = true;
+    }
+    if (bulletN <= 0) {
+      gotAxe=1;
     }
   }
 }
