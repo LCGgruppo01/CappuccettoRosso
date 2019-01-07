@@ -31,9 +31,13 @@ var GameLevel_2 = {
     shake = 0.05;
     fristBone = 0;
     bulletN = 5;
+    fucileTerra = game.add.sprite(13*m, 8*m, 'fucile');
+    game.physics.arcade.enable(fucileTerra);
+    fucileTerra.enableBody = true;
 
     if (spawnY > 27*m) {
       fucile = true;
+      fucileTerra.alpha = 0;
     }else {
       fucile = false;
       scene3 = game.add.sprite(0, 0, 'open');
@@ -41,11 +45,7 @@ var GameLevel_2 = {
       scene3.alpha = 0;
       scene3.scale.setTo(0.6,0.6);
       scene3.fixedToCamera = true;
-      fucileTerra.alpha = 0;
     }
-    fucileTerra = game.add.sprite(13*m, 8*m, 'fucile');
-    game.physics.arcade.enable(fucileTerra);
-    fucileTerra.enableBody = true;
 
     worldCreate(); //find in World.js
     playerCreate(); //find in Player.js
