@@ -361,6 +361,28 @@ function wolfKingShot(){
     velocità.text = 'velocità ' + bone.tempo*500/bone.tempo;
   }
 };
+
+function wolfKingHearts() {
+
+  wolfLife1.x = kingWolf.x - 50;
+  wolfLife2.x = kingWolf.x - 25;
+  wolfLife3.x = kingWolf.x;
+  wolfLife4.x = kingWolf.x + 25;
+
+  if (kingWolf.health < 100 && kingWolf.health >= 75) {
+    wolfLife4.frame = 1;
+  }if (kingWolf.health < 75  && kingWolf.health >= 50) {
+    wolfLife3.frame = 1;
+  }if (kingWolf.health < 50 && kingWolf.health >= 25) {
+    wolfLife2.frame = 1;
+  }if (kingWolf.health < 25 && kingWolf.health >= 0) {
+    wolfLife1.frame = 1;
+    wolfLife1.kill();
+    wolfLife2.kill();
+    wolfLife3.kill();
+    wolfLife4.kill();
+  }
+};
 // wolves BEHAVE and FRAMES functions end
 
 //weapos START
@@ -389,15 +411,13 @@ function rifle(){
   if (gotAxe == 2) {
     if (SPACE.isDown && game.time.now > shootTime && shoot == true && bulletN > 0){
       if (position == "leftt") {
-        var bullet = Bullets.create(playerUp.x - 10, playerUp.y + 20, 'bullet');
-        bullet.body.gravity.y = gravity;
-        bullet.body.velocity.y = -100;
+        var bullet = Bullets.create(playerUp.x - 15, playerUp.y, 'bullet');
+        bullet.body.gravity.y = 25;
         bullet.body.velocity.x = -bulletVelocity + playerUp.body.velocity.x;
       }else if (position == "rightt") {
-        bullet = Bullets.create(playerUp.x + 10, playerUp.y + 20, 'bullet');
+        bullet = Bullets.create(playerUp.x + 15, playerUp.y, 'bullet');
         bullet.scale.x = -1;
-        bullet.body.gravity.y = gravity;
-        bullet.body.velocity.y = -100;
+        bullet.body.gravity.y = 25;
         bullet.body.velocity.x = bulletVelocity + playerUp.body.velocity.x;
       }
       shootTime = game.time.now + 300;
