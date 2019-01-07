@@ -5,8 +5,8 @@ var changeWeapon = 0;
 var shake = 0.05;
 var kingShot = 0;
 var tempo = 0;
-var cx = 0;
-var cy = 0;
+var step = 0;
+var fristBone = 0;
 
 var GameLevel_2 = {
 
@@ -26,7 +26,9 @@ var GameLevel_2 = {
   create: function() {
 
     level = 2;
-    var step = 0;
+    step = 0;
+    shake = 0.05;
+    fristBone = 0;
     ammoCount = 5;
 
     if (spawnY > 27*m) {
@@ -155,7 +157,9 @@ var GameLevel_2 = {
     kingWolf.alpha = 0.5;
     kingWolf.anchor.setTo(.5,.5);
 
-    platformsDes.create(118*m, 54*m, 'd1');
+    ultimo = platformsDes.create(118*m, 54*m, 'd1');
+    ultimo.body.immovable = true;
+
     cappuccetto = game.add.sprite(121*m, 57*m, 'cappuccetto');
     game.physics.arcade.enable(cappuccetto);
     cappuccetto.enableBody = true;
@@ -189,15 +193,17 @@ var GameLevel_2 = {
     if (playerUp.body.x >= 93*m && step == 0) {
       game.input.keyboard.removeKey(Phaser.Keyboard.UP);
     }
-    if (playerUp.body.x >= 97*m && step <= 1) {
+    if (playerUp.body.x >= 97*m && step <= 2) {
       game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
       game.input.keyboard.removeKey(Phaser.Keyboard.RIGHT);
       game.input.keyboard.removeKey(Phaser.Keyboard.DOWN);
       game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
       game.input.keyboard.removeKey(Phaser.Keyboard.H);
       playerUp.body.velocity.x = 0;
-      playerUp.frame = 0;
       playerDown.frame = 0;
+      if (step <=1) {
+        playerUp.frame = 0;
+      }
       if (playerUp.body.y <= 51*m && step == 0) {
         game.camera.shake(shake, 1000);
         shake = shake*0.95;
@@ -212,7 +218,7 @@ var GameLevel_2 = {
       rock2.kill();
       game.camera.follow(playerUp, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.05);
     }
-    else if (step == 2){
+    else if (step == 3){
       kingWolf.body.velocity.x = 0;
       cursors = game.input.keyboard.createCursorKeys();
       SPACE = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -220,12 +226,40 @@ var GameLevel_2 = {
       H = game.input.keyboard.addKey(Phaser.Keyboard.H);
       wolfKingShot();
     }
+    else if(step == 2){
+      kingWolf.body.velocity.x = 0;
+      setTimeout(function(){
+        if (fristBone == 0) {
+          wolfKingShot();
+          fristBone = 1;
+        }
+      }, 1100);
+      setTimeout(function(){
+        if (fristBone == 1) {
+          axeHit = false
+          changeHitbox();
+          playerUp.animations.play('rightAxeChop');
+          bone.body.velocity.x = - bone.body.velocity.x;
+          bone.body.velocity.y = - bone.body.velocity.y;
+          fristBone = 2;
+        }
+      }, 2490);
+      setTimeout(function(){
+        if (fristBone == 2) {
+          kingWolf.damage(25);
+          flashDamage();
+          bone.kill();
+          fristBone = 3;
+          step = 3;
+        }
+      }, 3710);
+    }
     else if (game.camera.x <= 99.5*m && step == 1) {
-      rock1 = platforms.create(94.2, 48, '');
-      rock1.body.setSize(1, 11, 0, 0);
+      rock1 = platforms.create(94.3*m, 48*m, '');
+      rock1.body.setSize(1*m, 11*m, 0, 0);
       rock1.body.immovable = true;
-      rock2 = platforms.create(111.1, 48, '');
-      rock2.body.setSize(1, 11, 0, 0);
+      rock2 = platforms.create(111.2*m, 48*m, '');
+      rock2.body.setSize(1*m, 11*m, 0, 0);
       rock2.body.immovable = true;
       step = 2;
     }
