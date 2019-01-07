@@ -316,11 +316,11 @@ function wolfKingShot(){
     bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((playerUp.y - kingWolf.y), 2))/500;
 
     bone.body.velocity.x = -(kingWolf.x - playerUp.x)/bone.tempo;
-    bone.body.velocity.y = (500 -gravity*bone.tempo);
+    bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
     kingShot = game.time.now + 1500;
 
-    xt.text = 'x ' + (kingWolf.x - playerUp.x);
-    yt.text = 'y ' + (playerUp.y - kingWolf.y);
+    xt.text = 'x ' + bone.body.velocity.x;
+    yt.text = 'y ' + bone.body.velocity.y;
     tempo.text = 'tempo ' + bone.tempo;
     velocità.text = 'velocità ' + bone.tempo*500/bone.tempo;
   }
@@ -541,6 +541,9 @@ function pauseMenu() {
   game.input.onDown.add(unpaused);
   //aggiungo per fixare un bug
   onPause = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
+  restart = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
+  restartLevel = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
+  mainMenu = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
 };
 
 function paused() {
@@ -550,9 +553,22 @@ function paused() {
     setTimeout(function(){
       game.paused = true;
      }, 20);
-    onPause = game.add.text(500, 350, 'Esci Dalla Siesta', { font: '24px Arial', fill: '#fff' });
-    onPause.inputEnabled = true;
-    onPause.fixedToCamera = true;
+     onPause = game.add.text(500, 350, 'Esci Dalla Siesta', { font: '24px Arial', fill: '#fff' });
+     onPause.inputEnabled = true;
+     onPause.fixedToCamera = true;
+
+     restart = game.add.text(500, 400, 'restart', { font: '24px Arial', fill: '#fff' });
+     restart.inputEnabled = true;
+     restart.fixedToCamera = true;
+
+     restartLevel = game.add.text(500, 450, 'restart level', { font: '24px Arial', fill: '#fff' });
+     restartLevel.inputEnabled = true;
+     restartLevel.fixedToCamera = true;
+
+     mainMenu = game.add.text(500, 500, 'main menu', { font: '24px Arial', fill: '#fff' });
+     mainMenu.inputEnabled = true;
+     mainMenu.fixedToCamera = true;
+
   }
 };
 
@@ -561,6 +577,51 @@ function unpaused(event){
     onPause.events.onInputUp.add(function(){
       game.paused = false;
       onPause.text = '';
+      restart.text = '';
+      restartLevel.text = '';
+      mainMenu.text = '';
+    });
+
+    restart.events.onInputUp.add(function(){
+      game.paused = false;
+      onPause.text = '';
+      restart.text = '';
+      restartLevel.text = '';
+      mainMenu.text = '';
+      if (level == 1) {
+        this.game.state.start('GameLevel_1');
+      }else if (level == 2) {
+        this.game.state.start('GameLevel_2');
+      }
+    });
+
+    restartLevel.events.onInputUp.add(function(){
+      game.paused = false;
+      onPause.text = '';
+      restart.text = '';
+      restartLevel.text = '';
+      mainMenu.text = '';
+      if (level == 1) {
+        this.game.state.start('GameLevel_1');
+        spawnX = 4*m;
+        spawnY = 54*m;
+      }else if (level == 2) {
+        this.game.state.start('GameLevel_2');
+        spawnX = 6*m;
+        spawnY = 5*m;
+      }
+    });
+
+    mainMenu.events.onInputUp.add(function(){
+      game.paused = false;
+      onPause.text = '';
+      restart.text = '';
+      restartLevel.text = '';
+      mainMenu.text = '';
+      this.game.state.start('GameStart');
+      spawnX = 4*m;
+      spawnY = 54*m;
+      fucile = false;
     });
   }
 };

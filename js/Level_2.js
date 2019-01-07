@@ -22,6 +22,7 @@ var GameLevel_2 = {
 
   create: function() {
 
+    level = 2;
     var step = 0;
     fucile = true;
 

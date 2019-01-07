@@ -42,6 +42,8 @@ var GameLevel_1 = {
   },
 
   create: function() {
+    level = 1;
+
     skyBack = game.add.sprite(0, 0, 'skyBackground');
     skyBack.fixedToCamera = true;
 
