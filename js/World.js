@@ -130,6 +130,10 @@ function worldCreate(){
   xt.fixedToCamera = true;
   yt = game.add.text(32, 160, 'y', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
   yt.fixedToCamera = true;
+  tempo = game.add.text(32, 220, 'tempo ', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
+  tempo.fixedToCamera = true;
+  velocità = game.add.text(32, 240, 'velocità ', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
+  velocità.fixedToCamera = true;
 
   testCreate();
   pauseMenu();
@@ -150,7 +154,8 @@ function worldUpdate(){
   game.physics.arcade.overlap(playerHitbox, platformsDes, desWall, null, this);
   game.physics.arcade.overlap(Bones, platforms, elide, null, this);
   game.physics.arcade.overlap(Bones, platformsOver, elide, null, this);
-  game.physics.arcade.overlap(playerUp, Bones, kingHit, null, this);
+  game.physics.arcade.overlap(playerUp, Bones, boneHitPlayer, null, this);
+  game.physics.arcade.overlap(kingWolf, Bones, boneHitKing, null, this);
   game.physics.arcade.overlap(player, Ammos, collectAmmo, null, this);
   game.physics.arcade.overlap(player, Lives, heal, null, this);
 
@@ -168,6 +173,8 @@ function worldUpdate(){
   game.physics.arcade.collide(player, platformsDes);
   game.physics.arcade.collide(Wolves, platformsDes);
   game.physics.arcade.collide(WolvesP, platformsDes);
+  game.physics.arcade.collide(kingWolf, platforms);
+  game.physics.arcade.collide(kingWolf, platformsOver);
   platformOverCollide(); //find in Functions.js
 
   // HUD
@@ -199,8 +206,9 @@ function worldUpdate(){
 
   barGranny.cameraOffset.x = playerUp.body.position.x/32 + 3*m;
 
-  xt.text = 'x ' + playerUp.body.x/m;
-  yt.text = 'y ' + playerUp.body.y/m;
+  //xt.text = 'x ' + playerUp.body.x/m;
+  //yt.text = 'y ' + playerUp.body.y/m;
+
 
   wolvesBehave(Wolves); //find in Functions.js
   wolfPatrolBehave(WolvesP); //find in Functions.js
