@@ -14,6 +14,7 @@ var cheat2 = 0;
 var cheat3 = 0;
 var weaponImage;
 var level;
+var viewTop;
 
 function worldPreload(){
   game.load.image('bullet', 'assets/images/bullet.png');
