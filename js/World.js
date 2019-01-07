@@ -37,6 +37,7 @@ function worldPreload(){
   game.load.image('d1destroyed', 'assets/images/d1destroyed.png');
   game.load.image('kingWolf', 'assets/images/kingWolf.png');
   game.load.image('cappuccetto', 'assets/images/cappuccetto.png');
+  game.load.image('border', 'assets/images/border.png');
 };
 
 function worldCreate(){
@@ -136,6 +137,17 @@ function worldCreate(){
   tempo.fixedToCamera = true;
   velocità = game.add.text(32, 240, 'velocità ', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
   velocità.fixedToCamera = true;
+
+  borderTop = game.add.sprite(0, -150, 'border');
+  borderTop.fixedToCamera = true;
+  game.physics.arcade.enable(borderTop);
+  borderTop.enableBody = true;
+
+  borderBottom = game.add.sprite(0, 768, 'border');
+  borderBottom.fixedToCamera = true;
+  game.physics.arcade.enable(borderBottom);
+  borderBottom.enableBody = true;
+
 
   testCreate();
   pauseMenu();
