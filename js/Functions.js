@@ -242,6 +242,7 @@ function boneHitPlayer(player, bone) {
     bone.rimbalzo = 1;
     bone.body.velocity.x = - bone.body.velocity.x;
     bone.body.velocity.y = - bone.body.velocity.y;
+
   }
 };
 
@@ -315,9 +316,9 @@ function wolfKingShot(){
 
     bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((playerUp.y - kingWolf.y), 2))/500;
 
-    bone.body.velocity.x = -(kingWolf.x - playerUp.x)/bone.tempo;
+    bone.body.velocity.x = -(kingWolf.x - playerUp.x)/bone.tempo -1*Math.random() +1*Math.random();
     bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
-    kingShot = game.time.now + 1500;
+    kingShot = game.time.now + 2000*Math.random();
 
     xt.text = 'x ' + bone.body.velocity.x;
     yt.text = 'y ' + bone.body.velocity.y;
