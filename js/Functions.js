@@ -356,7 +356,7 @@ function wolfKingShot(){
     kingShot = game.time.now + 2000*Math.random();
 
     xt.text = 'x ' + bone.body.velocity.x;
-    yt.text = 'y ' + bone.body.velocity.y;
+    yt.text = 'y ' + borderTop.cameraOffset.y;
     tempo.text = 'tempo ' + bone.tempo;
     velocità.text = 'velocità ' + bone.tempo*500/bone.tempo;
   }

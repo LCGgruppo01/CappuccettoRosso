@@ -207,7 +207,7 @@ var GameLevel_2 = {
     if (playerUp.body.x >= 93*m && step == 0) {
       game.input.keyboard.removeKey(Phaser.Keyboard.UP);
     }
-    if (playerUp.body.x >= 97*m && step <= 2) {
+    if (playerUp.body.x >= 97*m && step <= 3) {
       game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
       game.input.keyboard.removeKey(Phaser.Keyboard.RIGHT);
       game.input.keyboard.removeKey(Phaser.Keyboard.DOWN);
@@ -218,13 +218,19 @@ var GameLevel_2 = {
       if (step <=1) {
         playerUp.frame = 0;
       }
-      if (playerUp.body.y <= 51*m && step == 0) {
-        game.camera.shake(shake, 1000);
-        shake = shake*0.95;
+      if (borderTop.cameraOffset.y <= -10 && step == 0) {
+        borderTop.cameraOffset.y = borderTop.cameraOffset.y + 3;
+        borderBottom.cameraOffset.y = borderBottom.cameraOffset.y - 2;
       }
       setTimeout(function(){
-        rockCutscene.body.immovable = false;
-      }, 500)
+        if (playerUp.body.y <= 51*m && step == 0) {
+          game.camera.shake(shake, 1000);
+          shake = shake*0.95;
+        }
+        setTimeout(function(){
+          rockCutscene.body.immovable = false;
+        }, 500)
+      }, 1000)
     }
 
     if (kingWolf.health <= 10){
@@ -232,13 +238,22 @@ var GameLevel_2 = {
       rock2.kill();
       game.camera.follow(playerUp, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.05);
     }
-    else if (step == 3){
+    else if (step == 4) {
       kingWolf.body.velocity.x = 0;
       cursors = game.input.keyboard.createCursorKeys();
       SPACE = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
       C = game.input.keyboard.addKey(Phaser.Keyboard.C);
       H = game.input.keyboard.addKey(Phaser.Keyboard.H);
       wolfKingShot();
+    }
+    else if (step == 3){
+      if (borderTop.cameraOffset.y <= -155) {
+        step = 4;
+      }
+      else {
+        borderTop.cameraOffset.y = borderTop.cameraOffset.y - 2;
+        borderBottom.cameraOffset.y = borderBottom.cameraOffset.y + 2;
+      }
     }
     else if(step == 2){
       kingWolf.body.velocity.x = 0;
