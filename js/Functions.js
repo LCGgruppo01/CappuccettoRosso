@@ -230,7 +230,7 @@ function collectMe2(player, memoryObj2){
   }
 };
 
-function kingHit(player, bone) {
+function boneHitPlayer(player, bone) {
   if (game.time.now > immunity && axeHit == true){
     playerUp.body.velocity.x = -1000;
     timeHit = game.time.now + 300;
@@ -239,8 +239,19 @@ function kingHit(player, bone) {
     bone.kill();
   }
   if (axeHit == false){
-    bone.body.velocity.x = - bone.body.velocity.x;
-    bone.body.velocity.y = - bone.body.velocity.y;
+    bone.body.velocity.x = - (playerUp.x - kingWolf.x)*1.5;
+    bone.body.velocity.y = - 350 + (playerUp.y - kingWolf.y);
+    bone.rimbalzo = 1;
+  }
+};
+
+function boneHitKing(player, bone) {
+  if (game.time.now > immunity && axeHit == true && bone.rimbalzo == 1){
+    kingWolf.body.velocity.x = -1000;
+    timeHit = game.time.now + 300;
+    immunity = game.time.now + 500;
+    kingWolf.damage(25);
+    bone.kill();
   }
 };
 // COLLIDE & OVERLAP functions end
@@ -260,7 +271,7 @@ function wolvesBehave(Wolves) {
    else{
      wolf.body.velocity.x = 0;
    }
-   
+
    if ((wolf.body.touching.left || wolf.body.touching.right) && wolf.body.touching.down){
      wolf.body.velocity.y = wolfJump;
     }
@@ -299,6 +310,7 @@ function wolfFrames(Wolves){
 function wolfKingShot(){
   if (game.time.now > kingShot) {
     bone = Bones.create(kingWolf.x, kingWolf.y, 'barGranny');
+    bone.rimbalzo = 0;
     bone.body.gravity.y = gravity;
     bone.body.velocity.x = (playerUp.x - kingWolf.x);
     bone.body.velocity.y = - 350 + (playerUp.y - kingWolf.y);

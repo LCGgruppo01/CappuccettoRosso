@@ -1,8 +1,8 @@
 var scene1;
 var timeWolves = 0;
 var wait = 0;
-var step = 0;
 var memoryObjCollect = 0;
+var step1 = 0;
 
 var GameLevel_1 = {
 
@@ -42,6 +42,8 @@ var GameLevel_1 = {
   },
 
   create: function() {
+    step1 = 0;
+
     skyBack = game.add.sprite(0, 0, 'skyBackground');
     skyBack.fixedToCamera = true;
 
@@ -156,8 +158,8 @@ var GameLevel_1 = {
     platformCreate(152,53,4);
     platformCreate(156,56,30);
     platformsDes.create(170*m, 52*m, 'd1');
-    wolfCreate(168,54);
-    wolfCreate(166,54);
+    //wolfCreate(168,54);
+    //wolfCreate(166,54);
 
     //cutscene
     kingWolf = game.add.sprite(178*m, 53*m, 'kingWolf');
@@ -251,11 +253,11 @@ var GameLevel_1 = {
           }
          }, 200);
         setTimeout(function(){
-          if (step == 0) {
+          if (step1 == 0) {
             kingWolf.body.velocity.x = -250;
           }
           if(kingWolf.body.x <= 176*m){
-            step = 1;
+            step1 = 1;
             cappuccetto.body.velocity.x = 250;
             kingWolf.body.velocity.x = 250;
           }

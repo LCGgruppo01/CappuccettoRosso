@@ -4,6 +4,7 @@ var gotAxe = 1;
 var changeWeapon = 0;
 var shake = 0.05;
 var kingShot = 0;
+var step2 = 0;
 
 var GameLevel_2 = {
 
@@ -19,9 +20,9 @@ var GameLevel_2 = {
 
   create: function() {
 
-    var step = 0;
+    step2 = 0;
     fucile = true;
-    
+
     worldCreate(); //find in World.js
     playerCreate(); //find in Player.js
 
@@ -116,6 +117,7 @@ var GameLevel_2 = {
     kingWolf = game.add.sprite(115*m, 55*m, 'kingWolf');
     game.physics.arcade.enable(kingWolf);
     kingWolf.enableBody = true;
+    kingWolf.health = 100;
     platformsDes.create(118*m, 54*m, 'd1');
     cappuccetto = game.add.sprite(121*m, 57*m, 'cappuccetto');
     game.physics.arcade.enable(cappuccetto);
@@ -143,10 +145,10 @@ var GameLevel_2 = {
     }
 
     //cutscene
-    if (playerUp.body.x >= 93*m && step == 0) {
+    if (playerUp.body.x >= 93*m && step2 <= 1) {
       game.input.keyboard.removeKey(Phaser.Keyboard.UP);
     }
-    if (playerUp.body.x >= 97*m && step <= 1) {
+    if (playerUp.body.x >= 97*m && step2 <= 1) {
       game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
       game.input.keyboard.removeKey(Phaser.Keyboard.RIGHT);
       game.input.keyboard.removeKey(Phaser.Keyboard.DOWN);
@@ -155,7 +157,7 @@ var GameLevel_2 = {
       playerUp.body.velocity.x = 0;
       playerUp.frame = 0;
       playerDown.frame = 0;
-      if (playerUp.body.y <= 51*m && step == 0) {
+      if (playerUp.body.y <= 51*m && step2 == 0) {
         game.camera.shake(shake, 1000);
         shake = shake*0.95;
       }
@@ -163,33 +165,44 @@ var GameLevel_2 = {
         rockCutscene.body.immovable = false;
       }, 500)
     }
-    if (playerUp.body.y >= 57*m && step == 0) {
+
+    if (playerUp.body.y >= 57*m && step2 == 0) {
       game.camera.follow();
       game.camera.x += 8;
     }
-    if (game.camera.x >= 107.5*m && step == 0) {
-      step = 1;
+    if (game.camera.x >= 107.5*m && step2 == 0) {
+      step2 = 1;
     }
-    if (step == 1) {
-      setTimeout(function(){
-        kingWolf.body.velocity.x = -250;
-      },200)
-      setTimeout(function(){
-        game.camera.x -= 8;
-      },550)
+
+    if (kingWolf.healt == 0) {
+      step2 = 3;
+      rock1.kill();
+      rock2.kill();
     }
-    if (game.camera.x <= 99.5*m && step == 1) {
-      rockCreate(94.2,48,1,11);
-      rockCreate(111.1,48,1,11);
-      step = 2;
-    }
-    if (step == 2){
+    else if (step2 == 2){
       kingWolf.body.velocity.x = 0;
       cursors = game.input.keyboard.createCursorKeys();
       SPACE = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
       C = game.input.keyboard.addKey(Phaser.Keyboard.C);
       H = game.input.keyboard.addKey(Phaser.Keyboard.H);
       wolfKingShot();
+    }
+    else if (game.camera.x <= 99.5*m && step2 == 1) {
+      rock1 = platforms.create(94.2, 48, '');
+      rock1.body.setSize(1, 11, 0, 0);
+      rock1.body.immovable = true;
+      rock2 = platforms.create(111.1, 48, '');
+      rock2.body.setSize(1, 11, 0, 0);
+      rock2.body.immovable = true;
+      step2 = 2;
+    }
+    else if (step2 == 1) {
+      setTimeout(function(){
+        kingWolf.body.velocity.x = -250;
+      },200)
+      setTimeout(function(){
+        game.camera.x -= 8;
+      },550)
     }
     render();
     wolvesBehave(Wolves); //find in Functions.js

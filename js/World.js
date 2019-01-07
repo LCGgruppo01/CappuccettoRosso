@@ -150,7 +150,6 @@ function worldUpdate(){
   game.physics.arcade.overlap(playerHitbox, platformsDes, desWall, null, this);
   game.physics.arcade.overlap(Bones, platforms, elide, null, this);
   game.physics.arcade.overlap(Bones, platformsOver, elide, null, this);
-  game.physics.arcade.overlap(playerUp, Bones, kingHit, null, this);
   game.physics.arcade.overlap(player, Ammos, collectAmmo, null, this);
   game.physics.arcade.overlap(player, Lives, heal, null, this);
 
@@ -168,6 +167,8 @@ function worldUpdate(){
   game.physics.arcade.collide(player, platformsDes);
   game.physics.arcade.collide(Wolves, platformsDes);
   game.physics.arcade.collide(WolvesP, platformsDes);
+  game.physics.arcade.collide(playerUp, Bones, boneHitPlayer, null, this);
+  game.physics.arcade.collide(kingWolf, Bones, boneHitKing, null, this);
   platformOverCollide(); //find in Functions.js
 
   // HUD
