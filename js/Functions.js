@@ -521,6 +521,9 @@ function pauseMenu() {
   game.input.onDown.add(unpaused);
   //aggiungo per fixare un bug
   onPause = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
+  restart = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
+  restartLevel = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
+  mainMenu = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
 };
 
 function paused() {
@@ -530,9 +533,22 @@ function paused() {
     setTimeout(function(){
       game.paused = true;
      }, 20);
-    onPause = game.add.text(500, 350, 'Esci Dalla Siesta', { font: '24px Arial', fill: '#fff' });
-    onPause.inputEnabled = true;
-    onPause.fixedToCamera = true;
+     onPause = game.add.text(500, 350, 'Esci Dalla Siesta', { font: '24px Arial', fill: '#fff' });
+     onPause.inputEnabled = true;
+     onPause.fixedToCamera = true;
+
+     restart = game.add.text(500, 400, 'restart', { font: '24px Arial', fill: '#fff' });
+     restart.inputEnabled = true;
+     restart.fixedToCamera = true;
+
+     restartLevel = game.add.text(500, 450, 'restart level', { font: '24px Arial', fill: '#fff' });
+     restartLevel.inputEnabled = true;
+     restartLevel.fixedToCamera = true;
+
+     mainMenu = game.add.text(500, 500, 'main menu', { font: '24px Arial', fill: '#fff' });
+     mainMenu.inputEnabled = true;
+     mainMenu.fixedToCamera = true;
+
   }
 };
 
@@ -541,6 +557,51 @@ function unpaused(event){
     onPause.events.onInputUp.add(function(){
       game.paused = false;
       onPause.text = '';
+      restart.text = '';
+      restartLevel.text = '';
+      mainMenu.text = '';
+    });
+
+    restart.events.onInputUp.add(function(){
+      game.paused = false;
+      onPause.text = '';
+      restart.text = '';
+      restartLevel.text = '';
+      mainMenu.text = '';
+      if (level == 1) {
+        this.game.state.start('GameLevel_1');
+      }else if (level == 2) {
+        this.game.state.start('GameLevel_2');
+      }
+    });
+
+    restartLevel.events.onInputUp.add(function(){
+      game.paused = false;
+      onPause.text = '';
+      restart.text = '';
+      restartLevel.text = '';
+      mainMenu.text = '';
+      if (level == 1) {
+        this.game.state.start('GameLevel_1');
+        spawnX = 4*m;
+        spawnY = 54*m;
+      }else if (level == 2) {
+        this.game.state.start('GameLevel_2');
+        spawnX = 6*m;
+        spawnY = 5*m;
+      }
+    });
+
+    mainMenu.events.onInputUp.add(function(){
+      game.paused = false;
+      onPause.text = '';
+      restart.text = '';
+      restartLevel.text = '';
+      mainMenu.text = '';
+      this.game.state.start('GameStart');
+      spawnX = 4*m;
+      spawnY = 54*m;
+      fucile = false;
     });
   }
 };

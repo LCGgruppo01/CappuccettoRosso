@@ -19,9 +19,10 @@ var GameLevel_2 = {
 
   create: function() {
 
+    level = 2;
     var step = 0;
     fucile = true;
-    
+
     worldCreate(); //find in World.js
     playerCreate(); //find in Player.js
 
