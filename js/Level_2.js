@@ -15,6 +15,9 @@ var GameLevel_2 = {
     game.world.width=126*m;
     game.world.height=64*m;
     game.load.image('secretHall', 'assets/images/secretHall.png');
+    game.load.image('memoryObj', 'assets/images/memory_object.png');
+    game.load.image('fucile', 'assets/images/fucile.png');
+    game.load.image('open', 'http://1.bp.blogspot.com/-a8aV13i0t9Y/Vi4LTodbxuI/AAAAAAAABdM/YPArwcG7Gx8/s1600/cappuccetto-rosso-e-il-lupo.jpg');
 
     worldPreload(); //find in World.js
     playerPreload(); //find in Player.js
@@ -24,7 +27,22 @@ var GameLevel_2 = {
 
     level = 2;
     var step = 0;
-    fucile = true;
+    ammoCount = 5;
+
+    if (spawnY > 27*m) {
+      fucile = true;
+    }else {
+      fucile = false;
+      scene3 = game.add.sprite(0, 0, 'open');
+      scene3.tint = 0x6b16ff;
+      scene3.alpha = 0;
+      scene3.scale.setTo(0.6,0.6);
+      scene3.fixedToCamera = true;
+
+      fucileTerra = game.add.sprite(13*m, 8*m, 'fucile');
+      game.physics.arcade.enable(fucileTerra);
+      fucileTerra.enableBody = true;
+    }
 
     worldCreate(); //find in World.js
     playerCreate(); //find in Player.js
@@ -70,6 +88,17 @@ var GameLevel_2 = {
     rockCreate(17,41,13,1);
     rockCreate(29,35,1,6);
     rockCreate(16,35,13,1);
+    scene4 = game.add.sprite(0, 0, 'open');
+    scene4.tint = 0x1a16ff;
+    scene4.alpha = 0;
+    scene4.scale.setTo(0.6,0.6);
+    scene4.fixedToCamera = true;
+
+    memoryObj4 = game.add.sprite(24*m, 40*m, 'memoryObj');
+    memoryObj4.tint = 0x1a53ff;
+    game.physics.arcade.enable(memoryObj4);
+    memoryObj4.enableBody = true;
+
     //Vertical 3
     platformCreate(13,42,3);
     rockCreate(9,41,1,11);
@@ -138,6 +167,10 @@ var GameLevel_2 = {
     worldUpdate(); //find in World.js
     playerUpdate(); //find in Player.js
 
+    game.physics.arcade.overlap(playerUp, memoryObj4, collectMe4, null, this);
+    game.physics.arcade.overlap(playerUp, fucileTerra, collectMe3, null, this);
+
+    //secretHall
     if((playerUp.x > 17*m && playerUp.x < 29*m) && (playerUp.y > 35*m && playerUp.y < 41*m)){
       secretHall.alpha = secretHall.alpha*0.98;
     }else{

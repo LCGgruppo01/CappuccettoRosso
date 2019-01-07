@@ -186,17 +186,17 @@ var GameLevel_1 = {
     }
 
   //scenes
-  if (memoryObjCollect <= 0){
+
     scene1 = game.add.sprite(0, 0, 'open');
     scene1.alpha = 0;
     scene1.scale.setTo(0.6,0.6);
     scene1.fixedToCamera = true;
 
-    memoryObj1 = game.add.sprite(33*m, 57*m, 'memoryObj');
+    memoryObj1 = game.add.sprite(86*m, 51*m, 'memoryObj');
     game.physics.arcade.enable(memoryObj1);
     memoryObj1.enableBody = true;
-  }
-  if (memoryObjCollect <= 1){
+
+
     scene2 = game.add.sprite(0, 0, 'open');
     scene2.tint = 0x1a53ff;
     scene2.alpha = 0;
@@ -207,7 +207,7 @@ var GameLevel_1 = {
     memoryObj2.tint = 0x1a53ff;
     game.physics.arcade.enable(memoryObj2);
     memoryObj2.enableBody = true;
-  }
+
 
   platformsOver.setAll('alpha','0');
   platforms.setAll('alpha','0');
