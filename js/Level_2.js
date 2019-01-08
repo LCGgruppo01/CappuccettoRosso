@@ -204,7 +204,7 @@ var GameLevel_2 = {
     wolfKingHearts();
 
     //cutscene
-    if (playerUp.body.x >= 93*m && step2 <= 1) {
+    if (playerUp.body.x >= 93*m && step <= 1) {
       game.input.keyboard.removeKey(Phaser.Keyboard.UP);
     }
     if (playerUp.body.x >= 97*m && step <= 3) {
