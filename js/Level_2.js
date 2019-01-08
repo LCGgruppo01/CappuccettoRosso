@@ -17,7 +17,7 @@ var GameLevel_2 = {
     game.load.image('secretHall', 'assets/images/secretHall.png');
     game.load.image('memoryObj', 'assets/images/memory_object.png');
     game.load.image('fucile', 'assets/images/fucile.png');
-    game.load.image('open', 'http://1.bp.blogspot.com/-a8aV13i0t9Y/Vi4LTodbxuI/AAAAAAAABdM/YPArwcG7Gx8/s1600/cappuccetto-rosso-e-il-lupo.jpg');
+    game.load.image('scena4', 'assets/scene/cappuccetto alla finestra.jpg');
     game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
 
     worldPreload(); //find in World.js
@@ -40,10 +40,8 @@ var GameLevel_2 = {
       fucileTerra.alpha = 0;
     }else {
       fucile = false;
-      scene3 = game.add.sprite(0, 0, 'open');
-      scene3.tint = 0x6b16ff;
+      scene3 = game.add.sprite(0, 0, 'scena3');
       scene3.alpha = 0;
-      scene3.scale.setTo(0.6,0.6);
       scene3.fixedToCamera = true;
     }
 
@@ -92,10 +90,8 @@ var GameLevel_2 = {
     rockCreate(17,41,13,1);
     rockCreate(29,35,1,6);
     rockCreate(16,35,13,1);
-    scene4 = game.add.sprite(0, 0, 'open');
-    scene4.tint = 0x1a16ff;
+    scene4 = game.add.sprite(0, 0, 'scena4');
     scene4.alpha = 0;
-    scene4.scale.setTo(0.6,0.6);
     scene4.fixedToCamera = true;
 
     memoryObj4 = game.add.sprite(24*m, 40*m, 'memoryObj');

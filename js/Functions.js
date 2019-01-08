@@ -207,7 +207,9 @@ function collectMe1(player, memoryObj1){
     bar.alpha = 0;
     barGranny.alpha = 0;
     Hearts.alpha = 0;
-    d1Destroyed.alpha = 0;
+    if(spawnX < 98*m){
+      d1Destroyed.alpha = 0;
+    }
     memoryObj1.kill();
     game.paused = true;
     game.input.onDown.add(unpauseImage, this);
@@ -700,7 +702,9 @@ function unpauseImage(event){
   bar.alpha = 1;
   barGranny.alpha = 1;
   Hearts.alpha = 1;
-  d1Destroyed.alpha = 1;
+  if(spawnX < 98*m){
+    d1Destroyed.alpha = 1;
+  }
   scene1.alpha = 0;
   scene2.alpha = 0;
 };
@@ -713,7 +717,9 @@ function unpauseImage2(event){
   bar.alpha = 1;
   barGranny.alpha = 1;
   Hearts.alpha = 1;
-  scene3.alpha = 0;
+  if (spawnY <= 25*m) {
+    scene3.alpha = 0;
+  }
   scene4.alpha = 0;
 };
 
