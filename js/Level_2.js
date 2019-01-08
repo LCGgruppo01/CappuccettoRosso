@@ -146,8 +146,7 @@ var GameLevel_2 = {
     rockCreate(93,58,31,1);
     rockCreate(123,48,1,11);
     //bossFight
-    platformCreate(97,55,3);
-    platformCreate(107,55,3);
+    platformCreate(101,55,3);
     //cutscene
     rockCutscene = platforms.create(93*m, 48*m, '');
     rockCutscene.body.setSize(9*m, 1*m, 0, 0);
@@ -215,6 +214,7 @@ var GameLevel_2 = {
       game.input.keyboard.removeKey(Phaser.Keyboard.DOWN);
       game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
       game.input.keyboard.removeKey(Phaser.Keyboard.H);
+      game.input.keyboard.removeKey(Phaser.Keyboard.S);
       playerUp.body.velocity.x = 0;
       playerDown.frame = 0;
       if (step <=1) {
@@ -246,6 +246,7 @@ var GameLevel_2 = {
       SPACE = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
       C = game.input.keyboard.addKey(Phaser.Keyboard.C);
       H = game.input.keyboard.addKey(Phaser.Keyboard.H);
+      CTRL = game.input.keyboard.addKey(Phaser.Keyboard.S);
       wolfKingShot();
     }
     else if (step == 3){
@@ -310,11 +311,16 @@ var GameLevel_2 = {
     else if (game.camera.x >= 107.5*m && step == 0) {
       step = 1;
     }
-    else if (playerUp.body.y >= 57*m && step == 0) {
+    else if (playerUp.body.y >= 56*m && step == 0) {
       game.camera.follow();
       game.camera.x += 8;
     }
 
+    if (kingWolf.health <= 0) {
+      Bones.forEach(function(bone){
+        bone.kill();
+      });
+    }
     render();
     wolvesBehave(Wolves); //find in Functions.js
 
