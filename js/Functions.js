@@ -730,8 +730,8 @@ function nextLevelImg(event){
   scene2.alpha = 0;
   this.game.state.start('GameLevel_2');
   playerUp.health = 100;
-  spawnX = 28*m;
-  spawnY = 8*m;
+  spawnX = 6*m;
+  spawnY = 5*m;
 };
 
 function testCreate(){

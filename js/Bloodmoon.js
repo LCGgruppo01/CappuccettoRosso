@@ -7,6 +7,7 @@ var ScenaBloodmoon = {
 
   create: function() {
     scena = game.add.sprite(0, 0, 'scena');
+    scena.inputEnabled = true;
     scena.events.onInputUp.add(imageClick);
   },
 

@@ -53,7 +53,7 @@ function worldCreate(){
   cursors = game.input.keyboard.createCursorKeys();
   SPACE=game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
   C=game.input.keyboard.addKey(Phaser.Keyboard.C);
-  CTRL=game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
+  CTRL=game.input.keyboard.addKey(Phaser.Keyboard.S);
 
   // WORLD BACKGROUND start
 
