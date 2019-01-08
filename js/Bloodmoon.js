@@ -7,13 +7,16 @@ var ScenaBloodmoon = {
 
   create: function() {
     scena = game.add.sprite(0, 0, 'scena');
-    scena.events.onInputUp.add(imageClick2);
+    scena.events.onInputUp.add(imageClick);
   },
 
-};
+  update: function() {
 
-function imageClick2() {
-    this.game.state.start('GameLevel_1');
-};
+  },
 
+  imageClick: function(pointer) {
+      this.game.state.start('GameLevel_1');
+  }
+
+};
 game.state.add('ScenaBloodmoon', ScenaBloodmoon);
