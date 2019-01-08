@@ -146,7 +146,9 @@ var GameLevel_2 = {
     rockCreate(93,58,31,1);
     rockCreate(123,48,1,11);
     //bossFight
-    platformCreate(101,55,3);
+    platformCreate(97,55,2);
+    platformCreate(100,53,3);
+    platformCreate(104,55,2);
     //cutscene
     rockCutscene = platforms.create(93*m, 48*m, '');
     rockCutscene.body.setSize(9*m, 1*m, 0, 0);
@@ -176,7 +178,6 @@ var GameLevel_2 = {
     cappuccetto = game.add.sprite(121*m, 57*m, 'cappuccetto');
     game.physics.arcade.enable(cappuccetto);
     cappuccetto.enableBody = true;
-
   },
 
   update: function() {
@@ -203,6 +204,13 @@ var GameLevel_2 = {
     }
 
     wolfKingHearts();
+
+    if (kingWolf.health == 75) {
+      kingWolf.body.velocity.x = -500;
+      if (kingWolf.x < 92*m) {
+        kingWolf.body.velocity.x = 0;
+      }
+    }
 
     //cutscene
     if (playerUp.body.x >= 93*m && step <= 1) {
