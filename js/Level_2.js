@@ -146,6 +146,8 @@ var GameLevel_2 = {
     rockCreate(93,58,31,1);
     rockCreate(123,48,1,11);
     //bossFight
+    platformCreate(97,55,3);
+    platformCreate(107,55,3);
     //cutscene
     rockCutscene = platforms.create(93*m, 48*m, '');
     rockCutscene.body.setSize(9*m, 1*m, 0, 0);
@@ -204,10 +206,10 @@ var GameLevel_2 = {
     wolfKingHearts();
 
     //cutscene
-    if (playerUp.body.x >= 93*m && step2 <= 1) {
+    if (playerUp.body.x >= 93*m && step <= 1) {
       game.input.keyboard.removeKey(Phaser.Keyboard.UP);
     }
-    if (playerUp.body.x >= 97*m && step <= 3) {
+    if (playerUp.body.x >= 95.5*m && step <= 3) {
       game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
       game.input.keyboard.removeKey(Phaser.Keyboard.RIGHT);
       game.input.keyboard.removeKey(Phaser.Keyboard.DOWN);
@@ -259,7 +261,12 @@ var GameLevel_2 = {
       kingWolf.body.velocity.x = 0;
       setTimeout(function(){
         if (fristBone == 0) {
-          wolfKingShot();
+          bone = Bones.create(kingWolf.x, kingWolf.y, 'barGranny');
+          bone.rimbalzo = 0;
+          bone.body.gravity.y = gravity;
+          bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
+          bone.body.velocity.x = -(kingWolf.x - playerUp.x)/bone.tempo;
+          bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
           fristBone = 1;
         }
       }, 1100);
