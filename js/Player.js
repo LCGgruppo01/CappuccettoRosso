@@ -12,8 +12,8 @@ var bulletN = 5;
 
 function playerPreload(){
 
-  game.load.spritesheet('grannyUp', 'assets/images/GRANNYup67x75h.png', 67, 75);
-  game.load.spritesheet('grannyDown', 'assets/images/GRANNYdown67x75h.png', 67, 75);
+  game.load.spritesheet('grannyUp', 'assets/images/GRANNYup100x112h.png', 100, 112);
+  game.load.spritesheet('grannyDown', 'assets/images/GRANNYdown100x112h.png', 100, 112);
 
 };
 
@@ -35,8 +35,8 @@ function playerCreate(){
   player.setAll('body.collideWorldBounds', true);
   player.setAll('body.bounce.y', bounce);
   player.setAll('body.gravity.y', gravity);
-  playerUp.body.setSize(30, 60, 15, 15);
-  playerDown.body.setSize(30, 60, 15, 15);
+  playerUp.body.setSize(49, 91, 23, 21);
+  playerDown.body.setSize(49, 91, 23, 21);
 
 
   //player HEALTH

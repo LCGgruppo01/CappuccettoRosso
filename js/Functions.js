@@ -173,7 +173,7 @@ function checkpointHit(player, checkpoint){
 
 function platformOverCollide (){
   platformsOver.forEach(function(platform) {
-    if(playerUp.body.y + 50 - platform.body.y <= 0){
+    if(playerUp.body.y + 80 - platform.body.y <= 0){
       game.physics.arcade.collide(player, platform);
     }
   })
@@ -557,9 +557,9 @@ function playerAnimationUp(){
 
 function changeHitbox() {
   if (axeHit == false) {
-    playerHitbox.body.setSize(40, 60, 0, 0);
+    playerHitbox.body.setSize(40, 91, 0, 0);
     if (position == "rightt") {
-      playerHitbox.body.x = playerUp.body.x + 30;
+      playerHitbox.body.x = playerUp.body.x + 49;
     }else if (position == "leftt") {
       playerHitbox.body.x = playerUp.body.x - 40;
     }
