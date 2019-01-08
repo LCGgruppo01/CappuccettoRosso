@@ -53,7 +53,7 @@ function worldCreate(){
   cursors = game.input.keyboard.createCursorKeys();
   SPACE=game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
   C=game.input.keyboard.addKey(Phaser.Keyboard.C);
-  CTRL=game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
+  CTRL=game.input.keyboard.addKey(Phaser.Keyboard.S);
 
   // WORLD BACKGROUND start
 
@@ -167,7 +167,6 @@ function worldUpdate(){
   game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
   game.physics.arcade.overlap(playerHitbox, platformsDes, desWall, null, this);
   game.physics.arcade.overlap(Bones, platforms, elide, null, this);
-  game.physics.arcade.overlap(Bones, platformsOver, elide, null, this);
   game.physics.arcade.overlap(playerUp, Bones, boneHitPlayer, null, this);
   game.physics.arcade.overlap(kingWolf, Bones, boneHitKing, null, this);
   game.physics.arcade.overlap(player, Ammos, collectAmmo, null, this);
@@ -179,6 +178,7 @@ function worldUpdate(){
   game.physics.arcade.collide(Lives, platforms);
   game.physics.arcade.collide(playerUp, Wolves, wolfHit, null, this);
   game.physics.arcade.collide(playerUp, WolvesP, wolfHit, null, this);
+  game.physics.arcade.collide(playerUp, kingWolf, wolfHit, null, this);
   game.physics.arcade.collide(Wolves, platformsOver);
   game.physics.arcade.collide(Ammos, platformsOver);
   game.physics.arcade.collide(Lives, platformsOver);
@@ -188,7 +188,6 @@ function worldUpdate(){
   game.physics.arcade.collide(Wolves, platformsDes);
   game.physics.arcade.collide(WolvesP, platformsDes);
   game.physics.arcade.collide(kingWolf, platforms);
-  game.physics.arcade.collide(kingWolf, platformsOver);
   platformOverCollide(); //find in Functions.js
 
   // HUD

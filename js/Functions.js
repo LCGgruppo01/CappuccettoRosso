@@ -173,7 +173,7 @@ function checkpointHit(player, checkpoint){
 
 function platformOverCollide (){
   platformsOver.forEach(function(platform) {
-    if(playerUp.body.y + 50 - platform.body.y <= 0){
+    if(playerUp.body.y + 80 - platform.body.y <= 0){
       game.physics.arcade.collide(player, platform);
     }
   })
@@ -207,7 +207,9 @@ function collectMe1(player, memoryObj1){
     bar.alpha = 0;
     barGranny.alpha = 0;
     Hearts.alpha = 0;
-    d1Destroyed.alpha = 0;
+    if(spawnX < 98*m){
+      d1Destroyed.alpha = 0;
+    }
     memoryObj1.kill();
     game.paused = true;
     game.input.onDown.add(unpauseImage, this);
@@ -350,12 +352,24 @@ function wolfKingShot(){
     bone = Bones.create(kingWolf.x, kingWolf.y, 'barGranny');
     bone.rimbalzo = 0;
     bone.body.gravity.y = gravity;
+    if (player.y >= kingWolf.y) {
+      bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
 
-    bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((playerUp.y - kingWolf.y), 2))/500;
-    bone.body.velocity.x = -(kingWolf.x - playerUp.x)/bone.tempo -1*Math.random() +1*Math.random();
-    bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
-    kingShot = game.time.now + 2000*Math.random();
+      bone.body.velocity.x = -(kingWolf.x - playerUp.x)/bone.tempo;
+      bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
+      kingShot = game.time.now + 2000*Math.random();
+    }else if (player.y <= kingWolf.y) {
+      bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
 
+      bone.body.velocity.x = -500;
+      bone.body.velocity.y = -Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + 10*Math.pow((kingWolf.y - playerUp.y), 2))/1.5; //(Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
+      kingShot = game.time.now + 2000*Math.random();
+    }
+
+    xt.text = 'x ' + bone.body.velocity.x;
+    yt.text = 'y ' + bone.body.velocity.y;
+    tempo.text = 'tempo ' + bone.tempo;
+    velocità.text = 'velocità ' + bone.tempo*500/bone.tempo;
   }
 };
 
@@ -552,9 +566,9 @@ function playerAnimationUp(){
 
 function changeHitbox() {
   if (axeHit == false) {
-    playerHitbox.body.setSize(40, 60, 0, 0);
+    playerHitbox.body.setSize(40, 91, 0, 0);
     if (position == "rightt") {
-      playerHitbox.body.x = playerUp.body.x + 30;
+      playerHitbox.body.x = playerUp.body.x + 49;
     }else if (position == "leftt") {
       playerHitbox.body.x = playerUp.body.x - 40;
     }
@@ -695,7 +709,9 @@ function unpauseImage(event){
   bar.alpha = 1;
   barGranny.alpha = 1;
   Hearts.alpha = 1;
-  d1Destroyed.alpha = 1;
+  if(spawnX < 98*m){
+    d1Destroyed.alpha = 1;
+  }
   scene1.alpha = 0;
   scene2.alpha = 0;
 };
@@ -708,7 +724,9 @@ function unpauseImage2(event){
   bar.alpha = 1;
   barGranny.alpha = 1;
   Hearts.alpha = 1;
-  scene3.alpha = 0;
+  if (spawnY <= 25*m) {
+    scene3.alpha = 0;
+  }
   scene4.alpha = 0;
 };
 
@@ -725,8 +743,8 @@ function nextLevelImg(event){
   scene2.alpha = 0;
   this.game.state.start('GameLevel_2');
   playerUp.health = 100;
-  spawnX = 28*m;
-  spawnY = 8*m;
+  spawnX = 6*m;
+  spawnY = 5*m;
 };
 
 function testCreate(){

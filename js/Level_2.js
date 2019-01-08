@@ -17,7 +17,7 @@ var GameLevel_2 = {
     game.load.image('secretHall', 'assets/images/secretHall.png');
     game.load.image('memoryObj', 'assets/images/memory_object.png');
     game.load.image('fucile', 'assets/images/fucile.png');
-    game.load.image('open', 'http://1.bp.blogspot.com/-a8aV13i0t9Y/Vi4LTodbxuI/AAAAAAAABdM/YPArwcG7Gx8/s1600/cappuccetto-rosso-e-il-lupo.jpg');
+    game.load.image('scena4', 'assets/scene/cappuccetto alla finestra.jpg');
     game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
 
     worldPreload(); //find in World.js
@@ -40,10 +40,8 @@ var GameLevel_2 = {
       fucileTerra.alpha = 0;
     }else {
       fucile = false;
-      scene3 = game.add.sprite(0, 0, 'open');
-      scene3.tint = 0x6b16ff;
+      scene3 = game.add.sprite(0, 0, 'scena3');
       scene3.alpha = 0;
-      scene3.scale.setTo(0.6,0.6);
       scene3.fixedToCamera = true;
     }
 
@@ -92,10 +90,8 @@ var GameLevel_2 = {
     rockCreate(17,41,13,1);
     rockCreate(29,35,1,6);
     rockCreate(16,35,13,1);
-    scene4 = game.add.sprite(0, 0, 'open');
-    scene4.tint = 0x1a16ff;
+    scene4 = game.add.sprite(0, 0, 'scena4');
     scene4.alpha = 0;
-    scene4.scale.setTo(0.6,0.6);
     scene4.fixedToCamera = true;
 
     memoryObj4 = game.add.sprite(24*m, 40*m, 'memoryObj');
@@ -146,6 +142,9 @@ var GameLevel_2 = {
     rockCreate(93,58,31,1);
     rockCreate(123,48,1,11);
     //bossFight
+    platformCreate(97,55,2);
+    platformCreate(100,53,3);
+    platformCreate(104,55,2);
     //cutscene
     rockCutscene = platforms.create(93*m, 48*m, '');
     rockCutscene.body.setSize(9*m, 1*m, 0, 0);
@@ -175,7 +174,6 @@ var GameLevel_2 = {
     cappuccetto = game.add.sprite(121*m, 57*m, 'cappuccetto');
     game.physics.arcade.enable(cappuccetto);
     cappuccetto.enableBody = true;
-
   },
 
   update: function() {
@@ -203,16 +201,24 @@ var GameLevel_2 = {
 
     wolfKingHearts();
 
+    if (kingWolf.health == 75) {
+      kingWolf.body.velocity.x = -500;
+      if (kingWolf.x < 92*m) {
+        kingWolf.body.velocity.x = 0;
+      }
+    }
+
     //cutscene
     if (playerUp.body.x >= 93*m && step <= 1) {
       game.input.keyboard.removeKey(Phaser.Keyboard.UP);
     }
-    if (playerUp.body.x >= 97*m && step <= 3) {
+    if (playerUp.body.x >= 95.5*m && step <= 3) {
       game.input.keyboard.removeKey(Phaser.Keyboard.LEFT);
       game.input.keyboard.removeKey(Phaser.Keyboard.RIGHT);
       game.input.keyboard.removeKey(Phaser.Keyboard.DOWN);
       game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
       game.input.keyboard.removeKey(Phaser.Keyboard.H);
+      game.input.keyboard.removeKey(Phaser.Keyboard.S);
       playerUp.body.velocity.x = 0;
       playerDown.frame = 0;
       if (step <=1) {
@@ -244,6 +250,7 @@ var GameLevel_2 = {
       SPACE = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
       C = game.input.keyboard.addKey(Phaser.Keyboard.C);
       H = game.input.keyboard.addKey(Phaser.Keyboard.H);
+      CTRL = game.input.keyboard.addKey(Phaser.Keyboard.S);
       wolfKingShot();
     }
     else if (step == 3){
@@ -259,7 +266,12 @@ var GameLevel_2 = {
       kingWolf.body.velocity.x = 0;
       setTimeout(function(){
         if (fristBone == 0) {
-          wolfKingShot();
+          bone = Bones.create(kingWolf.x, kingWolf.y, 'barGranny');
+          bone.rimbalzo = 0;
+          bone.body.gravity.y = gravity;
+          bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
+          bone.body.velocity.x = -(kingWolf.x - playerUp.x)/bone.tempo;
+          bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
           fristBone = 1;
         }
       }, 1100);
@@ -303,11 +315,16 @@ var GameLevel_2 = {
     else if (game.camera.x >= 107.5*m && step == 0) {
       step = 1;
     }
-    else if (playerUp.body.y >= 57*m && step == 0) {
+    else if (playerUp.body.y >= 56*m && step == 0) {
       game.camera.follow();
       game.camera.x += 8;
     }
 
+    if (kingWolf.health <= 0) {
+      Bones.forEach(function(bone){
+        bone.kill();
+      });
+    }
     render();
     wolvesBehave(Wolves); //find in Functions.js
 
