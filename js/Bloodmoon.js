@@ -11,6 +11,10 @@ var ScenaBloodmoon = {
     scena.events.onInputUp.add(imageClick2);
   },
 
+  update: function() {
+
+  },
+
 };
 
 function imageClick2() {
