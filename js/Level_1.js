@@ -31,7 +31,7 @@ var GameLevel_1 = {
     game.load.image('tutorialSpace', 'assets/images/tutorial_space.png');
     game.load.image('memoryObj', 'assets/images/memory_object.png');
 
-    game.load.image('open', 'http://1.bp.blogspot.com/-a8aV13i0t9Y/Vi4LTodbxuI/AAAAAAAABdM/YPArwcG7Gx8/s1600/cappuccetto-rosso-e-il-lupo.jpg');
+    game.load.image('scena1', 'assets/scene/cappuccetto nel bosco.jpg');
 
     game.load.image('livello1', 'assets/images/livello1.png');
     game.load.image('livello1parte2', 'assets/images/livello1parte2 .png');
@@ -189,9 +189,8 @@ var GameLevel_1 = {
 
   //scenes
 
-    scene1 = game.add.sprite(0, 0, 'open');
+    scene1 = game.add.sprite(0, 0, 'scena1');
     scene1.alpha = 0;
-    scene1.scale.setTo(0.6,0.6);
     scene1.fixedToCamera = true;
 
     memoryObj1 = game.add.sprite(86*m, 51*m, 'memoryObj');
@@ -199,10 +198,9 @@ var GameLevel_1 = {
     memoryObj1.enableBody = true;
 
 
-    scene2 = game.add.sprite(0, 0, 'open');
+    scene2 = game.add.sprite(0, 0, 'scena1');
     scene2.tint = 0x1a53ff;
     scene2.alpha = 0;
-    scene2.scale.setTo(0.6,0.6);
     scene2.fixedToCamera = true;
 
     memoryObj2 = game.add.sprite(182*m, 55*m, 'memoryObj');
