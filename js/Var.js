@@ -12,8 +12,8 @@ var playerVelocity = 300;
 var playerJump = -400;
 var slowDownFactor = 0.87;
 var bulletVelocity = 500;
-var spawnX = 89*m;
-var spawnY = 46*m;
+var spawnX = 4*m;
+var spawnY = 56*m;
 
 //WOLF var
 var wolfJump = -250;
