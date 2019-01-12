@@ -27,4 +27,7 @@ if (player.y >= kingWolf.y) {
   kingShot = game.time.now + 2000*Math.random();
 }
 
+bone.body.velocity.x = -Math.sqrt((gravity*Math.abs(kingWolf.x + playerUp.x))/(2*Math.sqrt(1+(Math.pow((kingWolf.y - playerUp.y),2)/Math.pow((kingWolf.x - playerUp.x),2)))))/4;
+bone.body.velocity.y = -Math.sqrt((gravity*Math.abs(kingWolf.x + playerUp.x))/(2*Math.sqrt(1+(Math.pow((kingWolf.y - playerUp.y),2)/Math.pow((kingWolf.x - playerUp.x),2)))))*(((kingWolf.y - playerUp.y)/(kingWolf.x + playerUp.x)+(Math.sqrt(1+(Math.pow((kingWolf.y - playerUp.y),2)/Math.pow((kingWolf.x - playerUp.x),2))))*(Math.sign(playerUp.x + kingWolf.x))))/4;
+
 //SHOOTING end
