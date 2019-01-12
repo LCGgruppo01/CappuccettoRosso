@@ -18,7 +18,7 @@ var ScenaBloodmoon = {
 };
 
 function imageClick2() {
-    this.game.state.start('GameLevel_2');
-}
+    this.game.state.start('GameLevel_1');
+};
 
 game.state.add('ScenaBloodmoon', ScenaBloodmoon);
