@@ -13,7 +13,7 @@ var GameLevel_2 = {
   preload: function() {
 
     game.world.width=126*m;
-    game.world.height=64*m;
+    game.world.height=60*m;
     game.load.image('secretHall', 'assets/images/secretHall.png');
     game.load.image('memoryObj', 'assets/images/memory_object.png');
     game.load.image('fucile', 'assets/images/fucile.png');
@@ -223,8 +223,8 @@ var GameLevel_2 = {
       playerUp.body.velocity.x = 0;
       playerDown.frame = 0;
       gotAxe = 1;
-      if (step <=1) {
-        playerUp.frame = 6;
+      if (step <= 3 && (fristBone != 1 || fristBone != 2 || fristBone != 3)) {
+        playerUp.animations.stop(null, true);
       }
       if (borderTop.cameraOffset.y <= -10 && step == 0) {
         borderTop.cameraOffset.y = borderTop.cameraOffset.y + 3;
@@ -279,7 +279,8 @@ var GameLevel_2 = {
       }, 1100);
       setTimeout(function(){
         if (fristBone == 1) {
-          axeHit = false
+          fristBone == 1.5;
+          axeHit = false;
           changeHitbox();
           playerUp.animations.play('rightAxeChop');
           bone.body.velocity.x = - bone.body.velocity.x;
@@ -289,6 +290,7 @@ var GameLevel_2 = {
       }, 2640);
       setTimeout(function(){
         if (fristBone == 2) {
+          fristBone == 2.5;
           kingWolf.damage(25);
           flashDamage();
           bone.kill();
