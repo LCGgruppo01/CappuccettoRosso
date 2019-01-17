@@ -222,6 +222,7 @@ var GameLevel_2 = {
       game.input.keyboard.removeKey(Phaser.Keyboard.S);
       playerUp.body.velocity.x = 0;
       playerDown.frame = 0;
+      gotAxe = 1;
       if (step <=1) {
         playerUp.frame = 6;
       }
