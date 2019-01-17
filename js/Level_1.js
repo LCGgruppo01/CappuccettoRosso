@@ -272,6 +272,8 @@ var GameLevel_1 = {
     }
     //cutscene END
 
+    barGranny.cameraOffset.x = playerUp.body.position.x/32 + 3*m;
+
     if(playerUp.health <= 0){
       this.game.state.start('GameLevel_1');
       gotAxe=0;

@@ -217,12 +217,6 @@ function worldUpdate(){
     heart3.frame = 1;
   }
 
-  barGranny.cameraOffset.x = playerUp.body.position.x/32 + 3*m;
-
-  //xt.text = 'x ' + playerUp.body.x/m;
-  //yt.text = 'y ' + playerUp.body.y/m;
-
-
   wolvesBehave(Wolves); //find in Functions.js
   wolfPatrolBehave(WolvesP); //find in Functions.js
   wolfFrames(Wolves); //find in Functions.js
