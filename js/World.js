@@ -167,7 +167,7 @@ function worldUpdate(){
   game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
   game.physics.arcade.overlap(playerHitbox, platformsDes, desWall, null, this);
   game.physics.arcade.overlap(Bones, platforms, elide, null, this);
-  //game.physics.arcade.overlap(playerUp, Bones, boneHitPlayer, null, this);
+  game.physics.arcade.overlap(playerUp, Bones, boneHitPlayer, null, this);
   game.physics.arcade.overlap(kingWolf, Bones, boneHitKing, null, this);
   game.physics.arcade.overlap(player, Ammos, collectAmmo, null, this);
   game.physics.arcade.overlap(player, Lives, heal, null, this);
@@ -216,12 +216,6 @@ function worldUpdate(){
     heart2.frame = 1;
     heart3.frame = 1;
   }
-
-  barGranny.cameraOffset.x = playerUp.body.position.x/32 + 3*m;
-
-  //xt.text = 'x ' + playerUp.body.x/m;
-  //yt.text = 'y ' + playerUp.body.y/m;
-
 
   wolvesBehave(Wolves); //find in Functions.js
   wolfPatrolBehave(WolvesP); //find in Functions.js

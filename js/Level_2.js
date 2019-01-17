@@ -222,7 +222,7 @@ var GameLevel_2 = {
       playerUp.body.velocity.x = 0;
       playerDown.frame = 0;
       if (step <=1) {
-        playerUp.frame = 0;
+        playerUp.frame = 6;
       }
       if (borderTop.cameraOffset.y <= -10 && step == 0) {
         borderTop.cameraOffset.y = borderTop.cameraOffset.y + 3;
@@ -284,7 +284,7 @@ var GameLevel_2 = {
           bone.body.velocity.y = - bone.body.velocity.y;
           fristBone = 2;
         }
-      }, 2490);
+      }, 2640);
       setTimeout(function(){
         if (fristBone == 2) {
           kingWolf.damage(25);
@@ -293,7 +293,7 @@ var GameLevel_2 = {
           fristBone = 3;
           step = 3;
         }
-      }, 3710);
+      }, 3950);
     }
     else if (game.camera.x <= 99.5*m && step == 1) {
       rock1 = platforms.create(94.3*m, 48*m, '');
@@ -319,6 +319,8 @@ var GameLevel_2 = {
       game.camera.follow();
       game.camera.x += 8;
     }
+
+    barGranny.cameraOffset.x = playerUp.body.position.x/22.5 + 3*m;
 
     if (kingWolf.health <= 0) {
       Bones.forEach(function(bone){
