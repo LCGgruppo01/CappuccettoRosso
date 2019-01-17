@@ -167,7 +167,7 @@ function worldUpdate(){
   game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
   game.physics.arcade.overlap(playerHitbox, platformsDes, desWall, null, this);
   game.physics.arcade.overlap(Bones, platforms, elide, null, this);
-  game.physics.arcade.overlap(playerUp, Bones, boneHitPlayer, null, this);
+  //game.physics.arcade.overlap(playerUp, Bones, boneHitPlayer, null, this);
   game.physics.arcade.overlap(kingWolf, Bones, boneHitKing, null, this);
   game.physics.arcade.overlap(player, Ammos, collectAmmo, null, this);
   game.physics.arcade.overlap(player, Lives, heal, null, this);

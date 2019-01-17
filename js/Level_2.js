@@ -201,12 +201,12 @@ var GameLevel_2 = {
 
     wolfKingHearts();
 
-    if (kingWolf.health == 75) {
-      kingWolf.body.velocity.x = -500;
-      if (kingWolf.x < 92*m) {
-        kingWolf.body.velocity.x = 0;
-      }
-    }
+    //if (kingWolf.health == 75) {
+      //kingWolf.body.velocity.x = -500;
+      //if (kingWolf.x < 92*m) {
+        //kingWolf.body.velocity.x = 0;
+      //}
+    //}
 
     //cutscene
     if (playerUp.body.x >= 93*m && step <= 1) {
