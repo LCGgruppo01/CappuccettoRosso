@@ -33,8 +33,7 @@ var GameLevel_1 = {
 
     game.load.image('scena1', 'assets/scene/cappuccetto nel bosco.jpg');
 
-    game.load.image('livello1', 'assets/images/livello1.png');
-    game.load.image('livello1parte2', 'assets/images/livello1parte2 .png');
+    game.load.image('livello1', 'assets/images/level1.png');
     game.load.image('skyBackground', 'assets/images/sky background.png');
 
 
@@ -49,9 +48,8 @@ var GameLevel_1 = {
     skyBack = game.add.sprite(0, 0, 'skyBackground');
     skyBack.fixedToCamera = true;
 
-    game.add.sprite(1*m, 1*m, 'livello1');
-    parte2 = game.add.sprite(91*m, 1*m, 'livello1parte2');
-    parte2.scale.setTo(10,10);
+    level1 = game.add.sprite(1*m, 1*m, 'livello1');
+
     //Backgrounds
     game.add.sprite(0*m, 50*m, 'house');
     game.add.sprite(6.5*m, 57*m, 'tutorialMove');

@@ -18,6 +18,7 @@ var GameLevel_2 = {
     game.load.image('memoryObj', 'assets/images/memory_object.png');
     game.load.image('fucile', 'assets/images/fucile.png');
     game.load.image('scena4', 'assets/scene/cappuccetto alla finestra.jpg');
+    game.load.image('scena3', 'assets/scene/cappuccetto alla finestra.jpg');
     game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
 
     worldPreload(); //find in World.js
