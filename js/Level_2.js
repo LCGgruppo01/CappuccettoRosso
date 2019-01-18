@@ -170,8 +170,6 @@ var GameLevel_2 = {
     wolfLife5 = game.add.sprite(kingWolf.x + 150, kingWolf.y - 50, 'heart');
     wolfLife6 = game.add.sprite(kingWolf.x + 150, kingWolf.y - 50, 'heart');
 
-    ultimo = platformsDes.create(118*m, 54*m, 'd1');
-
     platformsDes.forEach(function(d1){
       d1.body.immovable = true;
       d1.frame = 0;
