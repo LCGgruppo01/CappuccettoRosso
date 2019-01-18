@@ -10,7 +10,7 @@ var GameLevel_1 = {
   preload: function() {
 
     game.world.width=185*m;
-    game.world.height=61*m;
+    game.world.height=59*m;
 
     game.load.crossOrigin = 'anonymous';
 
@@ -158,8 +158,10 @@ var GameLevel_1 = {
     platformCreate(152,53,4);
     platformCreate(156,56,30);
     platformsDes.create(170*m, 52*m, 'd1');
-    //wolfCreate(168,54);
-    //wolfCreate(166,54);
+    wolfCreate(168,54);
+    wolfCreate(166,54);
+
+    d1Destroyed = game.add.sprite(-5, 0, 'd1destroyed');
 
     //cutscene
     kingWolf = game.add.sprite(180*m, 53*m, 'kingWolf');

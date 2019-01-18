@@ -128,25 +128,23 @@ function worldCreate(){
     ammoCount = game.add.text(0.5*m, 3*m, 'ammo: ', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
     ammoCount.fixedToCamera = true;
   }
-  //position
-  xt = game.add.text(32, 140, 'x', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
-  xt.fixedToCamera = true;
-  yt = game.add.text(32, 160, 'y', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
-  yt.fixedToCamera = true;
-  tempo = game.add.text(32, 220, 'tempo ', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
-  tempo.fixedToCamera = true;
-  velocità = game.add.text(32, 240, 'velocità ', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
-  velocità.fixedToCamera = true;
 
   borderTop = game.add.sprite(0, -150, 'border');
   borderTop.fixedToCamera = true;
   game.physics.arcade.enable(borderTop);
   borderTop.enableBody = true;
+  borderTop.anchor.setTo(.2,.4);
+  borderTop.scale.x = 1.5;
+  borderTop.scale.y = 1.5;
+
 
   borderBottom = game.add.sprite(0, 768, 'border');
   borderBottom.fixedToCamera = true;
   game.physics.arcade.enable(borderBottom);
   borderBottom.enableBody = true;
+  borderBottom.anchor.setTo(.2,0);
+  borderBottom.scale.x = 1.5;
+  borderBottom.scale.y = 1.5;
 
 
   testCreate();

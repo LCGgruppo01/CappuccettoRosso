@@ -207,9 +207,7 @@ function collectMe1(player, memoryObj1){
     bar.alpha = 0;
     barGranny.alpha = 0;
     Hearts.alpha = 0;
-    if(spawnX < 98*m){
-      d1Destroyed.alpha = 0;
-    }
+    d1Destroyed.alpha = 0;
     memoryObj1.kill();
     game.paused = true;
     game.input.onDown.add(unpauseImage, this);
@@ -366,11 +364,6 @@ function wolfKingShot(){
       bone.body.velocity.y = -Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + 10*Math.pow((kingWolf.y - playerUp.y), 2))/1.5;
       kingShot = game.time.now + 2000*Math.random();
     }
-
-    xt.text = 'x ' + bone.body.velocity.x;
-    yt.text = 'y ' + bone.body.velocity.y;
-    tempo.text = 'tempo ' + bone.tempo;
-    velocità.text = 'velocità ' + bone.tempo*500/bone.tempo;
   }
 };
 
