@@ -122,6 +122,16 @@ function wolfHit(player, wolf) {
   }
 };
 
+function kingWolfHit(player, kingWolf) {
+  playerUp.body.velocity.y = -1000;
+  if (game.time.now > immunity){
+    //player.body.velocity.x = (player.x - kingWolf.x)/Math.abs(player.x - kingWolf.x)*2000;
+    timeHit = game.time.now + 300;
+    immunity = game.time.now + 1000;
+    player.damage(25);
+  }
+};
+
 function wolfBulletDamage(bullet, wolf){
   if (game.time.now > immunity){
     if (wolf.health < 110 && Math.random() < 0.7 && fucile == true) {
@@ -267,7 +277,7 @@ function collectMe4(player, memoryObj4){
 
 function boneHitPlayer(player, bone) {
   if (game.time.now > immunity && axeHit == true){
-    playerUp.body.velocity.x = -1000;
+    playerUp.body.velocity.x = (player.x - bone.x)/Math.abs(player.x - bone.x)*1000;
     timeHit = game.time.now + 300;
     immunity = game.time.now + 500;
     player.damage(25);
@@ -351,18 +361,32 @@ function wolfKingShot(){
     bone.rimbalzo = 0;
     bone.body.gravity.y = gravity;
 
-    if (player.y >= kingWolf.y) {
-      bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
+    if (kingWolf.body.position.x < 100*m) {
+      if (player.y >= kingWolf.y) {
+        bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
+        bone.body.velocity.x = (kingWolf.x - playerUp.x)/bone.tempo;
+        bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
+        kingShot = game.time.now + 2000*Math.random();
+      }else if (player.y <= kingWolf.y) {
+        bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
+        bone.body.velocity.x = 500;
+        bone.body.velocity.y = -Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + 10*Math.pow((kingWolf.y - playerUp.y), 2))/1.5;
+        kingShot = game.time.now + 2000*Math.random();
+      }
+    }
 
-      bone.body.velocity.x = -(kingWolf.x - playerUp.x)/bone.tempo;
-      bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
-      kingShot = game.time.now + 2000*Math.random();
-    }else if (player.y <= kingWolf.y) {
-      bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
-
-      bone.body.velocity.x = -500;
-      bone.body.velocity.y = -Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + 10*Math.pow((kingWolf.y - playerUp.y), 2))/1.5;
-      kingShot = game.time.now + 2000*Math.random();
+    else {
+      if (player.y >= kingWolf.y) {
+        bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
+        bone.body.velocity.x = -(kingWolf.x - playerUp.x)/bone.tempo;
+        bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
+        kingShot = game.time.now + 2000*Math.random();
+      }else if (player.y <= kingWolf.y) {
+        bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
+        bone.body.velocity.x = -500;
+        bone.body.velocity.y = -Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + 10*Math.pow((kingWolf.y - playerUp.y), 2))/1.5;
+        kingShot = game.time.now + 2000*Math.random();
+      }
     }
   }
 };
@@ -378,17 +402,26 @@ function wolfKingHearts() {
 
   if (kingWolf.health == 5) {
     wolfLife6.frame = 1;
-    if(kingWolf.x > 94*m){
-    //  kingWolf.body.velocity.x =
-    }
   }if (kingWolf.health == 4) {
     wolfLife5.frame = 1;
+    if(kingWolf.x > 96*m){
+    kingWolf.body.velocity.x = -400;
+    }
   }if (kingWolf.health == 3) {
     wolfLife4.frame = 1;
+    if(kingWolf.x < 107*m){
+    kingWolf.body.velocity.x = 400;
+    }
   }if (kingWolf.health == 2) {
     wolfLife3.frame = 1;
+    if(kingWolf.x > 96*m){
+    kingWolf.body.velocity.x = -400;
+    }
   }if (kingWolf.health == 1) {
     wolfLife2.frame = 1;
+    if(kingWolf.x < 107*m){
+    kingWolf.body.velocity.x = 400;
+    }
   }if (kingWolf.health === 0) {
     wolfLife1.frame = 1;
     wolfLife1.kill();
@@ -439,6 +472,12 @@ function rifle(){
       shootTime = game.time.now + 600;
       shoot = false;
       bulletN--;
+      if (position == "rightt") {
+        playerUp.body.velocity.x = playerUp.body.velocity.x -500;
+      }
+      else if (position == "leftt") {
+        playerUp.body.velocity.x = playerUp.body.velocity.x +500;
+      }
     }
 
     if (game.time.now > shootTime) {

@@ -169,6 +169,7 @@ function worldUpdate(){
   game.physics.arcade.overlap(kingWolf, Bones, boneHitKing, null, this);
   game.physics.arcade.overlap(player, Ammos, collectAmmo, null, this);
   game.physics.arcade.overlap(player, Lives, heal, null, this);
+  game.physics.arcade.overlap(playerUp, kingWolf, kingWolfHit, null, this);
 
   game.physics.arcade.collide(Wolves, platforms);
   game.physics.arcade.collide(player, platforms);
@@ -176,7 +177,6 @@ function worldUpdate(){
   game.physics.arcade.collide(Lives, platforms);
   game.physics.arcade.collide(playerUp, Wolves, wolfHit, null, this);
   game.physics.arcade.collide(playerUp, WolvesP, wolfHit, null, this);
-  game.physics.arcade.collide(playerUp, kingWolf, wolfHit, null, this);
   game.physics.arcade.collide(Wolves, platformsOver);
   game.physics.arcade.collide(Ammos, platformsOver);
   game.physics.arcade.collide(Lives, platformsOver);

@@ -256,7 +256,6 @@ var GameLevel_2 = {
       game.camera.follow(playerUp, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.05);
     }
     else if (step == 4) {
-      kingWolf.body.velocity.x = 0;
       cursors = game.input.keyboard.createCursorKeys();
       SPACE = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
       C = game.input.keyboard.addKey(Phaser.Keyboard.C);
