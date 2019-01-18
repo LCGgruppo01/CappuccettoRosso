@@ -17,13 +17,13 @@ var level;
 var viewTop;
 
 function worldPreload(){
-  game.load.image('bullet', 'assets/images/bullet.png');
 
   game.load.spritesheet('wolf', 'assets/images/wolf.png', 64, 128);
   game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 64, 128);
   game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
   game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
   game.load.spritesheet('weapon', 'assets/images/weapon.png', 128, 64);
+  game.load.spritesheet('bullet', 'assets/images/bullet.png', 32, 16);
 
   game.load.image('thorns', 'assets/images/thorns.png');
   game.load.image('ground', 'assets/images/ground.png');
@@ -54,6 +54,7 @@ function worldCreate(){
   SPACE=game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
   C=game.input.keyboard.addKey(Phaser.Keyboard.C);
   CTRL=game.input.keyboard.addKey(Phaser.Keyboard.S);
+
 
   // WORLD BACKGROUND start
 

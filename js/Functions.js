@@ -460,14 +460,18 @@ function rifle(){
   if (gotAxe == 2) {
     if (SPACE.isDown && game.time.now > shootTime && shoot == true && bulletN > 0){
       if (position == "leftt") {
-        var bullet = Bullets.create(playerUp.x - 25, playerUp.y + 15, 'bullet');
+        var bullet = Bullets.create(playerUp.x - 25, playerUp.y + 10, 'bullet');
         bullet.body.gravity.y = 25;
         bullet.body.velocity.x = -bulletVelocity + playerUp.body.velocity.x;
+        bullet.animations.add('bulletFire', [0, 1, 2, 3], 10, true);
+        bullet.animations.play('bulletFire');
       }else if (position == "rightt") {
-        bullet = Bullets.create(playerUp.x + 25, playerUp.y + 15, 'bullet');
+        bullet = Bullets.create(playerUp.x + 25, playerUp.y + 10, 'bullet');
         bullet.scale.x = -1;
         bullet.body.gravity.y = 25;
         bullet.body.velocity.x = bulletVelocity + playerUp.body.velocity.x;
+        bullet.animations.add('bulletFire', [0, 1, 2, 3], 10, true);
+        bullet.animations.play('bulletFire');
       }
       shootTime = game.time.now + 600;
       shoot = false;

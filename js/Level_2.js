@@ -105,7 +105,7 @@ var GameLevel_2 = {
     memoryObj4.enableBody = true;
 
     //Vertical 3
-    platformCreate(13,42,3);
+    platformCreate(12,42,4);
     rockCreate(9,41,1,11);
     rockCreate(16,41,1,7);
     platformCreate(10,45,4);
@@ -183,6 +183,8 @@ var GameLevel_2 = {
     cappuccetto.enableBody = true;
 
     thorns.setAll('alpha','0');
+
+    platformsOver.setAll('alpha','0');
 
   },
 
@@ -343,7 +345,6 @@ var GameLevel_2 = {
         bone.kill();
       });
     }
-    render();
     wolvesBehave(Wolves); //find in Functions.js
 
   },
