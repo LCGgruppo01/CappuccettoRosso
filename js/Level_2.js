@@ -221,10 +221,10 @@ var GameLevel_2 = {
       game.input.keyboard.removeKey(Phaser.Keyboard.H);
       game.input.keyboard.removeKey(Phaser.Keyboard.S);
       playerUp.body.velocity.x = 0;
-      playerDown.frame = 0;
       gotAxe = 1;
-      if (step <= 3 && (fristBone != 1 || fristBone != 2 || fristBone != 3)) {
+      if (step <= 3 && (fristBone == 0 || fristBone == 1 || fristBone == 3)) {
         playerUp.animations.stop(null, true);
+        playerDown.animations.stop(null, true);
       }
       if (borderTop.cameraOffset.y <= -10 && step == 0) {
         borderTop.cameraOffset.y = borderTop.cameraOffset.y + 3;
@@ -279,7 +279,7 @@ var GameLevel_2 = {
       }, 1100);
       setTimeout(function(){
         if (fristBone == 1) {
-          fristBone == 1.5;
+          step = 2;
           axeHit = false;
           changeHitbox();
           playerUp.animations.play('rightAxeChop');
@@ -287,15 +287,19 @@ var GameLevel_2 = {
           bone.body.velocity.y = - bone.body.velocity.y;
           fristBone = 2;
         }
-      }, 2640);
+      }, 2600);
       setTimeout(function(){
         if (fristBone == 2) {
-          fristBone == 2.5;
+          fristBone = 3;
+        }
+      }, 3040);
+      setTimeout(function(){
+        if (fristBone == 2 || fristBone == 3) {
           kingWolf.damage(25);
           flashDamage();
           bone.kill();
-          fristBone = 3;
           step = 3;
+          fristBone = 4;
         }
       }, 3950);
     }
