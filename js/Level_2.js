@@ -299,7 +299,6 @@ var GameLevel_2 = {
       }, 2600);
       setTimeout(function(){
         if (fristBone == 2) {
-          kingWolf.damage(1);
           fristBone = 3;
         }
       }, 3040);
