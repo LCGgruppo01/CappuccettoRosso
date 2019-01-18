@@ -36,7 +36,6 @@ var GameLevel_1 = {
     game.load.image('livello1', 'assets/images/level1.png');
     game.load.image('skyBackground', 'assets/images/sky background.png');
 
-
     playerPreload(); //find in player.js
     worldPreload(); //find in World.js
   },
