@@ -4,6 +4,7 @@ var wait = 0;
 var step1 = 0;
 var memoryObjCollect = 0;
 var step1 = 0;
+var level1back;
 
 var GameLevel_1 = {
 
@@ -48,6 +49,8 @@ var GameLevel_1 = {
     skyBack.fixedToCamera = true;
 
     level1back = game.add.sprite(1*m, 1*m, 'livello1back');
+    game.physics.arcade.enable(level1back);
+    level1back.enableBody = true;
     level1 = game.add.sprite(1*m, 1*m, 'livello1');
 
     //Backgrounds
@@ -212,12 +215,23 @@ var GameLevel_1 = {
   platforms.setAll('alpha','0');
   thorns.setAll('alpha','0');
 
+  game.time.events.loop(500, function () {
+    level1back.body.velocity.y = - playerUp.body.velocity.y/40;
+  });
+
+
   },
 
   update: function() {
 
     worldUpdate(); //find in World.js
     playerUpdate(); //find in player.js
+
+    if (playerUp.x < 19*m) {
+      playerJump = -425;
+    }else {
+      playerJump = -450;
+    }
 
     game.physics.arcade.overlap(playerUp, axe, getAxe, null, this);
     game.physics.arcade.overlap(playerUp, memoryObj1, collectMe1, null, this);
