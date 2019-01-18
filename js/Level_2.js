@@ -328,7 +328,7 @@ var GameLevel_2 = {
       game.camera.x += 8;
     }
 
-    barGranny.cameraOffset.x = playerUp.body.position.x/22.5 + 3*m;
+    barGranny.cameraOffset.x = Math.sqrt(Math.pow(playerUp.body.position.x, 2) + Math.pow(playerUp.body.position.y, 2))/22.5 + 2.5*m;
 
     if (kingWolf.health <= 0) {
       Bones.forEach(function(bone){
