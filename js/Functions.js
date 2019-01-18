@@ -115,7 +115,7 @@ function thornHit(playerFunction, thorn) {
 function wolfHit(player, wolf) {
   if (game.time.now > immunity && axeHit == true){
     wolf.body.velocity.x = -(playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*500;
-    player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*2000;
+    player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*1000;
     timeHit = game.time.now + 300;
     immunity = game.time.now + 500;
     player.damage(25);

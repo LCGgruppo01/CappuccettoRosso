@@ -25,6 +25,7 @@ function worldPreload(){
   game.load.spritesheet('weapon', 'assets/images/weapon.png', 128, 64);
   game.load.spritesheet('bullet', 'assets/images/bullet.png', 32, 16);
 
+  game.load.image('ammo', 'assets/images/ammo.png');
   game.load.image('thorns', 'assets/images/thorns.png');
   game.load.image('ground', 'assets/images/ground.png');
   game.load.image('platformStart', 'assets/images/platformStart.png');

@@ -91,7 +91,6 @@ var GameLevel_2 = {
     wolfCreate(27,39);
     //Secret Hall
     secretHall = game.add.sprite(16*m, 35*m, 'secretHall');
-    rockCreate(16,36,1,3);
     rockCreate(17,41,13,1);
     rockCreate(29,35,1,6);
     rockCreate(16,35,13,1);
@@ -181,7 +180,7 @@ var GameLevel_2 = {
     cappuccetto.enableBody = true;
 
     thorns.setAll('alpha','0');
-
+    platforms.setAll('alpha','0');
     platformsOver.setAll('alpha','0');
 
   },
@@ -210,13 +209,6 @@ var GameLevel_2 = {
     }
 
     wolfKingHearts();
-
-    //if (kingWolf.health == 75) {
-      //kingWolf.body.velocity.x = -500;
-      //if (kingWolf.x < 92*m) {
-        //kingWolf.body.velocity.x = 0;
-      //}
-    //}
 
     //cutscene
     if (playerUp.body.x >= 93*m && step <= 1) {
