@@ -21,11 +21,15 @@ var GameLevel_2 = {
     game.load.image('scena3', 'assets/scene/cappuccetto alla finestra.jpg');
     game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
 
+    game.load.image('livello2', 'assets/images/level2.png');
+
     worldPreload(); //find in World.js
     playerPreload(); //find in Player.js
   },
 
   create: function() {
+
+    level2 = game.add.sprite(1*m, 1*m, 'livello2');
 
     level = 2;
     step = 0;
@@ -126,7 +130,7 @@ var GameLevel_2 = {
     wolfPatrolCreate(60,50,67);
     platformCreate(68,50,3);
     platformCreate(71,48,3);
-    wolfCreate(78,46);
+    wolfPatrolCreate(75,46,85);
     rockCreate(74,48,1,11);
     thornsCreate(50,57,26);
     rockCreate(75,48,5,1);
@@ -155,7 +159,7 @@ var GameLevel_2 = {
     game.physics.arcade.enable(kingWolf);
     kingWolf.enableBody = true;
     kingWolf.body.gravity.y = gravity;
-    kingWolf.health = 100;
+    kingWolf.health = 6;
     kingWolf.alpha = 0.5;
     kingWolf.anchor.setTo(.5,.5);
 
@@ -163,6 +167,8 @@ var GameLevel_2 = {
     wolfLife2 = game.add.sprite(kingWolf.x + 50, kingWolf.y - 50, 'heart');
     wolfLife3 = game.add.sprite(kingWolf.x + 100, kingWolf.y - 50, 'heart');
     wolfLife4 = game.add.sprite(kingWolf.x + 150, kingWolf.y - 50, 'heart');
+    wolfLife5 = game.add.sprite(kingWolf.x + 150, kingWolf.y - 50, 'heart');
+    wolfLife6 = game.add.sprite(kingWolf.x + 150, kingWolf.y - 50, 'heart');
 
     ultimo = platformsDes.create(118*m, 54*m, 'd1');
 
@@ -175,6 +181,9 @@ var GameLevel_2 = {
     cappuccetto = game.add.sprite(121*m, 57*m, 'cappuccetto');
     game.physics.arcade.enable(cappuccetto);
     cappuccetto.enableBody = true;
+
+    thorns.setAll('alpha','0');
+
   },
 
   update: function() {
@@ -240,7 +249,7 @@ var GameLevel_2 = {
       }, 1000)
     }
 
-    if (kingWolf.health <= 10){
+    if (kingWolf.health <= 0){
       rock1.kill();
       rock2.kill();
       game.camera.follow(playerUp, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.05);
@@ -288,7 +297,7 @@ var GameLevel_2 = {
       }, 2640);
       setTimeout(function(){
         if (fristBone == 2) {
-          kingWolf.damage(25);
+          kingWolf.damage(1);
           flashDamage();
           bone.kill();
           fristBone = 3;

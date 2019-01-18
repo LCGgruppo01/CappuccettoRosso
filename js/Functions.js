@@ -288,7 +288,7 @@ function boneHitKing(kingWolf, bone) {
     kingWolf.body.velocity.x = -1000;
     timeHit = game.time.now + 300;
     immunity = game.time.now + 500;
-    kingWolf.damage(25);
+    kingWolf.damage(1);
     bone.kill();
   }
 };
@@ -348,7 +348,7 @@ function wolfFrames(Wolves){
 };
 
 function wolfKingShot(){
-  if (game.time.now > kingShot && kingWolf.health >= 10) {
+  if (game.time.now > kingShot && kingWolf.health > 0) {
     bone = Bones.create(kingWolf.x, kingWolf.y, 'barGranny');
     bone.rimbalzo = 0;
     bone.body.gravity.y = gravity;
@@ -380,19 +380,30 @@ function wolfKingHearts() {
   wolfLife2.x = kingWolf.x - 25;
   wolfLife3.x = kingWolf.x;
   wolfLife4.x = kingWolf.x + 25;
+  wolfLife5.x = kingWolf.x + 50;
+  wolfLife6.x = kingWolf.x + 75;
 
-  if (kingWolf.health < 100 && kingWolf.health >= 75) {
+  if (kingWolf.health == 5) {
+    wolfLife6.frame = 1;
+    if(kingWolf.x > 94*m){
+    //  kingWolf.body.velocity.x =
+    }
+  }if (kingWolf.health == 4) {
+    wolfLife5.frame = 1;
+  }if (kingWolf.health == 3) {
     wolfLife4.frame = 1;
-  }if (kingWolf.health < 75  && kingWolf.health >= 50) {
+  }if (kingWolf.health == 2) {
     wolfLife3.frame = 1;
-  }if (kingWolf.health < 50 && kingWolf.health >= 25) {
+  }if (kingWolf.health == 1) {
     wolfLife2.frame = 1;
-  }if (kingWolf.health < 25 && kingWolf.health >= 0) {
+  }if (kingWolf.health === 0) {
     wolfLife1.frame = 1;
     wolfLife1.kill();
     wolfLife2.kill();
     wolfLife3.kill();
     wolfLife4.kill();
+    wolfLife5.kill();
+    wolfLife6.kill();
   }
 };
 // wolves BEHAVE and FRAMES functions end
@@ -432,18 +443,19 @@ function rifle(){
         bullet.body.gravity.y = 25;
         bullet.body.velocity.x = bulletVelocity + playerUp.body.velocity.x;
       }
-      shootTime = game.time.now + 300;
+      shootTime = game.time.now + 600;
       shoot = false;
       bulletN--;
     }
 
-    if (SPACE.isUp) {
+    if (game.time.now > shootTime) {
       shoot = true;
       axeHit = true;
+      if (bulletN <= 0) {
+        gotAxe=1;
+      }
     }
-    if (bulletN <= 0) {
-      gotAxe=1;
-    }
+
   }
 }
 
@@ -558,11 +570,14 @@ function playerAnimationUp(){
   }
   if (axeHit == false){
     playerUp.animations.play('rightAxeChop');
+  }else if(shoot == false && gotAxe == 2 && game.time.now > tAnimazioneSparo){
+    playerUp.animations.play('rightShot');
+    tAnimazioneSparo = game.time.now + 600;
   }
 
 };
 //animations END
-
+var tAnimazioneSparo = 0;
 //player attack HItBOX
 
 function changeHitbox() {

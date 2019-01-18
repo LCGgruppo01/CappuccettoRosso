@@ -50,7 +50,9 @@ function playerCreate(){
   playerUp.animations.add('rightAxe', [6, 7, 8, 9], 10, true);
   playerUp.animations.add('rightGun', [11, 12, 13, 14], 10, true);
   animAxe = playerUp.animations.add('rightAxeChop', [15, 16, 17, 18], 10, true);
+  animShot = playerUp.animations.add('rightShot', [21, 20, 19], 10, true);
   animAxe.loop = false;
+  animShot.loop = false;
 
 };
 
@@ -95,6 +97,12 @@ function playerUpdate(){
 
   //find in Functions.js
   if (animAxe.isPlaying) {
+    if (position=='leftt') {
+      playerUp.scale.x = -1;
+    }else {
+      playerUp.scale.x = 1;
+    }
+  }else if (animShot.isPlaying) {
     if (position=='leftt') {
       playerUp.scale.x = -1;
     }else {

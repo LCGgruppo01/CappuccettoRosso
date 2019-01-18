@@ -16,7 +16,6 @@ var GameLevel_1 = {
 
     game.load.spritesheet('axe', 'assets/images/axe_64.png', 64, 64);
 
-    game.load.image('house', 'assets/images/house.png');
     game.load.image('p1', 'assets/images/p1.png');
     game.load.image('p2', 'assets/images/p2.png');
     game.load.image('p3', 'assets/images/p3.png');
@@ -34,6 +33,7 @@ var GameLevel_1 = {
     game.load.image('scena1', 'assets/scene/cappuccetto nel bosco.jpg');
 
     game.load.image('livello1', 'assets/images/level1.png');
+    game.load.image('livello1back', 'assets/images/level1sfondo.png');
     game.load.image('skyBackground', 'assets/images/sky background.png');
 
 
@@ -48,10 +48,10 @@ var GameLevel_1 = {
     skyBack = game.add.sprite(0, 0, 'skyBackground');
     skyBack.fixedToCamera = true;
 
+    level1back = game.add.sprite(1*m, 1*m, 'livello1back');
     level1 = game.add.sprite(1*m, 1*m, 'livello1');
 
     //Backgrounds
-    game.add.sprite(0*m, 50*m, 'house');
     game.add.sprite(6.5*m, 57*m, 'tutorialMove');
     game.add.sprite(10.5*m, 55*m, 'tutorialUp');
     game.add.sprite(14.25*m, 53.5*m, 'tutorialAxe');
@@ -209,6 +209,7 @@ var GameLevel_1 = {
 
   platformsOver.setAll('alpha','0');
   platforms.setAll('alpha','0');
+  thorns.setAll('alpha','0');
 
   },
 
