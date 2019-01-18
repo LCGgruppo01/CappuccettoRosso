@@ -299,16 +299,13 @@ var GameLevel_2 = {
       }, 2600);
       setTimeout(function(){
         if (fristBone == 2) {
-<<<<<<< HEAD
           kingWolf.damage(1);
-=======
           fristBone = 3;
         }
       }, 3040);
       setTimeout(function(){
         if (fristBone == 2 || fristBone == 3) {
-          kingWolf.damage(25);
->>>>>>> 536dd291242ad26d97680f1df83495bab39d7727
+          kingWolf.damage(1);
           flashDamage();
           bone.kill();
           step = 3;
