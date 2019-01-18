@@ -29,7 +29,7 @@ var GameLevel_2 = {
 
   create: function() {
 
-    level2 = game.add.sprite(1*m, 1*m, 'livello2');
+    level2 = game.add.sprite(0*m, 1*m, 'livello2');
 
     level = 2;
     step = 0;
@@ -148,8 +148,8 @@ var GameLevel_2 = {
     rockCreate(123,48,1,11);
     //bossFight
     platformCreate(97,55,2);
-    platformCreate(100,53,3);
-    platformCreate(104,55,2);
+    platformCreate(101,53,3);
+    platformCreate(105,55,2);
     //cutscene
     rockCutscene = platforms.create(93*m, 48*m, '');
     rockCutscene.body.setSize(9*m, 1*m, 0, 0);
