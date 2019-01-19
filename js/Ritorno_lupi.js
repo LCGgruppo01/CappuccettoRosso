@@ -18,7 +18,7 @@ var RitornoLupi = {
 };
 
 function imageClick3() {
-    this.game.state.start('GameLevel_1');
+    this.game.state.start('GameLevel_2');
 }
 
 game.state.add('RitornoLupi', RitornoLupi);

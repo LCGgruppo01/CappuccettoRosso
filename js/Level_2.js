@@ -19,9 +19,10 @@ var GameLevel_2 = {
     game.load.image('fucile', 'assets/images/fucile.png');
     game.load.image('scena4', 'assets/scene/cappuccetto alla finestra.jpg');
     game.load.image('scena3', 'assets/scene/cappuccetto alla finestra.jpg');
-    game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
+    game.load.spritesheet('heart', 'assets/images/heart22x22.png', 22, 22);
 
     game.load.image('livello2', 'assets/images/level2.png');
+    game.load.image('skyBackground', 'assets/images/sky background.png');
 
     worldPreload(); //find in World.js
     playerPreload(); //find in Player.js
@@ -29,7 +30,10 @@ var GameLevel_2 = {
 
   create: function() {
 
-    level2 = game.add.sprite(0*m, 1*m, 'livello2');
+    skyBack = game.add.sprite(0, 0, 'skyBackground');
+    skyBack.fixedToCamera = true;
+
+    level2 = game.add.sprite(0*m, 0*m, 'livello2');
 
     level = 2;
     step = 0;
@@ -159,15 +163,22 @@ var GameLevel_2 = {
     kingWolf.enableBody = true;
     kingWolf.body.gravity.y = gravity;
     kingWolf.health = 6;
-    kingWolf.alpha = 0.5;
     kingWolf.anchor.setTo(.5,.5);
 
+    wolfKingAnimationCreate();
+
     wolfLife1 = game.add.sprite(kingWolf.x, kingWolf.y - 50, 'heart');
+    wolfLife1.frame = 2;
     wolfLife2 = game.add.sprite(kingWolf.x + 50, kingWolf.y - 50, 'heart');
+    wolfLife2.frame = 2;
     wolfLife3 = game.add.sprite(kingWolf.x + 100, kingWolf.y - 50, 'heart');
+    wolfLife3.frame = 2;
     wolfLife4 = game.add.sprite(kingWolf.x + 150, kingWolf.y - 50, 'heart');
+    wolfLife4.frame = 2;
     wolfLife5 = game.add.sprite(kingWolf.x + 150, kingWolf.y - 50, 'heart');
+    wolfLife5.frame = 2;
     wolfLife6 = game.add.sprite(kingWolf.x + 150, kingWolf.y - 50, 'heart');
+    wolfLife6.frame = 2;
 
     platformsDes.forEach(function(d1){
       d1.body.immovable = true;
@@ -268,7 +279,9 @@ var GameLevel_2 = {
       kingWolf.body.velocity.x = 0;
       setTimeout(function(){
         if (fristBone == 0) {
-          bone = Bones.create(kingWolf.x, kingWolf.y, 'barGranny');
+          bone = Bones.create(kingWolf.x, kingWolf.y, 'bone');
+          bone.animations.add('boneAnimation', [0, 1, 2], 10, true);
+          bone.animations.play('boneAnimation');
           bone.rimbalzo = 0;
           bone.body.gravity.y = gravity;
           bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
@@ -296,7 +309,7 @@ var GameLevel_2 = {
       setTimeout(function(){
         if (fristBone == 2 || fristBone == 3) {
           kingWolf.damage(1);
-          flashDamage();
+          kingWolf.animations.play('danno');
           bone.kill();
           step = 3;
           fristBone = 4;
@@ -336,7 +349,7 @@ var GameLevel_2 = {
       });
     }
     wolvesBehave(Wolves); //find in Functions.js
-
+    wolfKingAnimationUpdate();
   },
 
 };
