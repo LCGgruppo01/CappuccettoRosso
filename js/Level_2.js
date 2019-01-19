@@ -90,7 +90,7 @@ var GameLevel_2 = {
     rockCreate(4,40,6,1);
     wolfCreate(27,39);
     //Secret Hall
-    secretHall = game.add.sprite(16*m, 35*m, 'secretHall');
+    secretHall = game.add.sprite(16*m - 7, 34*m, 'secretHall');
     rockCreate(17,41,13,1);
     rockCreate(29,35,1,6);
     rockCreate(16,35,13,1);
