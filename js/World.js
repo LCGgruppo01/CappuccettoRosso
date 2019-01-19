@@ -39,6 +39,7 @@ function worldPreload(){
   game.load.image('kingWolf', 'assets/images/kingWolf.png');
   game.load.image('cappuccetto', 'assets/images/cappuccetto.png');
   game.load.image('border', 'assets/images/border.png');
+  game.load.image('backPause', 'assets/images/backPause.png');
 };
 
 function worldCreate(){

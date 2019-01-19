@@ -681,6 +681,9 @@ function paused() {
     setTimeout(function(){
       game.paused = true;
      }, 20);
+     backPause = game.add.sprite(0,0,"backPause");
+     backPause.alpha = 0.7;
+     backPause.fixedToCamera = true;
      onPause = game.add.text(500, 350, 'Esci Dalla Siesta', { font: '24px Arial', fill: '#fff' });
      onPause.inputEnabled = true;
      onPause.fixedToCamera = true;
@@ -708,6 +711,7 @@ function unpaused(event){
       restart.text = '';
       restartLevel.text = '';
       mainMenu.text = '';
+      backPause.alpha = 0;
     });
 
     restart.events.onInputUp.add(function(){
@@ -716,6 +720,7 @@ function unpaused(event){
       restart.text = '';
       restartLevel.text = '';
       mainMenu.text = '';
+      backPause.alpha = 0;
       if (level == 1) {
         this.game.state.start('GameLevel_1');
       }else if (level == 2) {
@@ -729,6 +734,7 @@ function unpaused(event){
       restart.text = '';
       restartLevel.text = '';
       mainMenu.text = '';
+      backPause.alpha = 0;
       if (level == 1) {
         this.game.state.start('GameLevel_1');
         spawnX = 4*m;
@@ -746,6 +752,7 @@ function unpaused(event){
       restart.text = '';
       restartLevel.text = '';
       mainMenu.text = '';
+      backPause.alpha = 0;
       this.game.state.start('GameStart');
       spawnX = 4*m;
       spawnY = 54*m;
