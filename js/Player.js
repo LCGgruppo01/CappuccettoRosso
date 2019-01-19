@@ -60,12 +60,23 @@ function playerUpdate(){
 
   //player MOVEMENT start
   if (cursors.left.isDown && game.time.now > timeHit){
-    player.setAll('body.velocity.x', -playerVelocity);
+    if (SPACE.isDown && gotAxe == 2) {
+      player.setAll('body.velocity.x', -200);
+    }
+    else {
+      player.setAll('body.velocity.x', -playerVelocity);
+    }
     position = "leftt";
   }
 
   if (cursors.right.isDown && game.time.now > timeHit){
-    player.setAll('body.velocity.x', playerVelocity);
+    if (SPACE.isDown && gotAxe == 2) {
+      player.setAll('body.velocity.x', 200);
+    }
+    else {
+      player.setAll('body.velocity.x', playerVelocity);
+    }
+    position = "leftt";
     position = "rightt";
   }
 
