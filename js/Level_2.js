@@ -159,7 +159,7 @@ var GameLevel_2 = {
     kingWolf.enableBody = true;
     kingWolf.body.gravity.y = gravity;
     kingWolf.health = 6;
-    kingWolf.alpha = 0.5;
+    kingWolf.alpha = 1;
     kingWolf.anchor.setTo(.5,.5);
 
     wolfLife1 = game.add.sprite(kingWolf.x, kingWolf.y - 50, 'heart');
