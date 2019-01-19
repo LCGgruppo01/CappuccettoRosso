@@ -482,10 +482,10 @@ function rifle(){
       shoot = false;
       bulletN--;
       if (position == "rightt") {
-        playerUp.body.velocity.x = playerUp.body.velocity.x -500;
+        playerUp.body.velocity.x = -500;
       }
       else if (position == "leftt") {
-        playerUp.body.velocity.x = playerUp.body.velocity.x +500;
+        playerUp.body.velocity.x = +500;
       }
     }
 
@@ -810,6 +810,7 @@ function testCreate(){
 function testUpdate(){
   if(H.isDown){
     playerUp.heal(100);
+    bulletN = 5;
   }
 };
 

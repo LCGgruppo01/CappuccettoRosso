@@ -225,7 +225,7 @@ var GameLevel_2 = {
       gotAxe = 1;
       if (step <= 3 && (fristBone == 0 || fristBone == 1 || fristBone == 3)) {
         playerUp.animations.stop(null, true);
-        playerDown.animations.stop(null, true);
+        playerDown.frame = 0;
       }
       if (borderTop.cameraOffset.y <= -10 && step == 0) {
         borderTop.cameraOffset.y = borderTop.cameraOffset.y + 3;
