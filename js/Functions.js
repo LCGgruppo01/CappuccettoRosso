@@ -279,6 +279,20 @@ function collectMe4(player, memoryObj4){
   }
 };
 
+function collectMe5(player, cappuccetto2){
+  if(cursors.down.isDown){
+    scene5.alpha = 1;
+    scene5.inputEnabled = true;
+    playerUp.alpha = 0;
+    playerDown.alpha = 0;
+    bar.alpha = 0;
+    barGranny.alpha = 0;
+    Hearts.alpha = 0;
+    game.paused = true;
+    game.input.onDown.add(endImg, this);
+  }
+};
+
 function boneHitPlayer(player, bone) {
   if (game.time.now > immunity && axeHit == true){
     if(kingWolf.body.velocity.x <= 1){
@@ -809,6 +823,11 @@ function nextLevelImg(event){
   playerUp.health = 100;
   spawnX = 6*m;
   spawnY = 5*m;
+};
+
+function endImg(event) {
+  game.paused = false;
+  this.game.state.start('GameStart');
 };
 
 function testCreate(){
