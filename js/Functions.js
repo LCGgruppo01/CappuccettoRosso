@@ -439,6 +439,7 @@ function rifle(){
       shootTime = game.time.now + 600;
       shoot = false;
       bulletN--;
+      playerUp.body.velocity.x = -500
     }
 
     if (game.time.now > shootTime) {
