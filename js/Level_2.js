@@ -26,6 +26,8 @@ var GameLevel_2 = {
     game.load.image('cadavere2', 'assets/images/cadavere2.png');
     game.load.image('tronco', 'assets/images/troncofinale.png');
     game.load.image('artiglio', 'assets/images/artiglio.png');
+    game.load.spritesheet('cappuccetto2', 'assets/images/cappuccetto67x108.png', 67, 108);
+
 
     worldPreload(); //find in World.js
     playerPreload(); //find in Player.js
@@ -172,17 +174,17 @@ var GameLevel_2 = {
 
     wolfKingAnimationCreate();
 
-    wolfLife1 = game.add.sprite(kingWolf.x, kingWolf.y - 50, 'heart');
+    wolfLife1 = game.add.sprite(kingWolf.x - 125, kingWolf.y - 50, 'heart');
     wolfLife1.frame = 2;
-    wolfLife2 = game.add.sprite(kingWolf.x + 50, kingWolf.y - 50, 'heart');
+    wolfLife2 = game.add.sprite(kingWolf.x - 75, wolfLife1.y, 'heart');
     wolfLife2.frame = 2;
-    wolfLife3 = game.add.sprite(kingWolf.x + 100, kingWolf.y - 50, 'heart');
+    wolfLife3 = game.add.sprite(kingWolf.x - 25, wolfLife1.y, 'heart');
     wolfLife3.frame = 2;
-    wolfLife4 = game.add.sprite(kingWolf.x + 150, kingWolf.y - 50, 'heart');
+    wolfLife4 = game.add.sprite(kingWolf.x + 25, wolfLife1.y, 'heart');
     wolfLife4.frame = 2;
-    wolfLife5 = game.add.sprite(kingWolf.x + 150, kingWolf.y - 50, 'heart');
+    wolfLife5 = game.add.sprite(kingWolf.x + 75, wolfLife1.y, 'heart');
     wolfLife5.frame = 2;
-    wolfLife6 = game.add.sprite(kingWolf.x + 150, kingWolf.y - 50, 'heart');
+    wolfLife6 = game.add.sprite(kingWolf.x + 125, wolfLife1.y, 'heart');
     wolfLife6.frame = 2;
 
     platformsDes.forEach(function(d1){
@@ -191,7 +193,7 @@ var GameLevel_2 = {
       d1.stato = 1;
     });
 
-    cappuccetto2 = game.add.sprite(121*m, 54*m, 'cappuccetto');
+    cappuccetto2 = game.add.sprite(121*m, 54*m, 'cappuccetto2');
     game.physics.arcade.enable(cappuccetto2);
     cappuccetto2.enableBody = true;
     cappuccetto2.body.gravity.y = gravity;

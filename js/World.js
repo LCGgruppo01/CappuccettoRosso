@@ -122,16 +122,16 @@ function worldCreate(){
   //life
   Hearts = game.add.group();
 
-  heart0 = Hearts.create(0.5*m, 0.45*m, 'heart');
+  heart0 = Hearts.create(0.5*m, 0.5*m, 'heart');
   heart0.frame = 0;
   heart0.fixedToCamera = true;
-  heart1 = Hearts.create(1*m, 0.45*m, 'heart');
+  heart1 = Hearts.create(1*m, 0.5*m, 'heart');
   heart1.frame = 0;
   heart1.fixedToCamera = true;
-  heart2 = Hearts.create(1.5*m, 0.45*m, 'heart');
+  heart2 = Hearts.create(1.5*m, 0.5*m, 'heart');
   heart2.frame = 0;
   heart2.fixedToCamera = true;
-  heart3 = Hearts.create(2*m, 0.45*m, 'heart');
+  heart3 = Hearts.create(2*m, 0.5*m, 'heart');
   heart3.frame = 0;
   heart3.fixedToCamera = true;
   //bar
@@ -188,6 +188,7 @@ function worldUpdate(){
   game.physics.arcade.collide(player, platforms);
   game.physics.arcade.collide(Ammos, platforms);
   game.physics.arcade.collide(Lives, platforms);
+  game.physics.arcade.collide(Carcasse, platforms);
   game.physics.arcade.collide(playerUp, Wolves, wolfHit, null, this);
   game.physics.arcade.collide(playerUp, WolvesP, wolfHit, null, this);
   game.physics.arcade.collide(Wolves, platformsOver);
@@ -195,6 +196,7 @@ function worldUpdate(){
   game.physics.arcade.collide(Lives, platformsOver);
   game.physics.arcade.collide(WolvesP, platforms);
   game.physics.arcade.collide(WolvesP, platformsOver);
+  game.physics.arcade.collide(Carcasse, platformsOver);
   game.physics.arcade.collide(player, platformsDes);
   game.physics.arcade.collide(Wolves, platformsDes);
   game.physics.arcade.collide(WolvesP, platformsDes);
