@@ -38,32 +38,35 @@ var GameStart = {
     game.physics.arcade.enable(copertinaFG);
     copertinaFG.enableBody = true;
 
-    start = game.add.sprite(512, 384, 'start');
+    start = game.add.sprite(974, 50, 'start');
     game.physics.arcade.enable(start);
     start.enableBody = true;
-    start.anchor.setTo(.5,.5);
+    start.anchor.setTo(1,0);
     start.inputEnabled = true;
     start.events.onInputUp.add(imageClick);
-    l1 = game.add.sprite(512, 100, 'startL1');
+    l1 = game.add.sprite(512, 100, '');
     game.physics.arcade.enable(l1);
     l1.enableBody = true;
     l1.anchor.setTo(.5,.5);
     l1.inputEnabled = true;
     l1.events.onInputUp.add(imageClickLevel1);
-    l2 = game.add.sprite(512, 500, 'startL2');
+    l2 = game.add.sprite(512, 500, '');
     game.physics.arcade.enable(l2);
     l2.enableBody = true;
     l2.anchor.setTo(.5,.5);
     l2.inputEnabled = true;
-
     l2.events.onInputUp.add(imageClickLevel2);
-    CR = game.add.sprite(10, 10, 'startCR');
+
+    CR = game.add.sprite(50, 718, 'startCR');
+    CR.anchor.setTo(0,0);
     CR.inputEnabled = true;
     CR.events.onInputUp.add(imageClickCR);
-    AU = game.add.sprite(148, 10, 'startAU');
+    AU = game.add.sprite(974, 718, 'startAU');
+    AU.anchor.setTo(1,0);
     AU.inputEnabled = true;
     AU.events.onInputUp.add(imageClickAU);
-    HO = game.add.sprite(286, 10, 'startHO');
+    HO = game.add.sprite(512, 718, 'startHO');
+    HO.anchor.setTo(.5,0);
     HO.inputEnabled = true;
     HO.events.onInputUp.add(imageClickHO);
   },
