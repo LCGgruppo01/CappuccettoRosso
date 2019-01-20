@@ -592,7 +592,7 @@ function wolfKingAnimationUpdate() {
 
   //quando muore
   if (kingWolf.health <=0) {
-    carcassa = game.add.sprite(kingWolf.x, kingWolf.y - 156/2, "kingWolf");
+    carcassa = Carcasse.create(kingWolf.x, kingWolf.y - 156/2, "kingWolf");
     carcassa.frame = 17;
   }
 };
