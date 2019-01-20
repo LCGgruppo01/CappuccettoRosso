@@ -349,7 +349,6 @@ function collectMe3(player, fucileTerra){
     game.paused = true;
     game.input.onDown.add(unpauseImage2, this);
     fucile = true;
-    ammoCount.alpha = 0;
     gotAxe = 2;
   }
 };
@@ -367,6 +366,7 @@ function collectMe4(player, memoryObj4){
     secretHall.alpha = 0;
     memoryObj4.kill();
     game.paused = true;
+    ammoCount.alpha = 0;
     game.input.onDown.add(unpauseImage2, this);
   }
 };

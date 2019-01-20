@@ -14,6 +14,7 @@ var cheat2 = 0;
 var cheat3 = 0;
 var level;
 var viewTop;
+var ammoCount;
 
 function worldPreload(){
 
@@ -113,6 +114,10 @@ function worldCreate(){
   Bones.enableBody = true;
 
   // WORLD STUFFS end
+
+  //ammo rifle
+  ammoCount = game.add.sprite(0.5*m, 1*m, 'ammoCount')
+  ammoCount.fixedToCamera = true;
 
   //life
   Hearts = game.add.group();
@@ -233,11 +238,14 @@ function worldUpdate(){
   weaposChange(); //find in Functions.js
 
   if (fucile == true) {
-    ammoCount = game.add.sprite(0.5*m, 1*m, 'ammoCount')
-    ammoCount.fixedToCamera = true;
+    ammoCount.alpha = 1;
     ammoCount.frame = 10 - bulletN;
     rifle(); //find in Functions.js
+  }else {
+    ammoCount.alpha = 0;
   }
-
+  if (game.paused == true) {
+    ammoCount.alpha = 0;
+  }
 
 };
