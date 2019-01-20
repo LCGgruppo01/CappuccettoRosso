@@ -130,5 +130,6 @@ function playerUpdate(){
   playerDown.body.y = playerUp.body.y;
 
   hitBoxUpdate();
+  flashDamage();
 
 };

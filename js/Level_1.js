@@ -165,12 +165,17 @@ var GameLevel_1 = {
     d1Destroyed = game.add.sprite(-5, 0, 'd1destroyed');
 
     //cutscene
-    kingWolf = game.add.sprite(180*m, 53*m, 'kingWolf');
+    kingWolf = game.add.sprite(180*m, 51*m, 'kingWolf');
     game.physics.arcade.enable(kingWolf);
     kingWolf.enableBody = true;
-    cappuccetto = game.add.sprite(176*m, 55*m, 'cappuccetto');
+    kingWolf.body.gravity.y = gravity;
+    wolfKingAnimationCreate()
+
+    cappuccetto = game.add.sprite(176.5*m, 53*m, 'cappuccetto');
     game.physics.arcade.enable(cappuccetto);
     cappuccetto.enableBody = true;
+    cappuccetto.body.gravity.y = gravity;
+    cappuccetto.animations.add('ferma', [0, 2, 1, 2], 10, false);
 
     platforms.forEach(function(platform){
       platform.body.immovable = true;
@@ -235,6 +240,13 @@ var GameLevel_1 = {
     game.physics.arcade.overlap(playerUp, axe, getAxe, null, this);
     game.physics.arcade.overlap(playerUp, memoryObj1, collectMe1, null, this);
     game.physics.arcade.overlap(playerUp, memoryObj2, collectMe2, null, this);
+    game.physics.arcade.overlap(kingWolf, cappuccetto, animazioneRapimento, null, this);
+    game.physics.arcade.collide(cappuccetto, platformsOver);
+    game.physics.arcade.collide(cappuccetto, platforms);
+    game.physics.arcade.collide(kingWolf, platforms);
+    game.physics.arcade.collide(kingWolf, platformsOver);
+
+
 
     //cutscene START
     if(playerUp.body.x >= 172*m){
@@ -292,6 +304,17 @@ var GameLevel_1 = {
     if(playerUp.health <= 0){
       this.game.state.start('GameLevel_1');
       gotAxe=0;
+    }
+
+    if (kingWolf.body.velocity.x < 10) {
+      cappuccetto.animations.play('ferma');
+      if (kingWolf.body.velocity.x === 0) {
+        kingWolf.animations.play('fermo');
+      }else if (kingWolf.body.velocity.x !== 0) {
+        kingWolf.animations.play('corri');
+      }
+    }else{
+      kingWolf.animations.play('corriCapp');
     }
 
   },

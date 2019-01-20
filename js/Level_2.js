@@ -186,9 +186,11 @@ var GameLevel_2 = {
       d1.stato = 1;
     });
 
-    cappuccetto = game.add.sprite(121*m, 57*m, 'cappuccetto');
+    cappuccetto = game.add.sprite(121*m, 54*m, 'cappuccetto');
     game.physics.arcade.enable(cappuccetto);
     cappuccetto.enableBody = true;
+    cappuccetto.body.gravity.y = gravity;
+    cappuccetto.animations.add('ferma', [0, 2, 1, 2], 10, false);
 
     thorns.setAll('alpha','0');
     platforms.setAll('alpha','0');
@@ -203,6 +205,9 @@ var GameLevel_2 = {
 
     game.physics.arcade.overlap(playerUp, memoryObj4, collectMe4, null, this);
     game.physics.arcade.overlap(playerUp, fucileTerra, collectMe3, null, this);
+    game.physics.arcade.overlap(playerUp, cappuccetto, endGame, null, this);
+    game.physics.arcade.collide(cappuccetto, platforms);
+
 
     //secretHall
     if((playerUp.x > 17*m && playerUp.x < 29*m) && (playerUp.y > 35*m && playerUp.y < 41*m)){
@@ -279,6 +284,7 @@ var GameLevel_2 = {
       kingWolf.body.velocity.x = 0;
       setTimeout(function(){
         if (fristBone == 0) {
+          kingWolf.animations.play('lancio');
           bone = Bones.create(kingWolf.x, kingWolf.y, 'bone');
           bone.animations.add('boneAnimation', [0, 1, 2], 10, true);
           bone.animations.play('boneAnimation');
@@ -310,6 +316,7 @@ var GameLevel_2 = {
         if (fristBone == 2 || fristBone == 3) {
           kingWolf.damage(1);
           kingWolf.animations.play('danno');
+          game.camera.flash(0x00701f, 50);
           bone.kill();
           step = 3;
           fristBone = 4;
@@ -350,6 +357,7 @@ var GameLevel_2 = {
     }
     wolvesBehave(Wolves); //find in Functions.js
     wolfKingAnimationUpdate();
+    cappuccetto.animations.play('ferma');
   },
 
 };

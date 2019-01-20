@@ -279,6 +279,12 @@ function collectMe4(player, memoryObj4){
   }
 };
 
+function endGame() {
+  if (cursors.down.isDown) {
+    this.game.state.start('GameStart');
+  }
+};
+
 function boneHitPlayer(player, bone) {
   if (game.time.now > immunity && axeHit == true){
     if(kingWolf.body.velocity.x <= 1){
@@ -299,11 +305,11 @@ function boneHitPlayer(player, bone) {
 function boneHitKing(kingWolf, bone) {
   if (game.time.now > immunity && bone.rimbalzo == 1){
     kingWolf.body.velocity.x = -1000;
-    timeHit = game.time.now + 300;
     immunity = game.time.now + 500;
     kingWolf.damage(1);
     bone.kill();
     kingWolf.animations.play('danno');
+    game.camera.flash(0x00701f, 50);
   }
 };
 // COLLIDE & OVERLAP functions end
@@ -362,7 +368,7 @@ function wolfFrames(Wolves){
 };
 
 function wolfKingShot(){
-  if (game.time.now > kingShot && kingWolf.health > 0 && kingWolf.body.velocity.x <= 1) {
+  if (game.time.now > kingShot && kingWolf.health > 0 && kingWolf.body.velocity.x === 0) {
     kingWolf.animations.play('lancio');
     bone = Bones.create(kingWolf.x, kingWolf.y, 'bone');
     bone.animations.add('boneAnimation', [0, 1, 2], 10, true);
@@ -375,12 +381,12 @@ function wolfKingShot(){
         bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
         bone.body.velocity.x = (kingWolf.x - playerUp.x)/bone.tempo;
         bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
-        kingShot = game.time.now + 1500*Math.random() + 500;
+        kingShot = game.time.now + 1500*Math.random() + 1000;
       }else if (player.y <= kingWolf.y) {
         bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
         bone.body.velocity.x = 500;
         bone.body.velocity.y = -Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + 10*Math.pow((kingWolf.y - playerUp.y), 2))/1.5;
-        kingShot = game.time.now + 1500*Math.random() + 500;
+        kingShot = game.time.now + 1500*Math.random() + 1000;
       }
     }
 
@@ -415,21 +421,29 @@ function wolfKingHearts() {
     wolfLife5.frame = 1;
     if(kingWolf.x > 97*m){
     kingWolf.body.velocity.x = -400;
-    }
+  }else {
+    kingWolf.body.velocity.x = 0;
+  }
   }if (kingWolf.health == 3) {
     wolfLife4.frame = 1;
     if(kingWolf.x < 107*m){
     kingWolf.body.velocity.x = 400;
+    }else {
+      kingWolf.body.velocity.x = 0;
     }
   }if (kingWolf.health == 2) {
     wolfLife3.frame = 1;
     if(kingWolf.x > 97*m){
     kingWolf.body.velocity.x = -400;
+    }else {
+      kingWolf.body.velocity.x = 0;
     }
   }if (kingWolf.health == 1) {
     wolfLife2.frame = 1;
     if(kingWolf.x < 107*m){
     kingWolf.body.velocity.x = 400;
+    }else {
+      kingWolf.body.velocity.x = 0;
     }
   }if (kingWolf.health === 0) {
     wolfLife1.frame = 1;
@@ -473,6 +487,14 @@ function wolfKingAnimationUpdate() {
     carcassa.frame = 17;
   }
 };
+
+function animazioneRapimento(kingWolf, cappuccetto) {
+  cappuccetto.frame = 3;
+  cappuccetto.alpha = 0;
+  gabbia = game.add.sprite(11296,3478, 'cappuccetto')
+  gabbia.frame = 3;
+  kingWolf.scale.x = -1;
+}
 // wolves BEHAVE and FRAMES functions end
 
 //weapos START
