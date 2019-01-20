@@ -23,6 +23,8 @@ var GameLevel_2 = {
     game.load.spritesheet('heart', 'assets/images/heart22x22.png', 22, 22);
     game.load.image('livello2', 'assets/images/level2.png');
     game.load.image('skyBackground', 'assets/images/sky background.png');
+    game.load.image('tutorialS', 'assets/images/tutorial_S.png');
+    game.load.image('cadavere2', 'assets/images/cadavere2.png');
 
     worldPreload(); //find in World.js
     playerPreload(); //find in Player.js
@@ -40,9 +42,11 @@ var GameLevel_2 = {
     shake = 0.05;
     fristBone = 0;
     bulletN = 5;
-    fucileTerra = game.add.sprite(13*m, 8*m, 'fucile');
+    cadavere = game.add.sprite(10*m, 8*m, 'cadavere2');
+    fucileTerra = game.add.sprite(11.7*m, 8.6*m, 'fucile');
     game.physics.arcade.enable(fucileTerra);
     fucileTerra.enableBody = true;
+    tutorialS = game.add.sprite(15*m, 7.5*m, 'tutorialS');
 
     if (spawnY > 25*m) {
       fucile = true;

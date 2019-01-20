@@ -43,6 +43,7 @@ function worldPreload(){
   game.load.image('d1destroyed', 'assets/images/d1destroyed.png');
   game.load.image('border', 'assets/images/border.png');
   game.load.image('backPause', 'assets/images/backPause.png');
+  game.load.image('cadavere', 'assets/images/cadavere.png');
 
 };
 

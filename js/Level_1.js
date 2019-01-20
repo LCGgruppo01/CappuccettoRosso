@@ -211,8 +211,7 @@ var GameLevel_1 = {
     scene2.alpha = 0;
     scene2.fixedToCamera = true;
 
-    memoryObj2 = game.add.sprite(182*m, 55*m, 'memoryObj');
-    memoryObj2.tint = 0x1a53ff;
+    memoryObj2 = game.add.sprite(182*m, 55*m, 'cadavere');
     game.physics.arcade.enable(memoryObj2);
     memoryObj2.enableBody = true;
 

@@ -142,12 +142,13 @@ function kingWolfHit(player, kingWolf) {
 function wolfBulletDamagePatrol(bullet, wolf){
   if (game.time.now > immunity){
     if (wolf.health < 110 && Math.random() < 0.7 && fucile == true) {
-      ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
+      ammo = Ammos.create(wolf.x, wolf.y, 'ammo');
       ammo.body.gravity.y = gravity;
       ammo.body.bounce.y = 0.2;
     }
     if (wolf.health < 110 && Math.random() < 0.3) {
       life = Lives.create(wolf.x, wolf.y, 'heart');
+      life.frame = 3;
       life.body.gravity.y = gravity;
       life.body.bounce.y = 0.2;
     }
@@ -179,12 +180,13 @@ function wolfHitboxDamagePatrol(hitbox, wolf) {
       }
     }
     if (wolf.health < 100 && Math.random() < 0.7 && fucile == true) {
-      ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
+      ammo = Ammos.create(wolf.x, wolf.y, 'ammo');
       ammo.body.gravity.y = gravity;
       ammo.body.bounce.y = 0.2;
     }
     if (wolf.health < 100 && Math.random() < 0.3) {
       life = Lives.create(wolf.x, wolf.y, 'heart');
+      life.frame = 3;
       life.body.gravity.y = gravity;
       life.body.bounce.y = 0.2;
     }
@@ -210,12 +212,13 @@ function wolfHitboxDamageChaser(hitbox, wolf) {
       }
     }
     if (wolf.health < 100 && Math.random() < 0.7 && fucile == true) {
-      ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
+      ammo = Ammos.create(wolf.x, wolf.y, 'ammo');
       ammo.body.gravity.y = gravity;
       ammo.body.bounce.y = 0.2;
     }
     if (wolf.health < 100 && Math.random() < 0.3) {
       life = Lives.create(wolf.x, wolf.y, 'heart');
+      life.frame = 3;
       life.body.gravity.y = gravity;
       life.body.bounce.y = 0.2;
     }
@@ -229,12 +232,13 @@ function wolfHitboxDamageChaser(hitbox, wolf) {
 function wolfBulletDamageChaser(bullet, wolf){
   if (game.time.now > immunity){
     if (wolf.health < 110 && Math.random() < 0.7 && fucile == true) {
-      ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
+      ammo = Ammos.create(wolf.x, wolf.y, 'ammo');
       ammo.body.gravity.y = gravity;
       ammo.body.bounce.y = 0.2;
     }
     if (wolf.health < 110 && Math.random() < 0.3) {
       life = Lives.create(wolf.x, wolf.y, 'heart');
+      life.frame = 3;
       life.body.gravity.y = gravity;
       life.body.bounce.y = 0.2;
     }
@@ -324,8 +328,8 @@ function collectMe2(player, memoryObj2){
     d1Destroyed.alpha = 0;
     memoryObj2.kill();
     game.paused = true;
-    spawnX = 6;
-    spawnY = 6;
+    spawnX = 8;
+    spawnY = 8;
     game.input.onDown.add(nextLevelImg, this);
   }
 };
@@ -339,6 +343,7 @@ function collectMe3(player, fucileTerra){
     playerDown.alpha = 0;
     bar.alpha = 0;
     barGranny.alpha = 0;
+    tutorialS.alpha = 0;
     Hearts.alpha = 0;
     fucileTerra.kill();
     game.paused = true;
@@ -896,11 +901,11 @@ function unpaused(event){
       if (level == 1) {
         this.game.state.start('GameLevel_1');
         spawnX = 4*m;
-        spawnY = 54*m;
+        spawnY = 55*m;
       }else if (level == 2) {
         this.game.state.start('GameLevel_2');
-        spawnX = 6*m;
-        spawnY = 5*m;
+        spawnX = 9.5*m;
+        spawnY = 8*m;
       }
     });
 
@@ -913,7 +918,7 @@ function unpaused(event){
       backPause.alpha = 0;
       this.game.state.start('GameStart');
       spawnX = 4*m;
-      spawnY = 54*m;
+      spawnY = 55*m;
       fucile = false;
     });
   }
@@ -936,6 +941,7 @@ function unpauseImage(event){
   }
   scene1.alpha = 0;
   scene2.alpha = 0;
+  Carcasse.setAll('alpha', 1);
 };
 
 function unpauseImage2(event){
@@ -950,6 +956,8 @@ function unpauseImage2(event){
     scene3.alpha = 0;
   }
   scene4.alpha = 0;
+  Carcasse.setAll('alpha', 1);
+  tutorialS.alpha = 1;
 };
 
 function nextLevelImg(event){
@@ -965,8 +973,8 @@ function nextLevelImg(event){
   scene2.alpha = 0;
   this.game.state.start('GameLevel_2');
   playerUp.health = 100;
-  spawnX = 6*m;
-  spawnY = 5*m;
+  spawnX = 9.5*m;
+  spawnY = 8*m;
 };
 
 function endImg(event) {
