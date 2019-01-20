@@ -656,7 +656,7 @@ function rifle(){
     }
 
   }
-}
+};
 
 function weaposChange(){
   if(CTRL.isDown && gotAxe == 1 && game.time.now > changeWeapon && fucile == true){

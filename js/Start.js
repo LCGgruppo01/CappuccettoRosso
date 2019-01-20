@@ -16,8 +16,6 @@ var GameStart = {
     game.load.image('copertinaMG', 'assets/images/copertinaMG.png');
     game.load.image('copertinaMBG', 'assets/images/copertinaMBG.png');
     game.load.image('start', 'assets/images/start.png');
-    game.load.image('startL1', 'assets/images/startL1.png');
-    game.load.image('startL2', 'assets/images/startL2.png');
     game.load.image('startCR', 'assets/images/startCR.png');
     game.load.image('startAU', 'assets/images/startAU.png');
     game.load.image('startHO', 'assets/images/startHO.png');
