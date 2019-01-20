@@ -829,9 +829,8 @@ function pauseMenu() {
   pause.fixedToCamera = true;
 
   P.onDown.add(paused, this);
-  pause.events.onInputUp.add(paused), this;
   pause.events.onInputUp.add(paused);
-  game.input.onDown.add(unpaused, this);
+  game.input.onDown.add(unpaused);
   //aggiungo per fixare un bug
   onPause = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
   restart = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
@@ -936,6 +935,8 @@ function unpaused(){
 // TEST & DEBUG functions
 function unpauseImage(event){
   game.paused = false;
+  scene1.inputEnabled = false;
+  scene2.inputEnabled = false;
   memoryObjCollect++
   playerUp.alpha = 1;
   playerDown.alpha = 1;
@@ -952,6 +953,8 @@ function unpauseImage(event){
 
 function unpauseImage2(event){
   game.paused = false;
+  scene4.inputEnabled = false;
+  scene5.inputEnabled = false;
   memoryObjCollect++
   playerUp.alpha = 1;
   playerDown.alpha = 1;
@@ -960,6 +963,7 @@ function unpauseImage2(event){
   Hearts.alpha = 1;
   if (spawnY <= 25*m) {
     scene3.alpha = 0;
+    scene3.inputEnabled = false;
   }
   scene4.alpha = 0;
   Carcasse.setAll('alpha', 1);
