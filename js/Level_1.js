@@ -5,6 +5,7 @@ var step1 = 0;
 var memoryObjCollect = 0;
 var level1back;
 var gabbia;
+var vitaFineLivello;
 
 var GameLevel_1 = {
 
@@ -292,6 +293,7 @@ var GameLevel_1 = {
             step1 = 1;
             cappuccetto.body.velocity.x = 250;
             kingWolf.body.velocity.x = 250;
+            vitaFineLivello = playerUp.health;
           }
         }, 3000);
       }

@@ -63,6 +63,7 @@ var GameLevel_2 = {
 
     worldCreate(); //find in World.js
     playerCreate(); //find in Player.js
+    playerUp.health = vitaFineLivello;
 
     //Cave entering
     wolfCreate(27,7);
