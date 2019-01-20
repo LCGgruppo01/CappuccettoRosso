@@ -310,7 +310,7 @@ function collectMe1(player, memoryObj1){
     d1Destroyed.alpha = 0;
     memoryObj1.kill();
     game.paused = true;
-    game.input.onDown.add(unpauseImage, this);
+    game.input.onDown.add(unpauseImage);
   }
 };
 
@@ -349,8 +349,6 @@ function collectMe3(player, fucileTerra){
     game.paused = true;
     game.input.onDown.add(unpauseImage2, this);
     fucile = true;
-    ammoCount = game.add.text(0.5*m, 3*m, 'ammo: ', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
-    ammoCount.fixedToCamera = true;
     gotAxe = 2;
   }
 };
@@ -368,6 +366,7 @@ function collectMe4(player, memoryObj4){
     secretHall.alpha = 0;
     memoryObj4.kill();
     game.paused = true;
+    ammoCount.alpha = 0;
     game.input.onDown.add(unpauseImage2, this);
   }
 };
@@ -672,19 +671,13 @@ function weaposChange(){
     gotAxe = 1;
     changeWeapon = game.time.now + 300;
   }
-
-  if (gotAxe === 0) {
-    weaponImage.frame = 0;
-  }else if (gotAxe == 1) {
-    weaponImage.frame = 1;
-  }else if (gotAxe == 2) {
-    weaponImage.frame = 2;
-  }
 };
 
 function collectAmmo(player, ammo) {
   ammo.kill();
-  bulletN++;
+  if (bulletN < 10) {
+    bulletN++;
+  }
 };
 
 function heal(player, life){
@@ -853,22 +846,24 @@ function paused() {
      onPause.inputEnabled = true;
      onPause.fixedToCamera = true;
 
-     restart = game.add.sprite(500, 400, 'buttonCheck');
+     restart = game.add.sprite(512, 650, 'buttonCheck');
+     restart.anchor.setTo(0.5,0);
      restart.inputEnabled = true;
      restart.fixedToCamera = true;
 
-     restartLevel = game.add.sprite(500, 450, 'buttonLevel');
+     restartLevel = game.add.sprite(924, 650, 'buttonLevel');
+     restartLevel.anchor.setTo(1,0);
      restartLevel.inputEnabled = true;
      restartLevel.fixedToCamera = true;
 
-     mainMenu = game.add.sprite(500, 200, 'buttonMenu');
+     mainMenu = game.add.sprite(100, 650, 'buttonMenu');
      mainMenu.inputEnabled = true;
      mainMenu.fixedToCamera = true;
 
   }
 };
 
-function unpaused(event){
+function unpaused(){
   if (game.paused) {
     onPause.events.onInputUp.add(function(){
       game.paused = false;

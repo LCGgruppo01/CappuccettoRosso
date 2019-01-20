@@ -42,21 +42,8 @@ var GameStart = {
     start.anchor.setTo(1,0);
     start.inputEnabled = true;
     start.events.onInputUp.add(imageClick);
-    l1 = game.add.sprite(512, 100, '');
-    game.physics.arcade.enable(l1);
-    l1.enableBody = true;
-    l1.anchor.setTo(.5,.5);
-    l1.inputEnabled = true;
-    l1.events.onInputUp.add(imageClickLevel1);
-    l2 = game.add.sprite(512, 500, '');
-    game.physics.arcade.enable(l2);
-    l2.enableBody = true;
-    l2.anchor.setTo(.5,.5);
-    l2.inputEnabled = true;
-    l2.events.onInputUp.add(imageClickLevel2);
 
     CR = game.add.sprite(50, 718, 'startCR');
-    CR.anchor.setTo(0,0);
     CR.inputEnabled = true;
     CR.events.onInputUp.add(imageClickCR);
     AU = game.add.sprite(974, 718, 'startAU');
@@ -76,8 +63,6 @@ var GameStart = {
       copertinaMBG.body.velocity.x = parallaxMBG;
       copertinaMG.body.velocity.x = parallaxMG;
       start.body.velocity.x = parallaxFFG;
-      l1.body.velocity.x = parallaxFFG;
-      l2.body.velocity.x = parallaxFFG;
       copertinaFG.body.velocity.x = parallaxFG;
     }
     else if (copertinaFG.body.x >= -2248 && au == true) {
@@ -85,8 +70,6 @@ var GameStart = {
       copertinaMBG.body.velocity.x = -parallaxMBG;
       copertinaMG.body.velocity.x = -parallaxMG;
       start.body.velocity.x = -parallaxFFG;
-      l1.body.velocity.x = -parallaxFFG;
-      l2.body.velocity.x = -parallaxFFG;
       copertinaFG.body.velocity.x = -parallaxFG;
     }
     else if ((copertinaFG.body.x <= -1025 || copertinaFG.body.x >= -1023) && ho == true) {
@@ -95,8 +78,6 @@ var GameStart = {
         copertinaMBG.body.velocity.x = parallaxMBG;
         copertinaMG.body.velocity.x = parallaxMG;
         start.body.velocity.x = parallaxFFG;
-        l1.body.velocity.x = parallaxFFG;
-        l2.body.velocity.x = parallaxFFG;
         copertinaFG.body.velocity.x = parallaxFG;
       }
       else if (copertinaFG.body.x > -1024) {
@@ -104,8 +85,6 @@ var GameStart = {
         copertinaMBG.body.velocity.x = -parallaxMBG;
         copertinaMG.body.velocity.x = -parallaxMG;
         start.body.velocity.x = -parallaxFFG;
-        l1.body.velocity.x = -parallaxFFG;
-        l2.body.velocity.x = -parallaxFFG;
         copertinaFG.body.velocity.x = -parallaxFG;
       }
     }
@@ -115,8 +94,6 @@ var GameStart = {
       copertinaMG.body.velocity.x = 0;
       copertinaFG.body.velocity.x = 0;
       start.body.velocity.x = 0;
-      l1.body.velocity.x = 0;
-      l2.body.velocity.x = 0;
       cr = false;
       au = false;
       ho = false;
@@ -132,19 +109,9 @@ var GameStart = {
 };
 
 function imageClick() {
-    this.game.state.start('ScenaBloodmoon');
-}
-
-function imageClickLevel1() {
-    spawnX = 2*m;
-    spawnY = 56*m;
-    this.game.state.start('GameLevel_1');
-}
-
-function imageClickLevel2() {
-    spawnX = 6*m;
-    spawnY = 6*m;
-    this.game.state.start('GameLevel_2');
+  spawnX = 96*m;
+  spawnY = 51*m;
+  this.game.state.start('ScenaBloodmoon');
 }
 
 function imageClickCR() {

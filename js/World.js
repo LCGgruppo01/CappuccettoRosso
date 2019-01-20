@@ -12,9 +12,9 @@ var cheat = 0;
 var cheat1 = 0;
 var cheat2 = 0;
 var cheat3 = 0;
-var weaponImage;
 var level;
 var viewTop;
+var ammoCount;
 
 function worldPreload(){
 
@@ -23,11 +23,11 @@ function worldPreload(){
   game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 64, 128);
   game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
   game.load.spritesheet('heart', 'assets/images/heart22x22.png', 22, 22);
-  game.load.spritesheet('weapon', 'assets/images/weapon.png', 128, 64);
   game.load.spritesheet('bullet', 'assets/images/bullet.png', 32, 16);
   game.load.spritesheet('bone', 'assets/images/osso40x40.png', 40, 40);
   game.load.spritesheet('cappuccetto', 'assets/images/cappuccetto68x106.png', 68, 106);
   game.load.spritesheet('kingWolf', 'assets/images/spriteboss122x156.png', 122, 156);
+  game.load.spritesheet('ammoCount', 'assets/images/ammocount124x36.png', 124, 36);
 
   game.load.image('pauseButton', 'assets/images/buttonPause.png');
   game.load.image('buttonPlay', 'assets/images/buttonPlay.png');
@@ -115,6 +115,10 @@ function worldCreate(){
 
   // WORLD STUFFS end
 
+  //ammo rifle
+  ammoCount = game.add.sprite(0.5*m, 1*m, 'ammoCount')
+  ammoCount.fixedToCamera = true;
+
   //life
   Hearts = game.add.group();
 
@@ -137,13 +141,6 @@ function worldCreate(){
   barGranny.fixedToCamera = true;
   game.physics.arcade.enable(barGranny);
   barGranny.enableBody = true;
-  //weapon
-  weaponImage = game.add.sprite(0.5*m, 1*m, 'weapon');
-  weaponImage.fixedToCamera = true;
-  if (fucile == true) {
-    ammoCount = game.add.text(0.5*m, 3*m, 'ammo: ', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
-    ammoCount.fixedToCamera = true;
-  }
 
   borderTop = game.add.sprite(0, -150, 'border');
   borderTop.fixedToCamera = true;
@@ -241,9 +238,14 @@ function worldUpdate(){
   weaposChange(); //find in Functions.js
 
   if (fucile == true) {
-    ammoCount.text = 'ammo: ' + bulletN;
+    ammoCount.alpha = 1;
+    ammoCount.frame = 10 - bulletN;
     rifle(); //find in Functions.js
+  }else {
+    ammoCount.alpha = 0;
   }
-
+  if (game.paused == true) {
+    ammoCount.alpha = 0;
+  }
 
 };

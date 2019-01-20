@@ -23,13 +23,12 @@ var GameLevel_1 = {
     game.load.image('p4', 'assets/images/p4.png');
     game.load.image('p5', 'assets/images/p5.png');
     game.load.image('p6', 'assets/images/p6.png');
-    game.load.image('s1', 'assets/images/s1.png');
     game.load.image('t1', 'assets/images/t1.png');
     game.load.image('tutorialMove', 'assets/images/tutorial_move.png');
     game.load.image('tutorialUp', 'assets/images/tutorial_up.png');
     game.load.image('tutorialAxe', 'assets/images/tutorial_axe.png');
     game.load.image('tutorialSpace', 'assets/images/tutorial_space.png');
-    game.load.image('memoryObj', 'assets/images/memory_object.png');
+    game.load.image('memoryObj', 'assets/images/mantella.png');
 
     game.load.image('scena1', 'assets/scene/cappuccetto nel bosco.jpg');
 
@@ -144,7 +143,7 @@ var GameLevel_1 = {
     trunkCreate(87,1,43);
     trunkCreate(87,48,6);
     //platform spine
-    thornsCreate(93,57,67)
+    thornsCreate(93,57,64)
     platformCreate(93,52,9);
     checkpointCreate(98,50);
     platformCreate(104,54,6);
@@ -201,7 +200,7 @@ var GameLevel_1 = {
     scene1.alpha = 0;
     scene1.fixedToCamera = true;
 
-    memoryObj1 = game.add.sprite(86*m, 51*m, 'memoryObj');
+    memoryObj1 = game.add.sprite(85*m, 51.3*m, 'memoryObj');
     game.physics.arcade.enable(memoryObj1);
     memoryObj1.enableBody = true;
 
