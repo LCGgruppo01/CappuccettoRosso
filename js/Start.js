@@ -2,10 +2,10 @@ var cr = false;
 var au = false;
 var ho = false;
 var parallaxBG = 100;
-var parallaxMBG = 300;
-var parallaxMG = 500;
-var parallaxFG = 700;
-var parallaxFFG = 850;
+var parallaxMBG = 350;
+var parallaxMG = 600;
+var parallaxFG = 800;
+var parallaxFFG = 950;
 
 var GameStart = {
 
