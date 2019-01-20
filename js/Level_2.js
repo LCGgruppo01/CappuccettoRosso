@@ -203,7 +203,7 @@ var GameLevel_2 = {
     thorns.setAll('alpha','0');
     platforms.setAll('alpha','0');
     platformsOver.setAll('alpha','0');
-
+    
   },
 
   update: function() {

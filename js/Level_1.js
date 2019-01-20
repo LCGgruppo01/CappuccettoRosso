@@ -15,7 +15,7 @@ var GameLevel_1 = {
 
     game.load.crossOrigin = 'anonymous';
 
-    game.load.spritesheet('axe', 'assets/images/axe_64.png', 64, 64);
+    game.load.spritesheet('axe', 'assets/images/axe80x80.png', 80, 80);
 
     game.load.image('p1', 'assets/images/p1.png');
     game.load.image('p2', 'assets/images/p2.png');
@@ -56,9 +56,9 @@ var GameLevel_1 = {
     //Backgrounds
     game.add.sprite(6.5*m, 57*m, 'tutorialMove');
     game.add.sprite(10.5*m, 55*m, 'tutorialUp');
-    game.add.sprite(14.25*m, 53.5*m, 'tutorialAxe');
+    game.add.sprite(14.25*m, 53.1*m, 'tutorialAxe');
     game.add.sprite(15.75*m, 54*m, 'tutorialSpace');
-    axe = game.add.sprite(14*m, 54*m, 'axe');
+    axe = game.add.sprite(13.9*m, 53.8*m, 'axe');
     axe.frame= 1;
     game.physics.arcade.enable(axe);
     //trunkBg(47,1,60);
@@ -144,7 +144,7 @@ var GameLevel_1 = {
     trunkCreate(87,1,43);
     trunkCreate(87,48,6);
     //platform spine
-    thornsCreate(90,57,67)
+    thornsCreate(93,57,67)
     platformCreate(93,52,9);
     checkpointCreate(98,50);
     platformCreate(104,54,6);
