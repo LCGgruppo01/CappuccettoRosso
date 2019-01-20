@@ -29,6 +29,11 @@ function worldPreload(){
   game.load.spritesheet('cappuccetto', 'assets/images/cappuccetto68x106.png', 68, 106);
   game.load.spritesheet('kingWolf', 'assets/images/spriteboss122x156.png', 122, 156);
 
+  game.load.image('pauseButton', 'assets/images/buttonPause.png');
+  game.load.image('buttonPlay', 'assets/images/buttonPlay.png');
+  game.load.image('buttonMenu', 'assets/images/buttonMenu.png');
+  game.load.image('buttonCheck', 'assets/images/buttonCheck.png');
+  game.load.image('buttonLevel', 'assets/images/buttonLevel.png');
 
   game.load.image('ammo', 'assets/images/ammo.png');
   game.load.image('thorns', 'assets/images/thorns.png');
