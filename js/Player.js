@@ -8,6 +8,8 @@ var immunity = 0;
 var position = "rightt";
 var timeAxe = 0;
 var animAxe;
+var lancio;
+var danno;
 var bulletN = 5;
 
 function playerPreload(){
@@ -128,5 +130,6 @@ function playerUpdate(){
   playerDown.body.y = playerUp.body.y;
 
   hitBoxUpdate();
+  flashDamage();
 
 };

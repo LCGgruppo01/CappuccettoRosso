@@ -19,7 +19,7 @@ var Rapimento = {
 };
 
 function imageClick4() {
-    this.game.state.start('GameLevel_2');
+    this.game.state.start('GameLevel_1');
 }
 
 game.state.add('Rapimento', Rapimento);

@@ -21,9 +21,13 @@ function worldPreload(){
   game.load.spritesheet('wolf', 'assets/images/wolf.png', 64, 128);
   game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 64, 128);
   game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
-  game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
+  game.load.spritesheet('heart', 'assets/images/heart22x22.png', 22, 22);
   game.load.spritesheet('weapon', 'assets/images/weapon.png', 128, 64);
   game.load.spritesheet('bullet', 'assets/images/bullet.png', 32, 16);
+  game.load.spritesheet('bone', 'assets/images/osso40x40.png', 40, 40);
+  game.load.spritesheet('cappuccetto', 'assets/images/cappuccetto68x106.png', 68, 106);
+  game.load.spritesheet('kingWolf', 'assets/images/spriteboss122x156.png', 122, 156);
+
 
   game.load.image('ammo', 'assets/images/ammo.png');
   game.load.image('thorns', 'assets/images/thorns.png');
@@ -36,10 +40,9 @@ function worldPreload(){
   game.load.image('bar', 'assets/images/bar.png');
   game.load.image('barGranny', 'assets/images/barGranny.png');
   game.load.image('d1destroyed', 'assets/images/d1destroyed.png');
-  game.load.image('kingWolf', 'assets/images/kingWolf.png');
-  game.load.image('cappuccetto', 'assets/images/cappuccetto.png');
   game.load.image('border', 'assets/images/border.png');
   game.load.image('backPause', 'assets/images/backPause.png');
+
 };
 
 function worldCreate(){
@@ -225,7 +228,6 @@ function worldUpdate(){
 
   cheats();
   testUpdate();
-  flashDamage();
   weaposChange(); //find in Functions.js
 
   if (fucile == true) {
