@@ -378,13 +378,11 @@ function wolfFrames(Wolves){
 function wolfKingShot(){
   if (game.time.now > kingShot && kingWolf.health > 0 && kingWolf.body.velocity.x === 0) {
     kingWolf.animations.play('lancio');
-    setTimeout(function(){
-      bone = Bones.create(kingWolf.x, kingWolf.y, 'bone');
-      bone.animations.add('boneAnimation', [0, 1, 2], 10, true);
-      bone.animations.play('boneAnimation');
-      bone.rimbalzo = 0;
-      bone.body.gravity.y = gravity;
-    }, 300);
+    bone = Bones.create(kingWolf.x, kingWolf.y, 'bone');
+    bone.animations.add('boneAnimation', [0, 1, 2], 10, true);
+    bone.animations.play('boneAnimation');
+    bone.rimbalzo = 0;
+    bone.body.gravity.y = gravity;
 
     if (kingWolf.body.position.x < 100*m) {
       if (player.y >= kingWolf.y) {

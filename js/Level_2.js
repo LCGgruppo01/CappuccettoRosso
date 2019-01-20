@@ -361,7 +361,7 @@ var GameLevel_2 = {
     }
     wolvesBehave(Wolves); //find in Functions.js
     wolfKingAnimationUpdate();
-    cappuccetto.animations.play('ferma');
+    cappuccetto2.animations.play('ferma');
   },
 
 };
