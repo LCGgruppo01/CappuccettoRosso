@@ -16,9 +16,9 @@ var GameLevel_2 = {
     game.world.height=60*m;
     game.load.image('secretHall', 'assets/images/secretHall.png');
     game.load.image('fucile', 'assets/images/fucile.png');
-    game.load.image('scena4', 'assets/scene/cappuccetto alla finestra.jpg');
-    game.load.image('scena3', 'assets/scene/cappuccetto alla finestra.jpg');
-    game.load.image('scena5', 'assets/scene/cappuccetto alla finestra.jpg');
+    game.load.image('scena4', 'assets/scene/liscia.jpg');
+    game.load.image('scena3', 'assets/scene/torna.jpg');
+    game.load.image('scena5', 'assets/scene/finito.jpg');
     game.load.spritesheet('heart', 'assets/images/heart22x22.png', 22, 22);
     game.load.image('livello2', 'assets/images/level2.png');
     game.load.image('skyBackground', 'assets/images/sky background.png');
@@ -226,7 +226,7 @@ var GameLevel_2 = {
     }
 
     if(playerUp.health <= 0){
-      this.game.state.start('GameLevel_2');
+      this.game.state.start('BadEnd2');
     }
 
     if(wolvesKilled >= 5){

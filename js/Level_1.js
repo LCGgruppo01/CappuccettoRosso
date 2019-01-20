@@ -30,7 +30,8 @@ var GameLevel_1 = {
     game.load.image('tutorialSpace', 'assets/images/tutorial_space.png');
     game.load.image('memoryObj', 'assets/images/mantella.png');
 
-    game.load.image('scena1', 'assets/scene/cappuccetto nel bosco.jpg');
+    game.load.image('scena1', 'assets/scene/avvicinando.jpg');
+    game.load.image('scena2', 'assets/scene/latroverò.jpg');
 
     game.load.image('livello1', 'assets/images/level1.png');
     game.load.image('livello1back', 'assets/images/level1sfondo.png');
@@ -204,9 +205,7 @@ var GameLevel_1 = {
     game.physics.arcade.enable(memoryObj1);
     memoryObj1.enableBody = true;
 
-
-    scene2 = game.add.sprite(0, 0, 'scena1');
-    scene2.tint = 0x1a53ff;
+    scene2 = game.add.sprite(0, 0, 'scena2');
     scene2.alpha = 0;
     scene2.fixedToCamera = true;
 
@@ -302,7 +301,7 @@ var GameLevel_1 = {
     barGranny.cameraOffset.x = playerUp.body.position.x/32 + 3*m;
 
     if(playerUp.health <= 0){
-      this.game.state.start('GameLevel_1');
+      this.game.state.start('BadEnd1');
       gotAxe=0;
     }
 

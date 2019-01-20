@@ -2,7 +2,7 @@ var RitornoLupi = {
 
   preload: function() {
     game.load.crossOrigin = 'anonymous';
-    game.load.image('scena2', 'assets/scene/ritorno lupi.jpg');
+    game.load.image('scena2', 'assets/scene/famelicialleati.jpg');
   },
 
   create: function() {

@@ -821,8 +821,9 @@ function pauseMenu() {
   pause.fixedToCamera = true;
 
   P.onDown.add(paused, this);
+  pause.events.onInputUp.add(paused), this;
   pause.events.onInputUp.add(paused);
-  game.input.onDown.add(unpaused);
+  game.input.onDown.add(unpaused, this);
   //aggiungo per fixare un bug
   onPause = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
   restart = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
