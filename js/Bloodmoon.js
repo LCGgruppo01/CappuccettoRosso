@@ -2,7 +2,7 @@ var ScenaBloodmoon = {
 
   preload: function() {
     game.load.crossOrigin = 'anonymous';
-    game.load.image('scena1', 'assets/scene/bloodmoon.jpg');
+    game.load.image('scena1', 'assets/scene/rossocielo.jpg');
   },
 
   create: function() {

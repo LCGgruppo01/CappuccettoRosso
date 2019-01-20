@@ -829,8 +829,9 @@ function pauseMenu() {
   pause.fixedToCamera = true;
 
   P.onDown.add(paused, this);
+  pause.events.onInputUp.add(paused), this;
   pause.events.onInputUp.add(paused);
-  game.input.onDown.add(unpaused);
+  game.input.onDown.add(unpaused, this);
   //aggiungo per fixare un bug
   onPause = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
   restart = game.add.text(500, 350, ' ', { font: '24px Arial', fill: '#fff' });
@@ -854,22 +855,25 @@ function paused() {
      onPause.inputEnabled = true;
      onPause.fixedToCamera = true;
 
-     restart = game.add.sprite(500, 400, 'buttonCheck');
+     restart = game.add.sprite(512, 650, 'buttonCheck');
+     restart.anchor.setTo(0.5,0);
      restart.inputEnabled = true;
      restart.fixedToCamera = true;
 
-     restartLevel = game.add.sprite(500, 450, 'buttonLevel');
+     restartLevel = game.add.sprite(924, 650, 'buttonLevel');
+     restartLevel.anchor.setTo(1,0);
      restartLevel.inputEnabled = true;
      restartLevel.fixedToCamera = true;
 
-     mainMenu = game.add.sprite(500, 200, 'buttonMenu');
+     mainMenu = game.add.sprite(100, 650, 'buttonMenu');
      mainMenu.inputEnabled = true;
      mainMenu.fixedToCamera = true;
 
   }
 };
 
-function unpaused(event){
+function unpaused(){
+  if (game.paused) {
     onPause.events.onInputUp.add(function(){
       game.paused = false;
       onPause.kill();
