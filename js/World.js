@@ -159,8 +159,6 @@ function worldCreate(){
   borderBottom.scale.x = 1.5;
   borderBottom.scale.y = 1.5;
 
-
-  testCreate();
   pauseMenu();
 
 
@@ -236,7 +234,6 @@ function worldUpdate(){
   wolfFrames(WolvesP); //find in Functions.js
 
   cheats();
-  testUpdate();
   weaposChange(); //find in Functions.js
 
   if (fucile == true) {

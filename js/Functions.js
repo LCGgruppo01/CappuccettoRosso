@@ -928,13 +928,12 @@ function unpaused(){
       spawnY = 55*m;
       fucile = false;
     });
-
+  }
 };
 
 //end PAUSE menù
 
 // TEST & DEBUG functions
-
 function unpauseImage(event){
   game.paused = false;
   memoryObjCollect++
@@ -987,16 +986,6 @@ function nextLevelImg(event){
 function endImg(event) {
   game.paused = false;
   this.game.state.start('GameStart');
-};
-
-function testCreate(){
-  H=game.input.keyboard.addKey(Phaser.Keyboard.H);
-};
-function testUpdate(){
-  if(H.isDown){
-    playerUp.heal(100);
-    bulletN = 5;
-  }
 };
 
 function render() {

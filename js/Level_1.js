@@ -319,7 +319,7 @@ var GameLevel_1 = {
   },
 
   imageClick: function(pointer) {
-      this.game.state.start('GameLevel_2');
+      this.game.state.start('GameLevel_1');
   }
 
 };
