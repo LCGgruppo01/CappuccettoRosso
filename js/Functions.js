@@ -161,6 +161,9 @@ function wolfBulletDamagePatrol(bullet, wolf){
   carcassa1.body.setSize(0, 0, 0, 12);
   carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
   carcassa1.animations.play('animazioneCarcassa');
+  if (wolf.body.velocity.x > 0) {
+    carcassa1.scale.x = -1;
+  }
 };
 
 function wolfHitboxDamagePatrol(hitbox, wolf) {
@@ -171,6 +174,9 @@ function wolfHitboxDamagePatrol(hitbox, wolf) {
       carcassa1.body.setSize(0, 0, 0, 12);
       carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
       carcassa1.animations.play('animazioneCarcassa');
+      if (wolf.body.velocity.x > 0) {
+        carcassa1.scale.x = -1;
+      }
     }
     if (wolf.health < 100 && Math.random() < 0.7 && fucile == true) {
       ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
@@ -199,6 +205,9 @@ function wolfHitboxDamageChaser(hitbox, wolf) {
       carcassa1.body.setSize(0, 0, 0, 12);
       carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
       carcassa1.animations.play('animazioneCarcassa');
+      if (wolf.body.velocity.x > 0) {
+        carcassa1.scale.x = -1;
+      }
     }
     if (wolf.health < 100 && Math.random() < 0.7 && fucile == true) {
       ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
@@ -239,6 +248,9 @@ function wolfBulletDamageChaser(bullet, wolf){
   carcassa1.body.setSize(0, 0, 0, 12);
   carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
   carcassa1.animations.play('animazioneCarcassa');
+  if (wolf.body.velocity.x > 0) {
+    carcassa1.scale.x = -1;
+  }
 };
 
 

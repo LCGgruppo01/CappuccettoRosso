@@ -51,7 +51,7 @@ var GameLevel_1 = {
     level1back = game.add.sprite(1*m, 1*m, 'livello1back');
     game.physics.arcade.enable(level1back);
     level1back.enableBody = true;
-    level1 = game.add.sprite(1*m, 1*m, 'livello1');
+    level1 = game.add.sprite(0*m, 1*m, 'livello1');
 
     //Backgrounds
     game.add.sprite(6.5*m, 57*m, 'tutorialMove');
@@ -222,7 +222,7 @@ var GameLevel_1 = {
   thorns.setAll('alpha','0');
 
   game.time.events.loop(500, function () {
-    level1back.body.velocity.y = - playerUp.body.velocity.y/40;
+    level1back.body.velocity.y = - playerUp.body.velocity.y/20;
   });
 
 
