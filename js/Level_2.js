@@ -15,7 +15,6 @@ var GameLevel_2 = {
     game.world.width=126*m;
     game.world.height=60*m;
     game.load.image('secretHall', 'assets/images/secretHall.png');
-    game.load.image('memoryObj', 'assets/images/memory_object.png');
     game.load.image('fucile', 'assets/images/fucile.png');
     game.load.image('scena4', 'assets/scene/cappuccetto alla finestra.jpg');
     game.load.image('scena3', 'assets/scene/cappuccetto alla finestra.jpg');
@@ -25,6 +24,8 @@ var GameLevel_2 = {
     game.load.image('skyBackground', 'assets/images/sky background.png');
     game.load.image('tutorialS', 'assets/images/tutorial_S.png');
     game.load.image('cadavere2', 'assets/images/cadavere2.png');
+    game.load.image('tronco', 'assets/images/troncofinale.png');
+    game.load.image('artiglio', 'assets/images/artiglio.png');
 
     worldPreload(); //find in World.js
     playerPreload(); //find in Player.js
@@ -106,8 +107,7 @@ var GameLevel_2 = {
     scene4.alpha = 0;
     scene4.fixedToCamera = true;
 
-    memoryObj4 = game.add.sprite(24*m, 40*m, 'memoryObj');
-    memoryObj4.tint = 0x1a53ff;
+    memoryObj4 = game.add.sprite(24*m, 39.6*m, 'artiglio');
     game.physics.arcade.enable(memoryObj4);
     memoryObj4.enableBody = true;
 
@@ -158,7 +158,8 @@ var GameLevel_2 = {
     platformCreate(101,53,3);
     platformCreate(105,55,2);
     //cutscene
-    rockCutscene = platforms.create(93*m, 48*m, '');
+    rockCutscene = platforms.create(93*m, 48*m, 'tronco');
+    rockCutscene.alpha = 1;
     rockCutscene.body.setSize(9*m, 1*m, 0, 0);
     rockCutscene.body.immovable = true;
 
@@ -203,7 +204,7 @@ var GameLevel_2 = {
     thorns.setAll('alpha','0');
     platforms.setAll('alpha','0');
     platformsOver.setAll('alpha','0');
-    
+
   },
 
   update: function() {
@@ -366,6 +367,7 @@ var GameLevel_2 = {
     wolvesBehave(Wolves); //find in Functions.js
     wolfKingAnimationUpdate();
     cappuccetto2.animations.play('ferma');
+    rockCutscene.alpha = 1;
   },
 
 };
