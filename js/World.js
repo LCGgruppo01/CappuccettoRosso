@@ -18,7 +18,8 @@ var viewTop;
 
 function worldPreload(){
 
-  game.load.spritesheet('wolf', 'assets/images/wolf.png', 64, 128);
+  game.load.spritesheet('wolfPatrol', 'assets/images/wolfPatrol110x140.png', 110, 140);
+  game.load.spritesheet('wolfChaser', 'assets/images/wolfChaser110x140.png', 110, 140);
   game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 64, 128);
   game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
   game.load.spritesheet('heart', 'assets/images/heart22x22.png', 22, 22);

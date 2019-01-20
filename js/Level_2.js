@@ -72,14 +72,14 @@ var GameLevel_2 = {
     platformCreate(38,20,4);
     rockCreate(33,23,9,1);
     //Horizontal 1
-    wolfPatrolCreate(33,21,41);
+    wolfPatrolCreate(33,21,40.5);
     rockCreate(33,24,1,8);
     platformCreate(29,24,4);
     platformCreate(24,26,4);
     rockCreate(4,19,29,1);
     rockCreate(26,32,8,1);
     thornsCreate(26,31,10);
-    wolfPatrolCreate(18,27,26);
+    wolfPatrolCreate(18,27,25.5);
     checkpointCreate(16,27);
     rockCreate(25,29,1,4);
     rockCreate(16,29,9,1);
@@ -128,12 +128,12 @@ var GameLevel_2 = {
     rockCreate(49,56,1,3);
     rockCreate(50,58,24,1);
     platformCreate(52,54,6);
-    wolfPatrolCreate(52,52,58);
+    wolfPatrolCreate(52,52,57.5);
     platformCreate(60,52,7);
-    wolfPatrolCreate(60,50,67);
+    wolfPatrolCreate(60,50,66.5);
     platformCreate(68,50,3);
     platformCreate(71,48,3);
-    wolfPatrolCreate(75,46,85);
+    wolfPatrolCreate(75,46,84.5);
     rockCreate(74,48,1,11);
     thornsCreate(50,57,26);
     rockCreate(75,48,5,1);
