@@ -158,8 +158,10 @@ function wolfBulletDamagePatrol(bullet, wolf){
   }
   bullet.kill();
   carcassa1 = Carcasse.create(wolf.x, wolf.y, 'wolfPatrol');
+  carcassa1.enableBody = true;
+  carcassa1.body.gravity.y = gravity;
   carcassa1.anchor.setTo(.5,.5);
-  carcassa1.body.setSize(0, 0, 0, 12);
+  carcassa1.body.setSize(110, 10, 0, 130);
   carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
   carcassa1.animations.play('animazioneCarcassa');
   if (wolf.body.velocity.x > 0) {
@@ -171,8 +173,10 @@ function wolfHitboxDamagePatrol(hitbox, wolf) {
   if (game.time.now > immunity && axeHit === false){
     if (wolf.health < 100) {
       carcassa1 = Carcasse.create(wolf.x, wolf.y, 'wolfPatrol');
+      carcassa1.enableBody = true;
+      carcassa1.body.gravity.y = gravity;
       carcassa1.anchor.setTo(.5,.5);
-      carcassa1.body.setSize(0, 0, 0, 12);
+      carcassa1.body.setSize(110, 10, 0, 130);
       carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
       carcassa1.animations.play('animazioneCarcassa');
       if (wolf.body.velocity.x > 0) {
@@ -203,8 +207,10 @@ function wolfHitboxDamageChaser(hitbox, wolf) {
   if (game.time.now > immunity && axeHit === false){
     if (wolf.health < 100) {
       carcassa1 = Carcasse.create(wolf.x, wolf.y, 'wolfChaser');
+      carcassa1.enableBody = true;
+      carcassa1.body.gravity.y = gravity;
       carcassa1.anchor.setTo(.5,.5);
-      carcassa1.body.setSize(0, 0, 0, 12);
+      carcassa1.body.setSize(110, 10, 0, 130);
       carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
       carcassa1.animations.play('animazioneCarcassa');
       if (wolf.body.velocity.x > 0) {
@@ -248,8 +254,10 @@ function wolfBulletDamageChaser(bullet, wolf){
   }
   bullet.kill();
   carcassa1 = Carcasse.create(wolf.x, wolf.y, 'wolfChaser');
+  carcassa1.enableBody = true;
+  carcassa1.body.gravity.y = gravity;
   carcassa1.anchor.setTo(.5,.5);
-  carcassa1.body.setSize(0, 0, 0, 12);
+  carcassa1.body.setSize(110, 10, 0, 130);
   carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
   carcassa1.animations.play('animazioneCarcassa');
   if (wolf.body.velocity.x > 0) {
@@ -310,7 +318,7 @@ function collectMe1(player, memoryObj1){
     d1Destroyed.alpha = 0;
     memoryObj1.kill();
     game.paused = true;
-    game.input.onDown.add(unpauseImage, this);
+    scene1.events.onInputUp.add(unpauseImage);
   }
 };
 
@@ -330,7 +338,7 @@ function collectMe2(player, memoryObj2){
     game.paused = true;
     spawnX = 8;
     spawnY = 8;
-    game.input.onDown.add(nextLevelImg, this);
+    scene2.events.onInputUp.add(nextLevelImg);
   }
 };
 
@@ -347,7 +355,7 @@ function collectMe3(player, fucileTerra){
     Hearts.alpha = 0;
     fucileTerra.kill();
     game.paused = true;
-    game.input.onDown.add(unpauseImage2, this);
+    scene3.events.onInputUp.add(unpauseImage2);
     fucile = true;
     gotAxe = 2;
   }
@@ -367,7 +375,7 @@ function collectMe4(player, memoryObj4){
     memoryObj4.kill();
     game.paused = true;
     ammoCount.alpha = 0;
-    game.input.onDown.add(unpauseImage2, this);
+    scene4.events.onInputUp.add(unpauseImage2);
   }
 };
 
@@ -382,7 +390,7 @@ function collectMe5(player, cappuccetto2){
     barGranny.alpha = 0;
     Hearts.alpha = 0;
     game.paused = true;
-    game.input.onDown.add(endImg, this);
+    scene5.events.onInputUp.add(endImg);
   }
 };
 
@@ -836,7 +844,7 @@ function paused() {
     // When the paus button is pressed, we pause the game
     setTimeout(function(){
       game.paused = true;
-     }, 20);
+    }, 20);
      backPause = game.add.sprite(0,0,"backPause");
      backPause.alpha = 0.7;
      backPause.fixedToCamera = true;
@@ -862,7 +870,6 @@ function paused() {
 };
 
 function unpaused(event){
-  if (game.paused) {
     onPause.events.onInputUp.add(function(){
       game.paused = false;
       onPause.kill();
@@ -917,7 +924,7 @@ function unpaused(event){
       spawnY = 55*m;
       fucile = false;
     });
-  }
+
 };
 
 //end PAUSE menù
