@@ -4,6 +4,7 @@ var wait = 0;
 var step1 = 0;
 var memoryObjCollect = 0;
 var level1back;
+var gabbia;
 
 var GameLevel_1 = {
 
@@ -81,19 +82,19 @@ var GameLevel_1 = {
     wolfCreate(42,53);
     //albero esterno
     platformCreate(26,50,6);
-    wolfPatrolCreate(26,48,31);
+    wolfPatrolCreate(26,48,30.5);
     platformCreate(35,51,7);
-    wolfPatrolCreate(35,49,42,1);
+    wolfPatrolCreate(35,49,41.5,1);
     platformCreate(34,47,5);
     platformCreate(28,46,3);
     platformCreate(31,44,4);
     platformCreate(35,51,7);
     platformCreate(24,41,7);
-    wolfPatrolCreate(24,39,31);
+    wolfPatrolCreate(24,39,30.5);
     platformCreate(34,39,10);
     platformCreate(27,37,5);
     platformCreate(37,36,10);
-    wolfPatrolCreate(37,34,47);
+    wolfPatrolCreate(37,34,46);
     //albero cavo 1
     trunkCreate(47,1,31);
     trunkCreate(47,36,22);
@@ -103,21 +104,21 @@ var GameLevel_1 = {
     platformCreate(57,32,3);
     platformCreate(50,30,4);
     platformCreate(54,27,5);
-    wolfPatrolCreate(54,25,59);
+    wolfPatrolCreate(54,25,58.5);
     platformCreate(50,25,3);
     platformCreate(53,23,5);
     platformCreate(57,21,3);
     platformCreate(52,19,4);
     platformCreate(50,17,3);
     platformCreate(54,15,4);
-    wolfPatrolCreate(54,13,58);
+    wolfPatrolCreate(54,13,57.5);
     platformsDes.create(61*m, 12*m, 'd1');
     trunkCreate(60,1,11);
     trunkCreate(60,16,42);
     //ponte
     platformCreate(63,16,11);
     checkpointCreate(64,14);
-    wolfPatrolCreate(66,14,74);
+    wolfPatrolCreate(66,14,73.5);
     //albero cavo 2
     trunkCreate(74,1,11);
     trunkCreate(74,16,42);
@@ -125,16 +126,16 @@ var GameLevel_1 = {
     platformCreate(77,16,4);
     platformCreate(83,19,4);
     platformCreate(77,23,7);
-    wolfPatrolCreate(77,21,84);
+    wolfPatrolCreate(77,21,83.5);
     platformCreate(81,27,4);
     platformCreate(80,31,7);
-    wolfPatrolCreate(80,29,86);
+    wolfPatrolCreate(80,29,85.5);
     platformCreate(78,36,3);
     platformCreate(77,39,7);
-    wolfPatrolCreate(77,37,84);
+    wolfPatrolCreate(77.5,37,83.5);
     platformCreate(80,43,7);
     platformCreate(77,48,10);
-    wolfPatrolCreate(77,46,85);
+    wolfPatrolCreate(77,46,84.5);
     platformCreate(79,51,4);
     platformCreate(85,52,2);
     platformCreate(82,54,3);
@@ -147,15 +148,15 @@ var GameLevel_1 = {
     platformCreate(93,52,9);
     checkpointCreate(98,50);
     platformCreate(104,54,6);
-    wolfPatrolCreate(104,52,110);
+    wolfPatrolCreate(104,52,109.5);
     platformCreate(112,52,2);
     platformCreate(116,55,9);
-    wolfPatrolCreate(116,53,125);
+    wolfPatrolCreate(116,53,124.5);
     platformCreate(128,54,2);
     platformCreate(137,54,1);
     platformCreate(141,53,1);
     platformCreate(144,51,7);
-    wolfPatrolCreate(144,49,151);
+    wolfPatrolCreate(144,49,150.5);
     platformCreate(152,53,4);
     platformCreate(156,56,30);
     platformsDes.create(170*m, 52*m, 'd1');
@@ -166,12 +167,13 @@ var GameLevel_1 = {
 
     //cutscene
     kingWolf = game.add.sprite(180*m, 51*m, 'kingWolf');
+    kingWolf.anchor.setTo(.5,.5);
     game.physics.arcade.enable(kingWolf);
     kingWolf.enableBody = true;
     kingWolf.body.gravity.y = gravity;
     wolfKingAnimationCreate()
 
-    cappuccetto = game.add.sprite(176.5*m, 53*m, 'cappuccetto');
+    cappuccetto = game.add.sprite(176*m, 53*m, 'cappuccetto');
     game.physics.arcade.enable(cappuccetto);
     cappuccetto.enableBody = true;
     cappuccetto.body.gravity.y = gravity;

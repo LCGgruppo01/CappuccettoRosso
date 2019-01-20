@@ -60,26 +60,28 @@ function thornsCreate(x, y,length){
 };
 
 function wolfCreate(x, y){
-  var wolf = Wolves.create(x*m, y*m, 'wolf');
+  var wolf = Wolves.create(x*m, y*m, 'wolfChaser');
   wolf.anchor.setTo(.5,.5);
+  wolf.body.setSize(105, 128, 0, 12);
   wolf.body.gravity.y = gravity;
   wolf.body.bounce.y = bounce;
   wolf.health = 100;
   wolf.casuale =0.2 + Math.random()*0.7;
-  wolf.animations.add('sane', [2, 3], 5, true);
-  wolf.animations.add('damage', [0, 1], 5, true);
+  wolf.animations.add('sane', [0, 1, 2, 3, 4, 5], 10, true);
+  wolf.animations.add('damage', [10, 11, 12, 13, 14, 15], 10, true);
 };
 
 function wolfPatrolCreate(x, y, fine){
-  var wolf = WolvesP.create(x*m, y*m, 'wolf');
-  wolf.anchor.setTo(.5,.5);
+  var wolf = WolvesP.create(x*m, y*m, 'wolfPatrol');
+  wolf.anchor.setTo(0.5,.5);
+  wolf.body.setSize(105, 128, 0, 12);
   wolf.body.gravity.y = gravity;
   wolf.body.bounce.y = bounce;
   wolf.inizio = x * m;
   wolf.fine = fine * m - 32;
   wolf.health = 100;
-  wolf.animations.add('sane', [2, 3], 5, true);
-  wolf.animations.add('damage', [0, 1], 5, true);
+  wolf.animations.add('sane', [0, 1, 2, 3, 4, 5], 10, true);
+  wolf.animations.add('damage', [10, 11, 12, 13, 14, 15], 10, true);
 };
 
 function checkpointCreate(x, y){
@@ -237,9 +239,12 @@ function collectMe2(player, memoryObj2){
     bar.alpha = 0;
     barGranny.alpha = 0;
     Hearts.alpha = 0;
+    gabbia.alpha = 0;
     d1Destroyed.alpha = 0;
     memoryObj2.kill();
     game.paused = true;
+    spawnX = 6;
+    spawnY = 6;
     game.input.onDown.add(nextLevelImg, this);
   }
 };
@@ -495,14 +500,17 @@ function wolfKingAnimationUpdate() {
     carcassa.frame = 17;
   }
 };
-
+var primavolta = 1;
 function animazioneRapimento(kingWolf, cappuccetto) {
   cappuccetto.frame = 3;
   cappuccetto.alpha = 0;
-  gabbia = game.add.sprite(11296,3478, 'cappuccetto')
-  gabbia.frame = 3;
+  if (primavolta == 1) {
+    gabbia = game.add.sprite(176*m, 3478, 'cappuccetto')
+    gabbia.frame = 3;
+    primavolta++;
+  }
   kingWolf.scale.x = -1;
-}
+};
 // wolves BEHAVE and FRAMES functions end
 
 //weapos START
@@ -896,8 +904,8 @@ function render() {
   game.debug.body(playerUp);
   game.debug.body(playerHitbox);
 
-  platforms.forEach(function(platform) {
-    game.debug.body(platform);
+  WolvesP.forEach(function(wolf) {
+    game.debug.body(wolf);
   });
 
 };
