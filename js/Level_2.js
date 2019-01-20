@@ -19,8 +19,8 @@ var GameLevel_2 = {
     game.load.image('fucile', 'assets/images/fucile.png');
     game.load.image('scena4', 'assets/scene/cappuccetto alla finestra.jpg');
     game.load.image('scena3', 'assets/scene/cappuccetto alla finestra.jpg');
+    game.load.image('scena5', 'assets/scene/cappuccetto alla finestra.jpg');
     game.load.spritesheet('heart', 'assets/images/heart22x22.png', 22, 22);
-
     game.load.image('livello2', 'assets/images/level2.png');
     game.load.image('skyBackground', 'assets/images/sky background.png');
 
@@ -186,11 +186,15 @@ var GameLevel_2 = {
       d1.stato = 1;
     });
 
-    cappuccetto = game.add.sprite(121*m, 54*m, 'cappuccetto');
-    game.physics.arcade.enable(cappuccetto);
-    cappuccetto.enableBody = true;
-    cappuccetto.body.gravity.y = gravity;
-    cappuccetto.animations.add('ferma', [0, 2, 1, 2], 10, false);
+    cappuccetto2 = game.add.sprite(121*m, 54*m, 'cappuccetto');
+    game.physics.arcade.enable(cappuccetto2);
+    cappuccetto2.enableBody = true;
+    cappuccetto2.body.gravity.y = gravity;
+    cappuccetto2.animations.add('ferma', [0, 2, 1, 2], 10, false);
+
+    scene5 = game.add.sprite(0, 0, 'scena5');
+    scene5.alpha = 0;
+    scene5.fixedToCamera = true;
 
     thorns.setAll('alpha','0');
     platforms.setAll('alpha','0');
@@ -205,8 +209,8 @@ var GameLevel_2 = {
 
     game.physics.arcade.overlap(playerUp, memoryObj4, collectMe4, null, this);
     game.physics.arcade.overlap(playerUp, fucileTerra, collectMe3, null, this);
-    game.physics.arcade.overlap(playerUp, cappuccetto, endGame, null, this);
-    game.physics.arcade.collide(cappuccetto, platforms);
+    game.physics.arcade.overlap(playerUp, cappuccetto2, collectMe5, null, this);
+    game.physics.arcade.collide(cappuccetto2, platforms);
 
 
     //secretHall
@@ -357,7 +361,7 @@ var GameLevel_2 = {
     }
     wolvesBehave(Wolves); //find in Functions.js
     wolfKingAnimationUpdate();
-    cappuccetto.animations.play('ferma');
+    cappuccetto2.animations.play('ferma');
   },
 
 };
