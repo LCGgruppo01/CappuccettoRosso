@@ -823,7 +823,7 @@ function flashDamage(){
 function pauseMenu() {
   P=game.input.keyboard.addKey(Phaser.Keyboard.P);
 
-  pause = game.add.text(900, 30, 'Pause', { font: '24px Arial', fill: '#fff' });
+  pause = game.add.sprite(950, 30, 'pauseButton');
   pause.inputEnabled = true;
   pause.fixedToCamera = true;
 
@@ -847,19 +847,21 @@ function paused() {
      backPause = game.add.sprite(0,0,"backPause");
      backPause.alpha = 0.7;
      backPause.fixedToCamera = true;
-     onPause = game.add.text(500, 350, 'Esci Dalla Siesta', { font: '24px Arial', fill: '#fff' });
+     pause.alpha = 0;
+
+     onPause = game.add.sprite(850, 25, 'buttonPlay');
      onPause.inputEnabled = true;
      onPause.fixedToCamera = true;
 
-     restart = game.add.text(500, 400, 'restart', { font: '24px Arial', fill: '#fff' });
+     restart = game.add.sprite(500, 400, 'buttonCheck');
      restart.inputEnabled = true;
      restart.fixedToCamera = true;
 
-     restartLevel = game.add.text(500, 450, 'restart level', { font: '24px Arial', fill: '#fff' });
+     restartLevel = game.add.sprite(500, 450, 'buttonLevel');
      restartLevel.inputEnabled = true;
      restartLevel.fixedToCamera = true;
 
-     mainMenu = game.add.text(500, 500, 'main menu', { font: '24px Arial', fill: '#fff' });
+     mainMenu = game.add.sprite(500, 200, 'buttonMenu');
      mainMenu.inputEnabled = true;
      mainMenu.fixedToCamera = true;
 
@@ -870,19 +872,20 @@ function unpaused(event){
   if (game.paused) {
     onPause.events.onInputUp.add(function(){
       game.paused = false;
-      onPause.text = '';
-      restart.text = '';
-      restartLevel.text = '';
-      mainMenu.text = '';
+      onPause.kill();
+      restart.kill();
+      restartLevel.kill();
+      mainMenu.kill();
       backPause.alpha = 0;
+      pause.alpha = 1;
     });
 
     restart.events.onInputUp.add(function(){
       game.paused = false;
-      onPause.text = '';
-      restart.text = '';
-      restartLevel.text = '';
-      mainMenu.text = '';
+      onPause.kill();
+      restart.kill();
+      restartLevel.kill();
+      mainMenu.kill();
       backPause.alpha = 0;
       if (level == 1) {
         this.game.state.start('GameLevel_1');
@@ -893,10 +896,10 @@ function unpaused(event){
 
     restartLevel.events.onInputUp.add(function(){
       game.paused = false;
-      onPause.text = '';
-      restart.text = '';
-      restartLevel.text = '';
-      mainMenu.text = '';
+      onPause.kill();
+      restart.kill();
+      restartLevel.kill();
+      mainMenu.kill();
       backPause.alpha = 0;
       if (level == 1) {
         this.game.state.start('GameLevel_1');
@@ -911,10 +914,10 @@ function unpaused(event){
 
     mainMenu.events.onInputUp.add(function(){
       game.paused = false;
-      onPause.text = '';
-      restart.text = '';
-      restartLevel.text = '';
-      mainMenu.text = '';
+      onPause.kill();
+      restart.kill();
+      restartLevel.kill();
+      mainMenu.kill();
       backPause.alpha = 0;
       this.game.state.start('GameStart');
       spawnX = 4*m;
