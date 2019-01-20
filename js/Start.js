@@ -2,6 +2,7 @@ var cr = false;
 var au = false;
 var ho = false;
 var parallaxBG = 100;
+var parallaxMBG = 300;
 var parallaxMG = 500;
 var parallaxFG = 700;
 var parallaxFFG = 850;
@@ -13,6 +14,7 @@ var GameStart = {
     game.load.image('copertinaBG', 'assets/images/copertinaBG.png');
     game.load.image('copertinaFG', 'assets/images/copertinaFG.png');
     game.load.image('copertinaMG', 'assets/images/copertinaMG.png');
+    game.load.image('copertinaMBG', 'assets/images/copertinaMBG.png');
     game.load.image('start', 'assets/images/start.png');
     game.load.image('startL1', 'assets/images/startL1.png');
     game.load.image('startL2', 'assets/images/startL2.png');
@@ -26,6 +28,9 @@ var GameStart = {
     copertinaBG = game.add.sprite(-1024, 0, 'copertinaBG');
     game.physics.arcade.enable(copertinaBG);
     copertinaBG.enableBody = true;
+    copertinaMBG = game.add.sprite(-1024, 0, 'copertinaMBG');
+    game.physics.arcade.enable(copertinaMBG);
+    copertinaMBG.enableBody = true;
     copertinaMG = game.add.sprite(-1024, 0, 'copertinaMG');
     game.physics.arcade.enable(copertinaMG);
     copertinaMG.enableBody = true;
@@ -67,6 +72,7 @@ var GameStart = {
 
     if (copertinaFG.body.x <= 200 && cr == true) {
       copertinaBG.body.velocity.x = parallaxBG;
+      copertinaMBG.body.velocity.x = parallaxMBG;
       copertinaMG.body.velocity.x = parallaxMG;
       start.body.velocity.x = parallaxFFG;
       l1.body.velocity.x = parallaxFFG;
@@ -75,6 +81,7 @@ var GameStart = {
     }
     else if (copertinaFG.body.x >= -2248 && au == true) {
       copertinaBG.body.velocity.x = -parallaxBG;
+      copertinaMBG.body.velocity.x = -parallaxMBG;
       copertinaMG.body.velocity.x = -parallaxMG;
       start.body.velocity.x = -parallaxFFG;
       l1.body.velocity.x = -parallaxFFG;
@@ -84,6 +91,7 @@ var GameStart = {
     else if ((copertinaFG.body.x <= -1025 || copertinaFG.body.x >= -1023) && ho == true) {
       if (copertinaFG.body.x < -1024) {
         copertinaBG.body.velocity.x = parallaxBG;
+        copertinaMBG.body.velocity.x = parallaxMBG;
         copertinaMG.body.velocity.x = parallaxMG;
         start.body.velocity.x = parallaxFFG;
         l1.body.velocity.x = parallaxFFG;
@@ -92,6 +100,7 @@ var GameStart = {
       }
       else if (copertinaFG.body.x > -1024) {
         copertinaBG.body.velocity.x = -parallaxBG;
+        copertinaMBG.body.velocity.x = -parallaxMBG;
         copertinaMG.body.velocity.x = -parallaxMG;
         start.body.velocity.x = -parallaxFFG;
         l1.body.velocity.x = -parallaxFFG;
@@ -101,6 +110,7 @@ var GameStart = {
     }
     else {
       copertinaBG.body.velocity.x = 0;
+      copertinaMBG.body.velocity.x = 0;
       copertinaMG.body.velocity.x = 0;
       copertinaFG.body.velocity.x = 0;
       start.body.velocity.x = 0;
@@ -111,7 +121,8 @@ var GameStart = {
       ho = false;
     }
 
-    copertinaBG.body.y = -10 +game.input.mousePointer.y/200;
+    copertinaBG.body.y = -10 -game.input.mousePointer.y/200;
+    copertinaMBG.body.y = -10 -game.input.mousePointer.y/150;
     copertinaMG.body.y = 10 -game.input.mousePointer.y/100;
     copertinaFG.body.y = 20 -game.input.mousePointer.y/35;
 

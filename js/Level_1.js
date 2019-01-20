@@ -3,7 +3,6 @@ var timeWolves = 0;
 var wait = 0;
 var step1 = 0;
 var memoryObjCollect = 0;
-var step1 = 0;
 var level1back;
 
 var GameLevel_1 = {
