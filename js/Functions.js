@@ -349,8 +349,7 @@ function collectMe3(player, fucileTerra){
     game.paused = true;
     game.input.onDown.add(unpauseImage2, this);
     fucile = true;
-    ammoCount = game.add.text(0.5*m, 3*m, 'ammo: ', { fontSize: '15px', fill: 'rgb(255, 255, 255)' });
-    ammoCount.fixedToCamera = true;
+    ammoCount.alpha = 0;
     gotAxe = 2;
   }
 };
@@ -672,19 +671,13 @@ function weaposChange(){
     gotAxe = 1;
     changeWeapon = game.time.now + 300;
   }
-
-  if (gotAxe === 0) {
-    weaponImage.frame = 0;
-  }else if (gotAxe == 1) {
-    weaponImage.frame = 1;
-  }else if (gotAxe == 2) {
-    weaponImage.frame = 2;
-  }
 };
 
 function collectAmmo(player, ammo) {
   ammo.kill();
-  bulletN++;
+  if (bulletN < 10) {
+    bulletN++;
+  }
 };
 
 function heal(player, life){
