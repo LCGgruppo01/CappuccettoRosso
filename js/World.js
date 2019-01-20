@@ -24,8 +24,8 @@ function worldPreload(){
   game.load.spritesheet('heart', 'assets/images/heart22x22.png', 22, 22);
   game.load.spritesheet('weapon', 'assets/images/weapon.png', 128, 64);
   game.load.spritesheet('bullet', 'assets/images/bullet.png', 32, 16);
-  game.load.spritesheet('bone', 'assets/images/osso28x28.png', 28, 28);
-  game.load.spritesheet('cappuccetto', 'assets/images/cappuccetto40x65.png', 40, 65);
+  game.load.spritesheet('bone', 'assets/images/osso40x40.png', 40, 40);
+  game.load.spritesheet('cappuccetto', 'assets/images/cappuccetto68x106.png', 68, 106);
   game.load.spritesheet('kingWolf', 'assets/images/spriteboss122x156.png', 122, 156);
 
 
