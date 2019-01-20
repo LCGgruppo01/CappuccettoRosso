@@ -8,6 +8,8 @@ var immunity = 0;
 var position = "rightt";
 var timeAxe = 0;
 var animAxe;
+var lancio;
+var danno;
 var bulletN = 5;
 
 function playerPreload(){
@@ -50,7 +52,7 @@ function playerCreate(){
   playerUp.animations.add('rightAxe', [6, 7, 8, 9], 10, true);
   playerUp.animations.add('rightGun', [11, 12, 13, 14], 10, true);
   animAxe = playerUp.animations.add('rightAxeChop', [15, 16, 17, 18], 10, true);
-  animShot = playerUp.animations.add('rightShot', [21, 20, 19], 10, true);
+  animShot = playerUp.animations.add('rightShot', [19, 20, 21], 10, true);
   animAxe.loop = false;
   animShot.loop = false;
 
@@ -60,12 +62,23 @@ function playerUpdate(){
 
   //player MOVEMENT start
   if (cursors.left.isDown && game.time.now > timeHit){
-    player.setAll('body.velocity.x', -playerVelocity);
+    if (SPACE.isDown && gotAxe == 2) {
+      player.setAll('body.velocity.x', -200);
+    }
+    else {
+      player.setAll('body.velocity.x', -playerVelocity);
+    }
     position = "leftt";
   }
 
   if (cursors.right.isDown && game.time.now > timeHit){
-    player.setAll('body.velocity.x', playerVelocity);
+    if (SPACE.isDown && gotAxe == 2) {
+      player.setAll('body.velocity.x', 200);
+    }
+    else {
+      player.setAll('body.velocity.x', playerVelocity);
+    }
+    position = "leftt";
     position = "rightt";
   }
 

@@ -115,9 +115,23 @@ function thornHit(playerFunction, thorn) {
 function wolfHit(player, wolf) {
   if (game.time.now > immunity && axeHit == true){
     wolf.body.velocity.x = -(playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*500;
-    player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*2000;
+    player.body.velocity.x = (player.x - wolf.x)/Math.abs(player.x - wolf.x)*1000;
     timeHit = game.time.now + 300;
     immunity = game.time.now + 500;
+    player.damage(25);
+  }
+};
+
+function kingWolfHit(player, kingWolf) {
+  if (game.time.now > immunity){
+    if (kingWolf.body.velocity.x != 0) {
+      player.body.velocity.x = - (player.x - kingWolf.x)/Math.abs(player.x - kingWolf.x)*3000;
+    }
+    else {
+      player.body.velocity.x = (player.x - kingWolf.x)/Math.abs(player.x - kingWolf.x)*2000;
+    }
+    timeHit = game.time.now + 300;
+    immunity = game.time.now + 2000;
     player.damage(25);
   }
 };
@@ -267,17 +281,18 @@ function collectMe4(player, memoryObj4){
 
 function boneHitPlayer(player, bone) {
   if (game.time.now > immunity && axeHit == true){
-    playerUp.body.velocity.x = -1000;
+    if(kingWolf.body.velocity.x <= 1){
+      playerUp.body.velocity.x = (player.x - bone.x)/Math.abs(player.x - bone.x)*1000;
+    }
     timeHit = game.time.now + 300;
     immunity = game.time.now + 500;
     player.damage(25);
     bone.kill();
   }
-  if (axeHit == false){
+  if (axeHit == false && bone.rimbalzo == 0){
     bone.rimbalzo = 1;
     bone.body.velocity.x = - bone.body.velocity.x;
     bone.body.velocity.y = - bone.body.velocity.y;
-
   }
 };
 
@@ -288,6 +303,7 @@ function boneHitKing(kingWolf, bone) {
     immunity = game.time.now + 500;
     kingWolf.damage(1);
     bone.kill();
+    kingWolf.animations.play('danno');
   }
 };
 // COLLIDE & OVERLAP functions end
@@ -346,23 +362,40 @@ function wolfFrames(Wolves){
 };
 
 function wolfKingShot(){
-  if (game.time.now > kingShot && kingWolf.health > 0) {
-    bone = Bones.create(kingWolf.x, kingWolf.y, 'barGranny');
+  if (game.time.now > kingShot && kingWolf.health > 0 && kingWolf.body.velocity.x <= 1) {
+    kingWolf.animations.play('lancio');
+    bone = Bones.create(kingWolf.x, kingWolf.y, 'bone');
+    bone.animations.add('boneAnimation', [0, 1, 2], 10, true);
+    bone.animations.play('boneAnimation');
     bone.rimbalzo = 0;
     bone.body.gravity.y = gravity;
 
-    if (player.y >= kingWolf.y) {
-      bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
+    if (kingWolf.body.position.x < 100*m) {
+      if (player.y >= kingWolf.y) {
+        bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
+        bone.body.velocity.x = (kingWolf.x - playerUp.x)/bone.tempo;
+        bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
+        kingShot = game.time.now + 1500*Math.random() + 500;
+      }else if (player.y <= kingWolf.y) {
+        bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
+        bone.body.velocity.x = 500;
+        bone.body.velocity.y = -Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + 10*Math.pow((kingWolf.y - playerUp.y), 2))/1.5;
+        kingShot = game.time.now + 1500*Math.random() + 500;
+      }
+    }
 
-      bone.body.velocity.x = -(kingWolf.x - playerUp.x)/bone.tempo;
-      bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
-      kingShot = game.time.now + 2000*Math.random();
-    }else if (player.y <= kingWolf.y) {
-      bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
-
-      bone.body.velocity.x = -500;
-      bone.body.velocity.y = -Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + 10*Math.pow((kingWolf.y - playerUp.y), 2))/1.5;
-      kingShot = game.time.now + 2000*Math.random();
+    else {
+      if (player.y >= kingWolf.y) {
+        bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
+        bone.body.velocity.x = -(kingWolf.x - playerUp.x)/bone.tempo;
+        bone.body.velocity.y = (Math.sqrt(Math.pow(500, 2) - Math.pow(bone.body.velocity.x, 2)) -0.5*gravity*bone.tempo);
+        kingShot = game.time.now + 1500*Math.random() + 500;
+      }else if (player.y <= kingWolf.y) {
+        bone.tempo = Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + Math.pow((kingWolf.y - playerUp.y), 2))/500;
+        bone.body.velocity.x = -500;
+        bone.body.velocity.y = -Math.sqrt(Math.pow((kingWolf.x - playerUp.x), 2) + 10*Math.pow((kingWolf.y - playerUp.y), 2))/1.5;
+        kingShot = game.time.now + 1500*Math.random() + 500;
+      }
     }
   }
 };
@@ -378,17 +411,26 @@ function wolfKingHearts() {
 
   if (kingWolf.health == 5) {
     wolfLife6.frame = 1;
-    if(kingWolf.x > 94*m){
-    //  kingWolf.body.velocity.x =
-    }
   }if (kingWolf.health == 4) {
     wolfLife5.frame = 1;
+    if(kingWolf.x > 97*m){
+    kingWolf.body.velocity.x = -400;
+    }
   }if (kingWolf.health == 3) {
     wolfLife4.frame = 1;
+    if(kingWolf.x < 107*m){
+    kingWolf.body.velocity.x = 400;
+    }
   }if (kingWolf.health == 2) {
     wolfLife3.frame = 1;
+    if(kingWolf.x > 97*m){
+    kingWolf.body.velocity.x = -400;
+    }
   }if (kingWolf.health == 1) {
     wolfLife2.frame = 1;
+    if(kingWolf.x < 107*m){
+    kingWolf.body.velocity.x = 400;
+    }
   }if (kingWolf.health === 0) {
     wolfLife1.frame = 1;
     wolfLife1.kill();
@@ -397,6 +439,38 @@ function wolfKingHearts() {
     wolfLife4.kill();
     wolfLife5.kill();
     wolfLife6.kill();
+  }
+};
+
+function wolfKingAnimationCreate() {
+  kingWolf.animations.add('fermo', [0, 1, 2, 3], 10, false);
+  kingWolf.animations.add('corriCapp', [4, 5, 6, 7], 10, false);
+  kingWolf.animations.add('corri', [8, 9, 10, 11], 10, false);
+  lancio = kingWolf.animations.add('lancio', [12, 13, 14, 15], 10, false);
+  danno = kingWolf.animations.add('danno', [16], 5, false);
+  kingWolf.animations.add('morto', [16, 16, 16, 17], 10, false);
+  kingWolf.animations.play('fermo');
+}
+function wolfKingAnimationUpdate() {
+  if (lancio.isPlaying || danno.isPlaying) {
+
+  }else if (kingWolf.body.velocity.x === 0) {
+    kingWolf.animations.play('fermo');
+  }else if (kingWolf.body.velocity.x !== 0) {
+    kingWolf.animations.play('corri');
+  }
+
+  //Scaling per Direzione
+  if (kingWolf.x > 96.95*m && kingWolf.x < 97.05*m) {
+    kingWolf.scale.x = -1;
+  }else if (kingWolf.x > 106.95*m && kingWolf.x < 107.05*m) {
+    kingWolf.scale.x = 1;
+  }
+
+  //quando muore
+  if (kingWolf.health <=0) {
+    carcassa = game.add.sprite(kingWolf.x, kingWolf.y - 156/2, "kingWolf");
+    carcassa.frame = 17;
   }
 };
 // wolves BEHAVE and FRAMES functions end
@@ -427,19 +501,28 @@ function rifle(){
   if (gotAxe == 2) {
     if (SPACE.isDown && game.time.now > shootTime && shoot == true && bulletN > 0){
       if (position == "leftt") {
-        var bullet = Bullets.create(playerUp.x - 15, playerUp.y, 'bullet');
+        var bullet = Bullets.create(playerUp.x - 25, playerUp.y + 10, 'bullet');
         bullet.body.gravity.y = 25;
-        bullet.body.velocity.x = -bulletVelocity + playerUp.body.velocity.x;
+        bullet.body.velocity.x = - bulletVelocity - Math.abs(playerUp.body.velocity.x);
+        bullet.animations.add('bulletFire', [0, 1, 2, 3], 10, true);
+        bullet.animations.play('bulletFire');
       }else if (position == "rightt") {
-        bullet = Bullets.create(playerUp.x + 15, playerUp.y, 'bullet');
+        bullet = Bullets.create(playerUp.x + 25, playerUp.y + 10, 'bullet');
         bullet.scale.x = -1;
         bullet.body.gravity.y = 25;
-        bullet.body.velocity.x = bulletVelocity + playerUp.body.velocity.x;
+        bullet.body.velocity.x = bulletVelocity + Math.abs(playerUp.body.velocity.x);
+        bullet.animations.add('bulletFire', [0, 1, 2, 3], 10, true);
+        bullet.animations.play('bulletFire');
       }
       shootTime = game.time.now + 600;
       shoot = false;
       bulletN--;
-      playerUp.body.velocity.x = -500
+      if (position == "rightt") {
+        playerUp.body.velocity.x = -500;
+      }
+      else if (position == "leftt") {
+        playerUp.body.velocity.x = +500;
+      }
     }
 
     if (game.time.now > shootTime) {
@@ -634,6 +717,9 @@ function paused() {
     setTimeout(function(){
       game.paused = true;
      }, 20);
+     backPause = game.add.sprite(0,0,"backPause");
+     backPause.alpha = 0.7;
+     backPause.fixedToCamera = true;
      onPause = game.add.text(500, 350, 'Esci Dalla Siesta', { font: '24px Arial', fill: '#fff' });
      onPause.inputEnabled = true;
      onPause.fixedToCamera = true;
@@ -661,6 +747,7 @@ function unpaused(event){
       restart.text = '';
       restartLevel.text = '';
       mainMenu.text = '';
+      backPause.alpha = 0;
     });
 
     restart.events.onInputUp.add(function(){
@@ -669,6 +756,7 @@ function unpaused(event){
       restart.text = '';
       restartLevel.text = '';
       mainMenu.text = '';
+      backPause.alpha = 0;
       if (level == 1) {
         this.game.state.start('GameLevel_1');
       }else if (level == 2) {
@@ -682,6 +770,7 @@ function unpaused(event){
       restart.text = '';
       restartLevel.text = '';
       mainMenu.text = '';
+      backPause.alpha = 0;
       if (level == 1) {
         this.game.state.start('GameLevel_1');
         spawnX = 4*m;
@@ -699,6 +788,7 @@ function unpaused(event){
       restart.text = '';
       restartLevel.text = '';
       mainMenu.text = '';
+      backPause.alpha = 0;
       this.game.state.start('GameStart');
       spawnX = 4*m;
       spawnY = 54*m;
@@ -763,6 +853,7 @@ function testCreate(){
 function testUpdate(){
   if(H.isDown){
     playerUp.heal(100);
+    bulletN = 5;
   }
 };
 

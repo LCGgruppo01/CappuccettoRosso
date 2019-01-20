@@ -17,14 +17,19 @@ var level;
 var viewTop;
 
 function worldPreload(){
-  game.load.image('bullet', 'assets/images/bullet.png');
 
   game.load.spritesheet('wolf', 'assets/images/wolf.png', 64, 128);
   game.load.spritesheet('checkpoint', 'assets/images/checkpoint.png', 64, 128);
   game.load.spritesheet('d1', 'assets/images/d1.png', 128, 256);
-  game.load.spritesheet('heart', 'assets/images/heart.png', 32, 32);
+  game.load.spritesheet('heart', 'assets/images/heart22x22.png', 22, 22);
   game.load.spritesheet('weapon', 'assets/images/weapon.png', 128, 64);
+  game.load.spritesheet('bullet', 'assets/images/bullet.png', 32, 16);
+  game.load.spritesheet('bone', 'assets/images/osso28x28.png', 28, 28);
+  game.load.spritesheet('cappuccetto', 'assets/images/cappuccetto40x65.png', 40, 65);
+  game.load.spritesheet('kingWolf', 'assets/images/spriteboss122x156.png', 122, 156);
 
+
+  game.load.image('ammo', 'assets/images/ammo.png');
   game.load.image('thorns', 'assets/images/thorns.png');
   game.load.image('ground', 'assets/images/ground.png');
   game.load.image('platformStart', 'assets/images/platformStart.png');
@@ -35,9 +40,9 @@ function worldPreload(){
   game.load.image('bar', 'assets/images/bar.png');
   game.load.image('barGranny', 'assets/images/barGranny.png');
   game.load.image('d1destroyed', 'assets/images/d1destroyed.png');
-  game.load.image('kingWolf', 'assets/images/kingWolf.png');
-  game.load.image('cappuccetto', 'assets/images/cappuccetto.png');
   game.load.image('border', 'assets/images/border.png');
+  game.load.image('backPause', 'assets/images/backPause.png');
+
 };
 
 function worldCreate(){
@@ -54,6 +59,7 @@ function worldCreate(){
   SPACE=game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
   C=game.input.keyboard.addKey(Phaser.Keyboard.C);
   CTRL=game.input.keyboard.addKey(Phaser.Keyboard.S);
+
 
   // WORLD BACKGROUND start
 
@@ -169,6 +175,7 @@ function worldUpdate(){
   game.physics.arcade.overlap(kingWolf, Bones, boneHitKing, null, this);
   game.physics.arcade.overlap(player, Ammos, collectAmmo, null, this);
   game.physics.arcade.overlap(player, Lives, heal, null, this);
+  game.physics.arcade.overlap(playerUp, kingWolf, kingWolfHit, null, this);
 
   game.physics.arcade.collide(Wolves, platforms);
   game.physics.arcade.collide(player, platforms);
@@ -176,7 +183,6 @@ function worldUpdate(){
   game.physics.arcade.collide(Lives, platforms);
   game.physics.arcade.collide(playerUp, Wolves, wolfHit, null, this);
   game.physics.arcade.collide(playerUp, WolvesP, wolfHit, null, this);
-  game.physics.arcade.collide(playerUp, kingWolf, wolfHit, null, this);
   game.physics.arcade.collide(Wolves, platformsOver);
   game.physics.arcade.collide(Ammos, platformsOver);
   game.physics.arcade.collide(Lives, platformsOver);
@@ -222,7 +228,6 @@ function worldUpdate(){
 
   cheats();
   testUpdate();
-  flashDamage();
   weaposChange(); //find in Functions.js
 
   if (fucile == true) {
