@@ -111,6 +111,7 @@ var GameStart = {
 function imageClick() {
   spawnX = 2*m;
   spawnY = 54*m;
+  fucile = false
   this.game.state.start('ScenaBloodmoon');
 }
 

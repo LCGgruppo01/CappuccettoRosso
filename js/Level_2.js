@@ -215,7 +215,7 @@ var GameLevel_2 = {
     playerUpdate(); //find in Player.js
 
     game.physics.arcade.overlap(playerUp, memoryObj4, collectMe4, null, this);
-    game.physics.arcade.overlap(playerUp, fucileTerra, collectMe3, null, this);
+    game.physics.arcade.overlap(playerUp, Terra, collectMe3, null, this);
     game.physics.arcade.overlap(playerUp, cappuccetto2, collectMe5, null, this);
     game.physics.arcade.collide(cappuccetto2, platforms);
 
