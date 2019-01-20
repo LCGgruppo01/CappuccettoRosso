@@ -527,7 +527,7 @@ function wolfKingHearts() {
   }
   }if (kingWolf.health == 3) {
     wolfLife4.frame = 1;
-    if(kingWolf.x < 107*m){
+    if(kingWolf.x < 109*m){
     kingWolf.body.velocity.x = 400;
     }else {
       kingWolf.body.velocity.x = 0;
@@ -541,7 +541,7 @@ function wolfKingHearts() {
     }
   }if (kingWolf.health == 1) {
     wolfLife2.frame = 1;
-    if(kingWolf.x < 107*m){
+    if(kingWolf.x < 109*m){
     kingWolf.body.velocity.x = 400;
     }else {
       kingWolf.body.velocity.x = 0;
