@@ -138,7 +138,8 @@ function kingWolfHit(player, kingWolf) {
   }
 };
 
-function wolfBulletDamage(bullet, wolf){
+// danno per Wolf Patrol
+function wolfBulletDamagePatrol(bullet, wolf){
   if (game.time.now > immunity){
     if (wolf.health < 110 && Math.random() < 0.7 && fucile == true) {
       ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
@@ -155,10 +156,22 @@ function wolfBulletDamage(bullet, wolf){
     wolf.body.velocity.y = 2000;
   }
   bullet.kill();
+  carcassa1 = Carcasse.create(wolf.x, wolf.y, 'wolfPatrol');
+  carcassa1.anchor.setTo(.5,.5);
+  carcassa1.body.setSize(0, 0, 0, 12);
+  carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
+  carcassa1.animations.play('animazioneCarcassa');
 };
 
-function wolfHitboxDamage(hitbox, wolf) {
+function wolfHitboxDamagePatrol(hitbox, wolf) {
   if (game.time.now > immunity && axeHit === false){
+    if (wolf.health < 100) {
+      carcassa1 = Carcasse.create(wolf.x, wolf.y, 'wolfPatrol');
+      carcassa1.anchor.setTo(.5,.5);
+      carcassa1.body.setSize(0, 0, 0, 12);
+      carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
+      carcassa1.animations.play('animazioneCarcassa');
+    }
     if (wolf.health < 100 && Math.random() < 0.7 && fucile == true) {
       ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
       ammo.body.gravity.y = gravity;
@@ -175,6 +188,60 @@ function wolfHitboxDamage(hitbox, wolf) {
     immunity = game.time.now + 500;
   }
 };
+
+
+// danno per Wolf Inseguitore
+function wolfHitboxDamageChaser(hitbox, wolf) {
+  if (game.time.now > immunity && axeHit === false){
+    if (wolf.health < 100) {
+      carcassa1 = Carcasse.create(wolf.x, wolf.y, 'wolfChaser');
+      carcassa1.anchor.setTo(.5,.5);
+      carcassa1.body.setSize(0, 0, 0, 12);
+      carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
+      carcassa1.animations.play('animazioneCarcassa');
+    }
+    if (wolf.health < 100 && Math.random() < 0.7 && fucile == true) {
+      ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
+      ammo.body.gravity.y = gravity;
+      ammo.body.bounce.y = 0.2;
+    }
+    if (wolf.health < 100 && Math.random() < 0.3) {
+      life = Lives.create(wolf.x, wolf.y, 'heart');
+      life.body.gravity.y = gravity;
+      life.body.bounce.y = 0.2;
+    }
+    wolf.body.velocity.y = 2000;
+    wolf.body.velocity.x = -(playerUp.x - wolf.x)/Math.abs(playerUp.x - wolf.x)*500;
+    wolf.damage(50);
+    immunity = game.time.now + 500;
+  }
+};
+
+function wolfBulletDamageChaser(bullet, wolf){
+  if (game.time.now > immunity){
+    if (wolf.health < 110 && Math.random() < 0.7 && fucile == true) {
+      ammo = Ammos.create(wolf.x, wolf.y, 'bullet');
+      ammo.body.gravity.y = gravity;
+      ammo.body.bounce.y = 0.2;
+    }
+    if (wolf.health < 110 && Math.random() < 0.3) {
+      life = Lives.create(wolf.x, wolf.y, 'heart');
+      life.body.gravity.y = gravity;
+      life.body.bounce.y = 0.2;
+    }
+    wolf.damage(100);
+    immunity = game.time.now + 500;
+    wolf.body.velocity.y = 2000;
+  }
+  bullet.kill();
+  carcassa1 = Carcasse.create(wolf.x, wolf.y, 'wolfChaser');
+  carcassa1.anchor.setTo(.5,.5);
+  carcassa1.body.setSize(0, 0, 0, 12);
+  carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
+  carcassa1.animations.play('animazioneCarcassa');
+};
+
+
 
 function kill(bul, wol) {
     wol.kill();
@@ -218,6 +285,7 @@ function collectMe1(player, memoryObj1){
   if(cursors.down.isDown){
     scene1.alpha = 1;
     scene1.inputEnabled = true;
+    Carcasse.setAll('alpha', 0);
     playerUp.alpha = 0;
     playerDown.alpha = 0;
     bar.alpha = 0;
@@ -234,6 +302,7 @@ function collectMe2(player, memoryObj2){
   if(cursors.down.isDown){
     scene2.alpha = 1;
     scene2.inputEnabled = true;
+    Carcasse.setAll('alpha', 0);
     playerUp.alpha = 0;
     playerDown.alpha = 0;
     bar.alpha = 0;
@@ -253,6 +322,7 @@ function collectMe3(player, fucileTerra){
   if(cursors.down.isDown){
     scene3.alpha = 1;
     scene3.inputEnabled = true;
+    Carcasse.setAll('alpha', 0);
     playerUp.alpha = 0;
     playerDown.alpha = 0;
     bar.alpha = 0;
@@ -272,6 +342,7 @@ function collectMe4(player, memoryObj4){
   if(cursors.down.isDown){
     scene4.alpha = 1;
     scene4.inputEnabled = true;
+    Carcasse.setAll('alpha', 0);
     playerUp.alpha = 0;
     playerDown.alpha = 0;
     bar.alpha = 0;
@@ -288,6 +359,7 @@ function collectMe5(player, cappuccetto2){
   if(cursors.down.isDown){
     scene5.alpha = 1;
     scene5.inputEnabled = true;
+    Carcasse.setAll('alpha', 0);
     playerUp.alpha = 0;
     playerDown.alpha = 0;
     bar.alpha = 0;

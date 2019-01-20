@@ -89,6 +89,9 @@ function worldCreate(){
   Checkpoints = game.add.group();
   Checkpoints.enableBody = true;
 
+  Carcasse = game.add.group();
+  Carcasse.enableBody = true;
+
   Ammos = game.add.group();
   Ammos.enableBody = true;
 
@@ -162,11 +165,11 @@ function worldCreate(){
 
 function worldUpdate(){
 
-  game.physics.arcade.overlap(playerHitbox, Wolves, wolfHitboxDamage, null, this);
-  game.physics.arcade.overlap(playerHitbox, WolvesP, wolfHitboxDamage, null, this);
+  game.physics.arcade.overlap(playerHitbox, Wolves, wolfHitboxDamageChaser, null, this);
+  game.physics.arcade.overlap(playerHitbox, WolvesP, wolfHitboxDamagePatrol, null, this);
   game.physics.arcade.overlap(playerUp, thorns, thornHit, null, this);
-  game.physics.arcade.overlap(Bullets, Wolves, wolfBulletDamage, null, this);
-  game.physics.arcade.overlap(Bullets, WolvesP, wolfBulletDamage, null, this);
+  game.physics.arcade.overlap(Bullets, Wolves, wolfBulletDamageChaser, null, this);
+  game.physics.arcade.overlap(Bullets, WolvesP, wolfBulletDamagePatrol, null, this);
   game.physics.arcade.overlap(Bullets, platforms, elide, null, this);
   game.physics.arcade.overlap(Bullets, platformsOver, elide, null, this);
   game.physics.arcade.overlap(player, Checkpoints, checkpointHit, null, this);
