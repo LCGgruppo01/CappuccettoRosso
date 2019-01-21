@@ -161,7 +161,6 @@ function worldCreate(){
 
   pauseMenu();
 
-
 };
 
 function worldUpdate(){
@@ -247,5 +246,7 @@ function worldUpdate(){
     ammoCount.alpha = 0;
     pause.alpha = 0;
   }
+
+  onPause.tint = 0xffffff;
 
 };
