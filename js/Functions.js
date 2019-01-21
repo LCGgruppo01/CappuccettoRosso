@@ -155,18 +155,18 @@ function wolfBulletDamagePatrol(bullet, wolf){
     wolf.damage(100);
     immunity = game.time.now + 500;
     wolf.body.velocity.y = 2000;
+    carcassa1 = Carcasse.create(wolf.x, wolf.y, 'wolfPatrol');
+    carcassa1.enableBody = true;
+    carcassa1.body.gravity.y = gravity;
+    carcassa1.anchor.setTo(.5,.5);
+    carcassa1.body.setSize(110, 10, 0, 130);
+    carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
+    carcassa1.animations.play('animazioneCarcassa');
+    if (wolf.body.velocity.x > 0) {
+      carcassa1.scale.x = -1;
+    }
   }
   bullet.kill();
-  carcassa1 = Carcasse.create(wolf.x, wolf.y, 'wolfPatrol');
-  carcassa1.enableBody = true;
-  carcassa1.body.gravity.y = gravity;
-  carcassa1.anchor.setTo(.5,.5);
-  carcassa1.body.setSize(110, 10, 0, 130);
-  carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
-  carcassa1.animations.play('animazioneCarcassa');
-  if (wolf.body.velocity.x > 0) {
-    carcassa1.scale.x = -1;
-  }
 };
 
 function wolfHitboxDamagePatrol(hitbox, wolf) {
@@ -251,18 +251,18 @@ function wolfBulletDamageChaser(bullet, wolf){
     wolf.damage(100);
     immunity = game.time.now + 500;
     wolf.body.velocity.y = 2000;
+    carcassa1 = Carcasse.create(wolf.x, wolf.y, 'wolfChaser');
+    carcassa1.enableBody = true;
+    carcassa1.body.gravity.y = gravity;
+    carcassa1.anchor.setTo(.5,.5);
+    carcassa1.body.setSize(110, 10, 0, 130);
+    carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
+    carcassa1.animations.play('animazioneCarcassa');
+    if (wolf.body.velocity.x > 0) {
+      carcassa1.scale.x = -1;
+    }
   }
   bullet.kill();
-  carcassa1 = Carcasse.create(wolf.x, wolf.y, 'wolfChaser');
-  carcassa1.enableBody = true;
-  carcassa1.body.gravity.y = gravity;
-  carcassa1.anchor.setTo(.5,.5);
-  carcassa1.body.setSize(110, 10, 0, 130);
-  carcassa1.animations.add('animazioneCarcassa', [20, 21 ,22], 10, false)
-  carcassa1.animations.play('animazioneCarcassa');
-  if (wolf.body.velocity.x > 0) {
-    carcassa1.scale.x = -1;
-  }
 };
 
 
@@ -348,6 +348,7 @@ function collectMe3(player, fucileTerra){
     scene3.inputEnabled = true;
     Carcasse.setAll('alpha', 0);
     playerUp.alpha = 0;
+    pause.alpha = 0;
     playerDown.alpha = 0;
     bar.alpha = 0;
     barGranny.alpha = 0;
@@ -518,11 +519,11 @@ function wolfKingShot(){
 function wolfKingHearts() {
 
   wolfLife1.x = kingWolf.x - 50;
-  wolfLife2.x = kingWolf.x - 25;
-  wolfLife3.x = kingWolf.x;
-  wolfLife4.x = kingWolf.x + 25;
-  wolfLife5.x = kingWolf.x + 50;
-  wolfLife6.x = kingWolf.x + 75;
+  wolfLife2.x = kingWolf.x - 30;
+  wolfLife3.x = kingWolf.x - 10;
+  wolfLife4.x = kingWolf.x + 10;
+  wolfLife5.x = kingWolf.x + 30;
+  wolfLife6.x = kingWolf.x + 50;
 
   if (kingWolf.health == 5) {
     wolfLife6.frame = 1;

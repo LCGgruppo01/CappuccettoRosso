@@ -63,7 +63,9 @@ var GameLevel_2 = {
 
     worldCreate(); //find in World.js
     playerCreate(); //find in Player.js
-    playerUp.health = vitaFineLivello;
+    if (spawnY < 9*m) {
+      playerUp.health = vitaFineLivello;
+    }
 
     //Cave entering
     wolfCreate(27,7);
@@ -175,17 +177,17 @@ var GameLevel_2 = {
 
     wolfKingAnimationCreate();
 
-    wolfLife1 = game.add.sprite(kingWolf.x - 75, kingWolf.y - 50, 'heart');
+    wolfLife1 = game.add.sprite(kingWolf.x - 100, kingWolf.y - 50, 'heart');
     wolfLife1.frame = 2;
-    wolfLife2 = game.add.sprite(kingWolf.x - 50, wolfLife1.y, 'heart');
+    wolfLife2 = game.add.sprite(kingWolf.x - 75, wolfLife1.y, 'heart');
     wolfLife2.frame = 2;
-    wolfLife3 = game.add.sprite(kingWolf.x - 25, wolfLife1.y, 'heart');
+    wolfLife3 = game.add.sprite(kingWolf.x - 50, wolfLife1.y, 'heart');
     wolfLife3.frame = 2;
-    wolfLife4 = game.add.sprite(kingWolf.x + 0, wolfLife1.y, 'heart');
+    wolfLife4 = game.add.sprite(kingWolf.x - 25, wolfLife1.y, 'heart');
     wolfLife4.frame = 2;
-    wolfLife5 = game.add.sprite(kingWolf.x + 25, wolfLife1.y, 'heart');
+    wolfLife5 = game.add.sprite(kingWolf.x + 0, wolfLife1.y, 'heart');
     wolfLife5.frame = 2;
-    wolfLife6 = game.add.sprite(kingWolf.x + 50, wolfLife1.y, 'heart');
+    wolfLife6 = game.add.sprite(kingWolf.x + 25, wolfLife1.y, 'heart');
     wolfLife6.frame = 2;
 
     platformsDes.forEach(function(d1){
