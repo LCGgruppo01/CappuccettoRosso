@@ -347,6 +347,7 @@ function collectMe3(player, fucileTerra){
     scene3.alpha = 1;
     scene3.inputEnabled = true;
     Carcasse.setAll('alpha', 0);
+    Ammos.setAll('alpha', 0);
     playerUp.alpha = 0;
     pause.alpha = 0;
     playerDown.alpha = 0;
@@ -367,6 +368,7 @@ function collectMe4(player, memoryObj4){
     scene4.alpha = 1;
     scene4.inputEnabled = true;
     Carcasse.setAll('alpha', 0);
+    Ammos.setAll('alpha', 0);
     playerUp.alpha = 0;
     playerDown.alpha = 0;
     bar.alpha = 0;
@@ -385,6 +387,7 @@ function collectMe5(player, cappuccetto2){
     scene5.alpha = 1;
     scene5.inputEnabled = true;
     Carcasse.setAll('alpha', 0);
+    Ammos.setAll('alpha', 0);
     playerUp.alpha = 0;
     playerDown.alpha = 0;
     bar.alpha = 0;
@@ -968,6 +971,7 @@ function unpauseImage2(event){
   }
   scene4.alpha = 0;
   Carcasse.setAll('alpha', 1);
+  Ammos.setAll('alpha', 1);
   tutorialS.alpha = 1;
 };
 
