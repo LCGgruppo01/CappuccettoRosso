@@ -277,7 +277,7 @@ var GameLevel_1 = {
         game.camera.follow();
         if(playerUp.body.x >= 172*m && playerUp.body.x < 173*m){
           playerUp.body.velocity.x = 0;
-          playerUp.frame = 0;
+          playerUp.frame = 5;
           playerDown.frame = 0;
         }
         setTimeout(function(){
