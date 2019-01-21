@@ -44,7 +44,7 @@ var GameLevel_2 = {
     step = 0;
     shake = 0.05;
     fristBone = 0;
-    bulletN = 5;
+    bulletN = 2;
     cadavere = game.add.sprite(10*m, 8*m, 'cadavere2');
     fucileTerra = game.add.sprite(11.7*m, 8.6*m, 'fucile');
     game.physics.arcade.enable(fucileTerra);
@@ -63,9 +63,11 @@ var GameLevel_2 = {
 
     worldCreate(); //find in World.js
     playerCreate(); //find in Player.js
-    if (spawnY < 9*m) {
+    if (spawnY < 9*m
+    ) {
       playerUp.health = vitaFineLivello;
     }
+    Ammos.create(17*m, 8.6*m, 'ammo');
 
     //Cave entering
     wolfCreate(27,7);
