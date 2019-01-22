@@ -423,6 +423,12 @@ function boneHitKing(kingWolf, bone) {
     bone.kill();
     kingWolf.animations.play('danno');
     game.camera.flash(0x00701f, 50);
+    //quando muore
+    if (kingWolf.health <=0) {
+      carcassa = Carcasse.create(kingWolf.x, kingWolf.y - 156/2, "kingWolf");
+      carcassa.frame = 17;
+    }
+
   }
 };
 // COLLIDE & OVERLAP functions end
@@ -594,17 +600,12 @@ function wolfKingAnimationUpdate() {
     kingWolf.scale.x = 1;
   }
 
-  //quando muore
-  if (kingWolf.health <=0) {
-    carcassa = Carcasse.create(kingWolf.x, kingWolf.y - 156/2, "kingWolf");
-    carcassa.frame = 17;
-  }
 };
 var primavolta = 1;
 function animazioneRapimento(kingWolf, cappuccetto) {
   cappuccetto.frame = 3;
   cappuccetto.alpha = 0;
-  if (primavolta == 1) {
+  if (primavolta <= 1) {
     gabbia = game.add.sprite(176*m, 3478, 'cappuccetto')
     gabbia.frame = 3;
     primavolta++;
@@ -964,6 +965,7 @@ function unpauseImage2(event){
   playerDown.alpha = 1;
   bar.alpha = 1;
   barGranny.alpha = 1;
+  pause.alpha = 1;
   Hearts.alpha = 1;
   if (spawnY <= 25*m) {
     scene3.alpha = 0;
